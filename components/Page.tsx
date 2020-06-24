@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Meta from "./Meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import Items from "./items";
 
 type theme = {
   red: string;
@@ -23,17 +24,17 @@ const theme: theme = {
   bs: "0 12px 24px 0 rgba(0,0,0,0.09)",
 };
 
-createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 @font-face {
-  font-family: 'optimusprinceps';
-  src: url()("/static/optimusprinceps.woff2")
+  font-family: 'radnika_next';
+  src: url()("/static/radnikanext-medium-webfont.woff2")
   format("woff2");
   font-weight:normal;
   font-style: normal;
 }
 html {
   box-sizing: border-box;
-  font-size: 10px;
+  font-size: 15px;
 }
 *, *:before, *:after{
   box-sizing: inherit
@@ -43,7 +44,7 @@ body{
   margin: 0;
   font-size: 1.5rem;
   line-height: 2;
-  font-family: 'optimusprinceps';
+  font-family: 'radnika_next';
 }
   a{
     color: ${theme.black};
@@ -72,8 +73,10 @@ class Page extends React.Component<PageProps, PageState> {
         <StyledPage>
           <Header></Header>
           <Meta></Meta>
-          Hey I'm page
+          Hey I'm pagesdadas
+          <GlobalStyle />
           <Inner>{this.props.children}</Inner>
+          <Items></Items>
         </StyledPage>
       </ThemeProvider>
     );

@@ -1,4 +1,4 @@
-export default function Nav(props: any) {
+export default function Sell(props: any) {
   return (
     <div>
       <p>Sell</p>
