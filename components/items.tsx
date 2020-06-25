@@ -48,20 +48,18 @@ class Items extends React.Component<ItemsProps, ItemsState> {
   render() {
     return (
       <Center>
-        <p>Items</p>
-        <Query query={ALL_ITEMS_QUERY}>
-          {({ data, error, loading }: any) => {
-            if (loading) return <p>Loading</p>;
-            if (error) {
-              console.log(error);
-              return <p>Error: {error.mesage}</p>;
-            }
-
+        <Query
+          query={ALL_ITEMS_QUERY}
+          // fetchPolicy="network-only"
+        >
+          {({ data, error, loading }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error: {error.message}</p>;
             return (
               <ItemsList>
-                {data.items.map((item: IItem) => {
-                  return <Item key={item.id} item={item} />;
-                })}
+                {data.items.map((item) => (
+                  <Item item={item} key={item.id} />
+                ))}
               </ItemsList>
             );
           }}
