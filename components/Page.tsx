@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Meta from "./Meta";
+import Header from "./header";
+import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
 type theme = {
@@ -23,7 +23,7 @@ const theme: theme = {
   bs: "0 12px 24px 0 rgba(0,0,0,0.09)",
 };
 
-createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 @font-face {
   font-family: 'optimusprinceps';
   src: url()("/static/optimusprinceps.woff2")
@@ -72,7 +72,7 @@ class Page extends React.Component<PageProps, PageState> {
         <StyledPage>
           <Header></Header>
           <Meta></Meta>
-          Hey I'm page
+          <GlobalStyle />
           <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>
