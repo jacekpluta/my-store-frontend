@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Meta from "./Meta";
+import Header from "./header";
+import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
 type theme = {
@@ -72,7 +72,11 @@ class Page extends React.Component<PageProps, PageState> {
         <StyledPage>
           <Header></Header>
           <Meta></Meta>
+<<<<<<< Updated upstream
           Hey I'm page
+=======
+          <GlobalStyle />
+>>>>>>> Stashed changes
           <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>

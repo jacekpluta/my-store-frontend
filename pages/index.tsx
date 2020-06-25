@@ -34,14 +34,21 @@
 // export default Index
 
 import React from "react";
+import Items from "../components/items";
 
-export interface IndexProps {}
+export interface HomeProps {}
 
-export interface IndexState {}
+export interface HomeState {}
 
+<<<<<<< Updated upstream
 class Index extends React.Component<IndexProps, IndexState> {
   render() {
     return <p> hey</p>;
+=======
+class Home extends React.Component<HomeProps, HomeState> {
+  render() {
+    return <Items></Items>;
+>>>>>>> Stashed changes
   }
 }
 

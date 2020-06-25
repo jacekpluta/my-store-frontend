@@ -1,7 +1,15 @@
+<<<<<<< Updated upstream
 import { IncomingMessage, ServerResponse } from 'http'
 import { useMemo } from 'react'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
+=======
+import { IncomingMessage, ServerResponse } from "http";
+import { useMemo } from "react";
+import { ApolloClient } from "apollo-boost";
+import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
+import { endpoint } from "../config";
+>>>>>>> Stashed changes
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
