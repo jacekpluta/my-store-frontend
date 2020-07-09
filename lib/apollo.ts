@@ -20,7 +20,7 @@ function createIsomorphLink(context: ResolverContext = {}) {
     const { HttpLink } = require("apollo-link-http");
     return new HttpLink({
       uri: process.env.NODE_ENV === "development" ? endpoint : endpoint,
-      credentials: "same-origin",
+      credentials: "include",
     });
   }
 }

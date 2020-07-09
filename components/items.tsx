@@ -3,10 +3,12 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Item from "./item";
+import Pagination from "./pagination";
+import { perPage } from "../config";
 
 export const ALL_ITEMS_QUERY = gql`
-  query ALL_ITEMS_QUERY {
-    items {
+  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
+    items(first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       title
       price
@@ -26,7 +28,9 @@ export interface IItem {
   title: string;
 }
 
-export interface ItemsProps {}
+export interface ItemsProps {
+  page: number;
+}
 
 export interface ItemsState {}
 
@@ -45,12 +49,20 @@ class Items extends React.Component<ItemsProps, ItemsState> {
   constructor(props: ItemsProps) {
     super(props);
   }
+
   render() {
+    const { page } = this.props;
     return (
       <Center>
+        <Pagination page={page} />
+
         <Query
           query={ALL_ITEMS_QUERY}
-          // fetchPolicy="network-only"
+          fetchPolicy="network-only"
+          variables={{
+            skip: page * perPage - perPage,
+            first: perPage,
+          }}
         >
           {({ data, error, loading }) => {
             if (loading) return <p>Loading...</p>;
@@ -64,6 +76,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
             );
           }}
         </Query>
+        <Pagination page={this.props.page} />
       </Center>
     );
   }

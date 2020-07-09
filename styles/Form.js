@@ -1,5 +1,15 @@
 import styled, { keyframes } from "styled-components";
 
+const loading = keyframes`
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100% 100%;
+  }
+`;
+
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
   background: rgba(0, 0, 0, 0.02);
@@ -54,18 +64,8 @@ const Form = styled.form`
     }
     &[aria-busy="true"]::before {
       background-size: 50% auto;
-      animation: ${loading ? loading : ""} 1s linear infinite;
+      animation: ${loading} 1s linear infinite;
     }
-  }
-`;
-
-const loading = keyframes`
-  from {
-    background-position: 0 0;
-  }
-
-  to {
-    background-position: 100% 100%;
   }
 `;
 
