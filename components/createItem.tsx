@@ -2,7 +2,7 @@ import React from "react";
 import { Mutation } from "react-apollo";
 import Form from "../styles/Form";
 import gql from "graphql-tag";
-import formatMoney from "../lib/formatMoney";
+
 import Error from "../components/errorMessage";
 import Router from "next/router";
 
@@ -43,7 +43,7 @@ class CreateItem extends React.Component<CreateItemProps, CreateItemState> {
     id: "",
     image: "",
     largeImage: "",
-    price: 0,
+    price: "",
     title: "",
   };
 

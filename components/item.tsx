@@ -51,7 +51,7 @@ class Item extends React.Component<ItemProps, ItemState> {
             <a>Edit </a>
           </Link>
           <button>Add to cart</button>
-          <DeleteItem>Delete Item</DeleteItem>>
+          <DeleteItem itemId={item.id}>Delete Item</DeleteItem>>
         </div>
       </ItemStyles>
     );

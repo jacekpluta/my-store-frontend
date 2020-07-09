@@ -1,14 +1,14 @@
 import React from "react";
 import Items from "../components/items";
 
-export interface HomeProps {}
-
-export interface HomeState {}
-
-class Home extends React.Component<HomeProps, HomeState> {
-  render() {
-    return <Items></Items>;
-  }
+interface HomeProps {
+  query: {
+    page: string;
+  };
+}
+//props.query
+function Home(props: HomeProps) {
+  return <Items page={parseFloat(props.query.page) || 1}></Items>;
 }
 
 export default Home;
