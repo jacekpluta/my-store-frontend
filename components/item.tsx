@@ -44,9 +44,10 @@ class Item extends React.Component<ItemProps, ItemState> {
 
         <div className="buttonList">
           <Link
-            // href="/update/[item.id]"
-            // as={`/update/${item.id}`}
-            href={{ pathname: "update", query: { id: item.id } }}
+            href={{
+              pathname: "update",
+              query: { id: item.id },
+            }}
           >
             <a>Edit </a>
           </Link>
