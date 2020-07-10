@@ -7,15 +7,11 @@ import { useFormFields } from "../lib/useFormFields";
 import { CURRENT_USER_QUERY } from "./queries";
 import Link from "next/link";
 
-export interface SignUpProps {}
+export interface SignInProps {}
 
-export const CREATE_USER_MUTATION = gql`
-  mutation CREATE_USER_MUTATION(
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    signUp(name: $name, email: $email, password: $password) {
+export const LOGIN_USER_MUTATION = gql`
+  mutation LOGIN_USER_MUTATION($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
       id
       email
       name
@@ -29,15 +25,14 @@ type target = {
   password: string;
 };
 
-export default function SignUp(props: SignUpProps) {
+export default function SignIn(props: SignInProps) {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
-    name: "",
   });
 
   const [createUser, { data, loading, error }] = useMutation(
-    CREATE_USER_MUTATION,
+    LOGIN_USER_MUTATION,
     {
       refetchQueries: [{ query: CURRENT_USER_QUERY }],
       awaitRefetchQueries: true,
@@ -61,7 +56,7 @@ export default function SignUp(props: SignUpProps) {
       }}
     >
       <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Sign up</h2>
+        <h2>Sign In</h2>
 
         <Error error={error} />
         <label htmlFor="email">
@@ -77,18 +72,6 @@ export default function SignUp(props: SignUpProps) {
           />
         </label>
 
-        <label htmlFor="name">
-          Name
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            required
-            value={name}
-            onChange={handleFieldChange}
-          />
-        </label>
         <label htmlFor="password">
           Password
           <input
@@ -104,8 +87,8 @@ export default function SignUp(props: SignUpProps) {
 
         <button type="submit">Submit</button>
         <p>
-          <Link href="/signin">
-            <a>Already have an account? SIGN IN</a>
+          <Link href="/signup">
+            <a>Don't have an account? SIGN UP</a>
           </Link>
         </p>
       </fieldset>
