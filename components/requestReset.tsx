@@ -5,8 +5,6 @@ import Error from "./errorMessage";
 import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "../lib/useFormFields";
 
-import Link from "next/link";
-
 export interface RequestResetProps {}
 
 export const REQUEST_RESET_MUTATION = gql`
