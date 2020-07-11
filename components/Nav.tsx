@@ -9,10 +9,6 @@ import SignOut from "./signOut";
 export default function Nav() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
 
-  if (data) {
-    console.log(data.user);
-  }
-
   return (
     <NavStyles>
       {/* {loading ? <p>Checking for user...</p> : ""} */}

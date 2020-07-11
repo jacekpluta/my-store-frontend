@@ -6,6 +6,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "../lib/useFormFields";
 import { CURRENT_USER_QUERY } from "./queries";
 import Link from "next/link";
+import Router from "next/router";
 
 export interface SignInProps {}
 
@@ -52,7 +53,9 @@ export default function SignIn(props: SignInProps) {
             password: password,
           },
         });
-        console.log(res);
+        Router.push({
+          pathname: "/account",
+        });
       }}
     >
       <fieldset disabled={loading} aria-busy={loading}>
@@ -89,6 +92,11 @@ export default function SignIn(props: SignInProps) {
         <p>
           <Link href="/signup">
             <a>Don't have an account? SIGN UP</a>
+          </Link>
+        </p>
+        <p>
+          <Link href="/requestreset">
+            <a>Forgot your password? RESET EMAIL</a>
           </Link>
         </p>
       </fieldset>
