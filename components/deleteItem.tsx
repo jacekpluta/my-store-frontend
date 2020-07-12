@@ -13,7 +13,7 @@ const DELETE_ITEM_MUTATION = gql`
 `;
 
 export default function deleteItem(props) {
-  const [deleteItem, { data }] = useMutation(DELETE_ITEM_MUTATION, {
+  const [deleteItem, { data, error }] = useMutation(DELETE_ITEM_MUTATION, {
     update(cache, payload) {
       const data = cache.readQuery({ query: ALL_ITEMS_QUERY });
       data.items = data.items.filter(
@@ -26,7 +26,9 @@ export default function deleteItem(props) {
 
   const handleDeleteItem = () => {
     if (confirm("Do you want to delete that item?"))
-      deleteItem({ variables: { id: itemId } });
+      deleteItem({ variables: { id: itemId } }).catch((error) => {
+        alert("You don't have permissions to delete that item");
+      });
   };
 
   return <button onClick={handleDeleteItem}>{props.children}</button>;

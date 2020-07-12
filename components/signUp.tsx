@@ -51,7 +51,7 @@ export default function SignUp(props: SignUpProps) {
       method="post"
       onSubmit={async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        const res = await createUser({
+        await createUser({
           variables: {
             email: email,
             name: name,

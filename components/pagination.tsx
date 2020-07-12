@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-
+import Error from "./errorMessage";
 import PaginationStyles from "../styles/PaginationStyles";
 
 import { useQuery } from "@apollo/react-hooks";
@@ -18,14 +18,14 @@ const PAGINATION_QUERY = gql`
   }
 `;
 
-export interface PaginationProps {}
+export interface PaginationProps {
+  page: number;
+}
 
-export interface PaginationState {}
-
-export default function Pagination(props) {
+export default function Pagination(props: PaginationProps) {
   const { page } = props;
   const { loading, error, data } = useQuery(PAGINATION_QUERY, {});
-  if (loading) return "Loading...";
+  if (loading) return <div>Loading...</div>;
   if (error) return <Error error={error} />;
   const pagesCount = data?.itemsConnection?.aggregate?.count;
   const allPages = Math.ceil(pagesCount / perPage);

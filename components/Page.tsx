@@ -73,6 +73,7 @@ class Page extends React.Component<PageProps, PageState> {
           <Header></Header>
           <Meta></Meta>
           <GlobalStyle />
+
           <Inner>{this.props.children}</Inner>
         </StyledPage>
       </ThemeProvider>
