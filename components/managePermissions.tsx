@@ -79,8 +79,8 @@ export default function ManagePermissions(props: ManagePermissionsProps) {
   const { page } = props;
   const usersOnPage: number = 20;
 
-  const usersConnectQuery = useQuery(USERS_QUERY, {});
-  const permissionsQuery = useQuery(PERMISSIONS_QUERY, {});
+  const usersConnectQuery = useQuery(USERS_QUERY);
+  const permissionsQuery = useQuery(PERMISSIONS_QUERY);
   const allUsersQuery = useQuery(ALL_USERS_QUERY, {
     variables: {
       skip: page * usersOnPage - usersOnPage,
@@ -183,7 +183,7 @@ export default function ManagePermissions(props: ManagePermissionsProps) {
 const User = (props: User) => {
   const { user } = props;
   const [userPermissions, setUserPermissions] = useState(user.permissions);
-  const permissionsQuery = useQuery(PERMISSIONS_QUERY, {});
+  const permissionsQuery = useQuery(PERMISSIONS_QUERY);
   const permissionsData = permissionsQuery?.data?.__type?.enumValues;
   const permissions = permissionsData.map(({ name }) => name);
   let updatedPermissions = [...userPermissions];

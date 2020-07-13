@@ -24,7 +24,7 @@ export interface PaginationProps {
 
 export default function Pagination(props: PaginationProps) {
   const { page } = props;
-  const { loading, error, data } = useQuery(PAGINATION_QUERY, {});
+  const { loading, error, data } = useQuery(PAGINATION_QUERY);
   if (loading) return <div>Loading...</div>;
   if (error) return <Error error={error} />;
   const pagesCount = data?.itemsConnection?.aggregate?.count;

@@ -4,6 +4,8 @@ import { ApolloClient } from "apollo-boost";
 import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
 import { endpoint } from "../config";
 
+import { typeDefs, resolvers } from "./graphqlLocal";
+
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 export type ResolverContext = {
@@ -24,14 +26,23 @@ function createIsomorphLink(context: ResolverContext = {}) {
     });
   }
 }
+const cache = new InMemoryCache();
 
 function createApolloClient(context?: ResolverContext) {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: createIsomorphLink(context),
-    cache: new InMemoryCache(),
+    cache: cache,
+    resolvers,
+    typeDefs,
   });
 }
+
+cache.writeData({
+  data: {
+    cartOpen: true,
+  },
+});
 
 export function initializeApollo(
   initialState: any = null,
