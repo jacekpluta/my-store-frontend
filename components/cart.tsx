@@ -41,8 +41,8 @@ export default function Cart() {
   const { id, name, cart } = currentUserQuery?.data?.user;
 
   const totalPrice = cart.reduce((all, cartItem) => {
-    if (!cartItem.item) return taalllly;
-    return all + cartItem.quantity * cartItem.item.price;
+    if (cartItem.item) return all + cartItem.quantity * cartItem.item.price;
+    else return;
   }, 0);
 
   return (

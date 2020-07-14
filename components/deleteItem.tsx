@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+
 import { ALL_ITEMS_QUERY } from "./items";
 
 const DELETE_ITEM_MUTATION = gql`
@@ -11,9 +12,14 @@ const DELETE_ITEM_MUTATION = gql`
     }
   }
 `;
+const GET_DELETED_ITEM_ID = gql`
+  {
+    id @client
+  }
+`;
 
 export default function deleteItem(props) {
-  const [deleteItem, { data, error }] = useMutation(DELETE_ITEM_MUTATION, {
+  const [deleteItem, deleteItemMutation] = useMutation(DELETE_ITEM_MUTATION, {
     update(cache, payload) {
       const data = cache.readQuery({ query: ALL_ITEMS_QUERY });
       data.items = data.items.filter(
@@ -24,11 +30,17 @@ export default function deleteItem(props) {
   });
   const { itemId } = props;
 
+  const { client, data } = useQuery(GET_DELETED_ITEM_ID);
+
   const handleDeleteItem = () => {
     if (confirm("Do you want to delete that item?"))
-      deleteItem({ variables: { id: itemId } }).catch((error) => {
-        alert("You don't have permissions to delete that item");
-      });
+      deleteItem({ variables: { id: itemId } })
+        .then(() => {
+          client.writeData({ data: { id: itemId } });
+        })
+        .catch((error) => {
+          alert("You don't have permissions to delete that item");
+        });
   };
 
   return <button onClick={handleDeleteItem}>{props.children}</button>;

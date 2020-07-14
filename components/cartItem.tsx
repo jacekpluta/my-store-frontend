@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { formatMoney } from "./item";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "./queries";
+import items from "../pages/items";
 
 const ButtonStyle = styled.button`
 font-size: 3rem;
@@ -29,7 +30,15 @@ const CartItemStyles = styled.li`
   }
 `;
 
-const DELETE_CART_ITEM_MUTATION = gql`
+export const DELETE_CART_ITEM_WHEN_ITEM_DELETED_MUTATION = gql`
+  mutation DELETE_CART_ITEM_WHEN_ITEM_DELETED_MUTATION($id: ID!) {
+    deleteCartItemWhenItemDeleted(id: $id) {
+      id
+    }
+  }
+`;
+
+export const DELETE_CART_ITEM_MUTATION = gql`
   mutation DELETE_CART_ITEM_MUTATION($id: ID!) {
     deleteCartItem(id: $id) {
       id
@@ -37,7 +46,21 @@ const DELETE_CART_ITEM_MUTATION = gql`
   }
 `;
 
+const GET_DELETED_ITEM_ID = gql`
+  {
+    id @client
+  }
+`;
+
 export default function CartItem({ cartItem }) {
+  const [
+    deleteCartItemWhenItemDeleted,
+    deleteCartItemWhenItemDeletedMutation,
+  ] = useMutation(DELETE_CART_ITEM_WHEN_ITEM_DELETED_MUTATION, {
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    awaitRefetchQueries: true,
+  });
+
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
     DELETE_CART_ITEM_MUTATION,
     {
@@ -45,6 +68,10 @@ export default function CartItem({ cartItem }) {
       awaitRefetchQueries: true,
     }
   );
+
+  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
+  const getDeletedItemQuery = useQuery(GET_DELETED_ITEM_ID);
+  const deletedItemId = getDeletedItemQuery?.data?.id;
 
   const deleteCartUpdate = (cache, payload) => {
     const data = cache.readQuery({ query: CURRENT_USER_QUERY });
@@ -54,9 +81,36 @@ export default function CartItem({ cartItem }) {
     const newData = data.user.cart.filter((cartItem) => {
       return cartItem.id !== cartItemId;
     });
-
     cache.writeQuery({ query: CURRENT_USER_QUERY, data: newData });
   };
+
+  useEffect(() => {
+    if (deletedItemId) {
+      async function deleteItemFromCart() {
+        const userCart = currentUserQuery.data.user.cart;
+
+        //check if deleted item is in the cart
+        const foundItem = userCart.filter((item) => {
+          if (item.item.id === deletedItemId) return item;
+        });
+
+        //if it is then delete it
+        if (foundItem) {
+          const id = foundItem[0].id;
+          console.log(id);
+          await deleteCartItemWhenItemDeleted({
+            variables: {
+              id: id,
+            },
+          }).catch((err) => alert(err.message));
+
+          //reset local query
+          getDeletedItemQuery.client.writeData({ data: { id: null } });
+        }
+      }
+      deleteItemFromCart();
+    }
+  }, [deletedItemId]);
 
   return (
     <CartItemStyles>
@@ -72,7 +126,7 @@ export default function CartItem({ cartItem }) {
           {cartItem.quantity} &times; {formatMoney(cartItem.item.price)} each
         </p>
       </div>
-      {console.log(cartItem.item.id)}
+
       <ButtonStyle
         title="Delete Item"
         onClick={async () => {
@@ -88,11 +142,7 @@ export default function CartItem({ cartItem }) {
                 id: cartItem.item.id,
               },
             },
-          })
-            .then((data) => {
-              console.log(data);
-            })
-            .catch((err) => alert(err.message));
+          }).catch((err) => alert(err.message));
         }}
       >
         &times;
