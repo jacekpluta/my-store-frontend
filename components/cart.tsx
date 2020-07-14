@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CartStyles from "../styles/CartStyles";
 import Supreme from "../styles/Supreme";
 import CloseButton from "../styles/CloseButton";
@@ -9,6 +9,7 @@ import Error from "./errorMessage";
 import { CURRENT_USER_QUERY } from "./queries";
 import CartItem from "./cartItem";
 import { formatMoney } from "./item";
+import CreditCardCheckout from "./CreditCardCheckout";
 
 export const LOCAL_STATE_QUERY = gql`
   query {
@@ -39,6 +40,7 @@ export default function Cart() {
 
   const cartOpen = queryData?.data?.cartOpen;
   const { id, name, cart } = currentUserQuery?.data?.user;
+  const user = currentUserQuery?.data?.user;
 
   const totalPrice = cart.reduce((all, cartItem) => {
     if (cartItem.item) return all + cartItem.quantity * cartItem.item.price;
@@ -64,7 +66,16 @@ export default function Cart() {
       </ul>
       <footer>
         <p>{formatMoney(totalPrice)}</p>
-        <ButtonStyle>Checkout</ButtonStyle>
+        {cart.length && (
+          <CreditCardCheckout
+            cart={cart}
+            totalPrice={totalPrice}
+            allItemsCount={cart.length}
+            user={user}
+          >
+            <ButtonStyle>Checkout</ButtonStyle>
+          </CreditCardCheckout>
+        )}
       </footer>
     </CartStyles>
   );

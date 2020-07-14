@@ -18,6 +18,7 @@
     "@apollo/react-components": "3.1.5",
     "@apollo/react-hooks": "3.1.5",
     "@emotion/core": "^10.0.28",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/nprogress": "0.2.0",
     "@types/react-transition-group": "^4.4.0",
     "@types/styled-components": "5.1.0",

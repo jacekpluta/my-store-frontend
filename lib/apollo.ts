@@ -40,7 +40,7 @@ function createApolloClient(context?: ResolverContext) {
 
 cache.writeData({
   data: {
-    cartOpen: true,
+    cartOpen: false,
   },
 });
 

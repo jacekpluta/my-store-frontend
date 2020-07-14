@@ -97,7 +97,7 @@ export default function CartItem({ cartItem }) {
         //if it is then delete it
         if (foundItem) {
           const id = foundItem[0].id;
-          console.log(id);
+
           await deleteCartItemWhenItemDeleted({
             variables: {
               id: id,

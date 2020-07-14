@@ -64,8 +64,6 @@ export default function Nav() {
 
   return (
     <NavStyles>
-      {/* {loading ? <p>Checking for user...</p> : ""} */}
-      {/* {error ? <p>Error: {error.message}</p> : ""} */}
       {currentUser && currentUser.user ? (
         <p>Hello {currentUser.user.name}</p>
       ) : (
