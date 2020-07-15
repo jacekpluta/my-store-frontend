@@ -4,7 +4,6 @@ import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
 import Cart from "./cart";
-import Search from "./search";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -68,7 +67,6 @@ export default function Header() {
         <Nav />
       </div>
       <div className="sub-bar">
-        <Search></Search>
         <Cart></Cart>
       </div>
     </StyledHeader>

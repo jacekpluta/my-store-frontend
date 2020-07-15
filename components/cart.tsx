@@ -73,7 +73,13 @@ export default function Cart() {
             allItemsCount={cart.length}
             user={user}
           >
-            <ButtonStyle>Checkout</ButtonStyle>
+            <ButtonStyle
+              onClick={() => {
+                toggleCart();
+              }}
+            >
+              Checkout
+            </ButtonStyle>
           </CreditCardCheckout>
         )}
       </footer>

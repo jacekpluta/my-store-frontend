@@ -7,6 +7,7 @@ import nProgress from "nprogress";
 import gql from "graphql-tag";
 import Error from "./errorMessage";
 import { CURRENT_USER_QUERY } from "./queries";
+import { ALL_ORDERS_QUERY } from "./orders";
 
 const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {
@@ -26,7 +27,10 @@ export default function CreditCardCheckout(props) {
   const [createOrder, createOrderMutation] = useMutation(
     CREATE_ORDER_MUTATION,
     {
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+      refetchQueries: [
+        { query: CURRENT_USER_QUERY },
+        { query: ALL_ORDERS_QUERY },
+      ],
       awaitRefetchQueries: true,
     }
   );
@@ -34,12 +38,20 @@ export default function CreditCardCheckout(props) {
   const { allItemsCount, totalPrice, cart, user } = props;
 
   const onToken = async (tokenId) => {
+    nProgress.start();
     const order = await createOrder({
       variables: {
         token: tokenId,
       },
     }).catch((err) => alert(err.message));
-    console.log(order);
+
+    Router.push({
+      pathname: "/order",
+      query: {
+        id: order.data.createOrder.id,
+      },
+    });
+    nProgress.done();
   };
 
   return (
