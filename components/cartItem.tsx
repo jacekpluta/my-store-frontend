@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { formatMoney } from "./item";
+import formatMoney from "./formatMoney";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "./queries";
-import items from "../pages/items";
 
 const ButtonStyle = styled.button`
 font-size: 3rem;

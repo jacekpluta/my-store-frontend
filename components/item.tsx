@@ -4,20 +4,8 @@ import ItemStyles from "../styles/ItemStyles";
 import PriceTag from "../styles/PriceTag";
 import Link from "next/link";
 import DeleteItem from "./deleteItem";
-
+import formatMoney from "./formatMoney";
 import AddToCart from "./addToCart";
-
-export function formatMoney(amount: number): string {
-  const options = {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  };
-
-  if (amount % 100 === 0) options.minimumFractionDigits = 0;
-  const formatter = new Intl.NumberFormat("en-US", options);
-  return formatter.format(amount / 100);
-}
 
 export interface ItemProps {
   item: {
@@ -49,7 +37,7 @@ class Item extends React.Component<ItemProps, ItemState> {
               query: { id: item.id },
             }}
           >
-            <a>{item.title} </a>
+            <a>{item.title}</a>
           </Link>
         </Title>
         <PriceTag>{formatMoney(item.price)}</PriceTag>

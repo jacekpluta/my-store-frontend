@@ -55,7 +55,7 @@ export default function Nav() {
   if (currentUserQuery.loading || toggleCartMutation.loading)
     return <p>Loading...</p>;
   if (currentUserQuery.error || toggleCartMutation.error)
-    return <p>Error: {error.message}</p>;
+    return <p>Error: {currentUserQuery.error}</p>;
   const cartItems = currentUserQuery.data.user.cart;
   const cartItemsCount = cartItems.reduce(
     (all, cartItem) => all + cartItem.quantity,

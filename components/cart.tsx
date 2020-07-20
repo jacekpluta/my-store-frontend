@@ -8,7 +8,7 @@ import gql from "graphql-tag";
 import Error from "./errorMessage";
 import { CURRENT_USER_QUERY } from "./queries";
 import CartItem from "./cartItem";
-import { formatMoney } from "./item";
+import formatMoney from "./formatMoney";
 import CreditCardCheckout from "./CreditCardCheckout";
 
 export const LOCAL_STATE_QUERY = gql`
