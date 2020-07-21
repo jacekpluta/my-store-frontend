@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Error from "./errorMessage";
+import Error from "./ErrorMessage";
 import styled from "styled-components";
 import Head from "next/head";
 
@@ -24,21 +24,19 @@ const SingleItemStyle = styled.div`
   }
 `;
 
-const SINGLE_ITEM_QUERY = gql`
+export const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
     item(where: { id: $id }) {
       id
       title
-      price
       description
-      image
       largeImage
     }
   }
 `;
 
 export interface SingleItemProps {
-  itemId: number;
+  itemId: string;
 }
 
 export default function SingleItem(props: SingleItemProps) {

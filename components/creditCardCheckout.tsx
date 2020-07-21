@@ -5,9 +5,9 @@ import { formatMoney } from "./item";
 import Router from "next/router";
 import nProgress from "nprogress";
 import gql from "graphql-tag";
-import Error from "./errorMessage";
-import { CURRENT_USER_QUERY } from "./queries";
-import { ALL_ORDERS_QUERY } from "./orders";
+import Error from "./ErrorMessage";
+import { CURRENT_USER_QUERY } from "./Queries";
+import { ALL_ORDERS_QUERY } from "./Orders";
 
 const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {

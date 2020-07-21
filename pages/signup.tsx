@@ -1,5 +1,5 @@
 import React from "react";
-import SignUp from "../components/signUp";
+import SignUp from "../components/SignUp";
 
 import { ColumnCenter } from "../styles/ColumnCenter";
 

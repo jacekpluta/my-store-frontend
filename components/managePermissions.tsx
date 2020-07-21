@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Error from "./errorMessage";
+import Error from "./ErrorMessage";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import PaginationStyles from "../styles/PaginationStyles";

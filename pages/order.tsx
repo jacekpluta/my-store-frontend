@@ -1,6 +1,6 @@
 import React from "react";
-import RequestToSignIn from "../components/requestToSignIn";
-import Order from "../components/order";
+import RequestToSignIn from "../components/RequestToSignIn";
+import Order from "../components/Order";
 type OrderProps = { query: { id: string } };
 
 const orderpage = (props: OrderProps) => (

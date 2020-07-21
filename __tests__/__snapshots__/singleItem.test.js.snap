@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`errors when no item found 1`] = `
+<p
+  data-test="graphql-error"
+>
+  <strong>
+    Error!
+  </strong>
+  Item not found
+</p>
+`;
+
+exports[`renders correctly 1`] = `
+<h2>
+  Viewing 
+  test
+</h2>
+`;
+
+exports[`renders correctly 2`] = `
+<img
+  alt="test"
+  src="test.jpg"
+/>
+`;
+
+exports[`renders correctly 3`] = `
+<p>
+  test description
+</p>
+`;

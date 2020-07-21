@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders user nav component when signed in 1`] = `
+Array [
+  <PaginationStyles
+    data-test="pagination"
+  >
+    <div
+      className="PaginationStyles-sc-7b9szd-0 dgRQTo"
+      data-test="pagination"
+    >
+      <Head>
+        <Component
+          handleStateChange={null}
+          inAmpMode={false}
+          reduceComponentsToState={[Function]}
+        />
+      </Head>
+      <Link
+        href={
+          Object {
+            "pathname": "/items",
+            "query": Object {
+              "page": 0,
+            },
+          }
+        }
+      >
+        <a
+          aria-disabled={true}
+          className="prev"
+          href="/items?page=0"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          ⬅ Prev
+        </a>
+      </Link>
+      <p>
+        Page 
+        1
+         of 
+        <span
+          className="allPages"
+        >
+          3
+        </span>
+      </p>
+      <p>
+        12
+         Items Total
+      </p>
+      <Link
+        href={
+          Object {
+            "pathname": "/items",
+            "query": Object {
+              "page": 2,
+            },
+          }
+        }
+      >
+        <a
+          aria-disabled={false}
+          className="next"
+          href="/items?page=2"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          ➡ Next
+        </a>
+      </Link>
+    </div>
+  </PaginationStyles>,
+  <div
+    className="PaginationStyles-sc-7b9szd-0 dgRQTo"
+    data-test="pagination"
+  >
+    <Head>
+      <Component
+        handleStateChange={null}
+        inAmpMode={false}
+        reduceComponentsToState={[Function]}
+      />
+    </Head>
+    <Link
+      href={
+        Object {
+          "pathname": "/items",
+          "query": Object {
+            "page": 0,
+          },
+        }
+      }
+    >
+      <a
+        aria-disabled={true}
+        className="prev"
+        href="/items?page=0"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        ⬅ Prev
+      </a>
+    </Link>
+    <p>
+      Page 
+      1
+       of 
+      <span
+        className="allPages"
+      >
+        3
+      </span>
+    </p>
+    <p>
+      12
+       Items Total
+    </p>
+    <Link
+      href={
+        Object {
+          "pathname": "/items",
+          "query": Object {
+            "page": 2,
+          },
+        }
+      }
+    >
+      <a
+        aria-disabled={false}
+        className="next"
+        href="/items?page=2"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        ➡ Next
+      </a>
+    </Link>
+  </div>,
+]
+`;

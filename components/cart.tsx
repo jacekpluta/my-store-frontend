@@ -5,10 +5,10 @@ import CloseButton from "../styles/CloseButton";
 import ButtonStyle from "../styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Error from "./errorMessage";
-import { CURRENT_USER_QUERY } from "./queries";
-import CartItem from "./cartItem";
-import formatMoney from "./formatMoney";
+import Error from "./ErrorMessage";
+import { CURRENT_USER_QUERY } from "./Queries";
+import CartItem from "./CartItem";
+import formatMoney from "./FormatMoney";
 import CreditCardCheckout from "./CreditCardCheckout";
 
 export const LOCAL_STATE_QUERY = gql`
@@ -39,50 +39,56 @@ export default function Cart() {
     return <Error error={toggleCartMutation.error || queryData.error}></Error>;
 
   const cartOpen = queryData?.data?.cartOpen;
-  const { id, name, cart } = currentUserQuery?.data?.user;
+  console.log(currentUserQuery);
   const user = currentUserQuery?.data?.user;
 
-  const totalPrice = cart.reduce((all, cartItem) => {
-    if (cartItem.item) return all + cartItem.quantity * cartItem.item.price;
-    else return;
-  }, 0);
+  const totalPrice = user?.cart
+    ? user.cart.reduce((all, cartItem) => {
+        if (cartItem.item) return all + cartItem.quantity * cartItem.item.price;
+        else return;
+      }, 0)
+    : "";
 
-  return (
-    <CartStyles open={cartOpen}>
-      <header>
-        <CloseButton onClick={() => toggleCart()} title="close">
-          &times;
-        </CloseButton>
-        <Supreme>{name} - Cart</Supreme>
-        <p>
-          You have {cart.length} item {cart.length === 1 ? "" : "s"} in your
-          cart
-        </p>
-      </header>
-      <ul>
-        {cart.map((cartItem) => (
-          <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
-        ))}
-      </ul>
-      <footer>
-        <p>{formatMoney(totalPrice)}</p>
-        {cart.length && (
-          <CreditCardCheckout
-            cart={cart}
-            totalPrice={totalPrice}
-            allItemsCount={cart.length}
-            user={user}
-          >
-            <ButtonStyle
-              onClick={() => {
-                toggleCart();
-              }}
+  if (user) {
+    return (
+      <CartStyles open={cartOpen}>
+        <header>
+          <CloseButton onClick={() => toggleCart()} title="close">
+            &times;
+          </CloseButton>
+          <Supreme>{user.name} - Cart</Supreme>
+          <p>
+            You have {user.cart.length} item {user.cart.length === 1 ? "" : "s"}{" "}
+            in your cart
+          </p>
+        </header>
+        <ul>
+          {user.cart.map((cartItem) => (
+            <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
+          ))}
+        </ul>
+        <footer>
+          <p>{formatMoney(totalPrice)}</p>
+          {user.cart.length && (
+            <CreditCardCheckout
+              cart={user.cart}
+              totalPrice={totalPrice}
+              allItemsCount={user.cart.length}
+              user={user}
             >
-              Checkout
-            </ButtonStyle>
-          </CreditCardCheckout>
-        )}
-      </footer>
-    </CartStyles>
-  );
+              <ButtonStyle
+                onClick={() => {
+                  toggleCart();
+                }}
+              >
+                Checkout
+              </ButtonStyle>
+            </CreditCardCheckout>
+          )}
+        </footer>
+      </CartStyles>
+    );
+  } else {
+    return "You are not logged in";
+  }
 }

@@ -3,9 +3,9 @@ import Title from "../styles/Title";
 import ItemStyles from "../styles/ItemStyles";
 import PriceTag from "../styles/PriceTag";
 import Link from "next/link";
-import DeleteItem from "./deleteItem";
-import formatMoney from "./formatMoney";
-import AddToCart from "./addToCart";
+import DeleteItem from "./DeleteItem";
+import formatMoney from "./FormatMoney";
+import AddToCart from "./AddToCart";
 
 export interface ItemProps {
   item: {
@@ -53,7 +53,7 @@ class Item extends React.Component<ItemProps, ItemState> {
             <a>Edit </a>
           </Link>
           <AddToCart itemId={item.id}></AddToCart>
-          <DeleteItem itemId={item.id}>Delete Item</DeleteItem>>
+          <DeleteItem itemId={item.id}>Delete Item</DeleteItem>
         </div>
       </ItemStyles>
     );

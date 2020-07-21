@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateItem from "../components/updateItem";
+import UpdateItem from "../components/UpdateItem";
 
 type SellProps = { query: { id: string } };
 

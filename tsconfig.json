@@ -60,9 +60,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -70,6 +68,6 @@
     "__tests__/snapshot.js",
     "__tests__/snapshot.js",
     "setupTests.js",
-    "__tests__/formatMoney.test.js"
+    "__tests__/FormatMoney.test.js"
   ]
 }

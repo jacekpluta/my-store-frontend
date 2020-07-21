@@ -1,9 +1,9 @@
-import React from "react";
-import { Mutation } from "react-apollo";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
 import Form from "../styles/Form";
 import gql from "graphql-tag";
-
-import Error from "../components/errorMessage";
+import { useFormFields } from "../lib/useFormFields";
+import Error from "./ErrorMessage";
 import Router from "next/router";
 
 export interface CreateItemProps {}
@@ -37,29 +37,17 @@ export const CREATE_ITEM_MUTATION = gql`
   }
 `;
 
-class CreateItem extends React.Component<CreateItemProps, CreateItemState> {
-  state = {
+const CreateItem = () => {
+  const [fields, handleFieldChange] = useFormFields({
     description: "",
-    id: "",
-    image: "",
-    largeImage: "",
     price: "",
     title: "",
-  };
+  });
 
-  constructor(props: CreateItemProps) {
-    super(props);
-  }
+  const [image, setImage] = useState("");
+  const [largeImage, setLargeImage] = useState("");
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { type, value, name } = e.target;
-
-    const val: string | number = type === "number" ? parseFloat(value) : value;
-
-    this.setState({ [name]: val });
-  };
-
-  uploadFile = async (e) => {
+  const uploadFile = async (e) => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -72,87 +60,94 @@ class CreateItem extends React.Component<CreateItemProps, CreateItemState> {
 
     const file = await res.json();
 
-    this.setState({
-      image: file.secure_url,
-      largeImage: file.eager[0].secure_url,
-    });
+    setImage(file.secure_url);
+    setLargeImage(file.eager[0].secure_url);
+
     {
-      this.state.image && <img src={this.state.image} alt="Upload preview" />;
+      image && <img src={image} alt="Upload preview" />;
     }
   };
 
-  render() {
-    return (
-      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
-        {(createItem, { loading, error }): any => (
-          <Form
-            onSubmit={async (e) => {
-              e.preventDefault();
-              //call mutation
-              const res = await createItem();
-              Router.push({
-                pathname: "/item",
-                query: { id: res.data.createItem.id },
-              });
-            }}
-          >
-            <Error error={error}></Error>
-            <fieldset disabled={loading ? loading : ""} aria-busy={loading}>
-              <label htmlFor="file">
-                Image
-                <input
-                  type="file"
-                  id="file"
-                  name="file"
-                  placeholder="Upload an image"
-                  required
-                  onChange={this.uploadFile}
-                />
-              </label>
+  const [createItem, createItemtMutation] = useMutation(CREATE_ITEM_MUTATION);
 
-              <label htmlFor="title">
-                Title
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  placeholder="Title"
-                  required
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="price">
-                Price
-                <input
-                  type="number"
-                  id="price"
-                  name="price"
-                  placeholder="Price"
-                  required
-                  value={this.state.price}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <label htmlFor="description">
-                Description
-                <input
-                  type="text"
-                  id="description"
-                  name="description"
-                  placeholder="Enter a description"
-                  required
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <button type="submit">Submit</button>
-            </fieldset>
-          </Form>
-        )}
-      </Mutation>
-    );
-  }
-}
+  return (
+    <Form
+      data-test="form"
+      onSubmit={async (e) => {
+        e.preventDefault();
+
+        const res = await createItem({
+          variables: {
+            ...fields,
+            image: image,
+            largeImage: largeImage,
+          },
+        });
+        Router.push({
+          pathname: "/item",
+          query: { id: res.data.createItem.id },
+        });
+      }}
+    >
+      <Error error={createItemtMutation.error}></Error>
+      <fieldset
+        disabled={
+          createItemtMutation.loading ? createItemtMutation.loading : ""
+        }
+        aria-busy={createItemtMutation.loading}
+      >
+        <label htmlFor="file">
+          Image
+          <input
+            type="file"
+            id="file"
+            name="file"
+            placeholder="Upload an image"
+            required
+            onChange={uploadFile}
+          />
+        </label>
+
+        <label htmlFor="title">
+          Title
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Title"
+            required
+            value={fields.title}
+            onChange={handleFieldChange}
+          />
+        </label>
+        <label htmlFor="price">
+          Price
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Price"
+            required
+            value={fields.price}
+            onChange={handleFieldChange}
+          />
+        </label>
+        <label htmlFor="description">
+          Description
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="Enter a description"
+            required
+            value={fields.description}
+            onChange={handleFieldChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </fieldset>
+    </Form>
+  );
+};
 
 export default CreateItem;

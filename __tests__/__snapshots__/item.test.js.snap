@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders and maches snapshot 1`] = `
+<ItemStyles__Item>
+  <img
+    alt="test"
+    src="testImage"
+  />
+  <Title>
+    <Link
+      href={
+        Object {
+          "pathname": "/item",
+          "query": Object {
+            "id": "123abc",
+          },
+        }
+      }
+    >
+      <a>
+        test
+      </a>
+    </Link>
+  </Title>
+  <PriceTag>
+    $1.11
+  </PriceTag>
+  <p>
+    test
+  </p>
+  <div
+    className="buttonList"
+  >
+    <Link
+      href={
+        Object {
+          "pathname": "update",
+          "query": Object {
+            "id": "123abc",
+          },
+        }
+      }
+    >
+      <a>
+        Edit 
+      </a>
+    </Link>
+    <addToCart
+      itemId="123abc"
+    />
+    <deleteItem
+      itemId="123abc"
+    >
+      Delete Item
+    </deleteItem>
+  </div>
+</ItemStyles__Item>
+`;

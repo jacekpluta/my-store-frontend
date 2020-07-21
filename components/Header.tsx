@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Nav from "./nav";
+import Nav from "./Nav";
 import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
-import Cart from "./cart";
+import Cart from "./Cart";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();

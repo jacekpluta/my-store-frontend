@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "./Queries";
 import gql from "graphql-tag";
 import Link from "next/link";
 

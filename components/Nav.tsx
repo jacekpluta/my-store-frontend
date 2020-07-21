@@ -3,10 +3,10 @@ import NavStyles from "../styles/NavStyles";
 
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { CURRENT_USER_QUERY } from "./queries";
-import SignOut from "./signOut";
+import { CURRENT_USER_QUERY } from "./Queries";
+import SignOut from "./SignOut";
 import { useMutation } from "@apollo/react-hooks";
-import { TOGGLE_CART_MUTATION } from "./cart";
+import { TOGGLE_CART_MUTATION } from "./Cart";
 import styled from "styled-components";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -56,14 +56,14 @@ export default function Nav() {
     return <p>Loading...</p>;
   if (currentUserQuery.error || toggleCartMutation.error)
     return <p>Error: {currentUserQuery.error}</p>;
-  const cartItems = currentUserQuery.data.user.cart;
-  const cartItemsCount = cartItems.reduce(
-    (all, cartItem) => all + cartItem.quantity,
-    0
-  );
+
+  const cartItems = currentUserQuery?.data?.user?.cart;
+  const cartItemsCount = !cartItems
+    ? ""
+    : cartItems.reduce((all, cartItem) => all + cartItem.quantity, 0);
 
   return (
-    <NavStyles>
+    <NavStyles data-test="nav">
       {currentUser && currentUser.user ? (
         <p>Hello {currentUser.user.name}</p>
       ) : (

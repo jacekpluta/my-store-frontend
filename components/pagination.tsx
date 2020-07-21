@@ -1,14 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Error from "./errorMessage";
+import Error from "./ErrorMessage";
 import PaginationStyles from "../styles/PaginationStyles";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { perPage } from "../config";
 
-const PAGINATION_QUERY = gql`
+export const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
     itemsConnection {
       aggregate {
@@ -30,7 +30,7 @@ export default function Pagination(props: PaginationProps) {
   const pagesCount = data?.itemsConnection?.aggregate?.count;
   const allPages = Math.ceil(pagesCount / perPage);
   return (
-    <PaginationStyles>
+    <PaginationStyles data-test="pagination">
       <Head>
         <title>
           MyShop - {page} of {allPages}
@@ -47,7 +47,7 @@ export default function Pagination(props: PaginationProps) {
         </a>
       </Link>
       <p>
-        Page {page} of {allPages}
+        Page {page} of <span className="allPages">{allPages}</span>
       </p>
       <p>{pagesCount} Items Total</p>
       <Link
@@ -56,7 +56,7 @@ export default function Pagination(props: PaginationProps) {
           query: { page: page + 1 },
         }}
       >
-        <a className="prev" aria-disabled={page >= allPages}>
+        <a className="next" aria-disabled={page >= allPages}>
           ➡ Next
         </a>
       </Link>

@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import Form from "../styles/Form";
-import Error from "./errorMessage";
+import Error from "./ErrorMessage";
 import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "../lib/useFormFields";
 
@@ -42,6 +42,7 @@ export default function RequestReset(props: RequestResetProps) {
           },
         });
       }}
+      data-test="form"
     >
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Request reset token to change your email</h2>

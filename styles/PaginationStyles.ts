@@ -4,9 +4,6 @@ const PaginationStyles = styled.div`
   text-align: center;
   display: inline-grid;
   grid-template-columns: repeat(4, auto);
-  /* align-items: stretch;
-  justify-content: center;
-  align-content: center; */
   margin: 2rem 0;
   border: 1px solid #e1e1e1;
   border-radius: 10px;
@@ -15,9 +12,7 @@ const PaginationStyles = styled.div`
   & > * {
     margin: 0;
     padding: 15px 30px;
-
     border-right: 1px solid #e1e1e1;
-
     &:last-child {
       border-right: 0;
     }

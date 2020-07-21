@@ -1,5 +1,5 @@
 import React from "react";
-import ResetPass from "../components/resetPassword";
+import ResetPass from "../components/ResetPassword";
 
 import { ColumnCenter } from "../styles/ColumnCenter";
 

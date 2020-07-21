@@ -6,4 +6,5 @@ module.exports = {
   ],
   setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
+  snapshotSerializers: ["enzyme-to-json/serializer"],
 };
