@@ -8,7 +8,6 @@ import formatMoney from "./FormatMoney";
 import { CURRENT_USER_QUERY } from "./Queries";
 import styled from "styled-components";
 import Link from "next/link";
-import { formatDistance } from "date-fns";
 
 export const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY($skip: Int = 0, $first: Int = 10) {

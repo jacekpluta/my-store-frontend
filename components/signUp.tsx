@@ -4,7 +4,6 @@ import Form from "./styles/Form";
 import Error from "./ErrorMessage";
 import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "../lib/useFormFields";
-import { CURRENT_USER_QUERY } from "./Queries";
 import Link from "next/link";
 import Router from "next/router";
 

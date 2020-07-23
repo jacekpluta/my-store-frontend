@@ -1,7 +1,7 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useMutation } from "@apollo/react-hooks";
-import Error from "../components/ErrorMessage";
+import Error from "./ErrorMessage";
 import Router from "next/router";
 import nProgress from "nprogress";
 import gql from "graphql-tag";
