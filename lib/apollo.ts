@@ -2,7 +2,7 @@ import { IncomingMessage, ServerResponse } from "http";
 import { useMemo } from "react";
 import { ApolloClient } from "apollo-boost";
 import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
-import { endpoint } from "../config";
+import { endpoint, productionBackendEndpoint } from "../config";
 
 import { typeDefs, resolvers } from "./graphqlLocal";
 
@@ -21,7 +21,10 @@ function createIsomorphLink(context: ResolverContext = {}) {
   } else {
     const { HttpLink } = require("apollo-link-http");
     return new HttpLink({
-      uri: process.env.NODE_ENV === "development" ? endpoint : endpoint,
+      uri:
+        process.env.NODE_ENV === "development"
+          ? endpoint
+          : productionBackendEndpoint,
       credentials: "include",
     });
   }
