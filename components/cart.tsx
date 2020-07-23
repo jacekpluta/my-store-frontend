@@ -39,7 +39,7 @@ export default function Cart() {
     return <Error error={toggleCartMutation.error || queryData.error}></Error>;
 
   const cartOpen = queryData?.data?.cartOpen;
-  console.log(currentUserQuery);
+
   const user = currentUserQuery?.data?.user;
 
   const totalPrice = user?.cart
@@ -49,46 +49,42 @@ export default function Cart() {
       }, 0)
     : "";
 
-  if (user) {
-    return (
-      <CartStyles open={cartOpen}>
-        <header>
-          <CloseButton onClick={() => toggleCart()} title="close">
-            &times;
-          </CloseButton>
-          <Supreme>{user.name} - Cart</Supreme>
-          <p>
-            You have {user.cart.length} item {user.cart.length === 1 ? "" : "s"}{" "}
-            in your cart
-          </p>
-        </header>
-        <ul>
-          {user.cart.map((cartItem) => (
-            <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
-          ))}
-        </ul>
-        <footer>
-          <p>{formatMoney(totalPrice)}</p>
-          {user.cart.length && (
-            <CreditCardCheckout
-              cart={user.cart}
-              totalPrice={totalPrice}
-              allItemsCount={user.cart.length}
-              user={user}
+  return (
+    <CartStyles open={cartOpen}>
+      <header>
+        <CloseButton onClick={() => toggleCart()} title="close">
+          &times;
+        </CloseButton>
+        <Supreme>{user.name} - Cart</Supreme>
+        <p>
+          You have {user.cart.length} item {user.cart.length === 1 ? "" : "s"}{" "}
+          in your cart
+        </p>
+      </header>
+      <ul>
+        {user.cart.map((cartItem) => (
+          <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
+        ))}
+      </ul>
+      <footer>
+        <p>{formatMoney(totalPrice)}</p>
+        {user.cart.length && (
+          <CreditCardCheckout
+            cart={user.cart}
+            totalPrice={totalPrice}
+            allItemsCount={user.cart.length}
+            user={user}
+          >
+            <ButtonStyle
+              onClick={() => {
+                toggleCart();
+              }}
             >
-              <ButtonStyle
-                onClick={() => {
-                  toggleCart();
-                }}
-              >
-                Checkout
-              </ButtonStyle>
-            </CreditCardCheckout>
-          )}
-        </footer>
-      </CartStyles>
-    );
-  } else {
-    return "You are not logged in";
-  }
+              Checkout
+            </ButtonStyle>
+          </CreditCardCheckout>
+        )}
+      </footer>
+    </CartStyles>
+  );
 }

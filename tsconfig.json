@@ -68,6 +68,7 @@
     "__tests__/snapshot.js",
     "__tests__/snapshot.js",
     "setupTests.js",
-    "__tests__/FormatMoney.test.js"
+    "__tests__/FormatMoney.test.js",
+    "__tests__/Cart.test.js"
   ]
 }

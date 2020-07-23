@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders and matches snapshot 1`] = `
+<div
+  className="OrderStyles-sc-1l0pc5d-0 exwKXT"
+  data-test="order"
+>
+  <Head>
+    <Component
+      handleStateChange={null}
+      inAmpMode={false}
+      reduceComponentsToState={[Function]}
+    />
+  </Head>
+  <p>
+    <span>
+      Order ID:
+      test123
+       
+    </span>
+  </p>
+  <p>
+    <span>
+      Charge: 
+      xzc123
+    </span>
+  </p>
+  <p>
+    <span>
+      Item count: 
+      2
+    </span>
+  </p>
+  <p>
+    <span>
+      Order total: 
+      $1
+    </span>
+  </p>
+  <div
+    className="items"
+  >
+    <div
+      className="order-item"
+      key="itemtest123"
+    >
+      <img
+        alt="test title"
+        src=""
+      />
+      <div
+        className="item-details"
+      >
+        <h2>
+          test title
+        </h2>
+        <p>
+          Quantity: 
+          2
+        </p>
+        <p>
+          Each: 
+          $0.50
+        </p>
+        <p>
+          SubTotal: 
+          $1
+        </p>
+        <p>
+          Description: 
+          test desc
+        </p>
+      </div>
+    </div>
+    <div
+      className="order-item"
+      key="itemtest456"
+    >
+      <img
+        alt="test title2"
+        src=""
+      />
+      <div
+        className="item-details"
+      >
+        <h2>
+          test title2
+        </h2>
+        <p>
+          Quantity: 
+          4
+        </p>
+        <p>
+          Each: 
+          $0.51
+        </p>
+        <p>
+          SubTotal: 
+          $2.04
+        </p>
+        <p>
+          Description: 
+          test desc2
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

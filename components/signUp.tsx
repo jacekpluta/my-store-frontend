@@ -32,17 +32,13 @@ type target = {
 
 export default function SignUp(props: SignUpProps) {
   const [fields, handleFieldChange] = useFormFields({
+    name: "",
     email: "",
     password: "",
-    name: "",
   });
 
   const [createUser, { data, loading, error }] = useMutation(
-    CREATE_USER_MUTATION,
-    {
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
-      awaitRefetchQueries: true,
-    }
+    CREATE_USER_MUTATION
   );
 
   const { name, email, password } = fields;
@@ -65,7 +61,7 @@ export default function SignUp(props: SignUpProps) {
     >
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Sign up</h2>
-
+        <p>{data ? "Account successfully created" : ""}</p>
         <Error error={error} />
         <label htmlFor="email">
           Email

@@ -45,13 +45,13 @@ export const DELETE_CART_ITEM_MUTATION = gql`
   }
 `;
 
-const GET_DELETED_ITEM_ID = gql`
+export const GET_DELETED_ITEM_ID = gql`
   {
     id @client
   }
 `;
 
-export default function CartItem({ cartItem }) {
+const CartItem = ({ cartItem }) => {
   const [
     deleteCartItemWhenItemDeleted,
     deleteCartItemWhenItemDeletedMutation,
@@ -61,11 +61,11 @@ export default function CartItem({ cartItem }) {
   });
 
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
-    DELETE_CART_ITEM_MUTATION,
-    {
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
-      awaitRefetchQueries: true,
-    }
+    DELETE_CART_ITEM_MUTATION
+    // {
+    //   refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    //   awaitRefetchQueries: true,
+    // }
   );
 
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
@@ -73,18 +73,29 @@ export default function CartItem({ cartItem }) {
   const deletedItemId = getDeletedItemQuery?.data?.id;
 
   const deleteCartUpdate = (cache, payload) => {
-    const data = cache.readQuery({ query: CURRENT_USER_QUERY });
+    let data;
+    try {
+      data = cache.readQuery({ query: CURRENT_USER_QUERY });
+    } catch (e) {
+      alert(e.message);
+    }
 
     const cartItemId = payload.data.deleteCartItem.id;
 
-    const newData = data.user.cart.filter((cartItem) => {
-      return cartItem.id !== cartItemId;
-    });
-    cache.writeQuery({ query: CURRENT_USER_QUERY, data: newData });
+    data.user.cart = data.user.cart.filter(
+      (cartItem) => cartItem.id !== cartItemId
+    );
+
+    try {
+      cache.writeQuery({ query: CURRENT_USER_QUERY, data });
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   useEffect(() => {
     if (deletedItemId) {
+      //delete item from cart if it was deleted from items page
       async function deleteItemFromCart() {
         const userCart = currentUserQuery.data.user.cart;
 
@@ -112,7 +123,7 @@ export default function CartItem({ cartItem }) {
   }, [deletedItemId]);
 
   return (
-    <CartItemStyles>
+    <CartItemStyles data-test="cartItem">
       <img
         width="200"
         src={cartItem.item.image}
@@ -126,6 +137,12 @@ export default function CartItem({ cartItem }) {
         </p>
       </div>
 
+      {deleteCartItemMutation.data ? (
+        <p>Item deleted!</p>
+      ) : (
+        <p>Item not deleted!</p>
+      )}
+
       <ButtonStyle
         title="Delete Item"
         onClick={async () => {
@@ -134,13 +151,6 @@ export default function CartItem({ cartItem }) {
               id: cartItem.item.id,
             },
             update: deleteCartUpdate,
-            optimisticResponse: {
-              __typename: "Mutation",
-              deleteCartItem: {
-                __typename: "CartItem",
-                id: cartItem.item.id,
-              },
-            },
           }).catch((err) => alert(err.message));
         }}
       >
@@ -148,4 +158,5 @@ export default function CartItem({ cartItem }) {
       </ButtonStyle>
     </CartItemStyles>
   );
-}
+};
+export default CartItem;

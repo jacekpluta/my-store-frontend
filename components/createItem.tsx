@@ -102,7 +102,7 @@ const CreateItem = () => {
             type="file"
             id="file"
             name="file"
-            placeholder="Upload an image"
+            placeholder={!image ? "Upload an image" : "Image uploaded"}
             required
             onChange={uploadFile}
           />

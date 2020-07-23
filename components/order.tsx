@@ -8,7 +8,7 @@ import formatMoney from "./FormatMoney";
 
 type OrderProps = { orderId: string };
 
-const SINGLE_ORDER_QUERY = gql`
+export const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
     order(id: $id) {
       id
@@ -41,36 +41,38 @@ export default function Order(props: OrderProps) {
 
   const order = data.order;
 
-  return (
-    <OrderStyles>
-      <Head>MyShop - Order {orderId}</Head>
-      <p>
-        <span>Order ID:{orderId} </span>
-      </p>
-      <p>
-        <span>Charge: {order.charge}</span>
-      </p>
+  if (order) {
+    return (
+      <OrderStyles data-test="order">
+        <Head>MyShop - Order {orderId}</Head>
+        <p>
+          <span>Order ID:{orderId} </span>
+        </p>
+        <p>
+          <span>Charge: {order.charge}</span>
+        </p>
 
-      <p>
-        <span>Item count: {order.items.length}</span>
-      </p>
-      <p>
-        <span>Order total: {formatMoney(order.total)}</span>
-      </p>
-      <div className="items">
-        {order.items.map((item) => (
-          <div className="order-item" key={item.id}>
-            <img src={item.image} alt={item.title} />
-            <div className="item-details">
-              <h2>{item.title}</h2>
-              <p>Quantity: {item.quantity}</p>
-              <p>Each: {formatMoney(item.price)}</p>
-              <p>SubTotal: {formatMoney(item.price * item.quantity)}</p>
-              <p>Description: {item.description}</p>
+        <p>
+          <span>Item count: {order.items.length}</span>
+        </p>
+        <p>
+          <span>Order total: {formatMoney(order.total)}</span>
+        </p>
+        <div className="items">
+          {order.items.map((item) => (
+            <div className="order-item" key={item.id}>
+              <img src={item.image} alt={item.title} />
+              <div className="item-details">
+                <h2>{item.title}</h2>
+                <p>Quantity: {item.quantity}</p>
+                <p>Each: {formatMoney(item.price)}</p>
+                <p>SubTotal: {formatMoney(item.price * item.quantity)}</p>
+                <p>Description: {item.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </OrderStyles>
-  );
+          ))}
+        </div>
+      </OrderStyles>
+    );
+  } else return <p>Please sign in!</p>;
 }
