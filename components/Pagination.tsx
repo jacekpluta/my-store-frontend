@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Error from "./ErrorMessage";
+import Error from "./errorMessage";
 import PaginationStyles from "./styles/PaginationStyles";
 
 import { useQuery } from "@apollo/react-hooks";

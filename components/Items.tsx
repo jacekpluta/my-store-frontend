@@ -2,10 +2,10 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import Item from "./Item";
-import Pagination from "./Pagination";
+import Item from "./item";
+import Pagination from "./pagination";
 import { perPage } from "../config";
-import Search from "./Search";
+import Search from "./search";
 
 export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {

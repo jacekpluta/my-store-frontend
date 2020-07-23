@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { ApolloCache } from "apollo-cache";
 import { Resolvers } from "apollo-client";
-import { LOCAL_STATE_QUERY, TOGGLE_CART_MUTATION } from "../components/Cart";
+import { LOCAL_STATE_QUERY, TOGGLE_CART_MUTATION } from "../components/cart";
 
 export const typeDefs = gql`
   extend type Query {

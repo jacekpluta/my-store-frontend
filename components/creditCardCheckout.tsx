@@ -1,13 +1,13 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useMutation } from "@apollo/react-hooks";
-import Error from "./ErrorMessage";
+import Error from "./errorMessage";
 import Router from "next/router";
 import nProgress from "nprogress";
 import gql from "graphql-tag";
 
-import { CURRENT_USER_QUERY } from "./Queries";
-import { ALL_ORDERS_QUERY } from "./Orders";
+import { CURRENT_USER_QUERY } from "./queries";
+import { ALL_ORDERS_QUERY } from "./orders";
 
 export const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {

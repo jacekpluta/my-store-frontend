@@ -5,11 +5,11 @@ import CloseButton from "./styles/CloseButton";
 import ButtonStyle from "./styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Error from "./ErrorMessage";
-import { CURRENT_USER_QUERY } from "./Queries";
-import CartItem from "./CartItem";
-import formatMoney from "./FormatMoney";
-import CreditCardCheckout from "./CreditCardCheckout";
+import Error from "./errorMessage";
+import { CURRENT_USER_QUERY } from "./queries";
+import CartItem from "./cartItem";
+import formatMoney from "./formatMoney";
+import CreditCardCheckout from "./creditCardCheckout";
 
 export const LOCAL_STATE_QUERY = gql`
   query {

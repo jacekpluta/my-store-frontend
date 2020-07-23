@@ -1,5 +1,5 @@
 import React from "react";
-import RequestReset from "../components/RequestReset";
+import RequestReset from "../components/requestReset";
 
 import ColumnCenter from "../components/styles/ColumnCenter";
 

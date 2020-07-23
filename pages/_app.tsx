@@ -3,7 +3,7 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloProvider as ApolloProviderHooks } from "@apollo/react-hooks";
 import { useApollo } from "../lib/apollo";
 import React from "react";
-import Page from "../components/Page";
+import Page from "../components/page";
 
 App.getInitialProps = async ({ Component, ctx }) => {
   let pageProps: pageProps = {};

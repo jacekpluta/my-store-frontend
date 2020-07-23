@@ -1,4 +1,4 @@
-import formatMoney from "../components/FormatMoney";
+import formatMoney from "../components/formatMoney";
 
 describe("Format money function", () => {
   it("works with cents", () => {

@@ -1,6 +1,6 @@
 import { mount } from "enzyme";
-import CreateItem from "../components/CreateItem";
-import { CREATE_ITEM_MUTATION } from "../components/CreateItem";
+import CreateItem from "../components/createItem";
+import { CREATE_ITEM_MUTATION } from "../components/createItem";
 import { MockedProvider } from "@apollo/react-testing";
 import Router from "next/router";
 
