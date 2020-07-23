@@ -116,7 +116,7 @@ const CartItem = ({ cartItem }: any) => {
           }).catch((err) => alert(err.message));
 
           //reset local query
-          // getDeletedItemQuery.client.writeData({ data: { id: null } });
+          getDeletedItemQuery.client.writeData({ data: { id: null } });
         }
       }
       deleteItemFromCart();

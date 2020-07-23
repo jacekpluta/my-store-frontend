@@ -40,7 +40,7 @@ export default function deleteItem(props: deleteItemProps) {
     if (confirm("Do you want to delete that item?"))
       deleteItem({ variables: { id: itemId } })
         .then(() => {
-          //client.writeData({ data: { id: itemId } });
+          client.writeData({ data: { id: itemId } });
         })
         .catch((error) => {
           alert("You don't have permissions to delete that item");
