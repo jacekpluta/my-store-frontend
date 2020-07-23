@@ -12,7 +12,7 @@ export const ADD_TO_CART_MUTATION = gql`
   }
 `;
 
-export default function addToCart(props) {
+export default function addToCart(props: any) {
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     awaitRefetchQueries: true,

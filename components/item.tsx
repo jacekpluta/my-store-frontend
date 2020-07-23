@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "../styles/Title";
+import { Title } from "../styles/Title";
 import ItemStyles from "../styles/ItemStyles";
 import PriceTag from "../styles/PriceTag";
 import Link from "next/link";
