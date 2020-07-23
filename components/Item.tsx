@@ -1,5 +1,5 @@
 import React from "react";
-import title from "../styles/title";
+
 import ItemStyles from "../styles/ItemStyles";
 import PriceTag from "../styles/PriceTag";
 import Link from "next/link";
@@ -30,16 +30,16 @@ class Item extends React.Component<ItemProps, ItemState> {
     return (
       <ItemStyles>
         {item.image && <img src={item.image} alt={item.title} />}
-        <Title>
-          <Link
-            href={{
-              pathname: "/item",
-              query: { id: item.id },
-            }}
-          >
-            <a>{item.title}</a>
-          </Link>
-        </Title>
+
+        <Link
+          href={{
+            pathname: "/item",
+            query: { id: item.id },
+          }}
+        >
+          <a>{item.title}</a>
+        </Link>
+
         <PriceTag>{formatMoney(item.price)}</PriceTag>
         <p>{item.description}</p>
 
