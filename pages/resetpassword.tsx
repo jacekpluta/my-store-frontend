@@ -1,7 +1,7 @@
 import React from "react";
 import ResetPass from "../components/ResetPassword";
 
-import { ColumnCenter } from "../components/styles/ColumnCenter";
+import ColumnCenter from "../components/styles/ColumnCenter";
 
 interface ResetpasswordProps {
   query: { resetToken: string };
