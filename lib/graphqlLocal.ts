@@ -35,7 +35,7 @@ export const resolvers = {
       const data: any = {
         data: { cartOpen: !cartOpen },
       };
-      // cache.writeData(data);
+      cache.writeData(data);
       return data;
     },
   },

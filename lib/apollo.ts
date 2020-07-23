@@ -47,11 +47,11 @@ function createApolloClient(context?: ResolverContext): any {
   });
 }
 
-// cache.writeData({
-//   data: {
-//     cartOpen: false,
-//   },
-// });
+cache.writeData({
+  data: {
+    cartOpen: false,
+  },
+});
 
 export function initializeApollo(
   initialState: any = null,

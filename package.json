@@ -7,7 +7,7 @@
   "scripts": {
     "codegen": "graphql-let",
     "dev": "yarn codegen && next -p 5000",
-    "build": "yarn codegen && next build",
+    "build": "next build",
     "start": "next start",
     "test": "NODE_ENV=test jest --watch",
     "test-win": "SET NODE_ENV=test&& jest --watch",
