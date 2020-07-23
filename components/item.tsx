@@ -1,7 +1,7 @@
 import React from "react";
 
-import ItemStyles from "../styles/ItemStyles";
-import PriceTag from "../styles/PriceTag";
+import ItemStyles from "./styles/ItemStyles";
+import PriceTag from "./styles/PriceTag";
 import Link from "next/link";
 import DeleteItem from "./DeleteItem";
 import formatMoney from "./FormatMoney";

@@ -4,9 +4,9 @@ import Link from "next/link";
 import Error from "./ErrorMessage";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import PaginationStyles from "../styles/PaginationStyles";
+import PaginationStyles from "./styles/PaginationStyles";
 import styled from "styled-components";
-import Table from "../styles/Table";
+import Table from "./styles/Table";
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 

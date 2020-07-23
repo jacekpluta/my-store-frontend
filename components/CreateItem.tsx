@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import Form from "../styles/Form";
+import Form from "./styles/Form";
 import gql from "graphql-tag";
 import { useFormFields } from "../lib/useFormFields";
 import Error from "./ErrorMessage";

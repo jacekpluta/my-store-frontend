@@ -1,7 +1,7 @@
 import React from "react";
 import RequestReset from "../components/RequestReset";
 
-import { ColumnCenter } from "../styles/ColumnCenter";
+import { ColumnCenter } from "../components/styles/ColumnCenter";
 
 type RequesttokenProps = {};
 

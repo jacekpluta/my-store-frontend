@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Error from "./ErrorMessage";
-import PaginationStyles from "../styles/PaginationStyles";
+import PaginationStyles from "./styles/PaginationStyles";
 
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";

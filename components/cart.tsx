@@ -1,8 +1,8 @@
 import React from "react";
-import CartStyles from "../styles/CartStyles";
-import Supreme from "../styles/Supreme";
-import CloseButton from "../styles/CloseButton";
-import ButtonStyle from "../styles/ButtonStyles";
+import CartStyles from "./styles/CartStyles";
+import Supreme from "./styles/Supreme";
+import CloseButton from "./styles/CloseButton";
+import ButtonStyle from "./styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Error from "./ErrorMessage";

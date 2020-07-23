@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import Head from "next/head";
 import gql from "graphql-tag";
 import Error from "./ErrorMessage";
-import OrderItemStyles from "../styles/OrderItemStyles";
+import OrderItemStyles from "./styles/OrderItemStyles";
 import formatMoney from "./FormatMoney";
 import { CURRENT_USER_QUERY } from "./Queries";
 import styled from "styled-components";

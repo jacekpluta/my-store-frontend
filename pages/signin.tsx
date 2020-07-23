@@ -1,6 +1,6 @@
 import React from "react";
 import SignIn from "../components/SignIn";
-import { ColumnCenter } from "../styles/ColumnCenter";
+import { ColumnCenter } from "../components/styles/ColumnCenter";
 
 type SignInProps = {};
 
