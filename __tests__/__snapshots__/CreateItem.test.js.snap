@@ -2,13 +2,15 @@
 
 exports[`renders component and maches snap 1`] = `
 <form
-  className="Form-sc-6xc9hh-0 cBDtSx"
+  className="Form-sc-1c1u0cd-0 bUSGKY"
   data-test="form"
   onSubmit={[Function]}
 >
   <DisplayError
     error={Object {}}
-  />
+  >
+    <p />
+  </DisplayError>
   <fieldset
     aria-busy={false}
     disabled=""

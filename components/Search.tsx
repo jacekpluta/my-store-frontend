@@ -25,7 +25,7 @@ const SEARCH_ITEM_QUERY = gql`
 
 export default function Search() {
   const [loading, setLoading] = useState(false);
-  const [items, setItems] = useState([]);
+  const [items, setItems]: any[] = useState([]);
 
   const handleOnSearch = debounce(async (e, client) => {
     e.persist();
@@ -38,7 +38,7 @@ export default function Search() {
     setLoading(false);
   }, 300);
 
-  const routeToItem = (item) => {
+  const routeToItem = (item: any) => {
     Router.push({
       pathname: "/item",
       query: {
@@ -79,7 +79,7 @@ export default function Search() {
             </ApolloConsumer>
             {isOpen ? (
               <DropDown>
-                {items.map((item, index) => (
+                {items.map((item: any, index: number): any => (
                   <DropDownItem
                     key={item.id}
                     {...getItemProps({ item })}
@@ -90,7 +90,13 @@ export default function Search() {
                   </DropDownItem>
                 ))}
                 {!items.length && !loading && (
-                  <DropDownItem>There in no item with that name</DropDownItem>
+                  <DropDownItem
+                    key={1}
+                    {...getItemProps(items)}
+                    highlighted={true}
+                  >
+                    There in no item with that name
+                  </DropDownItem>
                 )}
               </DropDown>
             ) : (

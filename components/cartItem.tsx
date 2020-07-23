@@ -6,13 +6,14 @@ import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "./queries";
 
 const ButtonStyle = styled.button`
-font-size: 3rem;
-background: none;
-border: 0;
-&:hover {
-    color: ${(props) => props.theme.red}
-    cursor: pointer
-}`;
+  font-size: 3rem;
+  background: none;
+  border: 0;
+  &:hover {
+    color: ${(props) => props.theme.red};
+    cursor: pointer;
+  }
+`;
 
 const CartItemStyles = styled.li`
   padding: 1rem 0;
@@ -51,7 +52,7 @@ export const GET_DELETED_ITEM_ID = gql`
   }
 `;
 
-const CartItem = ({ cartItem }) => {
+const CartItem = ({ cartItem }: any) => {
   const [
     deleteCartItemWhenItemDeleted,
     deleteCartItemWhenItemDeletedMutation,
@@ -72,7 +73,7 @@ const CartItem = ({ cartItem }) => {
   const getDeletedItemQuery = useQuery(GET_DELETED_ITEM_ID);
   const deletedItemId = getDeletedItemQuery?.data?.id;
 
-  const deleteCartUpdate = (cache, payload) => {
+  const deleteCartUpdate = (cache: any, payload: any) => {
     let data;
     try {
       data = cache.readQuery({ query: CURRENT_USER_QUERY });
@@ -83,7 +84,7 @@ const CartItem = ({ cartItem }) => {
     const cartItemId = payload.data.deleteCartItem.id;
 
     data.user.cart = data.user.cart.filter(
-      (cartItem) => cartItem.id !== cartItemId
+      (cartItem: any) => cartItem.id !== cartItemId
     );
 
     try {
@@ -100,7 +101,7 @@ const CartItem = ({ cartItem }) => {
         const userCart = currentUserQuery.data.user.cart;
 
         //check if deleted item is in the cart
-        const foundItem = userCart.filter((item) => {
+        const foundItem = userCart.filter((item: any) => {
           if (item.item.id === deletedItemId) return item;
         });
 
@@ -115,7 +116,7 @@ const CartItem = ({ cartItem }) => {
           }).catch((err) => alert(err.message));
 
           //reset local query
-          getDeletedItemQuery.client.writeData({ data: { id: null } });
+          // getDeletedItemQuery.client.writeData({ data: { id: null } });
         }
       }
       deleteItemFromCart();

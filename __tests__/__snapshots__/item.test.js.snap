@@ -6,22 +6,20 @@ exports[`renders and maches snapshot 1`] = `
     alt="test"
     src="testImage"
   />
-  <Title>
-    <Link
-      href={
-        Object {
-          "pathname": "/item",
-          "query": Object {
-            "id": "123abc",
-          },
-        }
+  <Link
+    href={
+      Object {
+        "pathname": "/item",
+        "query": Object {
+          "id": "123abc",
+        },
       }
-    >
-      <a>
-        test
-      </a>
-    </Link>
-  </Title>
+    }
+  >
+    <a>
+      test
+    </a>
+  </Link>
   <PriceTag>
     $1.11
   </PriceTag>

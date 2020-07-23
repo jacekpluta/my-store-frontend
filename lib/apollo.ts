@@ -1,12 +1,15 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { useMemo } from "react";
-import { ApolloClient } from "apollo-boost";
-import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
+
 import { endpoint, productionBackendEndpoint } from "../config";
 
+// import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
+// import { ApolloClient } from "@apollo/client";
 import { typeDefs, resolvers } from "./graphqlLocal";
 
-let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+
+let apolloClient: ApolloClient<any> | undefined;
 
 export type ResolverContext = {
   req?: IncomingMessage;
@@ -31,21 +34,24 @@ function createIsomorphLink(context: ResolverContext = {}) {
 }
 const cache = new InMemoryCache();
 
-function createApolloClient(context?: ResolverContext) {
+function createApolloClient(context?: ResolverContext): any {
   return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: createIsomorphLink(context),
+    uri:
+      process.env.NODE_ENV === "development"
+        ? endpoint
+        : productionBackendEndpoint,
+    credentials: "include",
     cache: cache,
     resolvers,
     typeDefs,
   });
 }
 
-cache.writeData({
-  data: {
-    cartOpen: false,
-  },
-});
+// cache.writeData({
+//   data: {
+//     cartOpen: false,
+//   },
+// });
 
 export function initializeApollo(
   initialState: any = null,

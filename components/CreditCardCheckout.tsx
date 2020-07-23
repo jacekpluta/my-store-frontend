@@ -23,7 +23,7 @@ export const CREATE_ORDER_MUTATION = gql`
   }
 `;
 
-export default function CreditCardCheckout(props) {
+export default function CreditCardCheckout(props: any) {
   const [createOrder, createOrderMutation] = useMutation(
     CREATE_ORDER_MUTATION,
     {
@@ -45,9 +45,9 @@ export default function CreditCardCheckout(props) {
 
   const { allItemsCount, cart, user } = props;
 
-  const onToken = async (tokenId) => {
+  const onToken = async (tokenId: string) => {
     nProgress.start();
-    const order = await createOrder({
+    const order: any = await createOrder({
       variables: {
         token: tokenId,
       },

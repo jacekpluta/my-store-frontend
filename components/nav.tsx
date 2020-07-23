@@ -60,7 +60,10 @@ export default function Nav() {
   const cartItems = currentUserQuery?.data?.user?.cart;
   const cartItemsCount = !cartItems
     ? ""
-    : cartItems.reduce((all, cartItem) => all + cartItem.quantity, 0);
+    : cartItems.reduce(
+        (all: any[], cartItem: any) => all + cartItem.quantity,
+        0
+      );
 
   return (
     <NavStyles data-test="nav">

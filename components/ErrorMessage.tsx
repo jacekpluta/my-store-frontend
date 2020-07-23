@@ -17,14 +17,14 @@ const ErrorStyles = styled.div`
   }
 `;
 
-const DisplayError = ({ error }: any): null | typeof ErrorStyles => {
-  if (!error || !error.message) return null;
+const DisplayError = ({ error }: any): any | typeof ErrorStyles => {
+  if (!error || !error.message) return <p></p>;
   if (
     error.networkError &&
     error.networkError.result &&
     error.networkError.result.errors.length
   ) {
-    return error.networkError.result.errors.map((error, i) => (
+    return error.networkError.result.errors.map((error: any, i: number) => (
       <ErrorStyles key={i}>
         <p data-test="graphql-error">
           <strong>Error!</strong>

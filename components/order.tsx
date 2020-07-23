@@ -59,7 +59,7 @@ export default function Order(props: OrderProps) {
           <span>Order total: {formatMoney(order.total)}</span>
         </p>
         <div className="items">
-          {order.items.map((item) => (
+          {order.items.map((item: any) => (
             <div className="order-item" key={item.id}>
               <img src={item.image} alt={item.title} />
               <div className="item-details">

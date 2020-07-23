@@ -67,12 +67,10 @@ export interface ManagePermissionsProps {
 }
 
 interface User {
-  user: {
-    name: number;
-    email: string;
-    id: number;
-    permissions: [];
-  };
+  name: string;
+  email: string;
+  id: number;
+  permissions: [];
 }
 
 export default function ManagePermissions(props: ManagePermissionsProps) {
@@ -112,7 +110,7 @@ export default function ManagePermissions(props: ManagePermissionsProps) {
   }
 
   const permissionsData = permissionsQuery?.data?.__type?.enumValues;
-  const permissions = permissionsData.map(({ name }) => name);
+  const permissions = permissionsData.map(({ name }: any) => name);
 
   const pagesCount: number =
     usersConnectQuery?.data?.usersConnection?.aggregate?.count;
@@ -128,7 +126,7 @@ export default function ManagePermissions(props: ManagePermissionsProps) {
           <tr>
             <th>NAME</th>
             <th>EMAIL</th>
-            {permissions.map((permission) => (
+            {permissions.map((permission: any) => (
               <th key={permission}>{permission}</th>
             ))}
           </tr>
@@ -180,12 +178,12 @@ export default function ManagePermissions(props: ManagePermissionsProps) {
   );
 }
 
-const User = (props: User) => {
-  const { user } = props;
+const User = (props: any) => {
+  const { user }: any = props;
   const [userPermissions, setUserPermissions] = useState(user.permissions);
   const permissionsQuery = useQuery(PERMISSIONS_QUERY);
   const permissionsData = permissionsQuery?.data?.__type?.enumValues;
-  const permissions = permissionsData.map(({ name }) => name);
+  const permissions = permissionsData.map(({ name }: User) => name);
   let updatedPermissions = [...userPermissions];
 
   const [updatePermission, { data, loading, error }] = useMutation(
@@ -226,7 +224,7 @@ const User = (props: User) => {
   `;
 
   const getAllPermisions = () =>
-    permissions.map((permission) => (
+    permissions.map((permission: any) => (
       <td key={permission}>
         <label htmlFor={`${user.id}-${permission}`}>
           {!loading ? (

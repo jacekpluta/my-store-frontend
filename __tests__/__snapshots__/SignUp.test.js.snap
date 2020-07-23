@@ -6,7 +6,7 @@ exports[`renders and maches snapshot 1`] = `
   onSubmit={[Function]}
 >
   <form
-    className="Form-sc-6xc9hh-0 cBDtSx"
+    className="Form-sc-1c1u0cd-0 bUSGKY"
     method="post"
     onSubmit={[Function]}
   >
@@ -20,7 +20,9 @@ exports[`renders and maches snapshot 1`] = `
       <p />
       <DisplayError
         error={Object {}}
-      />
+      >
+        <p />
+      </DisplayError>
       <label
         htmlFor="email"
       >

@@ -5,7 +5,11 @@ import { useApollo } from "../lib/apollo";
 import React from "react";
 import Page from "../components/page";
 
-App.getInitialProps = async ({ Component, ctx }) => {
+interface pageProps {
+  query?: string;
+}
+
+App.getInitialProps = async ({ Component, ctx }: any) => {
   let pageProps: pageProps = {};
   //crowls queires and mutation that need to be fetched
   if (Component.getInitialProps) {

@@ -2,7 +2,7 @@
 
 exports[`renders corrent amount of items in cart 1`] = `
 <div
-  className="Nav__Dot-zxvut8-0 fEapAn count"
+  className="nav__Dot-sc-1ax7fcx-0 mlsYp count"
 >
   9
 </div>

@@ -66,12 +66,12 @@ class Items extends React.Component<ItemsProps, ItemsState> {
             first: perPage,
           }}
         >
-          {({ data, error, loading }) => {
+          {({ data, error, loading }: any) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error: {error.message}</p>;
             return (
               <ItemsList>
-                {data.items.map((item) => (
+                {data.items.map((item: any) => (
                   <Item item={item} key={item.id} />
                 ))}
               </ItemsList>

@@ -34,7 +34,7 @@ export default function RequestReset(props: RequestResetProps) {
   return (
     <Form
       method="post"
-      onSubmit={async (e: React.ChangeEvent<HTMLInputElement>) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         await requestReset({
           variables: {

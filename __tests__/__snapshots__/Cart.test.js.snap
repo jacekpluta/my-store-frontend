@@ -7,7 +7,7 @@ exports[`renders component and maches snap 1`] = `
     title="close"
   >
     <button
-      className="CloseButton-sc-1lvvgfc-0 iLooDA"
+      className="CloseButton-e02u0t-0 jmHWvM"
       onClick={[Function]}
       title="close"
     >
@@ -16,7 +16,7 @@ exports[`renders component and maches snap 1`] = `
   </CloseButton>
   <Supreme>
     <h3
-      className="Supreme-dtbm01-0 hzNWwp"
+      className="Supreme-te7kwd-0 etBDhl"
     >
       test
        - Cart

@@ -53,7 +53,7 @@ export default function Orders() {
       <h2>Orders - {orders.length} </h2>
 
       <OrdersUl>
-        {orders.map((order) => (
+        {orders.map((order: any) => (
           <Link
             href={{
               pathname: "/",
@@ -63,7 +63,10 @@ export default function Orders() {
             <OrderItemStyles>
               <div className="order-meta">
                 <p>
-                  {order.items.reduce((all, item) => all + item.quantity, 0)}{" "}
+                  {order.items.reduce(
+                    (all: any, item: any) => all + item.quantity,
+                    0
+                  )}{" "}
                   items
                 </p>
                 <p>{order.items.length} products</p>
@@ -73,7 +76,7 @@ export default function Orders() {
                 </p>
               </div>
               <div className="images">
-                {order.items.map((item) => (
+                {order.items.map((item: any) => (
                   <img key={item.id} src={item.image} alt={item.title} />
                   // <div className="item-details">
                   //   <h2>{item.title}</h2>

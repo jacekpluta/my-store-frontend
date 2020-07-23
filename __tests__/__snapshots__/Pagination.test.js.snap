@@ -6,7 +6,7 @@ Array [
     data-test="pagination"
   >
     <div
-      className="PaginationStyles-sc-7b9szd-0 dgRQTo"
+      className="PaginationStyles-hhtwtv-0 kWkjbl"
       data-test="pagination"
     >
       <Head>
@@ -73,7 +73,7 @@ Array [
     </div>
   </PaginationStyles>,
   <div
-    className="PaginationStyles-sc-7b9szd-0 dgRQTo"
+    className="PaginationStyles-hhtwtv-0 kWkjbl"
     data-test="pagination"
   >
     <Head>

@@ -45,7 +45,7 @@ export default function SingleItem(props: SingleItemProps) {
     variables: { id: itemId },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <p>Loading...</p>;
   if (error) return <Error error={error} />;
   if (!data.item) return <p>No item found for item with id - {itemId}</p>;
 

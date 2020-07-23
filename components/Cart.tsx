@@ -43,7 +43,7 @@ export default function Cart() {
   const user = currentUserQuery?.data?.user;
 
   const totalPrice = user?.cart
-    ? user.cart.reduce((all, cartItem) => {
+    ? user.cart.reduce((all: any, cartItem: any) => {
         if (cartItem.item) return all + cartItem.quantity * cartItem.item.price;
         else return;
       }, 0)
@@ -62,7 +62,7 @@ export default function Cart() {
         </p>
       </header>
       <ul>
-        {user.cart.map((cartItem) => (
+        {user.cart.map((cartItem: any) => (
           <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
         ))}
       </ul>

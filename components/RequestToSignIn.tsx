@@ -4,7 +4,7 @@ import { CURRENT_USER_QUERY } from "./queries";
 import SignIn from "./signIn";
 import Error from "./errorMessage";
 
-export default function RequestToSignIn(props) {
+export default function RequestToSignIn(props: any) {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
   if (loading) {
     return <p>Loading...</p>;

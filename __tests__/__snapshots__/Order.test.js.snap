@@ -2,7 +2,7 @@
 
 exports[`renders and matches snapshot 1`] = `
 <div
-  className="OrderStyles-sc-1l0pc5d-0 exwKXT"
+  className="OrderStyles-a35333-0 bIrebZ"
   data-test="order"
 >
   <Head>

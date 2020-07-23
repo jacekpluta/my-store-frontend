@@ -47,7 +47,7 @@ const CreateItem = () => {
   const [image, setImage] = useState("");
   const [largeImage, setLargeImage] = useState("");
 
-  const uploadFile = async (e) => {
+  const uploadFile = async (e: any) => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -92,7 +92,7 @@ const CreateItem = () => {
       <Error error={createItemtMutation.error}></Error>
       <fieldset
         disabled={
-          createItemtMutation.loading ? createItemtMutation.loading : ""
+          createItemtMutation.loading ? createItemtMutation.loading : false
         }
         aria-busy={createItemtMutation.loading}
       >

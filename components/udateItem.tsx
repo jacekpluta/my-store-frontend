@@ -54,7 +54,7 @@ class UpdateItem extends React.Component<UpdateItemProps, UpdateItemState> {
     this.setState({ [name]: val });
   };
 
-  updateItem = async (e, updateItemMutation): void => {
+  updateItem = async (e: any, updateItemMutation: any): Promise<string> => {
     e.preventDefault();
     const res = await updateItemMutation({
       variables: {
@@ -62,6 +62,7 @@ class UpdateItem extends React.Component<UpdateItemProps, UpdateItemState> {
         ...this.state,
       },
     });
+    return "";
   };
 
   render() {
@@ -72,12 +73,12 @@ class UpdateItem extends React.Component<UpdateItemProps, UpdateItemState> {
           id: this.props.id,
         }}
       >
-        {({ data, loading }) => {
+        {({ data, loading }: any) => {
           if (loading) return <p>Loading...</p>;
           if (!data.item) return <p>No Item Found for ID {this.props.id}</p>;
           return (
             <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
-              {(updateItem, { loading, error }): any => {
+              {(updateItem: any, { loading, error }: any): any => {
                 return (
                   <Form
                     onSubmit={(e) => {
