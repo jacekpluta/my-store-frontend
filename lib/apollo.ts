@@ -15,22 +15,16 @@ export type ResolverContext = {
   res?: ServerResponse;
 };
 
-function createIsomorphLink(context: ResolverContext = {}) {
-  if (typeof window === "undefined") {
-    const { SchemaLink } = require("apollo-link-schema");
-    const { schema } = require("./schema");
-    return new SchemaLink({ schema, context });
-  } else {
-    const { HttpLink } = require("apollo-link-http");
-    return new HttpLink({
-      uri:
-        process.env.NODE_ENV === "development"
-          ? endpoint
-          : productionBackendEndpoint,
-      credentials: "include",
-    });
-  }
-}
+// function createIsomorphLink(context: ResolverContext = {}) {
+//   const { HttpLink } = require("apollo-link-http");
+//   return new HttpLink({
+//     uri:
+//       process.env.NODE_ENV === "development"
+//         ? endpoint
+//         : productionBackendEndpoint,
+//     credentials: "include",
+//   });
+// }
 const cache = new InMemoryCache();
 
 function createApolloClient(context?: ResolverContext): any {
