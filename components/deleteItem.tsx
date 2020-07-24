@@ -37,15 +37,15 @@ export default function deleteItem(props: deleteItemProps) {
   const { client, data } = useQuery(GET_DELETED_ITEM_ID);
 
   const handleDeleteItem = () => {
-    if (confirm("Do you want to delete that item?"))
-      deleteItem({ variables: { id: itemId } })
-        .then(() => {
-          makeVar([{ data: { id: itemId } }]);
-          // client.writeData({ data: { id: itemId } });
-        })
-        .catch((error) => {
-          console.log("You don't have permissions to delete that item");
-        });
+    // if (confirm("Do you want to delete that item?"))
+    deleteItem({ variables: { id: itemId } })
+      .then(() => {
+        makeVar([{ data: { id: itemId } }]);
+        // client.writeData({ data: { id: itemId } });
+      })
+      .catch((error) => {
+        console.log("You don't have permissions to delete that item");
+      });
   };
 
   return <button onClick={handleDeleteItem}>{props.children}</button>;
