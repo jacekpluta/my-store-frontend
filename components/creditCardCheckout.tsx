@@ -51,7 +51,7 @@ export default function CreditCardCheckout(props: any) {
       variables: {
         token: tokenId,
       },
-    }).catch((err) => alert(err.message));
+    }).catch((err) => console.log(err.message));
 
     Router.push({
       pathname: "/order",

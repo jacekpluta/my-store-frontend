@@ -79,7 +79,7 @@ const CartItem = ({ cartItem }: any) => {
     try {
       data = cache.readQuery({ query: CURRENT_USER_QUERY });
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
     }
 
     const cartItemId = payload.data.deleteCartItem.id;
@@ -91,7 +91,7 @@ const CartItem = ({ cartItem }: any) => {
     try {
       cache.writeQuery({ query: CURRENT_USER_QUERY, data });
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
     }
   };
 
@@ -114,7 +114,7 @@ const CartItem = ({ cartItem }: any) => {
             variables: {
               id: id,
             },
-          }).catch((err) => alert(err.message));
+          }).catch((err) => console.log(err.message));
 
           //reset local query
           makeVar([{ data: { id: null } }]);
@@ -155,7 +155,7 @@ const CartItem = ({ cartItem }: any) => {
               id: cartItem.item.id,
             },
             update: deleteCartUpdate,
-          }).catch((err) => alert(err.message));
+          }).catch((err) => console.log(err.message));
         }}
       >
         &times;

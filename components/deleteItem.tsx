@@ -44,7 +44,7 @@ export default function deleteItem(props: deleteItemProps) {
           // client.writeData({ data: { id: itemId } });
         })
         .catch((error) => {
-          alert("You don't have permissions to delete that item");
+          console.log("You don't have permissions to delete that item");
         });
   };
 
