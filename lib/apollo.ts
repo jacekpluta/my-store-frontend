@@ -1,9 +1,8 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { useMemo } from "react";
-
+import gql from "graphql-tag";
 import { endpoint, productionBackendEndpoint } from "../config";
 
-// import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
 // import { ApolloClient } from "@apollo/client";
 import { typeDefs, resolvers } from "./graphqlLocal";
 
@@ -41,13 +40,20 @@ function createApolloClient(context?: ResolverContext): any {
         ? endpoint
         : productionBackendEndpoint,
     credentials: "include",
-    cache: cache,
+    cache: new InMemoryCache(),
     resolvers,
     typeDefs,
   });
 }
 
-cache.writeData({
+cache.writeFragment({
+  fragment: gql`
+    fragment CartOpenStatus on CartOpen {
+      id
+      text
+      completed
+    }
+  `,
   data: {
     cartOpen: false,
   },
