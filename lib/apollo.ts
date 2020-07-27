@@ -29,10 +29,10 @@ const cache = new InMemoryCache();
 
 function createApolloClient(context?: ResolverContext): any {
   return new ApolloClient({
-    uri:
-      process.env.NODE_ENV === "development"
-        ? endpoint
-        : productionBackendEndpoint,
+    uri: "http://my-shop-yoga-backend.herokuapp.com",
+    // process.env.NODE_ENV === "development"
+    //   ? endpoint
+    //   : productionBackendEndpoint,
     credentials: "include",
     cache: new InMemoryCache(),
     resolvers,
