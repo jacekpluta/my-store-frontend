@@ -11,8 +11,11 @@ export const ADD_TO_CART_MUTATION = gql`
     }
   }
 `;
+type itemId = {
+  itemId: number;
+};
 
-export default function addToCart(props: any) {
+export default function addToCart(props: itemId) {
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     awaitRefetchQueries: true,

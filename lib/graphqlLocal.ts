@@ -25,13 +25,8 @@ interface AppResolvers extends Resolvers {
 
 export const resolvers = {
   Mutation: {
-    toggleCart: (
-      _: any,
-      //   { cartOpen }: { cartOpen: boolean },
-      variables: any,
-      { cache }: { cache: any }
-    ): any[] => {
-      const { cartOpen } = cache.readQuery({ query: LOCAL_STATE_QUERY });
+    toggleCart: (_: any, { cache }: { cache: any }): any[] => {
+      const { cartOpen } = cache.readFragment({ query: LOCAL_STATE_QUERY });
       const data: any = {
         data: { cartOpen: !cartOpen },
       };

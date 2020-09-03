@@ -20,12 +20,6 @@ export const LOGIN_USER_MUTATION = gql`
   }
 `;
 
-type target = {
-  email: string;
-  name: string;
-  password: string;
-};
-
 export default function SignIn(props: SignInProps) {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
@@ -46,7 +40,7 @@ export default function SignIn(props: SignInProps) {
       method="post"
       onSubmit={async (e) => {
         e.preventDefault();
-        const res = await createUser({
+        await createUser({
           variables: {
             email: email,
             name: name,
@@ -74,7 +68,6 @@ export default function SignIn(props: SignInProps) {
             onChange={handleFieldChange}
           />
         </label>
-
         <label htmlFor="password">
           Password
           <input
@@ -87,7 +80,6 @@ export default function SignIn(props: SignInProps) {
             onChange={handleFieldChange}
           />
         </label>
-
         <button type="submit">Submit</button>
         <p>
           <Link href="/signup">

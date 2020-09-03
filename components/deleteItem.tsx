@@ -41,10 +41,10 @@ export default function deleteItem(props: deleteItemProps) {
       deleteItem({ variables: { id: itemId } })
         .then(() => {
           makeVar([{ data: { id: itemId } }]);
-          // client.writeData({ data: { id: itemId } });
+          //client.writeData({ data: { id: itemId } });
         })
         .catch((error) => {
-          console.log("You don't have permissions to delete that item");
+          console.log("handleDeleteItem error");
         });
   };
 

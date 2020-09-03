@@ -33,13 +33,7 @@ const OrdersUl = styled.ul`
 `;
 
 export default function Orders() {
-  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-  if (currentUserQuery.loading) return <p>Loading...</p>;
-  if (currentUserQuery.error) return <Error error={currentUserQuery.error} />;
-
-  const allOrdersQuery = useQuery(ALL_ORDERS_QUERY, {
-    variables: { id: currentUserQuery.data.user.id },
-  });
+  const allOrdersQuery = useQuery(ALL_ORDERS_QUERY);
 
   if (allOrdersQuery.loading) return <p>Loading...</p>;
   if (allOrdersQuery.error) return <Error error={allOrdersQuery.error} />;
