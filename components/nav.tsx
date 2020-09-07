@@ -10,6 +10,8 @@ import { TOGGLE_CART_MUTATION } from "./cart";
 import styled from "styled-components";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Search from "./search";
+import { Input, Menu } from "semantic-ui-react";
 
 const Dot = styled.div`
   background: ${(props) => props.theme.red};
@@ -73,54 +75,71 @@ export default function Nav() {
         ""
       )}
 
-      <Link href="/items">
-        <a>Items</a>
-      </Link>
-
-      {currentUser && currentUser.user && (
-        <>
-          <Link href="/orders">
-            <a>Orders</a>
+      <Menu secondary color="olive">
+        <Menu.Item name="items">
+          <Link href="/items">
+            <a>Items</a>
           </Link>
-          <Link href="/account">
-            <a>Accout</a>
-          </Link>
+        </Menu.Item>
 
-          <Link href="/sell">
-            <a>Sell</a>
-          </Link>
+        {currentUser && currentUser.user && (
+          <>
+            <Menu.Item name="orders">
+              <Link href="/orders">
+                <a>Orders</a>
+              </Link>
+            </Menu.Item>
 
-          <SignOut></SignOut>
-          <button onClick={() => toggleCart()}>
-            My Cart
-            {cartItems.length === 0 ? (
-              " (0)"
+            <Menu.Item name="account">
+              <Link href="/account">
+                <a>Accout</a>
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item name="sell">
+              <Link href="/sell">
+                <a>Sell</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item name="sign out">
+              <SignOut></SignOut>
+            </Menu.Item>
+
+            {currentUser && !currentUser.user ? (
+              <Menu.Item name="sign out">
+                <Link href="/signin">
+                  <a>Sign In</a>
+                </Link>{" "}
+              </Menu.Item>
             ) : (
-              <AnimationStyles>
-                <TransitionGroup>
-                  <CSSTransition
-                    unmountOnExit
-                    classNames="count"
-                    className="count"
-                    key={cartItemsCount}
-                    timeout={{ enter: 1000, exit: 1000 }}
-                  >
-                    <Dot>{cartItemsCount}</Dot>
-                  </CSSTransition>
-                </TransitionGroup>
-              </AnimationStyles>
+              ""
             )}
-          </button>
-        </>
-      )}
 
-      {currentUser && !currentUser.user ? (
-        <Link href="/signin">
-          <a>Sign In</a>
-        </Link>
-      ) : (
-        ""
-      )}
+            <button onClick={() => toggleCart()}>
+              My Cart
+              {cartItems.length === 0 ? (
+                " (0)"
+              ) : (
+                <AnimationStyles>
+                  <TransitionGroup>
+                    <CSSTransition
+                      unmountOnExit
+                      classNames="count"
+                      className="count"
+                      key={cartItemsCount}
+                      timeout={{ enter: 1000, exit: 1000 }}
+                    >
+                      <Dot>{cartItemsCount}</Dot>
+                    </CSSTransition>
+                  </TransitionGroup>
+                </AnimationStyles>
+              )}
+            </button>
+          </>
+        )}
+      </Menu>
+
+      <Search></Search>
     </NavStyles>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import CartStyles from "./styles/CartStyles";
-import Supreme from "./styles/Supreme";
+
 import CloseButton from "./styles/CloseButton";
 import ButtonStyle from "./styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
@@ -56,7 +56,7 @@ export default function Cart() {
         <CloseButton onClick={() => toggleCart()} title="close">
           &times;
         </CloseButton>
-        <Supreme>{user.name} - Cart</Supreme>
+        {user.name} - Cart
         <p>
           You have {user.cart.length} item {user.cart.length === 1 ? "" : "s"}{" "}
           in your cart

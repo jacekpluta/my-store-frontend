@@ -4,7 +4,7 @@ import { ApolloProvider as ApolloProviderHooks } from "@apollo/react-hooks";
 import { useApollo } from "../lib/apollo";
 import React from "react";
 import Page from "../components/page";
-
+import "semantic-ui-css/semantic.min.css";
 interface pageProps {
   query?: string;
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const NavStyles = styled.ul`
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   display: flex;
   justify-self: end;
@@ -26,7 +26,11 @@ const NavStyles = styled.ul`
     &:before {
       content: "";
       width: 2px;
-      background: ${(props) => props.theme.lightgrey};
+      background: ${(
+    props
+  ) =>
+    props.theme
+      .lightgrey};
       height: 100%;
       left: 0;
       position: absolute;
@@ -56,7 +60,7 @@ const NavStyles = styled.ul`
         width: calc(100% - 10px);
       }
     }
-  }
+  } */
   @media (max-width: 1300px) {
     border-top: 1px solid ${(props) => props.theme.lightgrey};
     width: 100%;

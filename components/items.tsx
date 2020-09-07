@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Item from "./item";
 import Pagination from "./pagination";
 import { perPage } from "../config";
-import Search from "./search";
 
 export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -55,7 +54,6 @@ class Items extends React.Component<ItemsProps, ItemsState> {
     const { page } = this.props;
     return (
       <Center>
-        <Search></Search>
         <Pagination page={page} />
 
         <Query

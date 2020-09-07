@@ -2,7 +2,7 @@
 
 exports[`renders component 1`] = `
 <form
-  className="Form-sc-1c1u0cd-0 bUSGKY"
+  className="Form-sc-1c1u0cd-0 ddxHFt"
   data-test="form"
   method="post"
   onSubmit={[Function]}
