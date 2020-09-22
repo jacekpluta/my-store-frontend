@@ -2,12 +2,12 @@
 
 exports[`renders and matches snapshot 1`] = `
 <div
-  className="OrderStyles-a35333-0 bIrebZ"
+  className="OrderStyles-a35333-0 duaUKG"
   data-test="order"
 >
   <Head>
-    <Component
-      handleStateChange={null}
+    <_default
+      headManager={Object {}}
       inAmpMode={false}
       reduceComponentsToState={[Function]}
     />

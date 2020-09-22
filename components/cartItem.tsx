@@ -53,7 +53,59 @@ export const GET_DELETED_ITEM_ID = gql`
   }
 `;
 
-const CartItem = ({ cartItem }: any) => {
+export interface IItem {
+  item: {
+    id: number;
+    price: number;
+    user: null;
+    image: string;
+    title: string;
+    description: string;
+    largeImage: string;
+  };
+}
+export interface ICartItem {
+  id: number;
+  quantity: number;
+  item: {
+    id: number;
+    price: number;
+    user: null;
+    image: string;
+    title: string;
+    description: string;
+    largeImage: string;
+  };
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    permissions: string[];
+  };
+}
+interface propsCartItem {
+  cartItem: {
+    id: number;
+    quantity: number;
+    item: {
+      id: number;
+      price: number;
+      user: null;
+      image: string;
+      title: string;
+      description: string;
+      largeImage: string;
+    };
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      permissions: string[];
+    };
+  };
+}
+
+const CartItem = ({ cartItem }: propsCartItem) => {
   const [
     deleteCartItemWhenItemDeleted,
     deleteCartItemWhenItemDeletedMutation,
@@ -85,7 +137,7 @@ const CartItem = ({ cartItem }: any) => {
     const cartItemId = payload.data.deleteCartItem.id;
 
     data.user.cart = data.user.cart.filter(
-      (cartItem: any) => cartItem.id !== cartItemId
+      (cartItem: ICartItem) => cartItem.id !== cartItemId
     );
 
     try {
@@ -102,7 +154,7 @@ const CartItem = ({ cartItem }: any) => {
         const userCart = currentUserQuery.data.user.cart;
 
         //check if deleted item is in the cart
-        const foundItem = userCart.filter((item: any) => {
+        const foundItem = userCart.filter((item: IItem) => {
           if (item.item.id === deletedItemId) return item;
         });
 

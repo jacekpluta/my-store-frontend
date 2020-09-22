@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./header";
 import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import Gallery from "./gallery";
 
 type theme = {
   red: string;
@@ -24,13 +25,6 @@ const theme: theme = {
 };
 
 const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family: 'optimusprinceps';
-  src: url()("/static/optimusprinceps.woff2")
-  format("woff2");
-  font-weight:normal;
-  font-style: normal;
-}
 html {
   box-sizing: border-box;
   font-size: 10px;
@@ -43,7 +37,7 @@ body{
   margin: 0;
   font-size: 1.5rem;
   line-height: 2;
-  font-family: 'optimusprinceps';
+  font-family: "Arial", Times, serif;
 }
   a{
     color: ${theme.black};
@@ -51,7 +45,7 @@ body{
 `;
 
 const StyledPage = styled.div`
-  background: white;
+  background: grey;
   color: black;
 `;
 
@@ -71,6 +65,7 @@ class Page extends React.Component<PageProps, PageState> {
       <ThemeProvider theme={theme}>
         <StyledPage>
           <Header></Header>
+          <Gallery></Gallery>
           <Meta></Meta>
           <GlobalStyle />
 

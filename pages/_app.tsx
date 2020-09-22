@@ -4,7 +4,8 @@ import { ApolloProvider as ApolloProviderHooks } from "@apollo/react-hooks";
 import { useApollo } from "../lib/apollo";
 import React from "react";
 import Page from "../components/page";
-
+import "semantic-ui-css/semantic.min.css";
+import "../styles.css";
 interface pageProps {
   query?: string;
 }
@@ -22,6 +23,17 @@ App.getInitialProps = async ({ Component, ctx }: any) => {
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
+
+  const handleScroll = () => {
+    var header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 0);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
   return (
     <ApolloProviderHooks client={apolloClient}>
       <ApolloProvider client={apolloClient}>

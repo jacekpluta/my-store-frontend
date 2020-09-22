@@ -6,12 +6,12 @@ Array [
     data-test="pagination"
   >
     <div
-      className="PaginationStyles-hhtwtv-0 kWkjbl"
+      className="PaginationStyles-hhtwtv-0 BfNRm"
       data-test="pagination"
     >
       <Head>
-        <Component
-          handleStateChange={null}
+        <_default
+          headManager={Object {}}
           inAmpMode={false}
           reduceComponentsToState={[Function]}
         />
@@ -73,12 +73,12 @@ Array [
     </div>
   </PaginationStyles>,
   <div
-    className="PaginationStyles-hhtwtv-0 kWkjbl"
+    className="PaginationStyles-hhtwtv-0 BfNRm"
     data-test="pagination"
   >
     <Head>
-      <Component
-        handleStateChange={null}
+      <_default
+        headManager={Object {}}
         inAmpMode={false}
         reduceComponentsToState={[Function]}
       />

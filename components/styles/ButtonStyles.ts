@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ButtonStyles = styled.button`
-  background: green;
+  /* background: green;
   color: white;
   font-weight: 500;
   border: 0;
@@ -14,7 +14,7 @@ const ButtonStyles = styled.button`
   transition: all 0.5s;
   &[disabled] {
     opacity: 0.5;
-  }
+  } */
 `;
 
 export default ButtonStyles;

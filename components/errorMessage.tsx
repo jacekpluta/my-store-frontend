@@ -24,7 +24,7 @@ const DisplayError = ({ error }: any): any | typeof ErrorStyles => {
     error.networkError.result &&
     error.networkError.result.errors.length
   ) {
-    return error.networkError.result.errors.map((error: any, i: number) => (
+    return error.networkError.result.errors.map((error: Error, i: number) => (
       <ErrorStyles key={i}>
         <p data-test="graphql-error">
           <strong>Error!</strong>

@@ -1,7 +1,13 @@
 import React from "react";
 import SingleItem from "../components/singleItem";
 
-function Item(props: any) {
+interface ItemProps {
+  query: {
+    id: string;
+  };
+}
+
+function Item(props: ItemProps) {
   return <SingleItem itemId={props.query.id} />;
 }
 

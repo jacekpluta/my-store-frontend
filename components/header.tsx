@@ -1,9 +1,10 @@
-import styled from "styled-components";
 import Nav from "./nav";
 import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
 import Cart from "./cart";
+import { StyledHeader } from "./styles/StyledHeader";
+import React, { useEffect, useState } from "react";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -15,60 +16,34 @@ Router.events.on("routeChangeError", () => {
   NProgress.done();
 });
 
-const Logo = styled.h1`
-  font-size: 3rem;
-  margin-left: 2rem;
-  position: relative;
-  z-index: 2;
-  transform: skew(-7deg);
-  a {
-    padding: 0.5 rem 1 rem;
-    background: ${(props) => props.theme.red};
-    color: white;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-  @media (max-width: 1300px) {
-    margin: 0;
-    text-align: center;
-  }
-`;
-
-const StyledHeader = styled.header`
-  .bar {
-    border-bottom: 10px solid ${(props) => props.theme.black};
-    display: grid;
-    grid-template-columns: auto 1fr;
-    justify-content: space-between;
-    align-items: stretch;
-    @media (max-width: 1300px) {
-      grid-template-columns: 1fr;
-      justify-content: center;
-    }
-  }
-
-  .sub-bar {
-    display: grid;
-    grid-template-columns: 1ft auto;
-    border-bottom: 1px solid ${(props) => props.theme.lightGrey};
-  }
-`;
-
 export default function Header() {
+  const [image, setImage] = useState("myTransparentWhite.png");
+
+  const changeLogoToWhite = () => {
+    if (window.scrollY > 0) {
+      setImage("myTransparentBlack.png");
+    } else {
+      setImage("myTransparentWhite.png");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeLogoToWhite);
+    return () => window.removeEventListener("scroll", changeLogoToWhite);
+  }, []);
+
   return (
     <StyledHeader>
-      <div className="bar">
-        <Logo>
-          <Link href="/">
-            <a>MyShop</a>
-          </Link>
-        </Logo>
+      <Link href="/">
+        <img
+          src={`/images/${image}`}
+          alt="my shop"
+          style={{ width: "15%", cursor: "pointer" }}
+        ></img>
+      </Link>
+      <Nav />
 
-        <Nav />
-      </div>
-      <div className="sub-bar">
-        <Cart></Cart>
-      </div>
+      <Cart></Cart>
     </StyledHeader>
   );
 }

@@ -8,6 +8,7 @@ import gql from "graphql-tag";
 
 import { CURRENT_USER_QUERY } from "./queries";
 import { ALL_ORDERS_QUERY } from "./orders";
+import { ICartItem } from "./cartItem";
 
 export const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {
@@ -22,8 +23,32 @@ export const CREATE_ORDER_MUTATION = gql`
     }
   }
 `;
+interface CreditCardCheckoutProps {
+  allItemsCount: number;
+  totalPrice: number;
+  cart: {
+    item: {
+      id: number;
+      price: number;
+      user: null;
+      image: string;
+      title: string;
+      description: string;
+      largeImage: string;
+    };
+  };
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    permissions: string[];
+  };
+  children: any;
+}
 
-export default function CreditCardCheckout(props: any) {
+export default function CreditCardCheckout(props: CreditCardCheckoutProps) {
+  const { allItemsCount, cart, user, totalPrice } = props;
+
   const [createOrder, createOrderMutation] = useMutation(
     CREATE_ORDER_MUTATION,
     {
@@ -42,8 +67,6 @@ export default function CreditCardCheckout(props: any) {
   if (createOrderMutation.error) {
     return <Error error={createOrderMutation.error}></Error>;
   }
-
-  const { allItemsCount, cart, user } = props;
 
   const onToken = async (tokenId: string) => {
     nProgress.start();
@@ -65,7 +88,7 @@ export default function CreditCardCheckout(props: any) {
   return (
     <div>
       <StripeCheckout
-        amount={props.totalPrice}
+        amount={totalPrice}
         description={`Order of ${allItemsCount} item${
           allItemsCount === 1 ? `` : `s`
         }`}

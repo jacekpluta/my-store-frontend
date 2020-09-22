@@ -19,7 +19,7 @@ export default function signOut() {
   });
 
   return (
-    <button onClick={() => signOut()}>
+    <div onClick={() => signOut()}>
       <Link
         href={{
           pathname: "/",
@@ -27,6 +27,6 @@ export default function signOut() {
       >
         <a>Logout </a>
       </Link>
-    </button>
+    </div>
   );
 }

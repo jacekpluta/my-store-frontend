@@ -47,7 +47,11 @@ const CreateItem = () => {
   const [image, setImage] = useState("");
   const [largeImage, setLargeImage] = useState("");
 
-  const uploadFile = async (e: any) => {
+  interface HTMLInputEvent {
+    target: HTMLInputElement & EventTarget;
+  }
+
+  const uploadFile = async (e: HTMLInputEvent) => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);

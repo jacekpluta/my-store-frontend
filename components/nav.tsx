@@ -8,42 +8,28 @@ import SignOut from "./signOut";
 import { useMutation } from "@apollo/react-hooks";
 import { TOGGLE_CART_MUTATION } from "./cart";
 import styled from "styled-components";
+import { Icon } from "semantic-ui-react";
 
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-const Dot = styled.div`
-  background: ${(props) => props.theme.red};
-  color: white;
-  border-radius: 100%;
-  padding: 0.5rem;
-  line-height: 2rem;
-  min-width: 3rem;
-  margin-left: 1rem;
-  font-weight: 100;
-  font-feature-settings: "tnum";
-`;
+import CartItemsNumber from "./styles/CartItemsNumber";
+import WhiteIcon from "./styles/WhiteIcon";
 
 const AnimationStyles = styled.span`
-  position: relative;
+  position: absolute;
   .count {
-    display: block;
-    position: relative;
-    transition: all 1s;
+    transition: all 0.3s;
     backface-visibility: hidden;
   }
   .count-enter {
-    transform: scale(2) rotateX(0.5turn);
+    transform: scale(1.2);
   }
   .count-enter-active {
-    transform: rotateX(0);
   }
   .count-exit {
-    top: 0;
     position: absolute;
-    transform: rotateX(0);
   }
   .count-exit-active {
-    transform: scale(2) rotateX(0.5turn);
+    transform: scale(1.2);
   }
 `;
 export default function Nav() {
@@ -67,60 +53,80 @@ export default function Nav() {
 
   return (
     <NavStyles data-test="nav">
-      {currentUser && currentUser.user ? (
-        <p>Hello {currentUser.user.name}</p>
-      ) : (
-        ""
-      )}
+      <nav>
+        <ul>
+          <li>
+            <Link href="/items">
+              <a>Home</a>
+            </Link>
+          </li>
+          {currentUser.user && (
+            <>
+              <li>
+                <Link href="/orders">
+                  <a>Orders</a>
+                </Link>
+              </li>
 
-      <Link href="/items">
-        <a>Items</a>
-      </Link>
+              <li>
+                <Link href="/account">
+                  <a>Accout</a>
+                </Link>
+              </li>
 
-      {currentUser && currentUser.user && (
-        <>
-          <Link href="/orders">
-            <a>Orders</a>
-          </Link>
-          <Link href="/account">
-            <a>Accout</a>
-          </Link>
+              <li>
+                <Link href="/sell">
+                  <a>Sell</a>
+                </Link>
+              </li>
 
-          <Link href="/sell">
-            <a>Sell</a>
-          </Link>
+              <li>
+                <SignOut></SignOut>
+              </li>
 
-          <SignOut></SignOut>
-          <button onClick={() => toggleCart()}>
-            My Cart
-            {cartItems.length === 0 ? (
-              " (0)"
-            ) : (
-              <AnimationStyles>
-                <TransitionGroup>
-                  <CSSTransition
-                    unmountOnExit
-                    classNames="count"
-                    className="count"
-                    key={cartItemsCount}
-                    timeout={{ enter: 1000, exit: 1000 }}
-                  >
-                    <Dot>{cartItemsCount}</Dot>
-                  </CSSTransition>
-                </TransitionGroup>
-              </AnimationStyles>
-            )}
-          </button>
-        </>
-      )}
+              <WhiteIcon>
+                <Icon name="search" />
+              </WhiteIcon>
 
-      {currentUser && !currentUser.user ? (
-        <Link href="/signin">
-          <a>Sign In</a>
-        </Link>
-      ) : (
-        ""
-      )}
+              <WhiteIcon>
+                <Icon name="heart" />
+              </WhiteIcon>
+
+              <WhiteIcon onClick={() => toggleCart()}>
+                <div style={{ display: "inline" }}>
+                  <Icon name="shopping bag" />
+
+                  {cartItems.length === 0 ? (
+                    <CartItemsNumber> 0</CartItemsNumber>
+                  ) : (
+                    <AnimationStyles>
+                      <TransitionGroup>
+                        <CSSTransition
+                          unmountOnExit
+                          classNames="count"
+                          className="count"
+                          key={cartItemsCount}
+                          timeout={{ enter: 100, exit: 100 }}
+                        >
+                          <CartItemsNumber>{cartItemsCount}</CartItemsNumber>
+                        </CSSTransition>
+                      </TransitionGroup>
+                    </AnimationStyles>
+                  )}
+                </div>
+              </WhiteIcon>
+            </>
+          )}
+
+          {!currentUser.user && (
+            <li>
+              <Link href="/signin">
+                <a>Sign In</a>
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
     </NavStyles>
   );
 }

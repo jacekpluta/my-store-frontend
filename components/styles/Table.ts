@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const Table = styled.table`
-  border-spacing: 0;
+  /* border-spacing: 0;
   width: 100%;
-  border: 1px solid ${(props) => props.theme.offWhite};
+  border: 1px solid ${(props) =>
+    props.theme
+      .offWhite};
   margin: 0px auto;
 
   thead {
@@ -11,8 +13,12 @@ const Table = styled.table`
   }
   td,
   th {
-    border-bottom: 1px solid ${(props) => props.theme.offWhite};
-    border-right: 1px solid ${(props) => props.theme.offWhite};
+    border-bottom: 1px solid ${(
+    props
+  ) => props.theme.offWhite};
+    border-right: 1px solid ${(props) =>
+    props.theme
+      .offWhite};
     padding: 10px 5px;
     position: relative;
     &:last-child {
@@ -29,9 +35,11 @@ const Table = styled.table`
 
   tr {
     &:hover {
-      background: ${(props) => props.theme.offWhite};
+      background: ${(
+    props
+  ) => props.theme.offWhite};
     }
-  }
+  } */
 `;
 
 export default Table;
