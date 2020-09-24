@@ -16,12 +16,8 @@ Router.events.on("routeChangeError", () => {
   NProgress.done();
 });
 
-<<<<<<< HEAD
 export default function Header() {
   const [image, setImage] = useState("myTransparentWhite.png");
-=======
-const Logo = styled.h1``;
->>>>>>> jacagaca/my-store-frontend.git/master
 
   const changeLogoToWhite = () => {
     if (window.scrollY > 0) {
@@ -38,7 +34,6 @@ const Logo = styled.h1``;
 
   return (
     <StyledHeader>
-<<<<<<< HEAD
       <Link href="/">
         <img
           src={`/images/${image}`}
@@ -48,14 +43,6 @@ const Logo = styled.h1``;
       </Link>
 
       <Nav />
-=======
-      <div className="bar">
-        <Logo>
-          <Link href="/">
-            <a></a>
-          </Link>
-        </Logo>
->>>>>>> jacagaca/my-store-frontend.git/master
 
       <Cart></Cart>
     </StyledHeader>
