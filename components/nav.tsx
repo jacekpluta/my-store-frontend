@@ -11,10 +11,27 @@ import styled from "styled-components";
 import { Icon, Popup } from "semantic-ui-react";
 import Search from "./search";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+<<<<<<< HEAD
 import CartItemsNumber from "./styles/CartItemsNumber";
 import WhiteIcon from "./styles/WhiteIcon";
 import { motion } from "framer-motion";
 import { WhiteBar } from "./styles/WhiteBar";
+=======
+import Search from "./search";
+import { Input, Menu } from "semantic-ui-react";
+
+const Dot = styled.div`
+  background: ${(props) => props.theme.red};
+  color: white;
+  border-radius: 100%;
+  padding: 0.5rem;
+  line-height: 2rem;
+  min-width: 3rem;
+  margin-left: 1rem;
+  font-weight: 100;
+  font-feature-settings: "tnum";
+`;
+>>>>>>> jacagaca/my-store-frontend.git/master
 
 const AnimationStyles = styled.span`
   position: absolute;
@@ -93,6 +110,7 @@ export default function Nav() {
                 <SignOut></SignOut>
               </li>
 
+<<<<<<< HEAD
               <WhiteIcon>
                 <Popup
                   content={<Search />}
@@ -144,6 +162,73 @@ export default function Nav() {
         </ul>
         <WhiteBar />
       </nav>
+=======
+      <Menu secondary color="olive">
+        <Menu.Item name="items">
+          <Link href="/items">
+            <a>Items</a>
+          </Link>
+        </Menu.Item>
+
+        {currentUser && currentUser.user && (
+          <>
+            <Menu.Item name="orders">
+              <Link href="/orders">
+                <a>Orders</a>
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item name="account">
+              <Link href="/account">
+                <a>Accout</a>
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item name="sell">
+              <Link href="/sell">
+                <a>Sell</a>
+              </Link>
+            </Menu.Item>
+            <Menu.Item name="sign out">
+              <SignOut></SignOut>
+            </Menu.Item>
+
+            {currentUser && !currentUser.user ? (
+              <Menu.Item name="sign out">
+                <Link href="/signin">
+                  <a>Sign In</a>
+                </Link>{" "}
+              </Menu.Item>
+            ) : (
+              ""
+            )}
+
+            <button onClick={() => toggleCart()}>
+              My Cart
+              {cartItems.length === 0 ? (
+                " (0)"
+              ) : (
+                <AnimationStyles>
+                  <TransitionGroup>
+                    <CSSTransition
+                      unmountOnExit
+                      classNames="count"
+                      className="count"
+                      key={cartItemsCount}
+                      timeout={{ enter: 1000, exit: 1000 }}
+                    >
+                      <Dot>{cartItemsCount}</Dot>
+                    </CSSTransition>
+                  </TransitionGroup>
+                </AnimationStyles>
+              )}
+            </button>
+          </>
+        )}
+      </Menu>
+
+      <Search></Search>
+>>>>>>> jacagaca/my-store-frontend.git/master
     </NavStyles>
   );
 }

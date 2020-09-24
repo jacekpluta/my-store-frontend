@@ -5,7 +5,6 @@ import { useApollo } from "../lib/apollo";
 import React from "react";
 import Page from "../components/page";
 import "semantic-ui-css/semantic.min.css";
-import "../styles.css";
 interface pageProps {
   query?: string;
 }
