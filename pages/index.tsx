@@ -1,4 +1,5 @@
 import React from "react";
+import Gallery from "../components/gallery";
 import Items from "../components/items";
 
 interface HomeProps {
@@ -8,7 +9,7 @@ interface HomeProps {
 }
 //props.query
 function Home(props: HomeProps) {
-  return <Items page={parseFloat(props.query.page) || 1}></Items>;
+  return <Gallery></Gallery>;
 }
 
 export default Home;

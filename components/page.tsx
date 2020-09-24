@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./header";
 import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import Gallery from "./gallery";
 
 type theme = {
   red: string;
@@ -65,7 +64,7 @@ class Page extends React.Component<PageProps, PageState> {
       <ThemeProvider theme={theme}>
         <StyledPage>
           <Header></Header>
-          <Gallery></Gallery>
+
           <Meta></Meta>
           <GlobalStyle />
 

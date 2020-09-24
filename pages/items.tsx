@@ -1,13 +1,13 @@
 import React from "react";
 import Items from "../components/items";
 
-interface HomeProps {
+interface ItemsProps {
   query: {
     page: string;
   };
 }
 //props.query
-function items(props: HomeProps) {
+function items(props: ItemsProps) {
   return <Items page={parseFloat(props.query.page) || 1}></Items>;
 }
 

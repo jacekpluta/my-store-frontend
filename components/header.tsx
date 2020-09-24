@@ -41,6 +41,7 @@ export default function Header() {
           style={{ width: "15%", cursor: "pointer" }}
         ></img>
       </Link>
+
       <Nav />
 
       <Cart></Cart>

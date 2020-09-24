@@ -12,7 +12,7 @@ export const ADD_TO_CART_MUTATION = gql`
   }
 `;
 type itemId = {
-  itemId: number;
+  itemId: string;
 };
 
 export default function addToCart(props: itemId) {

@@ -1,18 +1,20 @@
 import Link from "next/link";
 import NavStyles from "./styles/NavStyles";
 
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { CURRENT_USER_QUERY } from "./queries";
 import SignOut from "./signOut";
 import { useMutation } from "@apollo/react-hooks";
 import { TOGGLE_CART_MUTATION } from "./cart";
 import styled from "styled-components";
-import { Icon } from "semantic-ui-react";
-
+import { Icon, Popup } from "semantic-ui-react";
+import Search from "./search";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import CartItemsNumber from "./styles/CartItemsNumber";
 import WhiteIcon from "./styles/WhiteIcon";
+import { motion } from "framer-motion";
+import { WhiteBar } from "./styles/WhiteBar";
 
 const AnimationStyles = styled.span`
   position: absolute;
@@ -32,11 +34,13 @@ const AnimationStyles = styled.span`
     transform: scale(1.2);
   }
 `;
+
 export default function Nav() {
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const [toggleCart, toggleCartMutation] = useMutation(TOGGLE_CART_MUTATION);
 
   const currentUser = currentUserQuery.data;
+  const [image, setImage] = useState("myTransparentWhite.png");
 
   if (currentUserQuery.loading || toggleCartMutation.loading)
     return <p>Loading...</p>;
@@ -56,8 +60,13 @@ export default function Nav() {
       <nav>
         <ul>
           <li>
-            <Link href="/items">
+            <Link href="/">
               <a>Home</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/items">
+              <a>Shop Now!</a>
             </Link>
           </li>
           {currentUser.user && (
@@ -85,7 +94,14 @@ export default function Nav() {
               </li>
 
               <WhiteIcon>
-                <Icon name="search" />
+                <Popup
+                  content={<Search />}
+                  on="click"
+                  pinned
+                  position="bottom center"
+                  offset="0, 10px"
+                  trigger={<Icon name="search" />}
+                />
               </WhiteIcon>
 
               <WhiteIcon>
@@ -126,6 +142,7 @@ export default function Nav() {
             </li>
           )}
         </ul>
+        <WhiteBar />
       </nav>
     </NavStyles>
   );

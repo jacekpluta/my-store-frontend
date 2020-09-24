@@ -5,6 +5,8 @@ import { wrap } from "@popmotion/popcorn";
 import { images } from "./images";
 import GalleryTitle from "./styles/GalleryTitle";
 import GalleryDot from "./styles/GalleryDot";
+import { OpacityBackground } from "./styles/OpacityBackground";
+import ButtonStyles from "./styles/ButtonStyles";
 
 const variants = {
   enter: (direction: number) => {
@@ -31,7 +33,6 @@ export default function Gallery() {
   const [page, setPage] = useState(0);
 
   const imageIndex = wrap(0, images.length, page);
-  // console.log(imageIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,7 +49,6 @@ export default function Gallery() {
           style={{
             width: "100%",
             height: "100vh",
-            opacity: "0.6",
             position: "absolute",
             maxWidth: "100vw",
           }}
@@ -63,13 +63,16 @@ export default function Gallery() {
           }}
         />
       </AnimatePresence>
-
+      <OpacityBackground></OpacityBackground>
       {images.map((image, index) => (
         <GalleryTitle>
           {imageIndex === 0 && <motion.div>aaa</motion.div>}
-          {imageIndex === 1 && <motion.div>aaa</motion.div>}
-          {imageIndex === 2 && <motion.div>aaa</motion.div>}
-          {imageIndex === 3 && <motion.div>aaa</motion.div>}
+          {imageIndex === 1 && <motion.div>bbb</motion.div>}
+          {imageIndex === 2 && <motion.div>ccc</motion.div>}
+          {imageIndex === 3 && <motion.div>ddd</motion.div>}
+          <ButtonStyles>
+            <div className="outline white-blue">sss</div>
+          </ButtonStyles>
         </GalleryTitle>
       ))}
 
