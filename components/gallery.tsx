@@ -2,11 +2,12 @@ import { StyledGallery } from "./styles/StyledGallery";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { wrap } from "@popmotion/popcorn";
-import { images } from "./images";
-import GalleryTitle from "./styles/GalleryTitle";
+import { images } from "../lib/images";
+import GalleryText from "./styles/GalleryText";
 import GalleryDot from "./styles/GalleryDot";
 import { OpacityBackground } from "./styles/OpacityBackground";
-import ButtonStyles from "./styles/ButtonStyles";
+import { ButtonMain } from "./styles/ButtonStyles";
+import GallerySubText from "./styles/GallerySubText";
 
 const variants = {
   enter: (direction: number) => {
@@ -27,6 +28,10 @@ const variants = {
       opacity: 0,
     };
   },
+
+  str: { opacity: 0, x: -200 },
+  ani: { opacity: 1, x: 0 },
+  ext: { opacity: 0, x: 200 },
 };
 
 export default function Gallery() {
@@ -65,15 +70,54 @@ export default function Gallery() {
       </AnimatePresence>
       <OpacityBackground></OpacityBackground>
       {images.map((image, index) => (
-        <GalleryTitle>
-          {imageIndex === 0 && <motion.div>aaa</motion.div>}
-          {imageIndex === 1 && <motion.div>bbb</motion.div>}
-          {imageIndex === 2 && <motion.div>ccc</motion.div>}
-          {imageIndex === 3 && <motion.div>ddd</motion.div>}
-          <ButtonStyles>
-            <div className="outline white-blue">sss</div>
-          </ButtonStyles>
-        </GalleryTitle>
+        <div>
+          <GalleryText>
+            <AnimatePresence exitBeforeEnter>
+              <motion.div
+                initial={"str"}
+                animate={"ani"}
+                exit={"ext"}
+                variants={variants}
+                key={page}
+              >
+                {imageIndex === 0 && <p>NEW SALE 50% OFF</p>}
+                {imageIndex === 1 && <p> STEP INTO NEW AIR</p>}
+                {imageIndex === 2 && <p> START RUNNING</p>}
+              </motion.div>
+            </AnimatePresence>
+
+            <GallerySubText>
+              <AnimatePresence exitBeforeEnter>
+                <motion.div
+                  initial={"str"}
+                  animate={"ani"}
+                  exit={"ext"}
+                  variants={variants}
+                  key={page}
+                >
+                  {imageIndex === 0 && (
+                    <p> Last season models are on sale, check them out!</p>
+                  )}
+                  {imageIndex === 1 && <p> Featuring new Air Max</p>}
+                  {imageIndex === 2 && (
+                    <p> It's never to late to start training</p>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </GallerySubText>
+            <AnimatePresence exitBeforeEnter>
+              <motion.div
+                initial={"str"}
+                animate={"ani"}
+                exit={"ext"}
+                variants={variants}
+                key={page}
+              >
+                <ButtonMain>START SHOPPING</ButtonMain>
+              </motion.div>
+            </AnimatePresence>
+          </GalleryText>
+        </div>
       ))}
 
       {images.map((image, index) => (

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const GalleryDot = styled.div`
-  z-index: 5;
   position: relative;
   background: white;
   border-radius: 30px;
@@ -14,7 +13,7 @@ const GalleryDot = styled.div`
   cursor: pointer;
   font-weight: bold;
   font-size: 18px;
-  z-index: 2;
+  z-index: 3;
   top: 40%;
   margin: 15px;
   opacity: 0.5;

@@ -4,20 +4,28 @@ import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
 type theme = {
-  red: string;
+  lightBlack: string;
   black: string;
   gray: string;
   lightGrey: string;
   offWhite: string;
   maxWidth: string;
   bs: string;
+  white: string;
+  whiteGrey: string;
+  greyish: string;
+  darkerGrey: string;
 };
 
 const theme: theme = {
-  red: "#FF0000",
-  black: "#393939",
+  lightBlack: "#231F20",
+  black: "#20211D",
   gray: "#3A3A3A",
   lightGrey: "#E1E1E1",
+  greyish: "#585E61",
+  darkerGrey: "#7F8181",
+  white: "#F0F2F2",
+  whiteGrey: "#D0D4D7",
   offWhite: "#EDEDED",
   maxWidth: "1000px",
   bs: "0 12px 24px 0 rgba(0,0,0,0.09)",
@@ -36,7 +44,7 @@ body{
   margin: 0;
   font-size: 1.5rem;
   line-height: 2;
-  font-family: "Arial", Times, serif;
+  font-family: 'Rubik', sans-serif;
 }
   a{
     color: ${theme.black};
@@ -44,12 +52,12 @@ body{
 `;
 
 const StyledPage = styled.div`
-  background: grey;
+  background: white;
   color: black;
 `;
 
 const Inner = styled.div`
-  max-width: ${(props) => props.theme.maxWidth};
+  /* max-width: ${(props) => props.theme.maxWidth}; */
   margin: 0 auto;
   padding: 2 rem;
 `;

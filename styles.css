@@ -38,11 +38,17 @@ header nav ul li a {
   transition: 0.7s;
 }
 
+header .icon {
+  color: white;
+  cursor: pointer;
+  padding-left: 15px;
+}
+
 header nav ul li a:hover {
   color: #999;
 }
 
-header.sticky .logo,
+header.sticky .icon,
 header.sticky ul li a {
   color: black;
 }

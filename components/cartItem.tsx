@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import formatMoney from "./formatMoney";
+import formatMoney from "./utils/formatMoney";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "./queries";
@@ -116,10 +116,6 @@ const CartItem = ({ cartItem }: propsCartItem) => {
 
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
     DELETE_CART_ITEM_MUTATION
-    // {
-    //   refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    //   awaitRefetchQueries: true,
-    // }
   );
 
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);

@@ -4,7 +4,7 @@ import Head from "next/head";
 import gql from "graphql-tag";
 import Error from "./errorMessage";
 import OrderStyles from "./styles/OrderStyles";
-import formatMoney from "./formatMoney";
+import formatMoney from "./utils/formatMoney";
 
 type OrderProps = { orderId: string };
 

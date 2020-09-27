@@ -26,17 +26,19 @@ export const CREATE_ORDER_MUTATION = gql`
 interface CreditCardCheckoutProps {
   allItemsCount: number;
   totalPrice: number;
-  cart: {
-    item: {
-      id: number;
-      price: number;
-      user: null;
-      image: string;
-      title: string;
-      description: string;
-      largeImage: string;
-    };
-  };
+  cart: [
+    {
+      item: {
+        id: number;
+        price: number;
+        user: null;
+        image: string;
+        title: string;
+        description: string;
+        largeImage: string;
+      };
+    }
+  ];
   user: {
     id: string;
     name: string;

@@ -5,6 +5,7 @@ import { ApolloConsumer } from "react-apollo";
 import gql from "graphql-tag";
 import debounce from "lodash.debounce";
 import { DropDown, DropDownItem, SearchStyles } from "./styles/DropDown";
+import { Icon } from "semantic-ui-react";
 
 const SEARCH_ITEM_QUERY = gql`
   query SEARCH_ITEM_QUERY($searchTerm: String!) {
@@ -63,18 +64,28 @@ export default function Search() {
           <div>
             <ApolloConsumer>
               {(client) => (
-                <input
-                  {...getInputProps({
-                    type: "search",
-                    placeholder: "Search for an item",
-                    id: "search",
-                    className: loading ? "loading" : "",
-                    onChange: (e) => {
-                      e.persist(); //access to event cos of debounce
-                      handleOnSearch(e, client);
-                    },
-                  })}
-                ></input>
+                <div style={{ display: "flex" }}>
+                  <Icon
+                    name="search"
+                    style={{
+                      paddingTop: "7px",
+                      paddingLeft: "7px",
+                      paddingRight: "18px",
+                    }}
+                  />
+                  <input
+                    {...getInputProps({
+                      type: "search",
+                      placeholder: `Search for an item      `,
+                      id: "search",
+                      className: loading ? "loading" : "",
+                      onChange: (e) => {
+                        e.persist(); //access to event cos of debounce
+                        handleOnSearch(e, client);
+                      },
+                    })}
+                  ></input>
+                </div>
               )}
             </ApolloConsumer>
             {isOpen ? (

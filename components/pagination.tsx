@@ -49,7 +49,7 @@ export default function Pagination(props: PaginationProps) {
       <p>
         Page {page} of <span className="allPages">{allPages}</span>
       </p>
-      <p>{pagesCount} Items Total</p>
+
       <Link
         href={{
           pathname: "/items",

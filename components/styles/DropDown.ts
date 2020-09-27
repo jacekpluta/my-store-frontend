@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 const DropDown = styled.div`
   position: absolute;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
   border: 1px solid ${(props) => props.theme.lightgrey};
 `;
 
@@ -41,11 +41,17 @@ const glow = keyframes`
 
 const SearchStyles = styled.div`
   position: relative;
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+
   input {
-    width: 100%;
+    width: 200px;
     padding: 10px;
     border: 0;
     font-size: 2rem;
+
     &.loading {
       animation: ${glow} 0.5s ease-in-out infinite alternate;
     }

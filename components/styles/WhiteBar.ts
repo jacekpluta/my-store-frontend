@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const WhiteBar = styled.div`
   position: absolute;
-  top: -20px;
+  top: 120px;
   left: 0;
-  height: 100%;
+  height: 1px;
   width: 100%;
   border-bottom-style: solid;
   border-bottom-width: 1px;

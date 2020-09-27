@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import Form from "./styles/Form";
 import gql from "graphql-tag";
-import { useFormFields } from "../lib/useFormFields";
+import { useFormFields } from "./utils/useFormFields";
 import Error from "./errorMessage";
 import Router from "next/router";
 

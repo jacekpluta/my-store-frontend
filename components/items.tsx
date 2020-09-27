@@ -5,10 +5,14 @@ import styled from "styled-components";
 import Item from "./item";
 import Pagination from "./pagination";
 import { perPage } from "../config";
-<<<<<<< HEAD
-import Gallery from "./gallery";
-=======
->>>>>>> jacagaca/my-store-frontend.git/master
+import { CatalogStyles } from "./styles/CatalogStyles";
+import { CatalogBar } from "./styles/CatalogBar";
+import { ItemsList } from "./styles/ItemsList";
+import CatalogNavBar from "./catalogNavBar";
+import { CatalogGrid } from "./styles/CatalogGrid";
+import Search from "./search";
+import { SearchSortStyles } from "./styles/SearchSortStyles";
+import Sort from "./sort";
 
 export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -38,17 +42,6 @@ export interface ItemsProps {
 
 export interface ItemsState {}
 
-const Center = styled.div`
-  text-align: center;
-`;
-
-const ItemsList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 60px;
-  max-width: ${(props) => props.theme.max};
-`;
-
 class Items extends React.Component<ItemsProps, ItemsState> {
   constructor(props: ItemsProps) {
     super(props);
@@ -57,14 +50,15 @@ class Items extends React.Component<ItemsProps, ItemsState> {
   render() {
     const { page } = this.props;
     return (
-<<<<<<< HEAD
-      <div>
-        <Center>
-          <Pagination page={page} />
-=======
-      <Center>
-        <Pagination page={page} />
->>>>>>> jacagaca/my-store-frontend.git/master
+      <CatalogStyles>
+        <CatalogBar>New Releases</CatalogBar>
+        <SearchSortStyles>
+          <Search />
+
+          <Sort />
+        </SearchSortStyles>
+        <CatalogGrid>
+          <CatalogNavBar />
 
           <Query
             query={ALL_ITEMS_QUERY}
@@ -86,9 +80,9 @@ class Items extends React.Component<ItemsProps, ItemsState> {
               );
             }}
           </Query>
-          <Pagination page={this.props.page} />
-        </Center>{" "}
-      </div>
+        </CatalogGrid>
+        <Pagination page={this.props.page} />
+      </CatalogStyles>
     );
   }
 }

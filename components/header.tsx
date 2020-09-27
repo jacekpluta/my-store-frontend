@@ -1,6 +1,6 @@
 import Nav from "./nav";
 import Link from "next/link";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import NProgress from "nprogress";
 import Cart from "./cart";
 import { StyledHeader } from "./styles/StyledHeader";
@@ -19,8 +19,11 @@ Router.events.on("routeChangeError", () => {
 export default function Header() {
   const [image, setImage] = useState("myTransparentWhite.png");
 
-  const changeLogoToWhite = () => {
-    if (window.scrollY > 0) {
+  const router = useRouter();
+  const path = router.pathname;
+
+  const changeLogo = () => {
+    if (path === "/" && window.scrollY > 0) {
       setImage("myTransparentBlack.png");
     } else {
       setImage("myTransparentWhite.png");
@@ -28,12 +31,27 @@ export default function Header() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", changeLogoToWhite);
-    return () => window.removeEventListener("scroll", changeLogoToWhite);
+    if (path !== "/") {
+      setImage("myTransparentBlack.png");
+    } else {
+      setImage("myTransparentWhite.png");
+    }
+  }, [path]);
+
+  const borderBottom = {
+    borderBottom: "1px solid black",
+  };
+
+  const borderBottomZero = {
+    borderBottom: "0px solid black",
+  };
+
+  useEffect(() => {
+    return () => window.removeEventListener("scroll", changeLogo);
   }, []);
 
   return (
-    <StyledHeader>
+    <StyledHeader style={path !== "/" ? borderBottom : borderBottomZero}>
       <Link href="/">
         <img
           src={`/images/${image}`}

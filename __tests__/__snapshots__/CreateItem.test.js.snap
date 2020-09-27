@@ -2,11 +2,7 @@
 
 exports[`renders component and maches snap 1`] = `
 <form
-<<<<<<< HEAD
   className="Form-sc-1c1u0cd-0"
-=======
-  className="Form-sc-1c1u0cd-0 ddxHFt"
->>>>>>> jacagaca/my-store-frontend.git/master
   data-test="form"
   onSubmit={[Function]}
 >

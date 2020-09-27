@@ -1,7 +1,7 @@
 import Link from "next/link";
 import NavStyles from "./styles/NavStyles";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { CURRENT_USER_QUERY } from "./queries";
 import SignOut from "./signOut";
@@ -12,9 +12,9 @@ import { Icon, Popup } from "semantic-ui-react";
 import Search from "./search";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import CartItemsNumber from "./styles/CartItemsNumber";
-import WhiteIcon from "./styles/WhiteIcon";
-import { motion } from "framer-motion";
+
 import { WhiteBar } from "./styles/WhiteBar";
+import { useRouter } from "next/router";
 
 const AnimationStyles = styled.span`
   position: absolute;
@@ -38,9 +38,19 @@ const AnimationStyles = styled.span`
 export default function Nav() {
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const [toggleCart, toggleCartMutation] = useMutation(TOGGLE_CART_MUTATION);
+  const [main, setMain] = useState(false);
 
   const currentUser = currentUserQuery.data;
-  const [image, setImage] = useState("myTransparentWhite.png");
+
+  const router = useRouter();
+  const path = router.pathname;
+  useEffect(() => {
+    if (path === "/") {
+      setMain(true);
+    } else {
+      setMain(false);
+    }
+  }, [path]);
 
   if (currentUserQuery.loading || toggleCartMutation.loading)
     return <p>Loading...</p>;
@@ -66,7 +76,7 @@ export default function Nav() {
           </li>
           <li>
             <Link href="/items">
-              <a>Shop Now!</a>
+              <a>Catalog</a>
             </Link>
           </li>
           {currentUser.user && (
@@ -93,7 +103,7 @@ export default function Nav() {
                 <SignOut></SignOut>
               </li>
 
-              <WhiteIcon>
+              <li className="icon">
                 <Popup
                   content={<Search />}
                   on="click"
@@ -102,13 +112,13 @@ export default function Nav() {
                   offset="0, 10px"
                   trigger={<Icon name="search" />}
                 />
-              </WhiteIcon>
+              </li>
 
-              <WhiteIcon>
+              <li className="icon">
                 <Icon name="heart" />
-              </WhiteIcon>
+              </li>
 
-              <WhiteIcon onClick={() => toggleCart()}>
+              <li onClick={() => toggleCart()} className="icon">
                 <div style={{ display: "inline" }}>
                   <Icon name="shopping bag" />
 
@@ -130,7 +140,7 @@ export default function Nav() {
                     </AnimationStyles>
                   )}
                 </div>
-              </WhiteIcon>
+              </li>
             </>
           )}
 
@@ -142,7 +152,7 @@ export default function Nav() {
             </li>
           )}
         </ul>
-        <WhiteBar />
+        {main && <WhiteBar />}
       </nav>
     </NavStyles>
   );

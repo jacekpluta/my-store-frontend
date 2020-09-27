@@ -4,7 +4,7 @@ import ItemStyles from "./styles/ItemStyles";
 import PriceTag from "./styles/PriceTag";
 import Link from "next/link";
 import DeleteItem from "./deleteItem";
-import formatMoney from "./formatMoney";
+import formatMoney from "./utils/formatMoney";
 import AddToCart from "./addToCart";
 
 export interface ItemProps {

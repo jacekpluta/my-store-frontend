@@ -4,7 +4,7 @@ export const Logo = styled.h1`
   font-size: 3rem;
   margin-left: 2rem;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   transform: skew(-7deg);
   a {
     padding: 0.5 rem 1 rem;

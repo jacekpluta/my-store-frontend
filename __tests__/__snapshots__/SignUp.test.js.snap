@@ -6,11 +6,7 @@ exports[`renders and maches snapshot 1`] = `
   onSubmit={[Function]}
 >
   <form
-<<<<<<< HEAD
     className="Form-sc-1c1u0cd-0"
-=======
-    className="Form-sc-1c1u0cd-0 ddxHFt"
->>>>>>> jacagaca/my-store-frontend.git/master
     method="post"
     onSubmit={[Function]}
   >

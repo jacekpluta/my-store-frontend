@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
-  z-index: 10;
+  z-index: 3;
   opacity: 1;
+
   .bar {
     border-bottom: 10px solid ${(props) => props.theme.black};
     display: grid;

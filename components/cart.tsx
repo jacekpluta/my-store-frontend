@@ -2,13 +2,13 @@ import React from "react";
 import CartStyles from "./styles/CartStyles";
 
 import CloseButton from "./styles/CloseButton";
-import ButtonStyle from "./styles/ButtonStyles";
+import { ButtonMain } from "./styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Error from "./errorMessage";
 import { CURRENT_USER_QUERY } from "./queries";
 import CartItem from "./cartItem";
-import formatMoney from "./formatMoney";
+import formatMoney from "./utils/formatMoney";
 import CreditCardCheckout from "./creditCardCheckout";
 import { ICartItem } from "./cartItem";
 
@@ -77,13 +77,13 @@ export default function Cart() {
             allItemsCount={user.cart.length}
             user={user}
           >
-            <ButtonStyle
+            <ButtonMain
               onClick={() => {
                 toggleCart();
               }}
             >
               Checkout
-            </ButtonStyle>
+            </ButtonMain>
           </CreditCardCheckout>
         )}
       </footer>

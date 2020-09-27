@@ -8,5 +8,5 @@ export const OpacityBackground = styled.div`
   width: 100%;
   background: black;
   opacity: 0.6;
-  z-index: 1;
+  z-index: 2;
 `;
