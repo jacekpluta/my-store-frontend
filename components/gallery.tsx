@@ -49,6 +49,7 @@ export default function Gallery() {
 
   return (
     <StyledGallery>
+      <OpacityBackground></OpacityBackground>
       <AnimatePresence initial={false}>
         <motion.img
           style={{
@@ -68,7 +69,7 @@ export default function Gallery() {
           }}
         />
       </AnimatePresence>
-      <OpacityBackground></OpacityBackground>
+
       {images.map((image, index) => (
         <div>
           <GalleryText>

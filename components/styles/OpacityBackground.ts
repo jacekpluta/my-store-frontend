@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const OpacityBackground = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+  right: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+
   background: black;
-  opacity: 0.6;
+  opacity: 0.5;
   z-index: 2;
 `;

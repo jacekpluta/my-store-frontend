@@ -52,3 +52,9 @@ header.sticky .icon,
 header.sticky ul li a {
   color: black;
 }
+
+.menu-wrapper-inner::-webkit-scrollbar-track {
+  margin-right: 20vw;
+  margin-left: 20vw;
+  border-radius: 50px;
+}

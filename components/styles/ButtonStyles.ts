@@ -5,15 +5,15 @@ export const ButtonMain = styled.button`
   font-size: 0.5em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.6s ease;
   color: white;
   background-color: black;
   border-radius: 50px;
   border: 1px solid black;
-  box-shadow: 0 4px rgba(0, 0, 0, 0.2);
+
   position: relative;
   display: inline-block;
   overflow: hidden;
+  box-shadow: 0 4px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 
   &:hover {

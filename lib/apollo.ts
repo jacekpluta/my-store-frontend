@@ -3,7 +3,6 @@ import { useMemo } from "react";
 import gql from "graphql-tag";
 import { endpoint, productionBackendEndpoint } from "../config";
 
-// import { ApolloClient } from "@apollo/client";
 import { typeDefs, resolvers } from "./graphqlLocal";
 
 import { ApolloClient, InMemoryCache } from "@apollo/client";
@@ -41,11 +40,11 @@ function createApolloClient(context?: ResolverContext): any {
 }
 
 cache.writeFragment({
+  id: "5",
   fragment: gql`
     fragment CartOpenStatus on CartOpen {
       id
-      text
-      completed
+      cartOpen
     }
   `,
   data: {

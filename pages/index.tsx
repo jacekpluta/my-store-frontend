@@ -1,7 +1,6 @@
 import React from "react";
 import Gallery from "../components/gallery";
-import Items from "../components/items";
-
+import Discounts from "../components/discounts";
 interface HomeProps {
   query: {
     page: string;
@@ -9,7 +8,12 @@ interface HomeProps {
 }
 //props.query
 function Home(props: HomeProps) {
-  return <Gallery></Gallery>;
+  return (
+    <>
+      <Gallery></Gallery>
+      <Discounts></Discounts>
+    </>
+  );
 }
 
 export default Home;
