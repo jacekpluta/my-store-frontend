@@ -2,7 +2,7 @@ import React from "react";
 import CartStyles from "./styles/CartStyles";
 
 import CloseButton from "./styles/CloseButton";
-import { ButtonMain } from "./styles/ButtonStyles";
+import { ButtonMainNormal } from "./styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Error from "./errorMessage";
@@ -77,13 +77,13 @@ export default function Cart() {
             allItemsCount={user.cart.length}
             user={user}
           >
-            <ButtonMain
+            <ButtonMainNormal
               onClick={() => {
                 toggleCart();
               }}
             >
               Checkout
-            </ButtonMain>
+            </ButtonMainNormal>
           </CreditCardCheckout>
         )}
       </footer>

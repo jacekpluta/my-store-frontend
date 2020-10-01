@@ -6,7 +6,7 @@ import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 type theme = {
   lightBlack: string;
   black: string;
-  gray: string;
+  grey: string;
   lightGrey: string;
   offWhite: string;
   maxWidth: string;
@@ -20,7 +20,7 @@ type theme = {
 const theme: theme = {
   lightBlack: "#231F20",
   black: "#20211D",
-  gray: "#3A3A3A",
+  grey: "#3A3A3A",
   lightGrey: "#E1E1E1",
   greyish: "#585E61",
   darkerGrey: "#7F8181",

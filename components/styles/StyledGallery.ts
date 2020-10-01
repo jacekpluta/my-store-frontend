@@ -6,7 +6,6 @@ export const StyledGallery = styled.div`
   /* top: 0;
   left: 0; */
   /* position: absolute; */
-  z-index: 1;
 
   display: flex;
 

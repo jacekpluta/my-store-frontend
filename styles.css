@@ -5,7 +5,6 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   transition: 0.7s;
   padding: 37px 100px;
 }
@@ -53,8 +52,22 @@ header.sticky ul li a {
   color: black;
 }
 
-.menu-wrapper-inner::-webkit-scrollbar-track {
+.menu-wrapper-aditional::-webkit-scrollbar-track {
   margin-right: 20vw;
   margin-left: 20vw;
   border-radius: 50px;
+}
+
+.img-wrapper {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.inner-img {
+  transition: 0.3s;
+}
+
+.inner-img:hover {
+  transform: scale(1.1);
 }

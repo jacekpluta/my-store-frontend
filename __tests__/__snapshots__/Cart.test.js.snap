@@ -7,7 +7,7 @@ exports[`renders component and maches snap 1`] = `
     title="close"
   >
     <button
-      className="CloseButton-e02u0t-0 gwSVMv"
+      className="CloseButton-e02u0t-0 dlLgyC"
       onClick={[Function]}
       title="close"
     >

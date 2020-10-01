@@ -6,7 +6,7 @@ import { images } from "../lib/images";
 import GalleryText from "./styles/GalleryText";
 import GalleryDot from "./styles/GalleryDot";
 import { OpacityBackground } from "./styles/OpacityBackground";
-import { ButtonMain } from "./styles/ButtonStyles";
+import { ButtonMainShiny } from "./styles/ButtonStyles";
 import GallerySubText from "./styles/GallerySubText";
 
 const variants = {
@@ -114,7 +114,7 @@ export default function Gallery() {
                 variants={variants}
                 key={page}
               >
-                <ButtonMain>START SHOPPING</ButtonMain>
+                <ButtonMainShiny>START SHOPPING</ButtonMainShiny>
               </motion.div>
             </AnimatePresence>
           </GalleryText>

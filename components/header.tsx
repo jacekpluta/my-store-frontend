@@ -47,6 +47,10 @@ export default function Header() {
   };
 
   useEffect(() => {
+    if (path === "/") {
+      window.addEventListener("scroll", changeLogo);
+    }
+
     return () => window.removeEventListener("scroll", changeLogo);
   }, []);
 

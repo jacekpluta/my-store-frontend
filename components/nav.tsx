@@ -1,6 +1,5 @@
 import Link from "next/link";
 import NavStyles from "./styles/NavStyles";
-
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { CURRENT_USER_QUERY } from "./queries";
@@ -12,7 +11,7 @@ import { Icon, Popup } from "semantic-ui-react";
 import Search from "./search";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import CartItemsNumber from "./styles/CartItemsNumber";
-
+import LoadingScreen from "./loadingScreen";
 import { WhiteBar } from "./styles/WhiteBar";
 import { useRouter } from "next/router";
 
@@ -39,6 +38,7 @@ export default function Nav() {
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const [toggleCart, toggleCartMutation] = useMutation(TOGGLE_CART_MUTATION);
   const [main, setMain] = useState(false);
+  const [toggleBar, setToggleBar] = useState(true);
 
   const currentUser = currentUserQuery.data;
 
@@ -52,8 +52,24 @@ export default function Nav() {
     }
   }, [path]);
 
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setToggleBar(false);
+    } else {
+      setToggleBar(true);
+    }
+  };
+
+  useEffect(() => {
+    if (path === "/") {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [path]);
+
   if (currentUserQuery.loading || toggleCartMutation.loading)
-    return <p>Loading...</p>;
+    return <LoadingScreen></LoadingScreen>;
   if (currentUserQuery.error || toggleCartMutation.error)
     return <p>Error: {currentUserQuery.error}</p>;
 
@@ -152,7 +168,7 @@ export default function Nav() {
             </li>
           )}
         </ul>
-        {main && <WhiteBar />}
+        {main && toggleBar && <WhiteBar />}
       </nav>
     </NavStyles>
   );
