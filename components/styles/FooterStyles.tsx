@@ -103,14 +103,18 @@ export const FooterStyles = styled.footer`
   padding-top: 3%;
 `;
 
-export const FooterLogos = styled.div`
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border-top: solid;
-  border-width: 1px;
-  border-color: ${(props) => props.theme.greyish};
+export const Logos = styled.div`
+  border-top: 1px solid ${(props) => props.theme.whiteGrey};
+  padding-top: 3%;
+  height: 170px;
 `;
 
-export const FooterLogosImg = styled.img``;
+export const LogosImg = styled.img`
+  height: 90px;
+  margin-right: 30px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  opacity: 0.7;
+`;

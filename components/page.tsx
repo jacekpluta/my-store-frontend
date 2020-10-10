@@ -39,6 +39,7 @@ html {
   font-size: 10px;
 }
 
+
 *, *:before, *:after{
   box-sizing: inherit
 }
@@ -78,6 +79,7 @@ class Page extends React.Component<PageProps, PageState> {
     return (
       <ThemeProvider theme={theme}>
         <StyledPage>
+          <div style={{ height: "100px" }}> </div>
           <Header></Header>
 
           <Meta></Meta>

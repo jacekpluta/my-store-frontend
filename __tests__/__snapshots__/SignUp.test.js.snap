@@ -15,7 +15,7 @@ exports[`renders and maches snapshot 1`] = `
       disabled={false}
     >
       <h2>
-        Sign up
+        Register
       </h2>
       <p />
       <DisplayError

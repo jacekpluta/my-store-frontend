@@ -32,7 +32,7 @@ export default function Header() {
       setBar(false);
     }
   };
-  console.log(bar);
+
   useEffect(() => {
     if (path !== "/") {
       setImage("myTransparentBlack.png");

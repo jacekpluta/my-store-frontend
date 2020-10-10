@@ -54,7 +54,6 @@ class Items extends React.Component<ItemsProps, ItemsState> {
         <CatalogBar>Catalog</CatalogBar>
         <SearchSortStyles>
           <Search />
-
           <Sort />
         </SearchSortStyles>
         <CatalogGrid>

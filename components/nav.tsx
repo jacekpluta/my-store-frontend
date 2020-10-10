@@ -165,6 +165,9 @@ export default function Nav() {
               <Link href="/signin">
                 <a>Sign In</a>
               </Link>
+              <Link href="/signup">
+                <a>Register</a>
+              </Link>
             </li>
           )}
         </ul>

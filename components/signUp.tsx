@@ -7,8 +7,6 @@ import { useFormFields } from "./utils/useFormFields";
 import Link from "next/link";
 import Router from "next/router";
 
-export interface SignUpProps {}
-
 export const CREATE_USER_MUTATION = gql`
   mutation CREATE_USER_MUTATION(
     $name: String!
@@ -23,13 +21,7 @@ export const CREATE_USER_MUTATION = gql`
   }
 `;
 
-type target = {
-  email: string;
-  name: string;
-  password: string;
-};
-
-export default function SignUp(props: SignUpProps) {
+export default function SignUp() {
   const [fields, handleFieldChange] = useFormFields({
     name: "",
     email: "",
@@ -48,9 +40,9 @@ export default function SignUp(props: SignUpProps) {
         e.preventDefault();
         await createUser({
           variables: {
-            email: email,
-            name: name,
-            password: password,
+            email,
+            name,
+            password,
           },
         });
         Router.push({
@@ -59,7 +51,7 @@ export default function SignUp(props: SignUpProps) {
       }}
     >
       <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Sign up</h2>
+        <h2>Register</h2>
         <p>{data ? "Account successfully created" : ""}</p>
         <Error error={error} />
         <label htmlFor="email">

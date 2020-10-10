@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 30vw;
+  margin: 13px;
+`;
 
 export const DiscountsStyle = styled.div`
   background: ${(props) => props.theme.white};

@@ -71,7 +71,7 @@ export default function Gallery() {
       </AnimatePresence>
 
       {images.map((image, index) => (
-        <div>
+        <div key={index}>
           <GalleryText>
             <AnimatePresence exitBeforeEnter>
               <motion.div
@@ -123,6 +123,7 @@ export default function Gallery() {
 
       {images.map((image, index) => (
         <GalleryDot
+          key={index}
           style={index === imageIndex ? { opacity: 1 } : {}}
           className="gallery_dot"
           onClick={() => {

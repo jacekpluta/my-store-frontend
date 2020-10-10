@@ -7,6 +7,7 @@ import { useFormFields } from "./utils/useFormFields";
 import { CURRENT_USER_QUERY } from "./queries";
 import Link from "next/link";
 import Router from "next/router";
+import { CatalogBar } from "./styles/CatalogBar";
 
 export interface SignInProps {}
 
@@ -35,63 +36,66 @@ export default function SignIn(props: SignInProps) {
   );
 
   const { name, email, password } = fields;
-  return (
-    <Form
-      method="post"
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await createUser({
-          variables: {
-            email: email,
-            name: name,
-            password: password,
-          },
-        });
-        Router.push({
-          pathname: "/account",
-        });
-      }}
-    >
-      <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Sign In</h2>
 
-        <Error error={error} />
-        <label htmlFor="email">
-          Email
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={handleFieldChange}
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={handleFieldChange}
-          />
-        </label>
-        <button type="submit">Submit</button>
-        <p>
-          <Link href="/signup">
-            <a>Don't have an account? SIGN UP</a>
-          </Link>
-        </p>
-        <p>
-          <Link href="/requestreset">
-            <a>Forgot your password? RESET EMAIL</a>
-          </Link>
-        </p>
-      </fieldset>
-    </Form>
+  return (
+    <>
+      <Form
+        method="post"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await createUser({
+            variables: {
+              email: email,
+              name: name,
+              password: password,
+            },
+          });
+          Router.push({
+            pathname: "/account",
+          });
+        }}
+      >
+        <fieldset disabled={loading} aria-busy={loading}>
+          <h2>Sign In</h2>
+
+          <Error error={error} />
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={handleFieldChange}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={handleFieldChange}
+            />
+          </label>
+          <button type="submit">Submit</button>
+          <p>
+            <Link href="/signup">
+              <a>Don't have an account? SIGN UP</a>
+            </Link>
+          </p>
+          <p>
+            <Link href="/requestreset">
+              <a>Forgot your password? RESET EMAIL</a>
+            </Link>
+          </p>
+        </fieldset>
+      </Form>
+    </>
   );
 }
