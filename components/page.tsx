@@ -15,6 +15,7 @@ type theme = {
   whiteGrey: string;
   greyish: string;
   darkerGrey: string;
+  blackwhite: string;
 };
 
 const theme: theme = {
@@ -24,9 +25,10 @@ const theme: theme = {
   lightGrey: "#E1E1E1",
   greyish: "#585E61",
   darkerGrey: "#7F8181",
-  white: "#F0F2F2",
+  white: "#FFFFFF",
   whiteGrey: "#D0D4D7",
   offWhite: "#EDEDED",
+  blackwhite: "#E3E3E3",
   maxWidth: "1000px",
   bs: "0 12px 24px 0 rgba(0,0,0,0.09)",
 };
@@ -36,9 +38,15 @@ html {
   box-sizing: border-box;
   font-size: 10px;
 }
+
 *, *:before, *:after{
   box-sizing: inherit
 }
+
+:focus {
+    outline: none;
+}
+
 body{
   padding: 0;
   margin: 0;

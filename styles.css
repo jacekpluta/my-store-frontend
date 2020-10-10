@@ -6,11 +6,11 @@ header {
   display: flex;
   justify-content: space-between;
   transition: 0.7s;
-  padding: 37px 100px;
+  padding: 30px 100px;
 }
 
 header.sticky {
-  padding: 7px 100px;
+  padding: 10px 100px;
   background: white;
 }
 
@@ -34,7 +34,7 @@ header nav ul li a {
   letter-spacing: 1px;
   font-size: 18px;
   font-weight: 700px;
-  transition: 0.7s;
+  transition: 0.3s;
 }
 
 header .icon {
@@ -56,18 +56,4 @@ header.sticky ul li a {
   margin-right: 20vw;
   margin-left: 20vw;
   border-radius: 50px;
-}
-
-.img-wrapper {
-  width: 400px;
-  height: 400px;
-  overflow: hidden;
-}
-
-.inner-img {
-  transition: 0.3s;
-}
-
-.inner-img:hover {
-  transform: scale(1.1);
 }

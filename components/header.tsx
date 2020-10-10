@@ -18,6 +18,7 @@ Router.events.on("routeChangeError", () => {
 
 export default function Header() {
   const [image, setImage] = useState("myTransparentWhite.png");
+  const [bar, setBar] = useState(false);
 
   const router = useRouter();
   const path = router.pathname;
@@ -25,48 +26,58 @@ export default function Header() {
   const changeLogo = () => {
     if (path === "/" && window.scrollY > 0) {
       setImage("myTransparentBlack.png");
+      setBar(true);
     } else {
       setImage("myTransparentWhite.png");
+      setBar(false);
     }
   };
-
+  console.log(bar);
   useEffect(() => {
     if (path !== "/") {
       setImage("myTransparentBlack.png");
+      setBar(true);
     } else {
       setImage("myTransparentWhite.png");
+      setBar(false);
     }
   }, [path]);
 
   const borderBottom = {
-    borderBottom: "1px solid black",
+    borderBottom: "1px solid #E3E3E3",
   };
 
   const borderBottomZero = {
-    borderBottom: "0px solid black",
+    borderBottom: "0px solid #E3E3E3",
   };
 
   useEffect(() => {
     if (path === "/") {
       window.addEventListener("scroll", changeLogo);
+    } else {
+      window.removeEventListener("scroll", changeLogo);
     }
 
     return () => window.removeEventListener("scroll", changeLogo);
-  }, []);
+  }, [path]);
 
   return (
-    <StyledHeader style={path !== "/" ? borderBottom : borderBottomZero}>
-      <Link href="/">
-        <img
-          src={`/images/${image}`}
-          alt="my shop"
-          style={{ width: "15%", cursor: "pointer" }}
-        ></img>
-      </Link>
+    <div style={bar ? borderBottom : borderBottomZero}>
+      <StyledHeader
+        style={bar && path !== "/" ? borderBottom : borderBottomZero}
+      >
+        <Link href="/">
+          <img
+            src={`/images/${image}`}
+            alt="my shop"
+            style={{ width: "15%", cursor: "pointer" }}
+          ></img>
+        </Link>
 
-      <Nav />
+        <Nav />
 
-      <Cart></Cart>
-    </StyledHeader>
+        <Cart></Cart>
+      </StyledHeader>
+    </div>
   );
 }

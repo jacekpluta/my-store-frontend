@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const SortStyles = styled.div`
-  width: 100%;
-  padding-right: 100px;
+  position: absolute;
   padding-left: 14px;
-  padding-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
-  /* border-color: ${(props) => props.theme.lightGrey}; */
+  border: solid 1px ${(props) => props.theme.whiteGrey};
+  right: 0;
+  margin-right: 40px;
   ul {
     position: relative;
     list-style: none;
@@ -24,22 +26,20 @@ export const SortStyles = styled.div`
   }
   ul > li > a {
     display: block;
-    /* background-color: #2c2c2c; */
     padding: 8px 14px;
     text-decoration: none;
-    /* color: #aaaaaa; */
   }
   ul > li > a:hover {
     background-color: #666666;
     color: #eeeeee;
   }
   ul ul {
-    width: 340px;
-
     position: absolute;
     z-index: 100;
 
     height: 0;
+    /* !!!!!!!!!!! */
+    right: -40px;
     overflow: hidden;
 
     -webkit-transition: height 0.3s ease-in;
@@ -47,17 +47,6 @@ export const SortStyles = styled.div`
     -o-transition: height 0.3s ease-in;
     -ms-transition: height 0.3s ease-in;
     transition: height 0.3s ease-in;
-  }
-
-  /* don't display tertiary box yet */
-  ul > li:hover ul ul,
-  ul > li > a:hover ul ul {
-    height: 0;
-  }
-  /* tertiary drop-down box */
-  ul ul ul {
-    left: 170px;
-    width: 170px;
   }
 
   ul > li:hover ul,
@@ -84,6 +73,7 @@ export const SortStyles = styled.div`
 
   ul ul li a {
     display: block;
+    overflow: hidden;
     text-decoration: none;
     margin: 0 12px;
     padding: 5px 0;

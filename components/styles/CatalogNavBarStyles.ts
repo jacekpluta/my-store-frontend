@@ -3,27 +3,33 @@ import styled from "styled-components";
 export const CatalogNavBarStyles = styled.div`
   text-align: left;
   height: 100%;
-  font-size: 14px;
+  font-size: 1em;
+  width: 30vh;
+  padding-left: 10px;
 
   h2 {
-    padding: 30px 0 0 25px;
+    padding: 0px 0 0 25px;
+    font-weight: 500;
   }
+
+  h2:first-child {
+    padding-top: 30px;
+  }
+
+  /* checkbox styles */
   .checkbox-container {
-    padding: 10px 0 0 25px;
+    padding: 0 0 0 25px;
   }
 
   .checkbox-label {
     position: relative;
-    margin: auto;
+    padding: 5px 0 0 5px;
     cursor: pointer;
-    font-size: 22px;
     line-height: 24px;
   }
 
   input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+    display: none;
   }
 
   .checkbox-custom {
@@ -39,7 +45,7 @@ export const CatalogNavBarStyles = styled.div`
     -moz-transition: all 0.3s ease-out;
     -ms-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
-    border: 2px solid ${(props) => props.theme.black};
+    border: 1px solid ${(props) => props.theme.greyish};
   }
 
   input:checked ~ .checkbox-custom {

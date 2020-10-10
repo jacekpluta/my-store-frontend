@@ -1,12 +1,10 @@
 import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import styled from "styled-components";
-import Item from "./item";
-import Pagination from "./pagination";
 import { CatalogNavBarStyles } from "./styles/CatalogNavBarStyles";
 import Checkbox from "./Checkbox";
-import { ButtonCatalogFilter } from "./styles/ButtonStyles";
+import {
+  ButtonCatalogNavFilter,
+  ButtonCatalogNavClear,
+} from "./styles/ButtonStyles";
 
 function CatalogNavBar() {
   return (
@@ -23,7 +21,19 @@ function CatalogNavBar() {
       <Checkbox>$50 - $75</Checkbox>
       <Checkbox>$75 - $100</Checkbox>
 
-      <ButtonCatalogFilter>START SHOPPING</ButtonCatalogFilter>
+      <h2>Gender</h2>
+      <Checkbox>Men</Checkbox>
+      <Checkbox>Women</Checkbox>
+
+      <h2>Categories</h2>
+      <Checkbox>Shoes</Checkbox>
+      <Checkbox>Boots</Checkbox>
+      <Checkbox>Trainers</Checkbox>
+      <Checkbox>Sandals</Checkbox>
+      <Checkbox>Flip Flops</Checkbox>
+
+      <ButtonCatalogNavFilter>FILTER</ButtonCatalogNavFilter>
+      <ButtonCatalogNavClear>CLEAR</ButtonCatalogNavClear>
     </CatalogNavBarStyles>
   );
 }

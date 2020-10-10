@@ -7,7 +7,6 @@ import debounce from "lodash.debounce";
 
 import { SortStyles } from "./styles/SortStyles";
 import { Icon } from "semantic-ui-react";
-import { selectHttpOptionsAndBody } from "@apollo/client";
 
 const SEARCH_ITEM_QUERY = gql`
   query SEARCH_ITEM_QUERY($searchTerm: String!) {
@@ -55,12 +54,29 @@ export default function Sort() {
       <ul>
         <li style={{ display: "black", float: "right" }}>
           <span>
-            <a href="#">
-              Sort By : {option}
-              <Icon name="sort" />
+            <a
+              href="#"
+              style={{
+                display: `flex`,
+              }}
+            >
+              <div
+                style={{
+                  borderRight: `solid 1px #D0D4D7`,
+                  paddingRight: "7px",
+                }}
+              >
+                {option}
+              </div>
+
+              <Icon
+                style={{
+                  paddingLeft: "7px",
+                }}
+                name="sort"
+              />
             </a>
           </span>
-
           <ul>
             <li>
               <span>

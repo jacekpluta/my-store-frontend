@@ -2,7 +2,6 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-import Item from "./item";
 import Pagination from "./pagination";
 import { perPage } from "../config";
 import { CatalogStyles } from "./styles/CatalogStyles";
@@ -13,6 +12,7 @@ import { CatalogGrid } from "./styles/CatalogGrid";
 import Search from "./search";
 import { SearchSortStyles } from "./styles/SearchSortStyles";
 import Sort from "./sort";
+import MenuItem from "./menuItem";
 
 export const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -51,7 +51,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
     const { page } = this.props;
     return (
       <CatalogStyles>
-        <CatalogBar>New Releases</CatalogBar>
+        <CatalogBar>Catalog</CatalogBar>
         <SearchSortStyles>
           <Search />
 
@@ -73,8 +73,8 @@ class Items extends React.Component<ItemsProps, ItemsState> {
               if (error) return <p>Error: {error.message}</p>;
               return (
                 <ItemsList>
-                  {data.items.map((item: any) => (
-                    <Item item={item} key={item.id} />
+                  {data.items.map((item: IItem, id: string) => (
+                    <MenuItem key={id} id={id} item={item} />
                   ))}
                 </ItemsList>
               );
