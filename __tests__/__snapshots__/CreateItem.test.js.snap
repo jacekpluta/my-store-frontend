@@ -2,7 +2,7 @@
 
 exports[`renders component and maches snap 1`] = `
 <form
-  className="Form-sc-1c1u0cd-0"
+  className="Form-sc-1c1u0cd-0 CTZpo"
   data-test="form"
   onSubmit={[Function]}
 >

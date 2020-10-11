@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function About() {
+export default function Account() {
   return (
     <div>
       Welcome to the account page.

@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import Error from "./errorMessage";
 import OrderItemStyles from "./styles/OrderItemStyles";
 import formatMoney from "./utils/formatMoney";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import styled from "styled-components";
 import Link from "next/link";
 

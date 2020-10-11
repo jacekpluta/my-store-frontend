@@ -6,7 +6,7 @@ import Router from "next/router";
 import nProgress from "nprogress";
 import gql from "graphql-tag";
 
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import { ALL_ORDERS_QUERY } from "./orders";
 import { ICartItem } from "./cartItem";
 

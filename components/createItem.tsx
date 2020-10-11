@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import { useFormFields } from "./utils/useFormFields";
 import Error from "./errorMessage";
 import Router from "next/router";
+import { FormStyles } from "./styles/FormStyles";
 
 export interface CreateItemProps {}
 
@@ -46,12 +47,13 @@ const CreateItem = () => {
 
   const [image, setImage] = useState("");
   const [largeImage, setLargeImage] = useState("");
-
+  const [uploading, setUploading] = useState(false);
   interface HTMLInputEvent {
     target: HTMLInputElement & EventTarget;
   }
 
   const uploadFile = async (e: HTMLInputEvent) => {
+    setUploading(true);
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -70,87 +72,99 @@ const CreateItem = () => {
     {
       image && <img src={image} alt="Upload preview" />;
     }
+
+    setUploading(false);
   };
 
   const [createItem, createItemtMutation] = useMutation(CREATE_ITEM_MUTATION);
 
-  return (
-    <Form
-      data-test="form"
-      onSubmit={async (e) => {
-        e.preventDefault();
-
-        const res = await createItem({
-          variables: {
-            ...fields,
-            image: image,
-            largeImage: largeImage,
-          },
-        });
-        Router.push({
-          pathname: "/item",
-          query: { id: res.data.createItem.id },
-        });
-      }}
-    >
-      <Error error={createItemtMutation.error}></Error>
+  FormStyles(
+    <FormStyles>
       <fieldset
-        disabled={
-          createItemtMutation.loading ? createItemtMutation.loading : false
-        }
-        aria-busy={createItemtMutation.loading}
+        disabled={createItemtMutation.loading || uploading}
+        aria-busy={createItemtMutation.loading || uploading}
       >
-        <label htmlFor="file">
-          Image
-          <input
-            type="file"
-            id="file"
-            name="file"
-            placeholder={!image ? "Upload an image" : "Image uploaded"}
-            required
-            onChange={uploadFile}
-          />
-        </label>
+        <div className="veen" style={{ background: "#D0D4D7" }}>
+          <div className="wrapper" style={{ left: "20%", width: "60%" }}>
+            <Form
+              data-test="form"
+              onSubmit={async (e) => {
+                e.preventDefault();
 
-        <label htmlFor="title">
-          Title
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
-            required
-            value={fields.title}
-            onChange={handleFieldChange}
-          />
-        </label>
-        <label htmlFor="price">
-          Price
-          <input
-            type="number"
-            id="price"
-            name="price"
-            placeholder="Price"
-            required
-            value={fields.price}
-            onChange={handleFieldChange}
-          />
-        </label>
-        <label htmlFor="description">
-          Description
-          <input
-            type="text"
-            id="description"
-            name="description"
-            placeholder="Enter a description"
-            required
-            value={fields.description}
-            onChange={handleFieldChange}
-          />
-        </label>
-        <button type="submit">Submit</button>
+                const res = await createItem({
+                  variables: {
+                    ...fields,
+                    image: image,
+                    largeImage: largeImage,
+                  },
+                });
+                Router.push({
+                  pathname: "/item",
+                  query: { id: res.data.createItem.id },
+                });
+              }}
+            >
+              <h2 className="second">
+                <span>My Shop</span>
+              </h2>
+              <h3>Request reset token</h3>
+              <Error error={createItemtMutation.error}></Error>
+              <div className="name">
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  required
+                  value={fields.title}
+                  onChange={handleFieldChange}
+                />
+
+                <label> Title</label>
+              </div>
+              <div className="name">
+                <input
+                  type="text"
+                  id="description"
+                  name="description"
+                  required
+                  value={fields.description}
+                  onChange={handleFieldChange}
+                />
+
+                <label> Description</label>
+              </div>
+              <div className="name">
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  required
+                  value={fields.price}
+                  onChange={handleFieldChange}
+                />
+
+                <label> Price</label>
+              </div>
+              <div className="name">
+                <input
+                  type="file"
+                  id="file"
+                  name="file"
+                  placeholder={!image ? "" : "Image uploaded"}
+                  required
+                  onChange={uploadFile}
+                />
+
+                <label> Image</label>
+              </div>
+              <div className="submit">
+                <button className="dark">ADD ITEM</button>
+              </div>
+            </Form>
+          </div>
+        </div>
       </fieldset>
-    </Form>
+    </FormStyles>
   );
 };
 

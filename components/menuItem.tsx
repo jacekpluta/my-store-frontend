@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ADD_TO_CART_MUTATION } from "./addToCart";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import { Icon, Button } from "semantic-ui-react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Error from "./errorMessage";
@@ -106,7 +106,7 @@ const MenuItem = ({ id, item }: { id: string; item: ItemProps }) => {
                   }}
                 >
                   <ButtonContainerDetails
-                    style={!currentUserQuery.data.user && { top: "50%" }}
+                    style={currentUserQuery.data.user ? { top: "65%" } : {}}
                   >
                     <Button animated="fade">
                       <Button.Content visible>

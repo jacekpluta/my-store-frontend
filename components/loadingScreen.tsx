@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 
 const LoadingScreenStyles = styled.div`
   .loading {
@@ -49,8 +50,6 @@ const LoadingScreenStyles = styled.div`
     }
   }
 `;
-
-import React from "react";
 
 function LoadingScreen() {
   return <LoadingScreenStyles></LoadingScreenStyles>;

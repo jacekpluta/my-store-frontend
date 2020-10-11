@@ -6,7 +6,7 @@ import { ButtonMainNormal } from "./styles/ButtonStyles";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Error from "./errorMessage";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import CartItem from "./cartItem";
 import formatMoney from "./utils/formatMoney";
 import CreditCardCheckout from "./creditCardCheckout";

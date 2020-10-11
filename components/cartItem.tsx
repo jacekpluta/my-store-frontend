@@ -3,7 +3,7 @@ import styled from "styled-components";
 import formatMoney from "./utils/formatMoney";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import { makeVar } from "@apollo/client";
 
 const ButtonStyle = styled.button`

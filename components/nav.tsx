@@ -2,7 +2,7 @@ import Link from "next/link";
 import NavStyles from "./styles/NavStyles";
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import SignOut from "./signOut";
 import { useMutation } from "@apollo/react-hooks";
 import { TOGGLE_CART_MUTATION } from "./cart";
@@ -108,12 +108,13 @@ export default function Nav() {
                   <a>Accout</a>
                 </Link>
               </li>
-
-              <li>
-                <Link href="/sell">
-                  <a>Sell</a>
-                </Link>
-              </li>
+              {currentUser.user.permissions.includes("ADMIN") && (
+                <li>
+                  <Link href="/sell">
+                    <a>Sell</a>
+                  </Link>
+                </li>
+              )}
 
               <li>
                 <SignOut></SignOut>
@@ -163,10 +164,7 @@ export default function Nav() {
           {!currentUser.user && (
             <li>
               <Link href="/signin">
-                <a>Sign In</a>
-              </Link>
-              <Link href="/signup">
-                <a>Register</a>
+                <a>Sign In / Register</a>
               </Link>
             </li>
           )}

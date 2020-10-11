@@ -1,7 +1,7 @@
 import Cart, { LOCAL_STATE_QUERY } from "../components/cart";
 import { mount } from "enzyme";
 import { MockedProvider } from "@apollo/react-testing";
-import { CURRENT_USER_QUERY } from "../components/queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 
 import { ApolloConsumer } from "@apollo/client";
 

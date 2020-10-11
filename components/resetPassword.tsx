@@ -6,7 +6,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "./utils/useFormFields";
 import Link from "next/link";
 import Router from "next/router";
-import { CURRENT_USER_QUERY } from "./queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
+import { FormStyles } from "./styles/FormStyles";
 
 export interface ResetPassProps {
   resetToken: string;
@@ -30,19 +31,13 @@ export const RESET_PASSWORD_MUTATION = gql`
   }
 `;
 
-type target = {
-  email: string;
-  name: string;
-  id: string;
-};
-
 export default function ResetPass(props: ResetPassProps) {
   const [fields, handleFieldChange] = useFormFields({
     password: "",
     confirmPassword: "",
   });
 
-  const [requestReset, { data, loading, error, called }] = useMutation(
+  const [resetPassword, resetPasswordData] = useMutation(
     RESET_PASSWORD_MUTATION,
     {
       refetchQueries: [{ query: CURRENT_USER_QUERY }],
@@ -52,73 +47,83 @@ export default function ResetPass(props: ResetPassProps) {
 
   const { password, confirmPassword } = fields;
   return (
-    <Form
-      method="post"
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await requestReset({
-          variables: {
-            resetToken: props.resetToken,
-            password: password,
-            confirmPassword: confirmPassword,
-          },
-        });
-        setTimeout(() => {
-          Router.push({
-            pathname: "/signin",
-          });
-        }, 2000);
-      }}
-    >
-      <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Reset your password</h2>
+    <FormStyles>
+      <fieldset
+        disabled={resetPasswordData.loading}
+        aria-busy={resetPasswordData.loading}
+      >
+        <div className="veen" style={{ background: "#D0D4D7" }}>
+          <div className="wrapper" style={{ left: "20%", width: "60%" }}>
+            <Form
+              method="post"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                await resetPassword({
+                  variables: {
+                    resetToken: props.resetToken,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                  },
+                });
+                setTimeout(() => {
+                  Router.push({
+                    pathname: "/signin",
+                  });
+                }, 2000);
+              }}
+            >
+              <h2 className="second">
+                <span>My Shop</span>
+              </h2>
 
-        <Error error={error} />
-        {!loading && !error && called && (
-          <p>
-            Your password has been reset successfully! Click
-            <p>
-              <Link href="/signin">here</Link>
-            </p>
-            to sign in or wait 5 seconds to be redirected.
-          </p>
-        )}
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={handleFieldChange}
-          />
-        </label>
+              <h2>Reset your password</h2>
 
-        <label htmlFor="confirmPassword">
-          Confirm Password
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            required
-            value={confirmPassword}
-            onChange={handleFieldChange}
-          />
-        </label>
+              <Error error={resetPasswordData.error} />
+              {!resetPasswordData.loading &&
+                !resetPasswordData.error &&
+                resetPasswordData.called && (
+                  <p>
+                    Your password has been reset successfully!
+                    <p>
+                      <Link href="/signin">
+                        Click here to sign in or wait 5 seconds to be
+                        redirected.
+                      </Link>
+                    </p>
+                  </p>
+                )}
 
-        <button type="submit">Submit</button>
-        {/* <p>
-          <Link href="/requestreset">
-            <a>
-              You want to reset your password but don't have a token? GET ONE
-              HERE
-            </a>
-          </Link>
-        </p> */}
+              <div className="mail">
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required
+                  value={confirmPassword}
+                  onChange={handleFieldChange}
+                />
+                <label>Password</label>
+              </div>
+
+              <div className="passwd">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  required
+                  value={password}
+                  onChange={handleFieldChange}
+                />
+                <label>Confirm Password</label>
+              </div>
+
+              <div className="submit">
+                <button className="dark">Reset password</button>
+              </div>
+            </Form>
+          </div>
+        </div>
       </fieldset>
-    </Form>
+    </FormStyles>
   );
 }
