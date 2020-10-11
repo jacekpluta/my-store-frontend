@@ -5,7 +5,7 @@ export const CatalogNavBarStyles = styled.div`
   height: 100%;
   font-size: 1em;
   width: 30vh;
-  padding-left: 10px;
+  padding-left: 5px;
 
   h2 {
     padding: 0px 0 0 25px;

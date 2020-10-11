@@ -6,6 +6,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "./utils/useFormFields";
 import Link from "next/link";
 import Router from "next/router";
+import { Bar } from "./styles/Bar";
 
 export const CREATE_USER_MUTATION = gql`
   mutation CREATE_USER_MUTATION(
@@ -33,72 +34,76 @@ export default function SignUp() {
   );
 
   const { name, email, password } = fields;
+
   return (
-    <Form
-      method="post"
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await createUser({
-          variables: {
-            email,
-            name,
-            password,
-          },
-        });
-        Router.push({
-          pathname: "/account",
-        });
-      }}
-    >
-      <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Register</h2>
-        <p>{data ? "Account successfully created" : ""}</p>
-        <Error error={error} />
-        <label htmlFor="email">
-          Email
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={handleFieldChange}
-          />
-        </label>
+    <>
+      <Bar>Log In</Bar>
+      <Form
+        method="post"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await createUser({
+            variables: {
+              email,
+              name,
+              password,
+            },
+          });
+          Router.push({
+            pathname: "/account",
+          });
+        }}
+      >
+        <fieldset disabled={loading} aria-busy={loading}>
+          <h2>Register</h2>
+          <p>{data ? "Account successfully created" : ""}</p>
+          <Error error={error} />
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={handleFieldChange}
+            />
+          </label>
 
-        <label htmlFor="name">
-          Name
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            required
-            value={name}
-            onChange={handleFieldChange}
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={handleFieldChange}
-          />
-        </label>
+          <label htmlFor="name">
+            Name
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              required
+              value={name}
+              onChange={handleFieldChange}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={handleFieldChange}
+            />
+          </label>
 
-        <button type="submit">Submit</button>
-        <p>
-          <Link href="/signin">
-            <a>Already have an account? SIGN IN</a>
-          </Link>
-        </p>
-      </fieldset>
-    </Form>
+          <button type="submit">Submit</button>
+          <p>
+            <Link href="/signin">
+              <a>Already have an account? SIGN IN</a>
+            </Link>
+          </p>
+        </fieldset>
+      </Form>
+    </>
   );
 }

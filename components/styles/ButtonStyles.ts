@@ -83,15 +83,15 @@ export const ButtonMainShiny = styled(ButtonMainNormal)`
 
 export const ButtonCatalogNavFilter = styled(ButtonMainNormal)`
   font-size: 1em;
-  padding: 15px 30px;
+  padding: 15px 15px;
   border-radius: 10px;
-  margin-right: 5px;
-  margin-left: 5px;
+
   margin-top: 25px;
 `;
 
 export const ButtonCatalogNavClear = styled(ButtonMainNormal)`
   font-size: 1em;
-  padding: 15px 30px;
+  padding: 15px 15px;
+  margin-left: 5px;
   border-radius: 10px;
 `;

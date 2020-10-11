@@ -99,10 +99,8 @@ export default function Gallery() {
                   {imageIndex === 0 && (
                     <p> Last season models are on sale, check them out!</p>
                   )}
-                  {imageIndex === 1 && <p> Featuring new Air Max</p>}
-                  {imageIndex === 2 && (
-                    <p> It's never to late to start training</p>
-                  )}
+                  {imageIndex === 1 && <p> Featuring new Air Max!</p>}
+                  {imageIndex === 2 && <p> It's never to late!</p>}
                 </motion.div>
               </AnimatePresence>
             </GallerySubText>

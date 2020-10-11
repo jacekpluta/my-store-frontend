@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-export const CatalogBar = styled.div`
+export const Bar = styled.div`
   text-align: left;
-  height: 100px;
-  width: 100%;
-  padding: 40px 25px 75px;
 
+  padding: 10px 0 10px 35px;
+  width: 100%;
   font-size: 28px;
   border-bottom-style: solid;
   border-bottom-width: 1px;

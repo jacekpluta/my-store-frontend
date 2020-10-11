@@ -62,9 +62,18 @@ export default function Header() {
   }, [path]);
 
   return (
-    <div style={bar ? borderBottom : borderBottomZero}>
+    <div>
+      {path !== "/" && (
+        <div style={{ height: "100px", visibility: "hidden" }}> </div>
+      )}
       <StyledHeader
-        style={bar && path !== "/" ? borderBottom : borderBottomZero}
+        style={
+          bar && path === "/"
+            ? borderBottom
+            : bar && path !== "/"
+            ? borderBottom
+            : borderBottomZero
+        }
       >
         <Link href="/">
           <img

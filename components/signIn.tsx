@@ -7,7 +7,7 @@ import { useFormFields } from "./utils/useFormFields";
 import { CURRENT_USER_QUERY } from "./queries";
 import Link from "next/link";
 import Router from "next/router";
-import { CatalogBar } from "./styles/CatalogBar";
+import { Bar } from "./styles/Bar";
 
 export interface SignInProps {}
 
@@ -39,6 +39,7 @@ export default function SignIn(props: SignInProps) {
 
   return (
     <>
+      <Bar>Sign In</Bar>
       <Form
         method="post"
         onSubmit={async (e) => {
@@ -56,8 +57,6 @@ export default function SignIn(props: SignInProps) {
         }}
       >
         <fieldset disabled={loading} aria-busy={loading}>
-          <h2>Sign In</h2>
-
           <Error error={error} />
           <label htmlFor="email">
             Email

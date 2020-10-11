@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import Pagination from "./pagination";
 import { perPage } from "../config";
 import { CatalogStyles } from "./styles/CatalogStyles";
-import { CatalogBar } from "./styles/CatalogBar";
+import { Bar } from "./styles/Bar";
 import { ItemsList } from "./styles/ItemsList";
 import CatalogNavBar from "./catalogNavBar";
 import { CatalogGrid } from "./styles/CatalogGrid";
@@ -51,7 +51,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
     const { page } = this.props;
     return (
       <CatalogStyles>
-        <CatalogBar>Catalog</CatalogBar>
+        <Bar>Catalog</Bar>
         <SearchSortStyles>
           <Search />
           <Sort />
