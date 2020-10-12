@@ -72,7 +72,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
               if (error) return <p>Error: {error.message}</p>;
               return (
                 <ItemsList>
-                  {data.items.map((item: IItem, id: string) => (
+                  {data.items.map((item: IItem, id: number) => (
                     <MenuItem key={id} id={id} item={item} />
                   ))}
                 </ItemsList>

@@ -24,7 +24,11 @@ const SEARCH_ITEM_QUERY = gql`
   }
 `;
 
-export default function Search() {
+// export interface IItems {
+//   items?: [IItem];
+// }
+
+export default function Search({ biggerIcon }) {
   const [loading, setLoading] = useState(false);
   const [items, setItems]: any[] = useState([]);
 
@@ -64,14 +68,22 @@ export default function Search() {
           <div>
             <ApolloConsumer>
               {(client) => (
-                <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingLeft: "10px",
+                  }}
+                >
                   <Icon
                     name="search"
-                    style={{
-                      paddingTop: "7px",
-                      paddingLeft: "7px",
-                      paddingRight: "18px",
-                    }}
+                    size={biggerIcon && "big"}
+                    style={
+                      biggerIcon
+                        ? { marginBottom: "0px" }
+                        : { marginBottom: "15px" }
+                    }
                   />
                   <input
                     {...getInputProps({

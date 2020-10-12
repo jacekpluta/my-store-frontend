@@ -31,7 +31,7 @@ interface ItemProps {
   title: string;
 }
 
-const MenuItem = ({ id, item }: { id: string; item: ItemProps }) => {
+const MenuItem = ({ id, item }: { id: number; item: ItemProps }) => {
   const [buttonsVisible, setButtonsVisible] = useState(false);
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
 

@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { CURRENT_USER_QUERY } from "../lib/queries";
 import SignOut from "./signOut";
 import { useMutation } from "@apollo/react-hooks";
-import { TOGGLE_CART_MUTATION } from "./cart";
+
 import styled from "styled-components";
 import { Icon, Popup } from "semantic-ui-react";
 import Search from "./search";
@@ -14,6 +14,7 @@ import CartItemsNumber from "./styles/CartItemsNumber";
 import LoadingScreen from "./loadingScreen";
 import { WhiteBar } from "./styles/WhiteBar";
 import { useRouter } from "next/router";
+import { isCartOpen } from "../lib/vars";
 
 const AnimationStyles = styled.span`
   position: absolute;
@@ -36,7 +37,7 @@ const AnimationStyles = styled.span`
 
 export default function Nav() {
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-  const [toggleCart, toggleCartMutation] = useMutation(TOGGLE_CART_MUTATION);
+
   const [main, setMain] = useState(false);
   const [toggleBar, setToggleBar] = useState(true);
 
@@ -68,10 +69,8 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [path]);
 
-  if (currentUserQuery.loading || toggleCartMutation.loading)
-    return <LoadingScreen></LoadingScreen>;
-  if (currentUserQuery.error || toggleCartMutation.error)
-    return <p>Error: {currentUserQuery.error}</p>;
+  if (currentUserQuery.loading) return <LoadingScreen></LoadingScreen>;
+  if (currentUserQuery.error) return <p>Error: {currentUserQuery.error}</p>;
 
   const cartItems = currentUserQuery?.data?.user?.cart;
   const cartItemsCount = !cartItems
@@ -108,13 +107,6 @@ export default function Nav() {
                   <a>Accout</a>
                 </Link>
               </li>
-              {currentUser.user.permissions.includes("ADMIN") && (
-                <li>
-                  <Link href="/sell">
-                    <a>Sell</a>
-                  </Link>
-                </li>
-              )}
 
               <li>
                 <SignOut></SignOut>
@@ -122,7 +114,7 @@ export default function Nav() {
 
               <li className="icon">
                 <Popup
-                  content={<Search />}
+                  content={<Search biggerIcon={true} />}
                   on="click"
                   pinned
                   position="bottom center"
@@ -135,7 +127,12 @@ export default function Nav() {
                 <Icon name="heart" />
               </li>
 
-              <li onClick={() => toggleCart()} className="icon">
+              <li
+                onClick={() => {
+                  isCartOpen(true);
+                }}
+                className="icon"
+              >
                 <div style={{ display: "inline" }}>
                   <Icon name="shopping bag" />
 

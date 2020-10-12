@@ -32,8 +32,10 @@ function CatalogNavBar() {
       <Checkbox>Sandals</Checkbox>
       <Checkbox>Flip Flops</Checkbox>
 
-      <ButtonCatalogNavFilter>FILTER</ButtonCatalogNavFilter>
-      <ButtonCatalogNavClear>CLEAR</ButtonCatalogNavClear>
+      <div style={{ position: "relative", left: "20px" }}>
+        <ButtonCatalogNavFilter>FILTER</ButtonCatalogNavFilter>
+        <ButtonCatalogNavClear>CLEAR</ButtonCatalogNavClear>
+      </div>
     </CatalogNavBarStyles>
   );
 }

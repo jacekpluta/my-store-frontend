@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import ScrollMenu from "react-horizontal-scrolling-menu";
-
-import { useQuery } from "@apollo/react-hooks";
-import Error from "./errorMessage";
 import { motion } from "framer-motion";
 import {
   DiscountsStyle,
@@ -11,25 +8,22 @@ import {
   UnderFeaturedStyle,
   FeaturedStyle,
 } from "./styles/ItemsStyles";
-
 import MenuItem from "./menuItem";
-import { ALL_ITEMS_QUERY, IItem } from "./items";
+import { IItem } from "./items";
 
-export const Menu = () => {
-  const discountItemsQuery = useQuery(ALL_ITEMS_QUERY);
+export interface IItems {
+  items?: [IItem];
+  subTitle?: string;
+  title?: string;
+}
 
-  if (discountItemsQuery.loading) return <p>Loading...</p>;
-  if (discountItemsQuery.error)
-    return <Error error={discountItemsQuery.error}></Error>;
+const Discounts = ({ items, subTitle, title }: IItems) => {
+  const ItemsMenu = () => {
+    return items.map((item: IItem, id: number) => (
+      <MenuItem key={id} id={id} item={item} />
+    ));
+  };
 
-  const items = discountItemsQuery.data.items;
-
-  return items.map((item: IItem, id: string) => (
-    <MenuItem key={id} id={id} item={item} />
-  ));
-};
-
-const Discounts = () => {
   const [selected, setSelected] = useState(null);
   const [galleryWidth, setGalleryWidth] = useState(0);
   const scrollmenu = useRef(null);
@@ -49,7 +43,7 @@ const Discounts = () => {
     }
   }, [galleryWidth]);
 
-  const menuItems = Menu();
+  const menuItems = ItemsMenu();
 
   const onSelect = (selectedItemKey: string | number) => {
     setSelected(selectedItemKey);
@@ -74,10 +68,8 @@ const Discounts = () => {
         }}
       >
         <FeaturedContainer>
-          <FeaturedStyle>Featured products</FeaturedStyle>
-          <UnderFeaturedStyle>
-            Get your new pair of shoes today!
-          </UnderFeaturedStyle>
+          <FeaturedStyle>{title}</FeaturedStyle>
+          <UnderFeaturedStyle>{subTitle}</UnderFeaturedStyle>
         </FeaturedContainer>
 
         <ScrollMenu

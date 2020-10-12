@@ -3,43 +3,27 @@ import CartStyles from "./styles/CartStyles";
 
 import CloseButton from "./styles/CloseButton";
 import { ButtonMainNormal } from "./styles/ButtonStyles";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
 import Error from "./errorMessage";
-import { CURRENT_USER_QUERY } from "../lib/queries";
+import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../lib/queries";
 import CartItem from "./cartItem";
 import formatMoney from "./utils/formatMoney";
 import CreditCardCheckout from "./creditCardCheckout";
 import { ICartItem } from "./cartItem";
 
-export const LOCAL_STATE_QUERY = gql`
-  query {
-    cartOpen @client
-  }
-`;
-
-export const TOGGLE_CART_MUTATION = gql`
-  mutation {
-    toggleCart @client
-  }
-`;
+import { isCartOpen } from "../lib/vars";
 
 export default function Cart() {
-  const queryData = useQuery(LOCAL_STATE_QUERY);
-  const [toggleCart, toggleCartMutation] = useMutation(TOGGLE_CART_MUTATION);
-
+  const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
 
-  if (
-    queryData.loading ||
-    toggleCartMutation.loading ||
-    currentUserQuery.loading
-  )
-    return <p>Loading...</p>;
-  if (queryData.error || toggleCartMutation.error || currentUserQuery.error)
-    return <Error error={toggleCartMutation.error || queryData.error}></Error>;
+  if (cartOpenData.loading) return <p>Loading...</p>;
+  if (cartOpenData.error) return <p>ERROR: {cartOpenData.error.message}</p>;
 
-  const cartOpen = queryData?.data?.cartOpen;
+  if (currentUserQuery.loading) return <p>Loading...</p>;
+  if (currentUserQuery.error)
+    return <Error error={currentUserQuery.error}></Error>;
 
   const user = currentUserQuery?.data?.user;
   if (!user) return <p></p>;
@@ -52,9 +36,14 @@ export default function Cart() {
     : "";
 
   return (
-    <CartStyles open={cartOpen}>
+    <CartStyles open={cartOpenData.data.cartOpen}>
       <header>
-        <CloseButton onClick={() => toggleCart()} title="close">
+        <CloseButton
+          onClick={() => {
+            isCartOpen(false);
+          }}
+          title="close"
+        >
           &times;
         </CloseButton>
         {user.name} - Cart
@@ -77,13 +66,7 @@ export default function Cart() {
             allItemsCount={user.cart.length}
             user={user}
           >
-            <ButtonMainNormal
-              onClick={() => {
-                toggleCart();
-              }}
-            >
-              Checkout
-            </ButtonMainNormal>
+            <ButtonMainNormal>Checkout</ButtonMainNormal>
           </CreditCardCheckout>
         )}
       </footer>

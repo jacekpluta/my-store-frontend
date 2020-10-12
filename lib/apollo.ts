@@ -3,9 +3,8 @@ import { useMemo } from "react";
 import gql from "graphql-tag";
 import { endpoint, productionBackendEndpoint } from "../config";
 
-import { typeDefs, resolvers } from "./graphqlLocal";
-
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient } from "@apollo/client";
+import { cache } from "./cache";
 
 let apolloClient: ApolloClient<any> | undefined;
 
@@ -14,18 +13,6 @@ export type ResolverContext = {
   res?: ServerResponse;
 };
 
-// function createIsomorphLink(context: ResolverContext = {}) {
-//   const { HttpLink } = require("apollo-link-http");
-//   return new HttpLink({
-//     uri:
-//       process.env.NODE_ENV === "development"
-//         ? endpoint
-//         : productionBackendEndpoint,
-//     credentials: "include",
-//   });
-// }
-const cache = new InMemoryCache();
-
 function createApolloClient(context?: ResolverContext): any {
   return new ApolloClient({
     uri:
@@ -33,24 +20,17 @@ function createApolloClient(context?: ResolverContext): any {
         ? endpoint
         : productionBackendEndpoint,
     credentials: "include",
-    cache: new InMemoryCache(),
-    resolvers,
-    typeDefs,
+    cache: cache,
+    name: "my-shop",
+    version: "1.0",
+    queryDeduplication: false,
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: "cache-and-network",
+      },
+    },
   });
 }
-
-cache.writeFragment({
-  id: "5",
-  fragment: gql`
-    fragment CartOpenStatus on CartOpen {
-      id
-      cartOpen
-    }
-  `,
-  data: {
-    cartOpen: false,
-  },
-});
 
 export function initializeApollo(
   initialState: any = null,
