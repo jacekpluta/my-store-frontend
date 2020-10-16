@@ -31,7 +31,7 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
   const [dicountsHovered, setDicountsHovered] = useState(false);
 
   useEffect(() => {
-    if (scrollmenu.current && scrollmenu.current.allItemsWidth > 250) {
+    if (scrollmenu.current && scrollmenu.current.allItemsWidth > 450) {
       setGalleryWidth(scrollmenu.current.allItemsWidth);
     }
   }, [scrollmenu.current]);

@@ -24,11 +24,11 @@ const SEARCH_ITEM_QUERY = gql`
   }
 `;
 
-// export interface IItems {
-//   items?: [IItem];
-// }
+export interface ISearchProps {
+  biggerIcon?: Boolean;
+}
 
-export default function Search({ biggerIcon }) {
+export default function Search({ biggerIcon }: ISearchProps) {
   const [loading, setLoading] = useState(false);
   const [items, setItems]: any[] = useState([]);
 
@@ -78,7 +78,7 @@ export default function Search({ biggerIcon }) {
                 >
                   <Icon
                     name="search"
-                    size={biggerIcon && "big"}
+                    size={biggerIcon ? "big" : "small"}
                     style={
                       biggerIcon
                         ? { marginBottom: "0px" }
