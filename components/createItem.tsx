@@ -25,6 +25,9 @@ export const CREATE_ITEM_MUTATION = gql`
     $price: Int!
     $image: String
     $largeImage: String
+    $gender: Gender
+    $category: Category
+    $brand: Brand
   ) {
     createItem(
       title: $title
@@ -32,25 +35,33 @@ export const CREATE_ITEM_MUTATION = gql`
       price: $price
       image: $image
       largeImage: $largeImage
+      gender: $gender
+      category: $category
+      brand: $brand
     ) {
       id
     }
   }
 `;
 
+interface HTMLInputEvent {
+  target: HTMLInputElement & EventTarget;
+}
+
 const CreateItem = () => {
   const [fields, handleFieldChange] = useFormFields({
     description: "",
     price: "",
     title: "",
+    gender: "MEN",
+    brand: "NIKE",
+    category: "SHOES",
   });
-
+  console.log(fields);
   const [image, setImage] = useState("");
   const [largeImage, setLargeImage] = useState("");
   const [uploading, setUploading] = useState(false);
-  interface HTMLInputEvent {
-    target: HTMLInputElement & EventTarget;
-  }
+  const [createItem, createItemtMutation] = useMutation(CREATE_ITEM_MUTATION);
 
   const uploadFile = async (e: HTMLInputEvent) => {
     setUploading(true);
@@ -76,9 +87,7 @@ const CreateItem = () => {
     setUploading(false);
   };
 
-  const [createItem, createItemtMutation] = useMutation(CREATE_ITEM_MUTATION);
-
-  FormStyles(
+  return (
     <FormStyles>
       <fieldset
         disabled={createItemtMutation.loading || uploading}
@@ -88,6 +97,7 @@ const CreateItem = () => {
           <div className="wrapper" style={{ left: "20%", width: "60%" }}>
             <Form
               data-test="form"
+              style={{ marginTop: "-35px" }}
               onSubmit={async (e) => {
                 e.preventDefault();
 
@@ -107,7 +117,7 @@ const CreateItem = () => {
               <h2 className="second">
                 <span>My Shop</span>
               </h2>
-              <h3>Request reset token</h3>
+
               <Error error={createItemtMutation.error}></Error>
               <div className="name">
                 <input
@@ -119,7 +129,7 @@ const CreateItem = () => {
                   onChange={handleFieldChange}
                 />
 
-                <label> Title</label>
+                <label>Title</label>
               </div>
               <div className="name">
                 <input
@@ -131,20 +141,53 @@ const CreateItem = () => {
                   onChange={handleFieldChange}
                 />
 
-                <label> Description</label>
+                <label>Description</label>
               </div>
+
               <div className="name">
                 <input
                   type="number"
                   id="price"
                   name="price"
                   required
-                  value={fields.price}
                   onChange={handleFieldChange}
                 />
 
-                <label> Price</label>
+                <label>Price</label>
               </div>
+
+              <div className="gender">
+                <label>Gender</label>
+                <select id="gender" name="gender" onChange={handleFieldChange}>
+                  <option value="MEN">Men</option>
+                  <option value="WOMEN">Women</option>
+                </select>
+              </div>
+
+              <div className="category">
+                <label>Category</label>
+                <select
+                  id="category"
+                  name="category"
+                  onChange={handleFieldChange}
+                >
+                  <option value="SHOES">Shoes</option>
+                  <option value="BOOTS">Boots</option>
+                  <option value="TRAINERS">Trainers</option>
+                  <option value="SANDALS">Sandals</option>
+                </select>
+              </div>
+
+              <div className="brand">
+                <label>Brand</label>
+                <select id="brand" name="brand" onChange={handleFieldChange}>
+                  <option value="NIKE">Nike</option>
+                  <option value="PUMA">Puma</option>
+                  <option value="ASICS">Asics</option>
+                  <option value="REBOOK">Rebook</option>
+                </select>
+              </div>
+
               <div className="name">
                 <input
                   type="file"

@@ -1,86 +1,63 @@
-import React, { useState } from "react";
-import Downshift, { resetIdCounter } from "downshift";
-import Router from "next/router";
-
-import gql from "graphql-tag";
-import debounce from "lodash.debounce";
+import React, { useState, useRef, useEffect } from "react";
 
 import { SortStyles } from "./styles/SortStyles";
 import { Icon } from "semantic-ui-react";
 
-const SEARCH_ITEM_QUERY = gql`
-  query SEARCH_ITEM_QUERY($searchTerm: String!) {
-    items(
-      where: {
-        OR: [
-          { title_contains: $searchTerm }
-          { description_contains: $searchTerm }
-        ]
-      }
-    ) {
-      id
-      image
-      title
+export interface SortProps {
+  handleOnSort: Function;
+}
+
+export default function Sort({ handleOnSort }: SortProps) {
+  const [option, setOption] = useState("Featured");
+  const [sortVisible, setSortVisible] = useState(false);
+  const wrapperRef = useRef(null);
+
+  function handleClickOutside(event: MouseEvent) {
+    if (wrapperRef && !wrapperRef?.current.contains(event.target)) {
+      setSortVisible(false);
     }
   }
-`;
 
-export default function Sort() {
-  const [loading, setLoading] = useState(false);
-  const [items, setItems]: any[] = useState([]);
-  const [option, setOption] = useState("Featured");
-  const handleOnSearch = debounce(async (e, client) => {
-    e.persist();
-    setLoading(true);
-    const res = await client.query({
-      query: SEARCH_ITEM_QUERY,
-      variables: { searchTerm: e.target.value },
-    });
-    setItems(res.data.items);
-    setLoading(false);
-  }, 300);
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const routeToItem = (item: any) => {
-    Router.push({
-      pathname: "/item",
-      query: {
-        id: item.id,
-      },
-    });
-  };
-  resetIdCounter();
   return (
-    <SortStyles>
+    <SortStyles ref={wrapperRef}>
       <ul>
-        <li style={{ display: "black", float: "right" }}>
+        <li>
           <span>
-            <a
-              href="#"
-              style={{
-                display: `flex`,
-              }}
-            >
+            <a href="#" onClick={() => setSortVisible(!sortVisible)}>
               <div
                 style={{
-                  borderRight: `solid 1px #D0D4D7`,
-                  paddingRight: "7px",
+                  paddingLeft: "10px",
                 }}
               >
                 {option}
               </div>
-
-              <Icon
+              <div
                 style={{
-                  paddingLeft: "7px",
+                  paddingRight: "5px",
+                  paddingLeft: "5px",
+                  borderLeft: `solid 1px #D0D4D7`,
                 }}
-                name="sort"
-              />
+              >
+                <Icon name="sort" />
+              </div>
             </a>
           </span>
-          <ul>
+          <ul style={sortVisible ? { height: "220px" } : { height: "0px" }}>
             <li>
               <span>
-                <a href="#" onClick={() => setOption("Featured")}>
+                <a
+                  href="#"
+                  onClick={() => {
+                    setOption("Featured");
+                    handleOnSort("createdAt_DESC");
+                    setSortVisible(false);
+                  }}
+                >
                   Featured
                   <Icon name="bolt" />
                 </a>
@@ -88,28 +65,56 @@ export default function Sort() {
             </li>
             <li>
               <span>
-                <a href="#" onClick={() => setOption("Name: A-Z")}>
+                <a
+                  href="#"
+                  onClick={() => {
+                    setOption("Name: A-Z");
+                    handleOnSort("title_DESC");
+                    setSortVisible(false);
+                  }}
+                >
                   Name: A-Z <Icon name="sort alphabet down" />
                 </a>
               </span>
             </li>
             <li>
               <span>
-                <a href="#" onClick={() => setOption("Name: Z-A")}>
+                <a
+                  href="#"
+                  onClick={() => {
+                    setOption("Name: Z-A");
+                    handleOnSort("title_ASC");
+                    setSortVisible(false);
+                  }}
+                >
                   Name: Z-A <Icon name="sort alphabet up" />
                 </a>
               </span>
             </li>
             <li>
               <span>
-                <a href="#" onClick={() => setOption("Price: High-Low")}>
+                <a
+                  href="#"
+                  onClick={() => {
+                    setOption("Price: High-Low");
+                    handleOnSort("price_DESC");
+                    setSortVisible(false);
+                  }}
+                >
                   Price: High-Low <Icon name="sort amount down" />
                 </a>
               </span>
             </li>
             <li>
               <span>
-                <a href="#" onClick={() => setOption("Price: Low-High")}>
+                <a
+                  href="#"
+                  onClick={() => {
+                    setOption("Price: Low-High");
+                    handleOnSort("price_ASC");
+                    setSortVisible(false);
+                  }}
+                >
                   Price: Low-High <Icon name="sort amount up" />
                 </a>
               </span>

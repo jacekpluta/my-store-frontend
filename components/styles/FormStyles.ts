@@ -57,7 +57,7 @@ export const FormStyles = styled.div`
       position: fixed;
       left: 50%;
       top: 50%;
-      z-index: 100;
+      z-index: 2;
 
       content: "";
       display: none;
@@ -74,7 +74,7 @@ export const FormStyles = styled.div`
       position: fixed;
       left: 50%;
       top: 50%;
-      z-index: 100;
+      z-index: 2;
 
       content: "";
       display: none;
@@ -168,18 +168,14 @@ export const FormStyles = styled.div`
     pointer-events: none;
   }
 
-  .veen .wrapper input {
+  .veen .wrapper input,
+  select {
     height: 40px;
     padding: 5px 15px;
     width: 100%;
     border: solid 1px #999;
   }
-  .veen .wrapper input {
-    height: 40px;
-    padding: 5px 15px;
-    width: 100%;
-    border: solid 1px #999;
-  }
+
   .veen .wrapper input:focus {
     outline: none;
     border-color: #ff4931;
@@ -271,7 +267,7 @@ export const FormStyles = styled.div`
   .site-link {
     padding: 5px 15px;
     position: fixed;
-    z-index: 99999;
+    z-index: 2;
     background: #fff;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
     right: 30px;

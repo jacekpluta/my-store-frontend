@@ -5,6 +5,7 @@ export const images = [
 ];
 
 export const imageMain = "./images/shoes5.jpg";
+export const emptyCart = "./images/emptyCart.png";
 
 export const infoImages = [
   "./images/info1.jpg",

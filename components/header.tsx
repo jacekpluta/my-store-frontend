@@ -5,6 +5,9 @@ import NProgress from "nprogress";
 import Cart from "./cart";
 import { StyledHeader } from "./styles/StyledHeader";
 import React, { useEffect, useState } from "react";
+import { Dimmer } from "./styles/Dimmer";
+import { IS_CART_OPEN_QUERY } from "../lib/queries";
+import { useQuery } from "@apollo/react-hooks";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -22,6 +25,10 @@ export default function Header() {
 
   const router = useRouter();
   const path = router.pathname;
+
+  const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
+
+  const cartOpen = cartOpenData.data.cartOpen;
 
   const changeLogo = () => {
     if (path === "/" && window.scrollY > 0) {
@@ -84,7 +91,7 @@ export default function Header() {
         </Link>
 
         <Nav />
-
+        {cartOpen && <Dimmer></Dimmer>}
         <Cart></Cart>
       </StyledHeader>
     </div>

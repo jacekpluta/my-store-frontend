@@ -118,7 +118,7 @@ export const CatalogNavBarStyles = styled.div`
     -ms-transform: scale(3);
     transform: scale(3);
     opacity: 0;
-    z-index: 999;
+    z-index: 2;
     transition: all 0.3s ease-out;
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;

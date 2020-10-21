@@ -1,5 +1,5 @@
 import { InMemoryCache } from "@apollo/client";
-import { isCartOpen } from "./vars";
+import { isCartOpen, filters, clearFilters } from "./vars";
 
 export const cache = new InMemoryCache({
   typePolicies: {
@@ -8,6 +8,16 @@ export const cache = new InMemoryCache({
         cartOpen: {
           read() {
             return isCartOpen();
+          },
+        },
+        filters: {
+          read() {
+            return filters();
+          },
+        },
+        clearFilters: {
+          read() {
+            return clearFilters();
           },
         },
       },

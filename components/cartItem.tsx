@@ -4,7 +4,7 @@ import formatMoney from "./utils/formatMoney";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "../lib/queries";
-import { makeVar } from "@apollo/client";
+import { CartItemStyles } from "./CartItemStyles";
 
 const ButtonStyle = styled.button`
   font-size: 3rem;
@@ -13,21 +13,6 @@ const ButtonStyle = styled.button`
   &:hover {
     color: ${(props) => props.theme.red};
     cursor: pointer;
-  }
-`;
-
-const CartItemStyles = styled.li`
-  padding: 1rem 0;
-  border-bottom: 1px solid ${(props) => props.theme.lightgray};
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr auto;
-  img {
-    margin-right: 10px;
-  }
-
-  p {
-    margin: 0;
   }
 `;
 
@@ -113,6 +98,7 @@ const CartItem = ({ cartItem }: propsCartItem) => {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     awaitRefetchQueries: true,
   });
+  if (!cartItem) return <p>Error: no cart item</p>;
 
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
     DELETE_CART_ITEM_MUTATION
@@ -163,11 +149,6 @@ const CartItem = ({ cartItem }: propsCartItem) => {
               id: id,
             },
           }).catch((err) => console.log(err.message));
-
-          //reset local query
-          makeVar([{ data: { id: null } }]);
-
-          // getDeletedItemQuery.client.writeData({ data: { id: null } });
         }
       }
       deleteItemFromCart();
@@ -178,14 +159,14 @@ const CartItem = ({ cartItem }: propsCartItem) => {
     <CartItemStyles data-test="cartItem">
       <img
         width="200"
-        src={cartItem.item.image}
-        alt={cartItem.item.title}
+        src={cartItem?.item?.image}
+        alt={cartItem?.item?.title}
       ></img>
       <div>
-        <h3>{cartItem.item.title}</h3>
+        <h3>{cartItem?.item?.title}</h3>
         <p>
-          {formatMoney(cartItem.item.price * cartItem.quantity)} -{" "}
-          {cartItem.quantity} &times; {formatMoney(cartItem.item.price)} each
+          {formatMoney(cartItem?.item?.price * cartItem.quantity)} -{" "}
+          {cartItem?.quantity} &times; {formatMoney(cartItem?.item?.price)} each
         </p>
       </div>
 

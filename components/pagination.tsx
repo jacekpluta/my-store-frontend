@@ -46,7 +46,7 @@ export default function Pagination(props: PaginationProps) {
           ⬅ Prev
         </a>
       </Link>
-      <p>
+      <p style={{ marginTop: 5 }}>
         Page {page} of <span className="allPages">{allPages}</span>
       </p>
 

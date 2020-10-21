@@ -119,13 +119,14 @@ export const Description = styled.div`
   color: grey;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.9fr 0.1fr;
+  grid-template-rows: 1fr 1fr;
   padding-left: 10px;
   padding-bottom: 10px;
   padding-top: 12px;
-
+  z-index: 1;
   p {
-    line-height: 0.5;
+    line-height: 1;
     color: ${(props) => props.theme.black};
     justify-self: start;
   }
@@ -140,7 +141,7 @@ export const Description = styled.div`
     justify-self: end;
     height: 1px;
     padding-bottom: 20px;
-    top: -12px;
+    top: -8px;
   }
   span {
     position: aboslute;

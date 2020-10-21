@@ -2,7 +2,7 @@ import React from "react";
 
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { makeVar } from "@apollo/client";
+
 import { ALL_ITEMS_QUERY } from "./items";
 
 const DELETE_ITEM_MUTATION = gql`
@@ -40,8 +40,7 @@ export default function deleteItem(props: deleteItemProps) {
     if (confirm("Do you want to delete that item?"))
       deleteItem({ variables: { id: itemId } })
         .then(() => {
-          makeVar([{ data: { id: itemId } }]);
-          //client.writeData({ data: { id: itemId } });
+          // makeVar([{ data: { id: itemId } }]);
         })
         .catch((error) => {
           console.log("handleDeleteItem error");

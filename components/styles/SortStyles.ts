@@ -1,21 +1,14 @@
 import styled from "styled-components";
 
-export const SortStyles = styled.div`
-  position: absolute;
-  padding-left: 14px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-
+export const Sort = styled.div`
   border: solid 1px ${(props) => props.theme.whiteGrey};
-  right: 0;
-  margin-right: 40px;
+
   ul {
     position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
-
-    /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    width: 150px;
     font-weight: normal;
   }
 
@@ -33,13 +26,20 @@ export const SortStyles = styled.div`
     background-color: #666666;
     color: #eeeeee;
   }
+  ul li span a {
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+  }
   ul ul {
     position: absolute;
     z-index: 100;
-
+    text-align: left;
     height: 0;
     /* !!!!!!!!!!! */
-    right: -40px;
+    top: 35px;
+    width: 102%;
+    left: -1%;
     overflow: hidden;
 
     -webkit-transition: height 0.3s ease-in;
@@ -56,9 +56,13 @@ export const SortStyles = styled.div`
     height: 220px;
   }
 
+  /* div:focus {
+  outline: none;
+} */
+
   ul ul li {
     background-color: #eaeaea;
-    width: 170px;
+    width: 160px;
 
     -webkit-transition: background-color 0.3s ease;
     -moz-transition: background-color 0.3s ease;
@@ -102,4 +106,17 @@ export const SortStyles = styled.div`
   ul ul ul li:hover + li {
     border-top: 1px solid #999 !important;
   }
+`;
+
+export const SortStyles = styled(Sort)`
+  position: absolute;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  right: 0;
+  margin-right: 40px;
+`;
+
+export const SortStylesSigleItem = styled(Sort)`
+  position: absolute;
+  margin-top: 30px;
 `;

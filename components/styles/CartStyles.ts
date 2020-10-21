@@ -1,52 +1,103 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+
+const slideInAnimation = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0px);
+  }
+`;
+const slideOutAnimation = keyframes`
+  from {
+    transform: translateX(0px);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+`;
 
 interface Props {
   open: boolean;
 }
 
+const showCart = css`
+  animation: ${slideInAnimation} 1s forwards;
+  visibility: visible;
+`;
+
+const hideCart = css`
+  animation: ${slideOutAnimation} 1s forwards;
+  visibility: visible;
+`;
+
 const CartStyles = styled.div`
-  padding: 20px;
+  visibility: hidden;
+
+  z-index: 6;
   position: relative;
   background: white;
   position: fixed;
   height: 100%;
   top: 0;
   right: 0;
-  width: 40%;
-  min-width: 500px;
-  bottom: 0;
-  transform: translateX(100%);
-  transition: all 0.3s;
-  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
-  z-index: 5;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  width: 25%;
+  min-width: 200px;
 
-  ${(props: Props) => props.open && `transform: translateX(0);`};
-  header {
-    border-bottom: 5px solid ${(props) => props.theme.black};
+  ${(props: Props) => (props.open ? showCart : hideCart)};
+
+  transform: translateX(100%);
+
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  /* display: grid;
+  grid-template-rows: auto 1fr auto; */
+  img {
+    padding: 10px;
+    height: 50%;
+    width: 100%;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+  .cartTop {
+    margin: 0;
+    padding: 0;
+    border-bottom: 5px solid ${(props) => props.theme.whiteGrey};
+    text-align: left;
+    padding-left: 2rem;
     margin-bottom: 2rem;
     padding-bottom: 2rem;
-  }
-  footer {
-    border-top: 10px double ${(props) => props.theme.black};
-    margin-top: 2rem;
     padding-top: 2rem;
+
+    .closeButton {
+      background: black;
+      color: white;
+      font-size: 2rem;
+      position: absolute;
+
+      right: 0;
+      top: 0;
+      margin-top: 2rem;
+      margin-right: 10px;
+    }
+  }
+
+  footer {
+    margin-top: 2rem;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
-    font-size: 3rem;
-    font-weight: 900;
-    p {
-      margin: 0;
-    }
   }
-  ul {
+  /* ul {
     margin: 0;
     padding: 0;
     list-style: none;
     overflow: scroll;
-  }
+  } */
 `;
 
 export default CartStyles;

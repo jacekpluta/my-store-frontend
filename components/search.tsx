@@ -82,7 +82,7 @@ export default function Search({ biggerIcon }: ISearchProps) {
                     style={
                       biggerIcon
                         ? { marginBottom: "0px" }
-                        : { marginBottom: "15px" }
+                        : { marginBottom: "2px" }
                     }
                   />
                   <input

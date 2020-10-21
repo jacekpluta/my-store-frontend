@@ -15,6 +15,8 @@ import {
   Description,
   Container,
 } from "./styles/ItemsStyles";
+import PickSize from "./pickSize";
+import { Dimmer } from "./styles/Dimmer";
 
 const variants = {
   str: { opacity: 0 },
@@ -31,8 +33,18 @@ interface ItemProps {
   title: string;
 }
 
-const MenuItem = ({ id, item }: { id: number; item: ItemProps }) => {
+const MenuItem = ({
+  id,
+  item,
+  width,
+}: {
+  id: number;
+  item: ItemProps;
+  width: number | null;
+}) => {
   const [buttonsVisible, setButtonsVisible] = useState(false);
+  const [showPickSize, setShowPickSize] = useState(false);
+
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
 
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
@@ -44,8 +56,11 @@ const MenuItem = ({ id, item }: { id: number; item: ItemProps }) => {
   if (currentUserQuery.error)
     return <Error error={currentUserQuery.error}></Error>;
 
+  const handleShowPickSize = (show: Boolean) => {
+    setShowPickSize(show);
+  };
   return (
-    <Container>
+    <Container style={{ width: width }}>
       <ContainerImg>
         <motion.div
           whileHover={{ opacity: 0.8, scale: 1.1 }}
@@ -68,12 +83,15 @@ const MenuItem = ({ id, item }: { id: number; item: ItemProps }) => {
               >
                 <ButtonContainerCart>
                   <Button
-                    onClick={async () => {
-                      await addToCart({
-                        variables: {
-                          id: item.id,
-                        },
-                      });
+                    // onClick={async () => {
+                    //   await addToCart({
+                    //     variables: {
+                    //       id: item.id,
+                    //     },
+                    //   });
+                    // }}
+                    onClick={() => {
+                      handleShowPickSize(true);
                     }}
                     animated="fade"
                   >
@@ -123,6 +141,7 @@ const MenuItem = ({ id, item }: { id: number; item: ItemProps }) => {
               </Link>
             )}
           </AnimatePresence>
+
           <Link
             href={{
               pathname: "/item",
@@ -151,6 +170,12 @@ const MenuItem = ({ id, item }: { id: number; item: ItemProps }) => {
 
         <p>${item.price}</p>
       </Description>
+
+      <PickSize
+        handleShowPickSize={handleShowPickSize}
+        showPickSize={showPickSize}
+        item={item}
+      ></PickSize>
     </Container>
   );
 };

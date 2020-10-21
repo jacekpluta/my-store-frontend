@@ -10,6 +10,7 @@ import {
 } from "./styles/ItemsStyles";
 import MenuItem from "./menuItem";
 import { IItem } from "./items";
+import { ItemsList } from "./styles/ItemsList";
 
 export interface IItems {
   items?: [IItem];
@@ -18,36 +19,37 @@ export interface IItems {
 }
 
 const Discounts = ({ items, subTitle, title }: IItems) => {
+  const width = 280;
+
   const ItemsMenu = () => {
     return items.map((item: IItem, id: number) => (
-      <MenuItem key={id} id={id} item={item} />
+      <MenuItem width={width} key={id} id={id} item={item} />
     ));
   };
 
-  const [selected, setSelected] = useState(null);
   const [galleryWidth, setGalleryWidth] = useState(0);
   const scrollmenu = useRef(null);
   const [alignCenter, setAlignCenter] = useState(false);
   const [dicountsHovered, setDicountsHovered] = useState(false);
 
+  const scrollmenuWidth = scrollmenu?.current?.allItemsWidth;
   useEffect(() => {
-    if (scrollmenu.current && scrollmenu.current.allItemsWidth > 450) {
-      setGalleryWidth(scrollmenu.current.allItemsWidth);
+    if (scrollmenuWidth && scrollmenu.current) {
+      setGalleryWidth(scrollmenuWidth);
     }
-  }, [scrollmenu.current]);
-
-  useEffect(() => {
-    const id = document.querySelector(".menu-wrapper");
-    if (id) {
-      id.classList.add("menu-wrapper-aditional");
-    }
-  }, [galleryWidth]);
+  }, [scrollmenu.current, scrollmenuWidth]);
 
   const menuItems = ItemsMenu();
 
-  const onSelect = (selectedItemKey: string | number) => {
-    setSelected(selectedItemKey);
-  };
+  useEffect(() => {
+    const divs = document.querySelectorAll(".menu-wrapper");
+
+    if (divs) {
+      for (let i = 0; i < divs.length; i++) {
+        divs[i].classList.add("menu-wrapper-aditional");
+      }
+    }
+  }, [menuItems]);
 
   //forces ScrollMenu component to rerenders
   useEffect(() => {
@@ -80,8 +82,8 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
           data={menuItems}
           innerWrapperStyle={{
             transform: "translate3d(0px, 0px, 0px)",
-            transition: `transform 0.4s ease 0s; width: ${galleryWidth}px`,
-            width: `${galleryWidth}px`,
+            // transition: `transform 0.4s ease 0s; width: ${1200}px`,
+            width: `${items.length * width + 150}px`,
             textAlign: "left",
           }}
           wrapperStyle={
@@ -94,8 +96,6 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
                 }
           }
           useButtonRole={true}
-          selected={selected}
-          onSelect={onSelect}
           wheel={false}
         ></ScrollMenu>
       </motion.div>

@@ -85,7 +85,6 @@ export const ButtonCatalogNavFilter = styled(ButtonMainNormal)`
   font-size: 1em;
   padding: 15px 15px;
   border-radius: 10px;
-
   margin-top: 25px;
 `;
 
@@ -94,4 +93,66 @@ export const ButtonCatalogNavClear = styled(ButtonMainNormal)`
   padding: 15px 15px;
   margin-left: 5px;
   border-radius: 10px;
+`;
+
+export const ButtonContinue = styled(ButtonMainNormal)`
+  text-align: center;
+  font-size: 1em;
+  padding: 15px 55px;
+  width: 80%;
+  margin-left: 10%;
+`;
+
+export const ButtonPickSize = styled(ButtonMainNormal)`
+  font-size: 1em;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 25px;
+  margin-right: 15px;
+  margin-left: 15px;
+`;
+
+export const ButtonCounterFirst = styled(ButtonMainNormal)`
+  font-size: 1.3em;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  margin-top: 100px;
+  margin-right: 0px;
+  margin-left: 0px;
+  border: 1px solid ${(props) => props.theme.blackwhite};
+  background-color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.black};
+
+  &:hover {
+    background-color: ${(props) => props.theme.black};
+    color: ${(props) => props.theme.white};
+  }
+`;
+
+export const ButtonCounterSecond = styled(ButtonCounterFirst)`
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+`;
+
+export const ButtonCounterNumber = styled(ButtonCounterFirst)`
+  border-radius: 0;
+  &:hover {
+    background-color: ${(props) => props.theme.white};
+    color: ${(props) => props.theme.black};
+  }
+`;
+
+export const ButtonAddToCart = styled(ButtonMainNormal)`
+  border-radius: 10px;
+  font-size: 0.8em;
+  padding: 15px;
+  margin-top: 100px;
+  padding-right: 100px;
+  padding-left: 100px;
 `;

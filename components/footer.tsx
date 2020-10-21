@@ -14,26 +14,8 @@ import {
 } from "./styles/FooterStyles";
 
 function Footer() {
-  const Menu = () =>
-    logoImages.map((image, index) => {
-      return <LogosImg key={index} src={logoImages[index]}></LogosImg>;
-    });
-
-  const menuItems = Menu();
-
   return (
     <>
-      <Info></Info>
-      <Logos>
-        <ScrollMenu
-          alignCenter={true}
-          clickWhenDrag={true}
-          dragging={true}
-          data={menuItems}
-          useButtonRole={true}
-          wheel={false}
-        ></ScrollMenu>
-      </Logos>
       <FooterStyles>
         <FooterMain>
           <ul>

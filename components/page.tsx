@@ -2,6 +2,9 @@ import React from "react";
 import Header from "./header";
 import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import Footer from "./footer";
+
+import { ReactChildren } from "react";
 
 type theme = {
   lightBlack: string;
@@ -70,25 +73,20 @@ const Inner = styled.div`
   margin: 0 auto;
 `;
 
-export interface PageProps {}
+function Page(props: ReactChildren) {
+  return (
+    <ThemeProvider theme={theme}>
+      <StyledPage>
+        <Header></Header>
 
-export interface PageState {}
+        <Meta></Meta>
+        <GlobalStyle />
 
-class Page extends React.Component<PageProps, PageState> {
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <StyledPage>
-          <Header></Header>
-
-          <Meta></Meta>
-          <GlobalStyle />
-
-          <Inner>{this.props.children}</Inner>
-        </StyledPage>
-      </ThemeProvider>
-    );
-  }
+        <Inner>{props.children}</Inner>
+        <Footer></Footer>
+      </StyledPage>
+    </ThemeProvider>
+  );
 }
 
 export default Page;
