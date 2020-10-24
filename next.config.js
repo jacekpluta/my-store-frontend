@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  distDir: "build",
   webpack(config, options) {
     config.module.rules.push({
       test: /\.graphql$/,
