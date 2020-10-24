@@ -10,7 +10,7 @@ import { ButtonPickSize } from "./styles/ButtonStyles";
 import { Dimmer } from "./styles/Dimmer";
 import { PickSizeStyles } from "./styles/PickSizeStyles";
 import Link from "next/link";
-import { addToCartItem } from "../lib/vars";
+import { addToCartItem, isCartOpen } from "../lib/vars";
 
 const ButtonStyle = styled.button`
   position: absolute;

@@ -126,6 +126,9 @@ export const Description = styled.div`
   padding-top: 12px;
   z-index: 1;
   p {
+    padding: 0;
+    margin: 0;
+
     line-height: 1;
     color: ${(props) => props.theme.black};
     justify-self: start;
@@ -133,7 +136,7 @@ export const Description = styled.div`
   p:nth-child(1) {
     font-size: 1.2em;
   }
-  p:nth-child(2) {
+  p:nth-child(3) {
     font-size: 1em;
   }
 

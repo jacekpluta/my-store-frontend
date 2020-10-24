@@ -38,7 +38,7 @@ export default function Pagination(props: PaginationProps) {
       </Head>
       <Link
         href={{
-          pathname: "/items",
+          pathname: "/catalog",
           query: { page: page - 1 },
         }}
       >
@@ -52,7 +52,7 @@ export default function Pagination(props: PaginationProps) {
 
       <Link
         href={{
-          pathname: "/items",
+          pathname: "/catalog",
           query: { page: page + 1 },
         }}
       >

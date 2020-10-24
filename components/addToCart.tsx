@@ -1,6 +1,5 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 
 type itemId = {

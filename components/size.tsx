@@ -39,7 +39,7 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
               handleSizePicked();
             }}
           >
-            {size === 0 && "Pick Size"}
+            {size}
           </a>
         </span>
       </li>
@@ -62,7 +62,7 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
                   paddingLeft: "10px",
                 }}
               >
-                {option}
+                {option === 0 ? "Pick size" : option}
               </div>
               <div
                 style={{

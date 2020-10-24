@@ -91,7 +91,7 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            <Link href="/items">
+            <Link href="/catalog">
               <a>Catalog</a>
             </Link>
           </li>

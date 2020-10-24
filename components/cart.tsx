@@ -42,7 +42,6 @@ export default function Cart() {
     return <Error error={currentUserQuery.error}></Error>;
 
   const user = currentUserQuery?.data?.user;
-  if (!user) return <p>You are not logged in!</p>;
 
   const totalPrice = user?.cart
     ? user.cart.reduce((all: number, cartItem: ICartItem) => {
@@ -57,7 +56,7 @@ export default function Cart() {
       isCartOpen(false);
     }
   }
-
+  console.log(cartOpen);
   return (
     <CartStyles
       open={cartOpen}

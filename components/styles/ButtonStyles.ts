@@ -45,7 +45,7 @@ export const ButtonMainParalax = styled(ButtonMainNormal)`
   border: 1px solid ${(props) => props.theme.white};
 
   border-radius: 50px;
-  top: 65%;
+  /* top: 65%; */
   &:hover {
     background-color: ${(props) => props.theme.black};
     color: ${(props) => props.theme.white};

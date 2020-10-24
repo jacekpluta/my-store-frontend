@@ -27,14 +27,14 @@ interface Props {
 const showCart = css`
   animation: ${slideInAnimation} 1s forwards;
   visibility: ${(props: Props) =>
-    props.cartAnimationActive ? "visible" : "hidden"};
+    !props.cartAnimationActive ? "visible" : "hidden"};
   margin-right: 0px;
 `;
 
 const hideCart = css`
   animation: ${slideOutAnimation} 1s forwards;
   visibility: ${(props: Props) =>
-    props.cartAnimationActive ? "visible" : "hidden"}; ;
+    !props.cartAnimationActive ? "visible" : "hidden"}; ;
 `;
 
 const CartStyles = styled.div`

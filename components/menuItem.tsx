@@ -149,8 +149,14 @@ const MenuItem = ({
         </motion.div>
       </ContainerImg>
       <Description>
-        <p>{item.title}</p>
-
+        <Link
+          href={{
+            pathname: "/item",
+            query: { id: item.id },
+          }}
+        >
+          <p style={{ cursor: "pointer" }}>{item.title}</p>
+        </Link>
         <Button
           animated="fade"
           className="buttonHeart"
@@ -164,7 +170,7 @@ const MenuItem = ({
           </Button.Content>
         </Button>
 
-        <p>${item.price}</p>
+        <p>${item.price}.00</p>
       </Description>
     </Container>
   );

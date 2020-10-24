@@ -8,6 +8,7 @@ import GalleryDot from "./styles/GalleryDot";
 import { OpacityBackground } from "./styles/OpacityBackground";
 import { ButtonMainShiny } from "./styles/ButtonStyles";
 import GallerySubText from "./styles/GallerySubText";
+import Link from "next/link";
 
 const variants = {
   enter: (direction: number) => {
@@ -112,7 +113,13 @@ export default function Gallery() {
                 variants={variants}
                 key={page}
               >
-                <ButtonMainShiny>START SHOPPING</ButtonMainShiny>
+                <Link
+                  href={{
+                    pathname: "/catalog",
+                  }}
+                >
+                  <ButtonMainShiny>START SHOPPING</ButtonMainShiny>{" "}
+                </Link>
               </motion.div>
             </AnimatePresence>
           </GalleryText>

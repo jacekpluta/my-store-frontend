@@ -9,7 +9,7 @@ interface ItemsProps {
   };
 }
 //props.query
-function items(props: ItemsProps) {
+function catalog(props: ItemsProps) {
   const filtersData = useQuery(FILTERS_QUERY, { fetchPolicy: "network-only" });
 
   if (filtersData.loading) return <p>Loading...</p>;
@@ -33,4 +33,4 @@ function items(props: ItemsProps) {
   );
 }
 
-export default items;
+export default catalog;

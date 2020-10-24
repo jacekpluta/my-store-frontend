@@ -19,7 +19,7 @@ Array [
       <Link
         href={
           Object {
-            "pathname": "/items",
+            "pathname": "/catalog",
             "query": Object {
               "page": 0,
             },
@@ -49,7 +49,7 @@ Array [
       <Link
         href={
           Object {
-            "pathname": "/items",
+            "pathname": "/catalog",
             "query": Object {
               "page": 2,
             },
@@ -82,7 +82,7 @@ Array [
     <Link
       href={
         Object {
-          "pathname": "/items",
+          "pathname": "/catalog",
           "query": Object {
             "page": 0,
           },
@@ -112,7 +112,7 @@ Array [
     <Link
       href={
         Object {
-          "pathname": "/items",
+          "pathname": "/catalog",
           "query": Object {
             "page": 2,
           },
