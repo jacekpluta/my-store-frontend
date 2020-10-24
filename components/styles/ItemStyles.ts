@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const ItemStyles = styled.div`
+  overflow: hidden;
+
   background: white;
   border: 1px solid ${(props) => props.theme.offWhite};
   box-shadow: ${(props) => props.theme.bs};

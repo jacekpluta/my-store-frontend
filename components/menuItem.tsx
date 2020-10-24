@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { ADD_TO_CART_MUTATION } from "./addToCart";
-import { CURRENT_USER_QUERY } from "../lib/queries";
+import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 import { Icon, Button } from "semantic-ui-react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Error from "./errorMessage";
@@ -15,8 +14,7 @@ import {
   Description,
   Container,
 } from "./styles/ItemsStyles";
-import PickSize from "./pickSize";
-import { Dimmer } from "./styles/Dimmer";
+import { addToCartItem } from "../lib/vars";
 
 const variants = {
   str: { opacity: 0 },
@@ -37,16 +35,16 @@ const MenuItem = ({
   id,
   item,
   width,
+  handleShowPickSize,
 }: {
   id: number;
   item: ItemProps;
   width: number | null;
+  handleShowPickSize: Function;
 }) => {
   const [buttonsVisible, setButtonsVisible] = useState(false);
-  const [showPickSize, setShowPickSize] = useState(false);
 
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     awaitRefetchQueries: true,
@@ -56,9 +54,6 @@ const MenuItem = ({
   if (currentUserQuery.error)
     return <Error error={currentUserQuery.error}></Error>;
 
-  const handleShowPickSize = (show: Boolean) => {
-    setShowPickSize(show);
-  };
   return (
     <Container style={{ width: width }}>
       <ContainerImg>
@@ -92,6 +87,7 @@ const MenuItem = ({
                     // }}
                     onClick={() => {
                       handleShowPickSize(true);
+                      addToCartItem(item);
                     }}
                     animated="fade"
                   >
@@ -170,12 +166,6 @@ const MenuItem = ({
 
         <p>${item.price}</p>
       </Description>
-
-      <PickSize
-        handleShowPickSize={handleShowPickSize}
-        showPickSize={showPickSize}
-        item={item}
-      ></PickSize>
     </Container>
   );
 };

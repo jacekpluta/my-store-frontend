@@ -152,7 +152,7 @@ export const ButtonAddToCart = styled(ButtonMainNormal)`
   border-radius: 10px;
   font-size: 0.8em;
   padding: 15px;
-  margin-top: 100px;
+  margin-top: 20px;
   padding-right: 100px;
   padding-left: 100px;
 `;

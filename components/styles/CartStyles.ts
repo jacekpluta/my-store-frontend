@@ -20,22 +20,24 @@ const slideOutAnimation = keyframes`
 `;
 
 interface Props {
-  open: boolean;
+  open: Boolean;
+  cartAnimationActive: Boolean;
 }
 
 const showCart = css`
   animation: ${slideInAnimation} 1s forwards;
-  visibility: visible;
+  visibility: ${(props: Props) =>
+    props.cartAnimationActive ? "visible" : "hidden"};
+  margin-right: 0px;
 `;
 
 const hideCart = css`
   animation: ${slideOutAnimation} 1s forwards;
-  visibility: visible;
+  visibility: ${(props: Props) =>
+    props.cartAnimationActive ? "visible" : "hidden"}; ;
 `;
 
 const CartStyles = styled.div`
-  visibility: hidden;
-
   z-index: 6;
   position: relative;
   background: white;
@@ -45,10 +47,9 @@ const CartStyles = styled.div`
   right: 0;
   width: 25%;
   min-width: 200px;
+  visibility: hidden;
 
   ${(props: Props) => (props.open ? showCart : hideCart)};
-
-  transform: translateX(100%);
 
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
   z-index: 3;

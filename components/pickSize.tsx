@@ -1,46 +1,144 @@
-import React, { useEffect, useRef } from "react";
-import items from "../pages/items";
+import { useMutation } from "@apollo/react-hooks";
+import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
+import Error from "./errorMessage";
+import Counter from "./counter";
 import { IItem } from "./items";
+import Size from "./Size";
 import { ButtonPickSize } from "./styles/ButtonStyles";
 import { Dimmer } from "./styles/Dimmer";
 import { PickSizeStyles } from "./styles/PickSizeStyles";
+import Link from "next/link";
+import { addToCartItem } from "../lib/vars";
+
+const ButtonStyle = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-right: 20px;
+
+  font-size: 3rem;
+  background: none;
+  border: 0;
+  &:hover {
+    color: ${(props) => props.theme.red};
+    cursor: pointer;
+  }
+`;
 
 interface PropsPickSize {
-  showPickSize: boolean;
+  showPickSize: Boolean;
   handleShowPickSize: Function;
   item: IItem;
 }
 
 function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
   const wrapperRef = useRef(null);
+  const [counter, setCounter] = useState(1);
+  const [sizePicked, setSizePicked] = useState(false);
+  const [error, setError] = useState("");
+
+  const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    awaitRefetchQueries: true,
+  });
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  if (addToCartMutation.loading) return <p>Loading...</p>;
+  if (addToCartMutation.error) return <Error error={addToCartMutation.error} />;
+
   function handleClickOutside(event: MouseEvent) {
-    if (wrapperRef && !wrapperRef?.current.contains(event.target)) {
+    if (wrapperRef && !wrapperRef?.current?.contains(event.target)) {
       handleShowPickSize(false);
     }
   }
 
+  const addCounter = (counter: number) => {
+    setCounter(counter + 1);
+  };
+
+  const substractCounter = (counter: number) => {
+    setCounter(counter - 1);
+  };
+
+  const handleSizePicked = () => {
+    setSizePicked(true);
+  };
   return (
     <div>
-      {showPickSize ? (
-        <PickSizeStyles showPickSize={showPickSize} ref={wrapperRef}>
-          <p>{item.image}</p>
-          <p>{item.title}</p>
+      {showPickSize && item && (
+        <>
+          <PickSizeStyles showPickSize={showPickSize} ref={wrapperRef}>
+            <div className="description">
+              <img src={item.image}></img>
+              <span>
+                <p>{item.title}</p>
+                <p>${item.price}.00</p>
+              </span>
+            </div>
 
-          <p>{item.price}</p>
+            <Size
+              error={error}
+              inSingleItem={false}
+              handleSizePicked={handleSizePicked}
+            ></Size>
 
-          <ButtonPickSize>ADD TO CART</ButtonPickSize>
-          <ButtonPickSize>VIEW DETAILS</ButtonPickSize>
-        </PickSizeStyles>
-      ) : (
-        <div ref={wrapperRef} />
+            <div style={{ marginLeft: "80px" }}>
+              <Counter
+                addCounter={addCounter}
+                substractCounter={substractCounter}
+                counter={counter}
+              ></Counter>
+            </div>
+
+            <div className="pickSizeButtons">
+              <div
+                onClick={async () => {
+                  if (sizePicked) {
+                    await addToCart({
+                      variables: {
+                        id: item.id,
+                        quantity: counter,
+                      },
+                    });
+
+                    addToCartItem(null);
+                    setError(false);
+                  } else {
+                    setError(true);
+                  }
+                }}
+              >
+                <ButtonPickSize>ADD TO CART</ButtonPickSize>
+              </div>
+
+              <Link
+                href={{
+                  pathname: "/item",
+                  query: { id: item.id },
+                }}
+              >
+                <ButtonPickSize>VIEW DETAILS</ButtonPickSize>
+              </Link>
+            </div>
+
+            <ButtonStyle
+              onClick={async () => {
+                handleShowPickSize(false);
+              }}
+            >
+              &times;
+            </ButtonStyle>
+          </PickSizeStyles>
+          <Dimmer></Dimmer>
+        </>
       )}
-      {showPickSize && <Dimmer></Dimmer>}
     </div>
   );
 }

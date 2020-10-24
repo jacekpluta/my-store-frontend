@@ -5,7 +5,7 @@ const GalleryText = styled.div`
   position: absolute;
   font-weight: bold;
   font-size: 40px;
-  z-index: 3;
+  z-index: 2;
   top: 30%;
   left: 50px;
   margin: 15px;

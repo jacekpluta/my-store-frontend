@@ -49,7 +49,7 @@ export const ContainerImg = styled.div`
 export const ButtonContainerCart = styled.div`
   position: absolute;
   top: 45%;
-  left: 50%;
+  left: 45%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   cursor: pointer;
@@ -58,7 +58,7 @@ export const ButtonContainerCart = styled.div`
 export const ButtonContainerDetails = styled.div`
   position: absolute;
   top: 55%;
-  left: 50%;
+  left: 45%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   cursor: pointer;
@@ -97,7 +97,7 @@ export const FeaturedStyle = styled.h2`
     props.theme.white}; /* Same as the parents Background */
   width: auto;
   display: inline-block;
-  z-index: 3;
+  z-index: 2;
   padding: 0 20px 0 20px;
   color: ${(props) => props.theme.black};
   position: relative;
@@ -107,7 +107,7 @@ export const FeaturedStyle = styled.h2`
 
 export const UnderFeaturedStyle = styled.h4`
   width: auto;
-  z-index: 3;
+  z-index: 2;
   color: grey;
   position: relative;
   margin: 0;
@@ -115,7 +115,7 @@ export const UnderFeaturedStyle = styled.h4`
 `;
 
 export const Description = styled.div`
-  z-index: 3;
+  z-index: 1;
   color: grey;
   position: relative;
   display: grid;

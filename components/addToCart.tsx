@@ -1,16 +1,8 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { CURRENT_USER_QUERY } from "../lib/queries";
+import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 
-export const ADD_TO_CART_MUTATION = gql`
-  mutation ADD_TO_CART_MUTATION($id: ID!) {
-    addToCart(id: $id) {
-      id
-      quantity
-    }
-  }
-`;
 type itemId = {
   itemId: string;
 };

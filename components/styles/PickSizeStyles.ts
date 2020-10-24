@@ -32,20 +32,21 @@ const pickSizeSlideOut = css`
 `;
 
 interface Props {
-  showPickSize: boolean;
+  showPickSize: Boolean;
 }
 
 export const PickSizeStyles = styled.div`
+  position: fixed;
   width: 25vw;
   height: 30vw;
   display: none;
   position: fixed;
-  top: 25%;
+  top: 20%;
   left: 40%;
   opacity: 0;
   z-index: 5;
   display: grid;
-  grid-template-rows: 1fr auto auto auto;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr;
 
   ${(props: Props) =>
@@ -53,4 +54,38 @@ export const PickSizeStyles = styled.div`
 
   background-color: ${(props) => props.theme.white};
   color: ${(props) => props.theme.black};
+
+  img {
+    padding-top: 20px;
+    padding-left: 20px;
+    width: 160px;
+    height: 180px;
+  }
+
+  .description {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-weight: 500;
+      font-size: 1.7rem;
+      padding-top: 80px;
+      padding-right: 50px;
+
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      p:nth-child(2) {
+        color: ${(props) => props.theme.greyish};
+      }
+    }
+  }
+
+  .pickSizeButtons {
+    margin-top: 5px;
+    display: flex;
+    margin-left: 29px;
+  }
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import { useQuery } from "@apollo/react-hooks";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import { motion } from "framer-motion";
 import {
@@ -10,7 +10,8 @@ import {
 } from "./styles/ItemsStyles";
 import MenuItem from "./menuItem";
 import { IItem } from "./items";
-import { ItemsList } from "./styles/ItemsList";
+import PickSize from "./pickSize";
+import { ADD_TO_CART_ITEM_QUERY } from "../lib/queries";
 
 export interface IItems {
   items?: [IItem];
@@ -20,17 +21,27 @@ export interface IItems {
 
 const Discounts = ({ items, subTitle, title }: IItems) => {
   const width = 280;
-
-  const ItemsMenu = () => {
-    return items.map((item: IItem, id: number) => (
-      <MenuItem width={width} key={id} id={id} item={item} />
-    ));
-  };
-
   const [galleryWidth, setGalleryWidth] = useState(0);
   const scrollmenu = useRef(null);
   const [alignCenter, setAlignCenter] = useState(false);
   const [dicountsHovered, setDicountsHovered] = useState(false);
+  const [showPickSize, setShowPickSize] = useState(false);
+
+  const handleShowPickSize = (show) => {
+    setShowPickSize(show);
+  };
+
+  const ItemsMenu = () => {
+    return items.map((item: IItem, id: number) => (
+      <MenuItem
+        width={width}
+        key={id}
+        id={id}
+        item={item}
+        handleShowPickSize={handleShowPickSize}
+      />
+    ));
+  };
 
   const scrollmenuWidth = scrollmenu?.current?.allItemsWidth;
   useEffect(() => {
@@ -58,6 +69,14 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  const addToCartItemQuery = useQuery(ADD_TO_CART_ITEM_QUERY, {
+    fetchPolicy: "network-only",
+  });
+
+  if (addToCartItemQuery.loading) return <p>Loading...</p>;
+
+  const data = addToCartItemQuery.data.addToCartItem;
 
   return (
     <DiscountsStyle>
@@ -99,6 +118,14 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
           wheel={false}
         ></ScrollMenu>
       </motion.div>
+
+      {data && (
+        <PickSize
+          showPickSize={showPickSize}
+          item={data}
+          handleShowPickSize={handleShowPickSize}
+        ></PickSize>
+      )}
     </DiscountsStyle>
   );
 };

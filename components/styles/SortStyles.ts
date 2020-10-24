@@ -1,14 +1,19 @@
 import styled from "styled-components";
+interface SizeStylesProps {
+  inSingleItem: Boolean;
+  error: Boolean;
+}
 
 export const Sort = styled.div`
   border: solid 1px ${(props) => props.theme.whiteGrey};
-
+  position: absolute;
   ul {
     position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
     width: 150px;
+    /* width: 330px; */
     font-weight: normal;
   }
 
@@ -29,6 +34,7 @@ export const Sort = styled.div`
   ul li span a {
     display: flex;
     width: 150px;
+    /* width: 330px; */
     justify-content: space-between;
   }
   ul ul {
@@ -37,9 +43,9 @@ export const Sort = styled.div`
     text-align: left;
     height: 0;
     /* !!!!!!!!!!! */
-    top: 35px;
-    width: 102%;
-    left: -1%;
+    top: 32px;
+    width: 100%;
+
     overflow: hidden;
 
     -webkit-transition: height 0.3s ease-in;
@@ -109,14 +115,37 @@ export const Sort = styled.div`
 `;
 
 export const SortStyles = styled(Sort)`
-  position: absolute;
   padding-top: 5px;
   padding-bottom: 5px;
   right: 0;
   margin-right: 40px;
 `;
 
-export const SortStylesSigleItem = styled(Sort)`
-  position: absolute;
-  margin-top: 30px;
+export const SizeStyles = styled(Sort)`
+  margin-top: 35px;
+  z-index: 1;
+
+  ${(props: SizeStylesProps) => props.error && " border: solid 1px red"};
+
+  ul {
+    ${(props: SizeStylesProps) =>
+      props.error ? "width: 305px" : "width: 340px"};
+  }
+
+  ${(props: SizeStylesProps) => !props.inSingleItem && "margin-left: 20px"};
+
+  ul {
+    ${(props: SizeStylesProps) =>
+      props.inSingleItem ? "width: 305px" : "width: 340px"};
+  }
+
+  ul li span a {
+    ${(props: SizeStylesProps) =>
+      props.inSingleItem ? "width: 305px" : "width: 340px"};
+  }
+
+  ul ul li {
+    ${(props: SizeStylesProps) =>
+      props.inSingleItem ? "width: 305px" : "width: 340px"};
+  }
 `;

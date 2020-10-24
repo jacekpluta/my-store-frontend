@@ -8,6 +8,7 @@ export const SingleItemStyle = styled.div`
   min-height: 600px;
   max-width: 1300px;
   padding: 30px;
+
   img {
     width: 100%;
     height: 100%;
@@ -17,10 +18,12 @@ export const SingleItemStyle = styled.div`
     font-size: 2.6rem;
     font-weight: 900;
   }
+
   p {
     margin: 0;
     padding: 0;
   }
+
   span {
     display: flex;
   }
@@ -38,6 +41,7 @@ export const SingleItemStyle = styled.div`
   span p:nth-child(1) {
     font-weight: 550;
   }
+
   p:nth-child(3) {
     padding-top: 20px;
   }
@@ -51,7 +55,5 @@ export const SingleItemStyle = styled.div`
 `;
 
 export const CounterStyles = styled.div`
-  position: absolute;
-  margin-top: -75px;
-  margin-left: 200px;
+  position: relative;
 `;

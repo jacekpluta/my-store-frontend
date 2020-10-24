@@ -12,7 +12,8 @@ import { SearchSortStyles } from "./styles/SearchSortStyles";
 import Sort from "./sort";
 import MenuItem from "./menuItem";
 
-import { ALL_ITEMS_QUERY } from "../lib/queries";
+import { ADD_TO_CART_ITEM_QUERY, ALL_ITEMS_QUERY } from "../lib/queries";
+import PickSize from "./pickSize";
 
 export interface IItem {
   description: string;
@@ -39,6 +40,7 @@ export interface ItemsState {
     price_gte?: number | undefined;
     price_lte?: number | undefined;
   };
+  showPickSize: Boolean;
 }
 
 enum Order {
@@ -58,8 +60,15 @@ class Items extends React.Component<ItemsProps, ItemsState> {
         first: perPage,
         orderBy: Order.createdAtDESC,
       },
+      showPickSize: false,
     };
   }
+
+  handleShowPickSize = (show: Boolean) => {
+    this.setState((currentState) => {
+      return { ...currentState, showPickSize: show };
+    });
+  };
 
   handleOnSort = (order: Order) => {
     this.setState((currentState) => {
@@ -175,7 +184,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
           return { filterOptions };
         });
       }
-      console.log(filters);
+
       if (filters.find((obj) => obj.gte >= 0)) {
         const priceArray = filters.filter((obj) => obj.gte >= 0);
 
@@ -211,7 +220,13 @@ class Items extends React.Component<ItemsProps, ItemsState> {
 
   render() {
     const { page, filters } = this.props;
-    console.log(this.state.filterOptions);
+
+    // const [showPickSize, setShowPickSize] = useState(false);
+
+    // const handleShowPickSize = (show) => {
+    //   setShowPickSize(show);
+    // };
+
     return (
       <CatalogStyles>
         <Bar>Catalog</Bar>
@@ -241,13 +256,37 @@ class Items extends React.Component<ItemsProps, ItemsState> {
               return (
                 <ItemsList>
                   {data.items.map((item: IItem, id: number, width: number) => (
-                    <MenuItem width={null} key={id} id={id} item={item} />
+                    <MenuItem
+                      width={null}
+                      key={id}
+                      id={id}
+                      item={item}
+                      handleShowPickSize={this.handleShowPickSize}
+                    />
                   ))}
                 </ItemsList>
               );
             }}
           </Query>
         </CatalogGrid>
+
+        <Query query={ADD_TO_CART_ITEM_QUERY} fetchPolicy="network-only">
+          {({ data, error, loading }: any) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error: {error.message}</p>;
+
+            const item = data.addToCartItem;
+
+            return (
+              <PickSize
+                showPickSize={this.state.showPickSize}
+                item={item}
+                handleShowPickSize={this.handleShowPickSize}
+              ></PickSize>
+            );
+          }}
+        </Query>
+
         <Pagination page={this.props.page} />
       </CatalogStyles>
     );

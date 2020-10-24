@@ -10,10 +10,22 @@ import CreditCardCheckout from "./creditCardCheckout";
 import { ICartItem } from "./cartItem";
 import { isCartOpen } from "../lib/vars";
 import { emptyCart } from "../lib/images";
+import { useState } from "react";
 
 export default function Cart() {
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
+
+  const [cartAnimationActive, setCartAnimationActive] = useState(false);
+
+  useEffect(() => {
+    if (!currentUserQuery.loading) {
+      const timer = setTimeout(() => {
+        setCartAnimationActive(true);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [currentUserQuery]);
 
   const wrapperRef = useRef(null);
 
@@ -47,7 +59,11 @@ export default function Cart() {
   }
 
   return (
-    <CartStyles open={cartOpen} ref={wrapperRef}>
+    <CartStyles
+      open={cartOpen}
+      ref={wrapperRef}
+      cartAnimationActive={cartAnimationActive}
+    >
       <div className="cartTop">
         <button
           className="closeButton"

@@ -4,7 +4,7 @@ import formatMoney from "./utils/formatMoney";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { CURRENT_USER_QUERY } from "../lib/queries";
-import { CartItemStyles } from "./CartItemStyles";
+import { CartItemStyles } from "./styles/CartItemStyles";
 
 const ButtonStyle = styled.button`
   font-size: 3rem;
