@@ -73,7 +73,7 @@ const Inner = styled.div`
   margin: 0 auto;
 `;
 
-function Page(props: ReactChildren) {
+function Page(props: any) {
   return (
     <ThemeProvider theme={theme}>
       <StyledPage>

@@ -8,6 +8,7 @@ import Gallery from "./gallery";
 import ImageMain from "./imageMain";
 import Info from "./info";
 import { LogosImg, Logos } from "./styles/FooterStyles";
+import Error from "./errorMessage";
 
 interface HomeProps {}
 

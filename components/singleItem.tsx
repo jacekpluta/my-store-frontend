@@ -30,7 +30,7 @@ export interface SingleItemProps {
 export default function SingleItem(props: SingleItemProps) {
   const { itemId } = props;
   const [counter, setCounter] = useState(1);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [sizePicked, setSizePicked] = useState(false);
 
   const singleItemQuery = useQuery(SINGLE_ITEM_QUERY, {

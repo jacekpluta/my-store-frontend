@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import { Query } from "react-apollo";
 import Pagination from "./pagination";
 import { perPage } from "../config";
@@ -105,11 +106,14 @@ class Items extends React.Component<ItemsProps, ItemsState> {
         });
       } else {
         this.setState((currentState) => {
-          const filterOptions = {
-            ...currentState.filterOptions,
-            gender_in: undefined,
-          };
-          return { filterOptions };
+          // const filterOptions = {
+          //   ...currentState.filterOptions,
+          //   gender_in: undefined,
+          // };
+
+          const { gender_in, ...filterOptions } = currentState.filterOptions;
+
+          return currentState;
         });
       }
 
@@ -141,11 +145,11 @@ class Items extends React.Component<ItemsProps, ItemsState> {
         });
       } else {
         this.setState((currentState) => {
-          const filterOptions = {
-            ...currentState.filterOptions,
-            category_in: undefined,
-          };
-          return { filterOptions };
+          // const filterOptions = {
+          //   ...currentState.filterOptions,
+          //   category_in: undefined,
+          // };
+          return _.omit(currentState, "category_in");
         });
       }
 
@@ -177,11 +181,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
         });
       } else {
         this.setState((currentState) => {
-          const filterOptions = {
-            ...currentState.filterOptions,
-            brand_in: undefined,
-          };
-          return { filterOptions };
+          return _.omit(currentState, "brand_in");
         });
       }
 
@@ -207,12 +207,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
         });
       } else {
         this.setState((currentState) => {
-          const filterOptions = {
-            ...currentState.filterOptions,
-            price_lte: undefined,
-            price_gte: undefined,
-          };
-          return { filterOptions };
+          return _.omit(currentState, "a", "c");
         });
       }
     }
@@ -220,12 +215,6 @@ class Items extends React.Component<ItemsProps, ItemsState> {
 
   render() {
     const { page, filters } = this.props;
-
-    // const [showPickSize, setShowPickSize] = useState(false);
-
-    // const handleShowPickSize = (show) => {
-    //   setShowPickSize(show);
-    // };
 
     return (
       <CatalogStyles>

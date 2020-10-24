@@ -27,7 +27,7 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
   const [dicountsHovered, setDicountsHovered] = useState(false);
   const [showPickSize, setShowPickSize] = useState(false);
 
-  const handleShowPickSize = (show) => {
+  const handleShowPickSize = (show: any) => {
     setShowPickSize(show);
   };
 

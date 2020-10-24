@@ -4,28 +4,30 @@ import { SizeStyles } from "./styles/SortStyles";
 
 const sizes = [40, 41, 42, 43];
 
-export interface PickSizeProps {
-  size: number | string;
-  key: number | string;
+export interface PickProps {
+  size: number;
+  key: number;
   handleSizePicked: Function;
-  error: Boolean;
 }
 
 export interface SizeProps {
   inSingleItem: Boolean;
+  error: Boolean;
+  handleSizePicked: Function;
 }
 
 const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
-  const [option, setOption] = useState("Pick Size");
+  const [option, setOption] = useState(0);
   const [sortVisible, setSortVisible] = useState(false);
   const wrapperRef = useRef(null);
+
   function handleClickOutside(event: MouseEvent) {
     if (wrapperRef && !wrapperRef?.current.contains(event.target)) {
       setSortVisible(false);
     }
   }
 
-  const PickSizeDrop = ({ size, key }: PickSizeProps) => {
+  const PickSizeDrop = ({ size, key, handleSizePicked }: PickProps) => {
     return (
       <li>
         <span>
@@ -37,7 +39,7 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
               handleSizePicked();
             }}
           >
-            {size}
+            {size === 0 && "Pick Size"}
           </a>
         </span>
       </li>
@@ -75,7 +77,11 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
           </span>
           <ul style={sortVisible ? { height: "220px" } : { height: "0px" }}>
             {sizes.map((size) => (
-              <PickSizeDrop key={size} size={size}></PickSizeDrop>
+              <PickSizeDrop
+                key={size}
+                size={size}
+                handleSizePicked={handleSizePicked}
+              ></PickSizeDrop>
             ))}
           </ul>
         </li>

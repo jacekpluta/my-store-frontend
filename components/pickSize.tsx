@@ -38,7 +38,7 @@ function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
   const wrapperRef = useRef(null);
   const [counter, setCounter] = useState(1);
   const [sizePicked, setSizePicked] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],

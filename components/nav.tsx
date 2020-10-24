@@ -70,7 +70,8 @@ export default function Nav() {
   }, [path]);
 
   if (currentUserQuery.loading) return <LoadingScreen></LoadingScreen>;
-  if (currentUserQuery.error) return <p>Error: {currentUserQuery.error}</p>;
+  if (currentUserQuery.error)
+    return <p>Error: {currentUserQuery.error.message}</p>;
 
   const cartItems = currentUserQuery?.data?.user?.cart;
   const cartItemsCount = !cartItems
