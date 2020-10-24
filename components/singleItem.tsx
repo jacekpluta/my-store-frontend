@@ -6,7 +6,7 @@ import { SingleItemStyle } from "./styles/SingleItemStyle";
 import { ButtonAddToCart } from "./styles/ButtonStyles";
 import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 import Counter from "./counter";
-import Size from "./Size";
+import Size from "./size";
 import { addToCartItem } from "../lib/vars";
 
 export const SINGLE_ITEM_QUERY = gql`
