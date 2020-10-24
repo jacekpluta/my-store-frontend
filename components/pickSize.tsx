@@ -5,7 +5,7 @@ import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 import Error from "./errorMessage";
 import Counter from "./counter";
 import { IItem } from "./items";
-import Size from "./Size";
+import Size from "./size";
 import { ButtonPickSize } from "./styles/ButtonStyles";
 import { Dimmer } from "./styles/Dimmer";
 import { PickSizeStyles } from "./styles/PickSizeStyles";
