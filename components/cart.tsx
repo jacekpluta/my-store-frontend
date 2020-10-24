@@ -34,13 +34,6 @@ export default function Cart() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (cartOpenData.loading) return <p>Loading...</p>;
-  if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
-
-  if (currentUserQuery.loading) return <p>Loading...</p>;
-  if (currentUserQuery.error)
-    return <Error error={currentUserQuery.error}></Error>;
-
   const user = currentUserQuery?.data?.user;
 
   const totalPrice = user?.cart
@@ -57,61 +50,72 @@ export default function Cart() {
     }
   }
 
-  return (
-    <CartStyles
-      open={cartOpen}
-      ref={wrapperRef}
-      cartAnimationActive={cartAnimationActive}
-    >
-      <div className="cartTop">
-        <button
-          className="closeButton"
-          onClick={() => {
-            isCartOpen(false);
-          }}
-          title="close"
-        >
-          &times;
-        </button>
-        <p>
-          Shopping Cart
-          {user.cart.length > 0 && (
-            <> - item {user.cart.length === 1 ? "" : "s"}</>
-          )}
-        </p>
-      </div>
-      {user.cart.length === 0 && (
-        <>
-          <img src={emptyCart} />{" "}
-          <ButtonContinue
+  if (cartOpenData.loading) return <p>Loading...</p>;
+  if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
+
+  if (currentUserQuery.loading) return <p>Loading...</p>;
+  if (currentUserQuery.error)
+    return <Error error={currentUserQuery.error}></Error>;
+
+  if (currentUserQuery) {
+    return (
+      <CartStyles
+        open={cartOpen}
+        ref={wrapperRef}
+        cartAnimationActive={cartAnimationActive}
+      >
+        <div className="cartTop">
+          <button
+            className="closeButton"
             onClick={() => {
               isCartOpen(false);
             }}
+            title="close"
           >
-            CONTINUE SHOPPING
-          </ButtonContinue>
-        </>
-      )}
+            &times;
+          </button>
+          <p>
+            Shopping Cart
+            {user.cart.length > 0 && (
+              <> - item {user.cart.length === 1 ? "" : "s"}</>
+            )}
+          </p>
+        </div>
+        {user?.cart?.length === 0 && (
+          <>
+            <img src={emptyCart} />{" "}
+            <ButtonContinue
+              onClick={() => {
+                isCartOpen(false);
+              }}
+            >
+              CONTINUE SHOPPING
+            </ButtonContinue>
+          </>
+        )}
 
-      <ul>
-        {user.cart.map((cartItem: ICartItem) => (
-          <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
-        ))}
-      </ul>
-      {user.cart.length > 0 && (
-        <footer>
-          <p>{formatMoney(totalPrice)}</p>
+        <ul>
+          {user?.cart?.map((cartItem: ICartItem) => (
+            <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
+          ))}
+        </ul>
+        {user?.cart?.length > 0 && (
+          <footer>
+            <p>{formatMoney(totalPrice)}</p>
 
-          <CreditCardCheckout
-            cart={user.cart}
-            totalPrice={totalPrice}
-            allItemsCount={user.cart.length}
-            user={user}
-          >
-            <ButtonMainNormal>Checkout</ButtonMainNormal>
-          </CreditCardCheckout>
-        </footer>
-      )}
-    </CartStyles>
-  );
+            <CreditCardCheckout
+              cart={user.cart}
+              totalPrice={totalPrice}
+              allItemsCount={user.cart.length}
+              user={user}
+            >
+              <ButtonMainNormal>Checkout</ButtonMainNormal>
+            </CreditCardCheckout>
+          </footer>
+        )}
+      </CartStyles>
+    );
+  } else {
+    return <></>;
+  }
 }

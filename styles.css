@@ -9,11 +9,6 @@ header {
   padding: 30px 100px;
 }
 
-header.sticky {
-  padding: 10px 100px;
-  background: white;
-}
-
 header nav ul {
   position: relative;
   display: flex;
@@ -45,6 +40,11 @@ header .icon {
 
 header nav ul li a:hover {
   color: #999;
+}
+
+header.sticky {
+  padding: 10px 100px;
+  background: white;
 }
 
 header.sticky .icon,

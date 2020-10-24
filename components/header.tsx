@@ -6,8 +6,9 @@ import Cart from "./cart";
 import { StyledHeader } from "./styles/StyledHeader";
 import React, { useEffect, useState } from "react";
 import { Dimmer } from "./styles/Dimmer";
-import { IS_CART_OPEN_QUERY } from "../lib/queries";
+import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
+import Error from "./errorMessage";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -26,6 +27,7 @@ export default function Header() {
   const router = useRouter();
   const path = router.pathname;
 
+  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
 
   const cartOpen = cartOpenData.data.cartOpen;
@@ -68,10 +70,34 @@ export default function Header() {
     return () => window.removeEventListener("scroll", changeLogo);
   }, [path]);
 
+  const handleScroll = () => {
+    const header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    if (currentUserQuery.data) {
+      const header = document.querySelector("header");
+      if (path === "/") {
+        header.classList.toggle("sticky", false);
+        window.addEventListener("scroll", handleScroll);
+      } else {
+        header.classList.toggle("sticky", true);
+      }
+    }
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [path, currentUserQuery]);
+
+  if (currentUserQuery.loading) return <p> Loading...</p>;
+  if (currentUserQuery.error)
+    return <Error error={currentUserQuery.error}></Error>;
+
+  const user = currentUserQuery.data.user;
   return (
-    <div>
+    <>
       {path !== "/" && (
-        <div style={{ height: "100px", visibility: "hidden" }}> </div>
+        <div style={{ height: "100px", visibility: "hidden" }}></div>
       )}
       <StyledHeader
         style={
@@ -92,8 +118,8 @@ export default function Header() {
 
         <Nav />
         {cartOpen && <Dimmer></Dimmer>}
-        <Cart></Cart>
+        {user && <Cart></Cart>}
       </StyledHeader>
-    </div>
+    </>
   );
 }

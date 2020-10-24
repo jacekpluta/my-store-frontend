@@ -1,12 +1,16 @@
 import { AppProps } from "next/app";
 import { ApolloProvider } from "react-apollo";
-import { ApolloProvider as ApolloProviderHooks } from "@apollo/react-hooks";
+import {
+  ApolloProvider as ApolloProviderHooks,
+  useQuery,
+} from "@apollo/react-hooks";
 import { useApollo } from "../lib/apollo";
 import React, { useEffect } from "react";
 import Page from "../components/page";
 import "semantic-ui-css/semantic.min.css";
 import "../styles.css";
 import { useRouter } from "next/router";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 interface pageProps {
   query?: string;
 }
@@ -24,26 +28,6 @@ App.getInitialProps = async ({ Component, ctx }: any) => {
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
-
-  const handleScroll = () => {
-    var header = document.querySelector("header");
-    header.classList.toggle("sticky", window.scrollY > 0);
-  };
-
-  const router = useRouter();
-  const path = router.pathname;
-
-  useEffect(() => {
-    const header = document.querySelector("header");
-    if (path === "/") {
-      header.classList.toggle("sticky", false);
-      window.addEventListener("scroll", handleScroll);
-    } else {
-      header.classList.toggle("sticky", true);
-    }
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [path]);
 
   return (
     <ApolloProviderHooks client={apolloClient}>
