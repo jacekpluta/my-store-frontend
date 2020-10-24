@@ -69,10 +69,6 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [path]);
 
-  if (currentUserQuery.loading) return <LoadingScreen></LoadingScreen>;
-  if (currentUserQuery.error)
-    return <p>Error: {currentUserQuery.error.message}</p>;
-
   const cartItems = currentUserQuery?.data?.user?.cart;
   const cartItemsCount = !cartItems
     ? ""

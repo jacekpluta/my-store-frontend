@@ -10,7 +10,7 @@ import { ButtonPickSize } from "./styles/ButtonStyles";
 import { Dimmer } from "./styles/Dimmer";
 import { PickSizeStyles } from "./styles/PickSizeStyles";
 import Link from "next/link";
-import { addToCartItem, isCartOpen } from "../lib/vars";
+import { addToCartItem } from "../lib/vars";
 
 const ButtonStyle = styled.button`
   position: absolute;
@@ -37,12 +37,11 @@ interface PropsPickSize {
 function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
   const wrapperRef = useRef(null);
   const [counter, setCounter] = useState(1);
-  const [sizePicked, setSizePicked] = useState(false);
+  const [sizePicked, setSizePicked] = useState(0);
   const [error, setError] = useState(false);
 
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    awaitRefetchQueries: true,
   });
 
   useEffect(() => {
@@ -67,9 +66,10 @@ function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
     setCounter(counter - 1);
   };
 
-  const handleSizePicked = () => {
-    setSizePicked(true);
+  const handleSizePicked = (sizeNumber: number) => {
+    setSizePicked(sizeNumber);
   };
+
   return (
     <div>
       {showPickSize && item && (
@@ -84,6 +84,7 @@ function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
             </div>
 
             <Size
+              sizePicked={sizePicked}
               error={error}
               inSingleItem={false}
               handleSizePicked={handleSizePicked}
@@ -100,11 +101,12 @@ function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
             <div className="pickSizeButtons">
               <div
                 onClick={async () => {
-                  if (sizePicked) {
+                  if (sizePicked !== 0) {
                     await addToCart({
                       variables: {
                         id: item.id,
                         quantity: counter,
+                        size: sizePicked,
                       },
                     });
 

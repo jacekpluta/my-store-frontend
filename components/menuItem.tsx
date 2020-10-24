@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
+import { CURRENT_USER_QUERY } from "../lib/queries";
 import { Icon, Button } from "semantic-ui-react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import Error from "./errorMessage";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -45,10 +45,6 @@ const MenuItem = ({
   const [buttonsVisible, setButtonsVisible] = useState(false);
 
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-  const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    awaitRefetchQueries: true,
-  });
 
   if (currentUserQuery.loading) return <p>Loading...</p>;
   if (currentUserQuery.error)
@@ -78,13 +74,6 @@ const MenuItem = ({
               >
                 <ButtonContainerCart>
                   <Button
-                    // onClick={async () => {
-                    //   await addToCart({
-                    //     variables: {
-                    //       id: item.id,
-                    //     },
-                    //   });
-                    // }}
                     onClick={() => {
                       handleShowPickSize(true);
                       addToCartItem(item);

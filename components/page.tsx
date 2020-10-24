@@ -56,7 +56,7 @@ body{
   margin: 0;
   font-size: 1.5rem;
   line-height: 2;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
   a{
     color: ${theme.black};

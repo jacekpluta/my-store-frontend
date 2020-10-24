@@ -76,8 +76,8 @@ export default function Header() {
   };
 
   useEffect(() => {
-    if (currentUserQuery.data) {
-      const header = document.querySelector("header");
+    const header = document.querySelector("header");
+    if (currentUserQuery.data && header) {
       if (path === "/") {
         header.classList.toggle("sticky", false);
         window.addEventListener("scroll", handleScroll);
@@ -89,7 +89,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [path, currentUserQuery]);
 
-  if (currentUserQuery.loading) return <p> Loading...</p>;
+  if (currentUserQuery.loading) return <></>;
   if (currentUserQuery.error)
     return <Error error={currentUserQuery.error}></Error>;
 

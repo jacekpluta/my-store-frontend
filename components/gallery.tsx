@@ -105,23 +105,25 @@ export default function Gallery() {
                 </motion.div>
               </AnimatePresence>
             </GallerySubText>
-            <AnimatePresence exitBeforeEnter>
-              <Link
-                href={{
-                  pathname: "/catalog",
-                }}
-              >
-                <motion.div
-                  initial={"str"}
-                  animate={"ani"}
-                  exit={"ext"}
-                  variants={variants}
-                  key={page}
-                >
-                  <ButtonMainShiny>START SHOPPING</ButtonMainShiny>{" "}
-                </motion.div>
-              </Link>
-            </AnimatePresence>
+            <Link
+              href={{
+                pathname: "/catalog",
+              }}
+            >
+              <div>
+                <AnimatePresence exitBeforeEnter>
+                  <motion.div
+                    initial={"str"}
+                    animate={"ani"}
+                    exit={"ext"}
+                    variants={variants}
+                    key={page}
+                  >
+                    <ButtonMainShiny>START SHOPPING</ButtonMainShiny>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </Link>
           </GalleryText>
         </div>
       ))}

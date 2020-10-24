@@ -158,7 +158,7 @@ const CartItem = ({ cartItem }: propsCartItem) => {
   return (
     <CartItemStyles data-test="cartItem">
       <img
-        width="200"
+        width="100"
         src={cartItem?.item?.image}
         alt={cartItem?.item?.title}
       ></img>
@@ -169,12 +169,6 @@ const CartItem = ({ cartItem }: propsCartItem) => {
           {cartItem?.quantity} &times; {formatMoney(cartItem?.item?.price)} each
         </p>
       </div>
-
-      {deleteCartItemMutation.data ? (
-        <p>Item deleted!</p>
-      ) : (
-        <p>Item not deleted!</p>
-      )}
 
       <ButtonStyle
         title="Delete Item"

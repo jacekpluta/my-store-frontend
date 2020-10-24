@@ -11,6 +11,7 @@ export const CURRENT_USER_QUERY = gql`
       cart {
         id
         quantity
+        size
         item {
           id
           price
@@ -103,8 +104,8 @@ export const FILTERED_ITEMS_QUERY = gql`
 `;
 
 export const ADD_TO_CART_MUTATION = gql`
-  mutation ADD_TO_CART_MUTATION($id: ID!, $quantity: Int!) {
-    addToCart(id: $id, quantity: $quantity) {
+  mutation ADD_TO_CART_MUTATION($id: ID!, $quantity: Int!, $size: Int!) {
+    addToCart(id: $id, quantity: $quantity, size: $size) {
       id
     }
   }

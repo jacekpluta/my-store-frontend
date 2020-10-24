@@ -5,7 +5,7 @@ import { SizeStyles } from "./styles/SortStyles";
 const sizes = [40, 41, 42, 43];
 
 export interface PickProps {
-  size: number;
+  sizeNum: number;
   key: number;
   handleSizePicked: Function;
 }
@@ -14,10 +14,15 @@ export interface SizeProps {
   inSingleItem: Boolean;
   error: Boolean;
   handleSizePicked: Function;
+  sizePicked: Number;
 }
 
-const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
-  const [option, setOption] = useState(0);
+const Size = ({
+  inSingleItem,
+  error,
+  handleSizePicked,
+  sizePicked,
+}: SizeProps) => {
   const [sortVisible, setSortVisible] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -27,19 +32,18 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
     }
   }
 
-  const PickSizeDrop = ({ size, key, handleSizePicked }: PickProps) => {
+  const PickSizeDrop = ({ sizeNum, key, handleSizePicked }: PickProps) => {
     return (
       <li>
         <span>
           <a
             href="#"
             onClick={() => {
-              setOption(size);
+              handleSizePicked(sizeNum);
               setSortVisible(false);
-              handleSizePicked();
             }}
           >
-            {size}
+            {sizeNum}
           </a>
         </span>
       </li>
@@ -62,7 +66,7 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
                   paddingLeft: "10px",
                 }}
               >
-                {option === 0 ? "Pick size" : option}
+                {sizePicked === 0 ? "Pick size" : sizePicked}
               </div>
               <div
                 style={{
@@ -76,10 +80,10 @@ const Size = ({ inSingleItem, error, handleSizePicked }: SizeProps) => {
             </a>
           </span>
           <ul style={sortVisible ? { height: "220px" } : { height: "0px" }}>
-            {sizes.map((size) => (
+            {sizes.map((sizeNum) => (
               <PickSizeDrop
-                key={size}
-                size={size}
+                key={sizeNum}
+                sizeNum={sizeNum}
                 handleSizePicked={handleSizePicked}
               ></PickSizeDrop>
             ))}

@@ -31,7 +31,7 @@ export default function SingleItem(props: SingleItemProps) {
   const { itemId } = props;
   const [counter, setCounter] = useState(1);
   const [error, setError] = useState(false);
-  const [sizePicked, setSizePicked] = useState(false);
+  const [sizePicked, setSizePicked] = useState(0);
 
   const singleItemQuery = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id: itemId },
@@ -39,7 +39,6 @@ export default function SingleItem(props: SingleItemProps) {
 
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    awaitRefetchQueries: true,
   });
 
   if (singleItemQuery.loading) return <p>Loading...</p>;
@@ -57,8 +56,9 @@ export default function SingleItem(props: SingleItemProps) {
   const substractCounter = (counter: number) => {
     setCounter(counter - 1);
   };
-  const handleSizePicked = () => {
-    setSizePicked(true);
+
+  const handleSizePicked = (sizeNumber: number) => {
+    setSizePicked(sizeNumber);
   };
 
   const inSingleItem: Boolean = true;
@@ -81,6 +81,7 @@ export default function SingleItem(props: SingleItemProps) {
           error={error}
           handleSizePicked={handleSizePicked}
           inSingleItem={inSingleItem}
+          sizePicked={sizePicked}
         ></Size>
         <Counter
           addCounter={addCounter}
@@ -91,11 +92,12 @@ export default function SingleItem(props: SingleItemProps) {
         <ButtonAddToCart
           disabled={addToCartMutation.loading}
           onClick={async () => {
-            if (sizePicked) {
+            if (sizePicked !== 0) {
               await addToCart({
                 variables: {
                   id: item.id,
                   quantity: counter,
+                  size: sizePicked,
                 },
               });
 

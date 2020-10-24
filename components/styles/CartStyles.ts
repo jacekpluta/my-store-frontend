@@ -21,20 +21,17 @@ const slideOutAnimation = keyframes`
 
 interface Props {
   open: Boolean;
-  cartAnimationActive: Boolean;
 }
 
 const showCart = css`
   animation: ${slideInAnimation} 1s forwards;
-  visibility: ${(props: Props) =>
-    props.cartAnimationActive ? "visible" : "hidden"};
+  visibility: visible;
   margin-right: 0px;
 `;
 
 const hideCart = css`
   animation: ${slideOutAnimation} 1s forwards;
-  visibility: ${(props: Props) =>
-    props.cartAnimationActive ? "visible" : "hidden"}; ;
+  visibility: visible;
 `;
 
 const CartStyles = styled.div`

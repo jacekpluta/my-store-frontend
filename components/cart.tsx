@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import CartStyles from "./styles/CartStyles";
-import { ButtonContinue, ButtonMainNormal } from "./styles/ButtonStyles";
+import { ButtonContinue, ButtonCatalogNavFilter } from "./styles/ButtonStyles";
 import { useQuery } from "@apollo/react-hooks";
 import Error from "./errorMessage";
 import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../lib/queries";
@@ -15,17 +15,6 @@ import { useState } from "react";
 export default function Cart() {
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-
-  const [cartAnimationActive, setCartAnimationActive] = useState(false);
-
-  useEffect(() => {
-    if (!currentUserQuery.loading) {
-      const timer = setTimeout(() => {
-        setCartAnimationActive(true);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [currentUserQuery]);
 
   const wrapperRef = useRef(null);
 
@@ -45,7 +34,7 @@ export default function Cart() {
   const cartOpen = cartOpenData.data.cartOpen;
 
   function handleClickOutside(event: MouseEvent) {
-    if (wrapperRef && !wrapperRef?.current.contains(event.target)) {
+    if (wrapperRef && !wrapperRef?.current?.contains(event.target)) {
       isCartOpen(false);
     }
   }
@@ -53,17 +42,13 @@ export default function Cart() {
   if (cartOpenData.loading) return <p>Loading...</p>;
   if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
 
-  if (currentUserQuery.loading) return <p>Loading...</p>;
+  if (currentUserQuery.loading) return <></>;
   if (currentUserQuery.error)
     return <Error error={currentUserQuery.error}></Error>;
 
   if (currentUserQuery) {
     return (
-      <CartStyles
-        open={cartOpen}
-        ref={wrapperRef}
-        cartAnimationActive={cartAnimationActive}
-      >
+      <CartStyles open={cartOpen} ref={wrapperRef}>
         <div className="cartTop">
           <button
             className="closeButton"
@@ -77,7 +62,10 @@ export default function Cart() {
           <p>
             Shopping Cart
             {user.cart.length > 0 && (
-              <> - item {user.cart.length === 1 ? "" : "s"}</>
+              <>
+                {" "}
+                - {user.cart.length} item{user.cart.length === 1 ? "" : "s"}
+              </>
             )}
           </p>
         </div>
@@ -109,7 +97,7 @@ export default function Cart() {
               allItemsCount={user.cart.length}
               user={user}
             >
-              <ButtonMainNormal>Checkout</ButtonMainNormal>
+              <ButtonCatalogNavFilter>Checkout</ButtonCatalogNavFilter>
             </CreditCardCheckout>
           </footer>
         )}
