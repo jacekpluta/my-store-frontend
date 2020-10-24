@@ -56,7 +56,7 @@ export default function Cart() {
       isCartOpen(false);
     }
   }
-  console.log(cartOpen);
+
   return (
     <CartStyles
       open={cartOpen}
