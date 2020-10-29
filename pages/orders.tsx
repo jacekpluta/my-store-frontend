@@ -1,5 +1,5 @@
 import React from "react";
-import RequestToSLogin from "../components/requestToLogin";
+import RequestToLogin from "../components/requestToLogin";
 import Orders from "../components/orders";
 
 const orderpage = () => (
