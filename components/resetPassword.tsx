@@ -67,7 +67,7 @@ export default function ResetPass(props: ResetPassProps) {
                 });
                 setTimeout(() => {
                   Router.push({
-                    pathname: "/signin",
+                    pathname: "/login",
                   });
                 }, 2000);
               }}
@@ -85,7 +85,7 @@ export default function ResetPass(props: ResetPassProps) {
                   <p>
                     Your password has been reset successfully!
                     <p>
-                      <Link href="/signin">
+                      <Link href="/login">
                         Click here to sign in or wait 5 seconds to be
                         redirected.
                       </Link>

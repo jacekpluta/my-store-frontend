@@ -1,13 +1,13 @@
 import Link from "next/link";
-import RequestToSignIn from "../components/requestToSignIn";
+import RequestToLogin from "../components/requestToLogin";
 
 export default function Account() {
   return (
-    <RequestToSignIn>
+    <RequestToLogin>
       Welcome to the account page.
       <Link href="/">
         <a>Home</a>
       </Link>{" "}
-    </RequestToSignIn>
+    </RequestToLogin>
   );
 }

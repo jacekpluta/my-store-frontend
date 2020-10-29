@@ -1,5 +1,5 @@
 import { mount } from "enzyme";
-import RequestToSignIn from "../components/RequestToSignIn";
+import RequestToLogin from "../components/RequestToLogin";
 import { CURRENT_USER_QUERY } from "../components/Queries";
 import { MockedProvider } from "@apollo/react-testing";
 
@@ -30,9 +30,9 @@ it("renders the child component when signed in", async () => {
   const Test = () => <p>Test</p>;
   const wrapper = mount(
     <MockedProvider mocks={signedInMocks}>
-      <RequestToSignIn>
+      <RequestToLogin>
         <Test />
-      </RequestToSignIn>
+      </RequestToLogin>
     </MockedProvider>
   );
 
@@ -45,7 +45,7 @@ it("renders the child component when signed in", async () => {
 it("renders sign in component when not signed in", async () => {
   const wrapper = mount(
     <MockedProvider mocks={notSignedInMocks}>
-      <RequestToSignIn />
+      <RequestToLogin />
     </MockedProvider>
   );
   await new Promise((resolve) => setTimeout(resolve, 0));
@@ -53,6 +53,6 @@ it("renders sign in component when not signed in", async () => {
 
   expect(wrapper.text()).toContain("Sign InEmailPasswordSubmit");
 
-  const SignIn = wrapper.find("SignIn");
-  expect(SignIn.exists()).toBe(true);
+  const Login = wrapper.find("Login");
+  expect(Login.exists()).toBe(true);
 });

@@ -5,22 +5,23 @@ import {
   useQuery,
 } from "@apollo/react-hooks";
 import { useApollo } from "../lib/apollo";
-import React, { useEffect } from "react";
+import React from "react";
 import Page from "../components/page";
 import "semantic-ui-css/semantic.min.css";
-import "../styles.css";
-import { useRouter } from "next/router";
-import { CURRENT_USER_QUERY } from "../lib/queries";
+import "../components/styles/styles.css";
+
 interface pageProps {
   query?: string;
 }
 
 App.getInitialProps = async ({ Component, ctx }: any) => {
   let pageProps: pageProps = {};
+
   //crowls queires and mutation that need to be fetched
   if (Component.getInitialProps) {
     pageProps = await Component.getInitialProps(ctx);
   }
+
   //exposes query to the user
   pageProps.query = ctx.query;
   return { pageProps };

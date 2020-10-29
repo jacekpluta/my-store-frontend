@@ -1,7 +1,7 @@
 import React from "react";
 
 import ManagePermissions from "../components/managePermissions";
-import RequestToSignIn from "../components/requestToSignIn";
+import RequestToLogin from "../components/requestToLogin";
 
 interface ManagepermissionsProps {
   query: {
@@ -10,11 +10,11 @@ interface ManagepermissionsProps {
 }
 
 const managepermissions = (props: ManagepermissionsProps) => (
-  <RequestToSignIn>
+  <RequestToLogin>
     <ManagePermissions
       page={parseFloat(props.query.page) || 1}
     ></ManagePermissions>
-  </RequestToSignIn>
+  </RequestToLogin>
 );
 
 export default managepermissions;

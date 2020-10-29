@@ -98,7 +98,7 @@ export default function SignUp() {
 
           <button type="submit">Submit</button>
           <p>
-            <Link href="/signin">
+            <Link href="/login">
               <a>Already have an account? SIGN IN</a>
             </Link>
           </p>

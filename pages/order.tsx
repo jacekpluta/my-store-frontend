@@ -1,12 +1,12 @@
 import React from "react";
-import RequestToSignIn from "../components/requestToSignIn";
+import RequestToLogin from "../components/requestToLogin";
 import Order from "../components/order";
 type OrderProps = { query: { id: string } };
 
 const orderpage = (props: OrderProps) => (
-  <RequestToSignIn>
+  <RequestToLogin>
     <Order orderId={props.query.id} />
-  </RequestToSignIn>
+  </RequestToLogin>
 );
 
 export default orderpage;

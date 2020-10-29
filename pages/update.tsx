@@ -1,14 +1,14 @@
 import React from "react";
-import RequestToSignIn from "../components/requestToSignIn";
+import RequestToLogin from "../components/requestToLogin";
 import UpdateItem from "../components/udateItem";
 
 type SellProps = { query: { id: string } };
 
 const Update = (props: SellProps) => {
   return (
-    <RequestToSignIn>
+    <RequestToLogin>
       <UpdateItem id={props.query.id}></UpdateItem>
-    </RequestToSignIn>
+    </RequestToLogin>
   );
 };
 

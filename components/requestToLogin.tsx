@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { CURRENT_USER_QUERY } from "../lib/queries";
-import SignIn from "./signIn";
+import Login from "./login";
 import Error from "./errorMessage";
 
 interface MyProps {}
 
-const RequestToSignIn: React.FunctionComponent<MyProps> = (props) => {
+const RequestToLogin: React.FunctionComponent<MyProps> = (props) => {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
   if (loading) {
     return <p>Loading...</p>;
@@ -19,9 +19,9 @@ const RequestToSignIn: React.FunctionComponent<MyProps> = (props) => {
   return (
     <div>
       <p>Please sign in to do that</p>
-      <SignIn />
+      <Login />
     </div>
   );
 };
 
-export default RequestToSignIn;
+export default RequestToLogin;

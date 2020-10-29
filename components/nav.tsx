@@ -4,14 +4,12 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { CURRENT_USER_QUERY } from "../lib/queries";
 import SignOut from "./signOut";
-import { useMutation } from "@apollo/react-hooks";
 
 import styled from "styled-components";
 import { Icon, Popup } from "semantic-ui-react";
 import Search from "./search";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import CartItemsNumber from "./styles/CartItemsNumber";
-import LoadingScreen from "./loadingScreen";
 import { WhiteBar } from "./styles/WhiteBar";
 import { useRouter } from "next/router";
 import { isCartOpen } from "../lib/vars";
@@ -76,7 +74,7 @@ export default function Nav() {
         (all: any[], cartItem: any) => all + cartItem.quantity,
         0
       );
-
+  console.log(currentUser);
   return (
     <NavStyles data-test="nav">
       <nav>
@@ -157,7 +155,7 @@ export default function Nav() {
 
           {!currentUser.user && (
             <li>
-              <Link href="/signin">
+              <Link href="/login">
                 <a>Sign In / Register</a>
               </Link>
             </li>

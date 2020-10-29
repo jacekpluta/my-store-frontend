@@ -10,11 +10,11 @@ import Router from "next/router";
 import { FormStyles } from "./styles/FormStyles";
 import Link from "next/link";
 
-export interface SignInProps {}
+export interface LoginProps {}
 
 export const LOGIN_USER_MUTATION = gql`
   mutation LOGIN_USER_MUTATION($email: String!, $password: String!) {
-    signIn(email: $email, password: $password) {
+    login(email: $email, password: $password) {
       id
       email
       name
@@ -36,7 +36,7 @@ export const CREATE_USER_MUTATION = gql`
   }
 `;
 
-export default function SignIn(props: SignInProps) {
+export default function Login(props: LoginProps) {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",

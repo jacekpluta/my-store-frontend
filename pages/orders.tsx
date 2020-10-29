@@ -1,11 +1,11 @@
 import React from "react";
-import RequestToSignIn from "../components/requestToSignIn";
+import RequestToSLogin from "../components/requestToLogin";
 import Orders from "../components/orders";
 
 const orderpage = () => (
-  <RequestToSignIn>
+  <RequestToLogin>
     <Orders />
-  </RequestToSignIn>
+  </RequestToLogin>
 );
 
 export default orderpage;

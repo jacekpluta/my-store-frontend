@@ -1,13 +1,13 @@
 import React from "react";
 import CreateItem from "../components/createItem";
-import RequestToSignIn from "../components/requestToSignIn";
+import RequestToLogin from "../components/requestToLogin";
 
 type SellProps = {};
 
 const Sell = (props: SellProps) => (
-  <RequestToSignIn>
+  <RequestToLogin>
     <CreateItem></CreateItem>
-  </RequestToSignIn>
+  </RequestToLogin>
 );
 
 export default Sell;

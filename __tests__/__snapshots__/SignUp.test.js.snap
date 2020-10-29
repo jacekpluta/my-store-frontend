@@ -72,10 +72,10 @@ exports[`renders and maches snapshot 1`] = `
       </button>
       <p>
         <Link
-          href="/signin"
+          href="/login"
         >
           <a
-            href="/signin"
+            href="/login"
             onClick={[Function]}
             onMouseEnter={[Function]}
           >
