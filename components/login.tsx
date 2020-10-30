@@ -4,37 +4,17 @@ import Form from "./styles/Form";
 import Error from "./errorMessage";
 import { useMutation } from "@apollo/react-hooks";
 import { useFormFields } from "./utils/useFormFields";
-import { CURRENT_USER_QUERY } from "../lib/queries";
+import {
+  CREATE_USER_MUTATION,
+  CURRENT_USER_QUERY,
+  LOGIN_USER_MUTATION,
+} from "../lib/queries";
 
 import Router from "next/router";
 import { FormStyles } from "./styles/FormStyles";
 import Link from "next/link";
 
 export interface LoginProps {}
-
-export const LOGIN_USER_MUTATION = gql`
-  mutation LOGIN_USER_MUTATION($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      id
-      email
-      name
-    }
-  }
-`;
-
-export const CREATE_USER_MUTATION = gql`
-  mutation CREATE_USER_MUTATION(
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    signUp(name: $name, email: $email, password: $password) {
-      id
-      email
-      name
-    }
-  }
-`;
 
 export default function Login(props: LoginProps) {
   const [fields, handleFieldChange] = useFormFields({

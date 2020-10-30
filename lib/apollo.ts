@@ -17,10 +17,11 @@ function createApolloClient(context?: ResolverContext): any {
   return new ApolloClient({
     uri:
       process.env.NODE_ENV === "development"
-        ? endpoint
+        ? productionBackendEndpoint
         : productionBackendEndpoint,
     credentials: "include",
     cache: cache,
+
     name: "my-shop",
     version: "1.0",
     queryDeduplication: false,

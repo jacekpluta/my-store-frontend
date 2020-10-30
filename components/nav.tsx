@@ -74,7 +74,7 @@ export default function Nav() {
         (all: any[], cartItem: any) => all + cartItem.quantity,
         0
       );
-  console.log(currentUser);
+
   return (
     <NavStyles data-test="nav">
       <nav>
