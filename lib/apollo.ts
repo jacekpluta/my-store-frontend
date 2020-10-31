@@ -1,6 +1,5 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { useMemo } from "react";
-import gql from "graphql-tag";
 import { endpoint, productionBackendEndpoint } from "../config";
 
 import { ApolloClient } from "@apollo/client";
@@ -21,7 +20,6 @@ function createApolloClient(context?: ResolverContext): any {
         : productionBackendEndpoint,
     credentials: "include",
     cache: cache,
-
     name: "my-shop",
     version: "1.0",
     queryDeduplication: false,

@@ -1,4 +1,4 @@
-import Cart, { LOCAL_STATE_QUERY } from "../components/cart";
+import Cart, { LOCAL_STATE_QUERY } from "../components/cart/cart";
 import { mount } from "enzyme";
 import { MockedProvider } from "@apollo/react-testing";
 import { CURRENT_USER_QUERY } from "../lib/queries";

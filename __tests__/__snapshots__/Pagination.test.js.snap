@@ -29,21 +29,27 @@ Array [
         <a
           aria-disabled={true}
           className="prev"
-          href="/items?page=0"
+          href="/catalog?page=0"
           onClick={[Function]}
           onMouseEnter={[Function]}
         >
           ⬅ Prev
         </a>
       </Link>
-      <p>
+      <p
+        style={
+          Object {
+            "marginTop": 5,
+          }
+        }
+      >
         Page 
         1
          of 
         <span
           className="allPages"
         >
-          3
+          2
         </span>
       </p>
       <Link
@@ -59,7 +65,7 @@ Array [
         <a
           aria-disabled={false}
           className="next"
-          href="/items?page=2"
+          href="/catalog?page=2"
           onClick={[Function]}
           onMouseEnter={[Function]}
         >
@@ -92,21 +98,27 @@ Array [
       <a
         aria-disabled={true}
         className="prev"
-        href="/items?page=0"
+        href="/catalog?page=0"
         onClick={[Function]}
         onMouseEnter={[Function]}
       >
         ⬅ Prev
       </a>
     </Link>
-    <p>
+    <p
+      style={
+        Object {
+          "marginTop": 5,
+        }
+      }
+    >
       Page 
       1
        of 
       <span
         className="allPages"
       >
-        3
+        2
       </span>
     </p>
     <Link
@@ -122,7 +134,7 @@ Array [
       <a
         aria-disabled={false}
         className="next"
-        href="/items?page=2"
+        href="/catalog?page=2"
         onClick={[Function]}
         onMouseEnter={[Function]}
       >

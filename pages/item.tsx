@@ -1,5 +1,5 @@
 import React from "react";
-import SingleItem from "../components/singleItem";
+import SingleItem from "../components/singleItem/singleItem";
 
 interface ItemProps {
   query: {

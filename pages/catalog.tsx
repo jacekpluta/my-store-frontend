@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { useEffect } from "react";
-import Items from "../components/items";
+import Items from "../components/catalog/items";
 import { FILTERS_QUERY } from "../lib/queries";
 
 interface ItemsProps {

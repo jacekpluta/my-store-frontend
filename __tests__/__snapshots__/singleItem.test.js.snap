@@ -11,22 +11,12 @@ exports[`errors when no item found 1`] = `
 </p>
 `;
 
-exports[`renders correctly 1`] = `
-<h2>
-  Viewing 
-  test
-</h2>
-`;
+exports[`renders correctly 1`] = `null`;
 
-exports[`renders correctly 2`] = `
-<img
-  alt="test"
-  src="test.jpg"
-/>
-`;
+exports[`renders correctly 2`] = `null`;
 
 exports[`renders correctly 3`] = `
 <p>
-  test description
+  Loading...
 </p>
 `;

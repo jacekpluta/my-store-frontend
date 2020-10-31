@@ -56,4 +56,7 @@ export const SingleItemStyle = styled.div`
 
 export const CounterStyles = styled.div`
   position: relative;
+  margin-right: 100px;
 `;
+
+export const AdminButtonsContainer = styled.div``;

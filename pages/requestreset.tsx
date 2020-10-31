@@ -1,5 +1,5 @@
 import React from "react";
-import RequestReset from "../components/requestReset";
+import RequestReset from "../components/user/requestReset";
 
 type RequesttokenProps = {};
 

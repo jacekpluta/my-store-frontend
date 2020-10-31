@@ -37,12 +37,13 @@ interface Props {
 
 export const PickSizeStyles = styled.div`
   position: fixed;
-  width: 25vw;
-  height: 30vw;
+  width: 400px;
+  height: 450px;
   display: none;
-  position: fixed;
-  top: 20%;
-  left: 40%;
+  top: 50%;
+  left: 50%;
+  margin-top: -225px; /* Negative half of height. */
+  margin-left: -200px; /* Negative half of width. */
   opacity: 0;
   z-index: 5;
   display: grid;

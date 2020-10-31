@@ -1,5 +1,5 @@
 import Link from "next/link";
-import RequestToLogin from "../components/requestToLogin";
+import RequestToLogin from "../components/user/requestToLogin";
 
 export default function Account() {
   return (

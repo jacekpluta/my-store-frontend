@@ -148,11 +148,20 @@ export const ButtonCounterNumber = styled(ButtonCounterFirst)`
   }
 `;
 
-export const ButtonAddToCart = styled(ButtonMainNormal)`
+export const ButtonSingleItemPage = styled(ButtonMainNormal)`
   border-radius: 10px;
   font-size: 0.8em;
   padding: 15px;
   margin-top: 20px;
   padding-right: 100px;
   padding-left: 100px;
+`;
+
+export const ButtonSingleItemAdminPage = styled(ButtonMainNormal)`
+  border-radius: 10px;
+  font-size: 0.8em;
+  padding-right: 18px;
+  padding-left: 18px;
+  margin: 5px;
+  margin-top: 20px;
 `;

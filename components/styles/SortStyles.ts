@@ -32,6 +32,7 @@ export const Sort = styled.div`
     color: #eeeeee;
   }
   ul li span a {
+    cursor: pointer;
     display: flex;
     width: 150px;
     /* width: 330px; */
@@ -39,9 +40,10 @@ export const Sort = styled.div`
   }
   ul ul {
     position: absolute;
-    z-index: 100;
+    z-index: 1;
     text-align: left;
     height: 0;
+
     /* !!!!!!!!!!! */
     top: 32px;
     width: 100%;
@@ -61,10 +63,6 @@ export const Sort = styled.div`
   ul ul li a:hover > ul {
     height: 220px;
   }
-
-  /* div:focus {
-  outline: none;
-} */
 
   ul ul li {
     background-color: #eaeaea;

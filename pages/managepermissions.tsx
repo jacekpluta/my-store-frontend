@@ -1,7 +1,7 @@
 import React from "react";
 
-import ManagePermissions from "../components/managePermissions";
-import RequestToLogin from "../components/requestToLogin";
+import ManagePermissions from "../components/user/managePermissions";
+import RequestToLogin from "../components/user/requestToLogin";
 
 interface ManagepermissionsProps {
   query: {

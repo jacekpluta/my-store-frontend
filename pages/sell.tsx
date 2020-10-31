@@ -1,6 +1,6 @@
 import React from "react";
-import CreateItem from "../components/createItem";
-import RequestToLogin from "../components/requestToLogin";
+import CreateItem from "../components/nav/createItem";
+import RequestToLogin from "../components/user/requestToLogin";
 
 type SellProps = {};
 

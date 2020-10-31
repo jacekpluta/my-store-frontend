@@ -85,17 +85,41 @@ const CartStyles = styled.div`
   }
 
   footer {
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: auto auto;
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
     align-items: center;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "total price"
+      "button button"
+      "button2 button2";
+
+    .total {
+      grid-area: total;
+    }
+    .price {
+      grid-area: price;
+    }
+    .button {
+      grid-area: button;
+      align-self: center;
+    }
+    .button2 {
+      grid-area: button2;
+      align-self: center;
+      margin-left: 50%;
+    }
   }
-  /* ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: scroll;
-  } */
 `;
 
 export default CartStyles;

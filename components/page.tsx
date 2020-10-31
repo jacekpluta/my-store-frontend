@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "./header";
+import Header from "./nav/header";
 import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import Footer from "./footer";
+import Footer from "./homePage/footer";
 
 import { ReactChildren } from "react";
 
