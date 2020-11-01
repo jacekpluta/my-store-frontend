@@ -98,8 +98,8 @@ export default function Nav() {
           {currentUser.user && (
             <>
               <li>
-                <Link href="/orders">
-                  <a>Orders</a>
+                <Link href="/cart">
+                  <a>Cart</a>
                 </Link>
               </li>
 
@@ -109,7 +109,7 @@ export default function Nav() {
                 </Link>
               </li>
 
-              {!matchedPermissions.length && (
+              {matchedPermissions.length && (
                 <li>
                   <Link href="/sell">
                     <a>Sell</a>

@@ -9,17 +9,20 @@ import { Icon } from "semantic-ui-react";
 
 const SEARCH_ITEM_QUERY = gql`
   query SEARCH_ITEM_QUERY($searchTerm: String!) {
-    items(
+    itemLowercases(
       where: {
         OR: [
           { title_contains: $searchTerm }
-          { description_contains: $searchTerm }
+          # { description_contains: $searchTerm }
         ]
       }
     ) {
       id
       image
       title
+      item{
+        id
+      }
     }
   }
 `;
@@ -39,15 +42,18 @@ export default function Search({ biggerIcon }: ISearchProps) {
       query: SEARCH_ITEM_QUERY,
       variables: { searchTerm: e.target.value },
     });
-    setItems(res.data.items);
+ 
+    setItems(res.data.itemLowercases);
     setLoading(false);
   }, 300);
 
-  const routeToItem = (item: any) => {
+
+
+  const routeToItem = (lowercaseItem: any) => {
     Router.push({
       pathname: "/item",
       query: {
-        id: item.id,
+        id: lowercaseItem.item.id,
       },
     });
   };
@@ -109,7 +115,7 @@ export default function Search({ biggerIcon }: ISearchProps) {
                     highlighted={index === highlightedIndex}
                   >
                     <img width="50" src={item.image} alt={item.title}></img>
-                    {item.title}
+                    {item.title.replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) => letter.toUpperCase())}
                   </DropDownItem>
                 ))}
                 {!items.length && !loading && (

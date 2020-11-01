@@ -43,7 +43,6 @@ const MenuItem = ({
   handleShowPickSize: Function;
 }) => {
   const [buttonsVisible, setButtonsVisible] = useState(false);
-
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
 
   if (currentUserQuery.loading) return <p>Loading...</p>;
@@ -63,7 +62,7 @@ const MenuItem = ({
           }}
         >
           <AnimatePresence>
-            {buttonsVisible && currentUserQuery.data.user && (
+            {buttonsVisible && (
               <motion.div
                 variants={variants}
                 key={"button1"}
@@ -108,9 +107,7 @@ const MenuItem = ({
                     opacity: { duration: 0.5 },
                   }}
                 >
-                  <ButtonContainerDetails
-                    style={currentUserQuery.data.user ? { top: "65%" } : {}}
-                  >
+                  <ButtonContainerDetails style={{ top: "65%" }}>
                     <Button animated="fade">
                       <Button.Content visible>
                         <a> View details</a>

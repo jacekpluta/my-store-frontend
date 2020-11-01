@@ -44,6 +44,34 @@ export const CREATE_ITEM_MUTATION = gql`
   }
 `;
 
+
+export const CREATE_ITEM_LOWERCASE_MUTATION = gql`
+  mutation CREATE_ITEM_LOWERCASE_MUTATION(
+    $title: String!
+    $description: String!
+    $price: Int!
+    $image: String!
+    $largeImage: String!
+    $gender: Gender!
+    $category: Category!
+    $brand: Brand!
+  ) {
+    createItemLowercase(
+      title: $title
+      description: $description
+      price: $price
+      image: $image
+      largeImage: $largeImage
+      gender: $gender
+      category: $category
+      brand: $brand
+    ) {
+      id
+      title
+    }
+  }
+`;
+
 interface HTMLInputEvent {
   target: HTMLInputElement & EventTarget;
 }
@@ -61,7 +89,7 @@ const CreateItem = () => {
   const [image, setImage] = useState("");
   const [largeImage, setLargeImage] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [createItem, createItemtMutation] = useMutation(CREATE_ITEM_MUTATION);
+  const [createItem, createItemMutation] = useMutation(CREATE_ITEM_MUTATION);
 
   const uploadFile = async (e: HTMLInputEvent) => {
     setUploading(true);
@@ -90,8 +118,8 @@ const CreateItem = () => {
   return (
     <FormStyles>
       <fieldset
-        disabled={createItemtMutation.loading || uploading}
-        aria-busy={createItemtMutation.loading || uploading}
+        disabled={createItemMutation.loading || uploading}
+        aria-busy={createItemMutation.loading || uploading}
       >
         <div className="veen" style={{ background: "#D0D4D7" }}>
           <div className="wrapper" style={{ left: "20%", width: "60%" }}>
@@ -108,6 +136,16 @@ const CreateItem = () => {
                     largeImage: largeImage,
                   },
                 });
+
+                const res2 = await createItemLowercase({
+                  variables: {
+                    ...fields,
+                    image: image,
+                    largeImage: largeImage,
+                  },
+                });
+
+                
 
                 Router.push({
                   pathname: "/item",
@@ -203,7 +241,7 @@ const CreateItem = () => {
               </div>
               <div className="submit">
                 <button
-                  disabled={uploading || createItemtMutation.loading}
+                  disabled={uploading || createItemMutation.loading}
                   className="dark"
                 >
                   ADD ITEM

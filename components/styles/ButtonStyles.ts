@@ -103,6 +103,14 @@ export const ButtonContinue = styled(ButtonMainNormal)`
   margin-left: 10%;
 `;
 
+export const ButtonContinueEmptyOrders = styled(ButtonMainNormal)`
+  text-align: center;
+  font-size: 1em;
+  padding: 15px 55px;
+  width: 50%;
+  margin-left: 10%;
+`;
+
 export const ButtonPickSize = styled(ButtonMainNormal)`
   font-size: 1em;
   padding: 15px;

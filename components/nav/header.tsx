@@ -102,7 +102,7 @@ export default function Header() {
       <StyledHeader
         style={
           bar && path === "/"
-            ? borderBottom
+            ? borderBottomZero
             : bar && path !== "/"
             ? borderBottom
             : borderBottomZero

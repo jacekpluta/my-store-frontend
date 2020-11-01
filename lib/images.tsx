@@ -6,6 +6,7 @@ export const images = [
 
 export const imageMain = "./images/shoes5.jpg";
 export const emptyCart = "./images/emptyCart.png";
+export const emptyOrders = "./images/emptyOrders.png";
 
 export const infoImages = [
   "./images/info1.jpg",
@@ -19,7 +20,6 @@ export const logoImages = [
   "./images/logos/logo3.png",
   "./images/logos/logo4.png",
   "./images/logos/logo5.png",
-
   "./images/logos/logo8.png",
   "./images/logos/logo9.png",
   "./images/logos/logo10.png",

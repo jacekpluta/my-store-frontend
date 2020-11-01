@@ -5,16 +5,18 @@ const CartItemsNumber = styled.div`
   font-size: 1.2rem;
   position: absolute;
   top: -5px;
-  background: #ffffff;
+  background: ${(props) => props.theme.whiteGrey};
   border-radius: 0.8em;
   -moz-border-radius: 0.8em;
   -webkit-border-radius: 0.8em;
-  color: #595959;
+  color: ${(props) => props.theme.black};
   font-weight: bold;
-  line-height: 1.6em;
+  line-height: 1.2em;
   margin-right: 5px;
+  padding-top: 4px;
   text-align: center;
   width: 1.6em;
+  height: 1.6em;
   cursor: pointer;
 `;
 

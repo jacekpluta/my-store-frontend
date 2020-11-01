@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const DiscountsStyle = styled.div`
   background: ${(props) => props.theme.white};
-  padding: 20px 0px 20px 40px;
+  padding: 20px 40px 20px 40px;
 
   .menu-wrapper--inner::-webkit-scrollbar-track-piece:start {
     margin-left: 50px;
@@ -83,6 +83,8 @@ export const FeaturedContainer = styled.div`
 
   ::after {
     content: "";
+    padding: 0;
+    margin: 0;
     width: 100%;
     border-bottom: solid 1px ${(props) => props.theme.black};
     position: absolute;

@@ -3,13 +3,12 @@ import styled from "styled-components";
 import { infoImages } from "../../lib/images";
 
 export const InfoStyles = styled.div`
-  margin: 3% 7% 3% 7%;
   max-width: 1500px;
   display: grid;
-  align-items: center;
-  grid-gap: 3rem;
-  grid-template-columns: 30% 30% 30%;
-
+  margin-bottom: 20px;
+  grid-template-columns: 25% 25% 25%;
+  justify-content: center;
+  grid-gap: 20px;
   @media (max-width: 768px) {
     grid-template-columns: 100%;
   }
@@ -42,21 +41,21 @@ function Info() {
   return (
     <InfoStyles>
       <Block>
-        <img src={infoImages[0]}></img>
+        <img loading="lazy" src={infoImages[0]}></img>
         <span>
           <h3>Support 24/7</h3>
           <p>Contact us at any time!</p>
         </span>
       </Block>
       <Block>
-        <img src={infoImages[1]}></img>
+        <img loading="lazy" src={infoImages[1]}></img>
         <span>
           <h3>Free Returns</h3>
           <p>Return without downsize!</p>
         </span>
       </Block>
       <Block>
-        <img src={infoImages[2]}></img>
+        <img loading="lazy" src={infoImages[2]}></img>
         <span>
           <h3>Fast Delivery</h3>
           <p>Same day shipment!</p>

@@ -76,7 +76,7 @@ export default function SingleItem(props: SingleItemProps) {
   const inSingleItem: Boolean = true;
 
   const permissionsNeeded = ["ADMIN", "PERRMISSIONUPDATE"];
-  const matchedPermissions = currentUser.data.user.permissions.filter(
+  const matchedPermissions = currentUser?.data?.user?.permissions?.filter(
     (permissionTheyHave: string) =>
       permissionsNeeded.includes(permissionTheyHave)
   );
@@ -129,7 +129,7 @@ export default function SingleItem(props: SingleItemProps) {
           ADD TO CART
         </ButtonSingleItemPage>
 
-        {matchedPermissions.length > 0 && (
+        {matchedPermissions?.length > 0 && (
           <AdminButtonsContainer
             style={{
               display: "inline-flex",
