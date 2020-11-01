@@ -1,5 +1,11 @@
 import styled, { keyframes, css } from "styled-components";
 
+const loading = keyframes`
+
+  from{transform:rotate(360deg)} 
+  to{transform:rotate(0deg) }
+`;
+
 const slideInAnimation = keyframes`
   from {
     transform: translateX(100%);
@@ -42,25 +48,73 @@ const CartStyles = styled.div`
   height: 100%;
   top: 0;
   right: 0;
-  width: 25%;
+  width: 23%;
   min-width: 200px;
   visibility: hidden;
 
-  ${(props: Props) => (props.open ? showCart : hideCart)};
-
-  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
-  z-index: 3;
-  /* display: grid;
-  grid-template-rows: auto 1fr auto; */
-  img {
-    padding: 10px;
-    height: 50%;
+  .loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 10;
+    height: 100%;
     width: 100%;
+
+    &::before {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+
+      content: "";
+      display: none;
+      width: 3em;
+      height: 3em;
+
+      border: 8px solid ${(props) => props.theme.black};
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-radius: 50%;
+      opacity: 0.9;
+    }
+    &::after {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+
+      content: "";
+      display: none;
+      opacity: 0.9;
+      width: 3em;
+      height: 3em;
+
+      border: 8px solid ${(props) => props.theme.white};
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-radius: 50%;
+    }
+    &[aria-busy="true"]::after {
+      display: block;
+      animation: ${loading} 1s linear infinite;
+    }
+    &[aria-busy="true"]::before {
+      display: block;
+      animation: ${loading} 1s linear infinite;
+    }
   }
 
   p {
     font-size: 2rem;
   }
+
+  ${(props: Props) => (props.open ? showCart : hideCart)};
+
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+
   .cartTop {
     margin: 0;
     padding: 0;
@@ -84,8 +138,20 @@ const CartStyles = styled.div`
     }
   }
 
+  .cartItems {
+    position: relative;
+    ul {
+      margin: 0;
+      padding: 5px 15px 15px 15px;
+
+      height: 480px;
+      list-style: none;
+      overflow-y: scroll;
+    }
+  }
+
   footer {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 30%;
     bottom: 0;
@@ -97,27 +163,55 @@ const CartStyles = styled.div`
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1.2fr 1.2fr 1.2fr 0.2fr;
     gap: 0px 0px;
     grid-template-areas:
       "total price"
       "button button"
-      "button2 button2";
+      "button2 button2"
+      "text text";
+    padding: 20px;
 
     .total {
+      p {
+        font-size: 24px;
+        color: ${(props) => props.theme.greyish};
+        font-weight: bolder;
+      }
       grid-area: total;
+      align-self: start;
+      justify-self: start;
     }
     .price {
+      p {
+        font-size: 24px;
+        color: ${(props) => props.theme.greyish};
+        font-weight: bolder;
+      }
+
       grid-area: price;
+      align-self: start;
+      justify-self: end;
     }
     .button {
       grid-area: button;
       align-self: center;
+      justify-self: center;
     }
     .button2 {
       grid-area: button2;
       align-self: center;
-      margin-left: 50%;
+      justify-self: center;
+    }
+    p {
+      color: ${(props) => props.theme.greyish};
+      font-size: 12px;
+    }
+
+    .text {
+      grid-area: text;
+      align-self: center;
+      justify-self: center;
     }
   }
 `;

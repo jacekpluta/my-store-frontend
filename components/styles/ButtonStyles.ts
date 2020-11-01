@@ -165,3 +165,67 @@ export const ButtonSingleItemAdminPage = styled(ButtonMainNormal)`
   margin: 5px;
   margin-top: 20px;
 `;
+
+export const ButtonCart1 = styled(ButtonMainNormal)`
+  padding: 20px 80px;
+  font-size: 1em;
+  margin-bottom: 8px;
+  text-transform: none;
+  color: ${(props) => props.theme.black};
+  background-color: ${(props) => props.theme.white};
+  border: 2px solid ${(props) => props.theme.greyish};
+  width: 300px;
+  border-radius: 50px;
+  font-weight: 900;
+  &:hover {
+    background-color: ${(props) => props.theme.whiteGrey};
+    color: ${(props) => props.theme.white};
+    border: 2px solid ${(props) => props.theme.greyish};
+  }
+`;
+
+export const ButtonCart2 = styled(ButtonCart1)`
+  color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.black};
+  border: 2px solid ${(props) => props.theme.greyish};
+
+  &:hover {
+    background-color: ${(props) => props.theme.whiteGrey};
+    color: ${(props) => props.theme.black};
+    border: 2px solid ${(props) => props.theme.greyish};
+  }
+`;
+
+export const ButtonCounterFirstCart = styled(ButtonCounterFirst)`
+  font-size: 1.3em;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  margin: 0;
+  border: 1px solid ${(props) => props.theme.blackwhite};
+  background-color: ${(props) => props.theme.white};
+  color: ${(props) => props.theme.black};
+  &:hover {
+    background-color: ${(props) => props.theme.black};
+    color: ${(props) => props.theme.white};
+  }
+`;
+
+export const ButtonCounterSecondCart = styled(ButtonCounterFirstCart)`
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+`;
+
+export const ButtonCounterNumberCart = styled(ButtonCounterFirstCart)`
+  border-radius: 0;
+  &:hover {
+    background-color: ${(props) => props.theme.white};
+    color: ${(props) => props.theme.black};
+  }
+`;

@@ -1,19 +1,44 @@
-import React, { useEffect, useRef } from "react";
-import CartStyles from "../styles/CartStyles";
-import { ButtonContinue, ButtonCatalogNavFilter } from "../styles/ButtonStyles";
 import { useQuery } from "@apollo/react-hooks";
-import Error from "../errorMessage";
-import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../../lib/queries";
-import CartItem from "./cartItem";
-import formatMoney from "../utils/formatMoney";
-import CreditCardCheckout from "./creditCardCheckout";
-import { ICartItem } from "./cartItem";
-import { isCartOpen } from "../../lib/vars";
+import React, { useEffect, useRef, useState } from "react";
 import { emptyCart } from "../../lib/images";
+import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../../lib/queries";
+import { isCartOpen } from "../../lib/vars";
+import Error from "../errorMessage";
+import {
+  ButtonCart1,
+  ButtonCart2,
+  ButtonContinue,
+} from "../styles/ButtonStyles";
+import CartStyles from "../styles/CartStyles";
+import formatMoney from "../utils/formatMoney";
+import CartItem from "./cartItem";
+import CreditCardCheckout from "./creditCardCheckout";
+
+export interface ICartItem {
+  id: number;
+  quantity: number;
+  size: number;
+  item: {
+    id: number;
+    price: number;
+    user: null;
+    image: string;
+    title: string;
+    description: string;
+    largeImage: string;
+  };
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    permissions: string[];
+  };
+}
 
 export default function Cart() {
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
+  const [isLoading, setIsLoading] = useState(false);
 
   const wrapperRef = useRef(null);
 
@@ -38,6 +63,10 @@ export default function Cart() {
     }
   }
 
+  const handleLoading = (loading: boolean) => {
+    setIsLoading(loading);
+  };
+
   if (cartOpenData.loading) return <p>Loading...</p>;
   if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
 
@@ -48,6 +77,8 @@ export default function Cart() {
   if (currentUserQuery) {
     return (
       <CartStyles open={cartOpen} ref={wrapperRef}>
+        {isLoading && <div className="loading" aria-busy={isLoading}></div>}
+
         <div className="cartTop">
           <button
             className="closeButton"
@@ -68,35 +99,42 @@ export default function Cart() {
             )}
           </p>
         </div>
-        {user?.cart?.length === 0 && (
-          <>
-            <img src={emptyCart} />{" "}
-            <ButtonContinue
-              onClick={() => {
-                isCartOpen(false);
-              }}
-            >
-              CONTINUE SHOPPING
-            </ButtonContinue>
-          </>
-        )}
 
-        <ul>
-          {user?.cart?.map((cartItem: ICartItem) => (
-            <CartItem key={cartItem.id} cartItem={cartItem}></CartItem>
-          ))}
-        </ul>
+        <div className="cartItems">
+          {user?.cart?.length === 0 ? (
+            <>
+              <img src={emptyCart} />
+              <ButtonContinue
+                onClick={() => {
+                  isCartOpen(false);
+                }}
+              >
+                CONTINUE SHOPPING
+              </ButtonContinue>
+            </>
+          ) : (
+            <ul>
+              {user?.cart?.map((cartItem: ICartItem) => (
+                <CartItem
+                  handleLoading={handleLoading}
+                  key={cartItem.id}
+                  cartItem={cartItem}
+                ></CartItem>
+              ))}
+            </ul>
+          )}
+        </div>
 
         {user?.cart?.length > 0 && (
           <footer>
             <div className="total">
-              <p>Total:</p>
+              <p>Subtotal:</p>
             </div>
             <div className="price">
               <p> {formatMoney(totalPrice)}</p>
             </div>
             <div className="button">
-              <ButtonCatalogNavFilter>View cart</ButtonCatalogNavFilter>
+              <ButtonCart1>View cart</ButtonCart1>
             </div>
             <div className="button2">
               <CreditCardCheckout
@@ -105,8 +143,11 @@ export default function Cart() {
                 allItemsCount={user.cart.length}
                 user={user}
               >
-                <ButtonCatalogNavFilter>Check out</ButtonCatalogNavFilter>
+                <ButtonCart2>Check out</ButtonCart2>
               </CreditCardCheckout>
+            </div>
+            <div className="text">
+              <p>Shipping & taxes calculated at checkout</p>
             </div>
           </footer>
         )}

@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import Router from "next/router";
+import React, { useState } from "react";
+import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../../lib/queries";
+import { addToCartItem } from "../../lib/vars";
 import Error from "../errorMessage";
 import {
-  SingleItemStyle,
-  AdminButtonsContainer,
-} from "../styles/SingleItemStyle";
-import {
-  ButtonSingleItemPage,
   ButtonSingleItemAdminPage,
+  ButtonSingleItemPage,
 } from "../styles/ButtonStyles";
-import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../../lib/queries";
+import {
+  AdminButtonsContainer,
+  SingleItemStyle,
+} from "../styles/SingleItemStyle";
 import Counter from "./counter";
-import Size from "./size";
-import { addToCartItem } from "../../lib/vars";
 import DeleteItem from "./deleteItem";
-import Router from "next/router";
+import Size from "./size";
 
 export const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {

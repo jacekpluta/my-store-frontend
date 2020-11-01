@@ -111,7 +111,6 @@ export const ADD_TO_CART_MUTATION = gql`
   }
 `;
 
-
 export const LOGIN_USER_MUTATION = gql`
   mutation LOGIN_USER_MUTATION($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -135,4 +134,3 @@ export const CREATE_USER_MUTATION = gql`
     }
   }
 `;
-
