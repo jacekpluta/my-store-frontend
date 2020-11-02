@@ -186,7 +186,7 @@ export const FormStyles = styled.div`
   .veen > .wrapper.move input:focus {
     border-color: #e0b722;
   }
-  @media (max-width: 767px) {
+  /* @media (max-width: 767px) {
     .veen {
       padding: 5px;
       margin: 0;
@@ -231,7 +231,7 @@ export const FormStyles = styled.div`
     .veen > .wrapper.move {
       left: 0%;
     }
-  }
+  } */
 
   input:-webkit-autofill,
   textarea:-webkit-autofill,

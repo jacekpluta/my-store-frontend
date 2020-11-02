@@ -4,8 +4,6 @@ import Meta from "./meta";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import Footer from "./homePage/footer";
 
-import { ReactChildren } from "react";
-
 type theme = {
   lightBlack: string;
   black: string;
@@ -42,7 +40,6 @@ html {
   font-size: 10px;
 }
 
-
 *, *:before, *:after{
   box-sizing: inherit
 }
@@ -56,7 +53,7 @@ body{
   margin: 0;
   font-size: 1.5rem;
   line-height: 2;
-  /* font-family: Arial, Helvetica, sans-serif; */
+
 }
   a{
     color: ${theme.black};

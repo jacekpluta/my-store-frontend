@@ -110,7 +110,7 @@ export default function SingleItem(props: SingleItemProps) {
         <ButtonSingleItemPage
           disabled={addToCartMutation.loading}
           onClick={async () => {
-            if (sizePicked !== 0) {
+            if (currentUser?.data?.user && sizePicked !== 0) {
               await addToCart({
                 variables: {
                   id: item.id,
@@ -121,6 +121,10 @@ export default function SingleItem(props: SingleItemProps) {
 
               addToCartItem(null);
               setError(false);
+            } else if (!currentUser?.data?.user) {
+              Router.push({
+                pathname: "/login",
+              });
             } else {
               setError(true);
             }

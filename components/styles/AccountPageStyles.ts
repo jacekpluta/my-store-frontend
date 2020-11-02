@@ -4,7 +4,7 @@ interface Props {
   activeTab: String;
 }
 
-const pickSizeSlideIn = css`
+const aaa = css`
   display: block;
   animation: 1s forwards;
 `;
@@ -31,7 +31,7 @@ export const AccountPageStyles = styled.div`
         padding: 10px;
         margin-right: 15%;
 
-        ${(props: Props) => props.activeTab && pickSizeSlideIn};
+        /* ${(props: Props) => props.activeTab && aaa}; */
 
         :hover {
           background-color: ${(props) => props.theme.offWhite};

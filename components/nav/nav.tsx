@@ -95,6 +95,7 @@ export default function Nav() {
               <a>Catalog</a>
             </Link>
           </li>
+
           {currentUser.user && (
             <>
               <li>
@@ -170,7 +171,7 @@ export default function Nav() {
           {!currentUser.user && (
             <li>
               <Link href="/login">
-                <a>Sign In / Register</a>
+                <a>Login / Register</a>
               </Link>
             </li>
           )}

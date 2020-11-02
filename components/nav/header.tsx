@@ -9,6 +9,7 @@ import { Dimmer } from "../styles/Dimmer";
 import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Error from "../errorMessage";
+import NavMenu from "../styles/NavMenu";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -99,6 +100,31 @@ export default function Header() {
       {path !== "/" && (
         <div style={{ height: "100px", visibility: "hidden" }}></div>
       )}
+      {/* <NavMenu>
+        <div id="menuToggle">
+          <input type="checkbox" />
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu">
+            <a href="#">
+              <li>Home</li>
+            </a>
+            <a href="#">
+              <li>About</li>
+            </a>
+            <a href="#">
+              <li>Info</li>
+            </a>
+            <a href="#">
+              <li>Contact</li>
+            </a>
+          </ul>
+        </div>
+      </NavMenu> */}
+
       <StyledHeader
         style={
           bar && path === "/"
