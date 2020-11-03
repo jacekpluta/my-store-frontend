@@ -116,7 +116,7 @@ export const SortStyles = styled(Sort)`
   padding-top: 5px;
   padding-bottom: 5px;
   right: 0;
-  margin-right: 40px;
+  margin-right: 15px;
 `;
 
 export const SizeStyles = styled(Sort)`

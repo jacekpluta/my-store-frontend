@@ -105,7 +105,7 @@ export const FormStyles = styled.div`
 
   .veen button.dark {
     border-color: ${(props) => props.theme.white};
-    background: ${(props) => props.theme.black};
+    background: ${(props) => props.theme.lightBlack};
   }
 
   .veen .move button.dark {
@@ -118,7 +118,7 @@ export const FormStyles = styled.div`
     width: 40%;
     height: 120%;
     top: -10%;
-    left: 5%;
+    left: 10%;
     background: #fff;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
     transition: all 0.5s;
@@ -126,11 +126,12 @@ export const FormStyles = styled.div`
     overflow: hidden;
   }
   .veen .wrapper > form {
+
     padding: 34px 30px 30px;
     width: 100%;
     transition: all 0.5s;
     background: #fff;
-    width: 100%;
+
   }
   .veen .wrapper > form:focus {
     outline: none;
@@ -186,7 +187,7 @@ export const FormStyles = styled.div`
   .veen > .wrapper.move input:focus {
     border-color: #e0b722;
   }
-  /* @media (max-width: 767px) {
+  @ (max-width: 767px) {
     .veen {
       padding: 5px;
       margin: 0;
@@ -213,17 +214,17 @@ export const FormStyles = styled.div`
       border-radius: 0;
       background: ${(props) => props.theme.black};
       border: 0;
-      opacity: 0.7;
-    }
-    .splits button.active {
       opacity: 1;
     }
     .splits button.active {
       opacity: 1;
-      background: ${(props) => props.theme.black};
+    }
+    .splits button.active {
+      opacity: 0.8;
+      background: ${(props) => props.theme.lightBlack};
     }
     .splits.rgstr-btn button.active {
-      background: ${(props) => props.theme.black};
+      background: ${(props) => props.theme.lightBlack};
     }
     .splits p {
       display: none;
@@ -231,7 +232,7 @@ export const FormStyles = styled.div`
     .veen > .wrapper.move {
       left: 0%;
     }
-  } */
+  }
 
   input:-webkit-autofill,
   textarea:-webkit-autofill,

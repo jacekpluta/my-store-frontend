@@ -223,6 +223,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
           <Search />
           <Sort handleOnSort={this.handleOnSort} />
         </SearchSortStyles>
+
         <CatalogGrid>
           <CatalogNavBar />
 

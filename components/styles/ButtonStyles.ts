@@ -83,24 +83,26 @@ export const ButtonMainShiny = styled(ButtonMainNormal)`
 
 export const ButtonCatalogNavFilter = styled(ButtonMainNormal)`
   font-size: 1em;
-  padding: 15px 15px;
-  border-radius: 10px;
-  margin-top: 25px;
+  
+  margin: 5px;
+   margin-top: 20px;
+    border-radius: 5px;
 `;
 
 export const ButtonCatalogNavClear = styled(ButtonMainNormal)`
   font-size: 1em;
-  padding: 15px 15px;
-  margin-left: 5px;
-  border-radius: 10px;
+  margin: 5px;
+  border-radius: 5px;
 `;
 
 export const ButtonContinue = styled(ButtonMainNormal)`
   text-align: center;
   font-size: 1em;
-  padding: 15px 55px;
+margin-left: 40px;
+margin-right: 40px;
   width: 80%;
-  margin-left: 10%;
+ 
+
 `;
 
 export const ButtonContinueEmptyOrders = styled(ButtonMainNormal)`
@@ -174,14 +176,17 @@ export const ButtonSingleItemAdminPage = styled(ButtonMainNormal)`
   margin-top: 20px;
 `;
 
-export const ButtonCart1 = styled(ButtonMainNormal)`
-  padding: 20px 80px;
+export const ButtonCartView = styled(ButtonMainNormal)`
+ padding-top: 20px;
+  padding-bottom: 20px;
+ 
   font-size: 1em;
   margin-bottom: 8px;
   text-transform: none;
   color: ${(props) => props.theme.black};
   background-color: ${(props) => props.theme.white};
   border: 2px solid ${(props) => props.theme.greyish};
+
   width: 300px;
   border-radius: 50px;
   font-weight: 900;
@@ -192,7 +197,7 @@ export const ButtonCart1 = styled(ButtonMainNormal)`
   }
 `;
 
-export const ButtonCart2 = styled(ButtonCart1)`
+export const ButtonCartCheck = styled(ButtonCartView)`
   color: ${(props) => props.theme.white};
   background-color: ${(props) => props.theme.black};
   border: 2px solid ${(props) => props.theme.greyish};

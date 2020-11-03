@@ -5,8 +5,8 @@ import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../../lib/queries";
 import { isCartOpen } from "../../lib/vars";
 import Error from "../errorMessage";
 import {
-  ButtonCart1,
-  ButtonCart2,
+  ButtonCartView,
+  ButtonCartCheck,
   ButtonContinue,
 } from "../styles/ButtonStyles";
 import CartStyles from "../styles/CartStyles";
@@ -39,6 +39,9 @@ export default function Cart() {
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const [isLoading, setIsLoading] = useState(false);
+  const [animate, setAnimate] = useState(false);
+
+
 
   const wrapperRef = useRef(null);
 
@@ -66,6 +69,17 @@ export default function Cart() {
   const handleLoading = (loading: boolean) => {
     setIsLoading(loading);
   };
+  
+  useEffect(() => {
+    if(currentUserQuery.data){
+  const timer = setTimeout(() => {
+    setAnimate(true)
+  }, 2000);
+    }
+
+  // return () => clearTimeout(timer);
+}, []);
+
 
   if (cartOpenData.loading) return <p>Loading...</p>;
   if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
@@ -76,7 +90,7 @@ export default function Cart() {
 
   if (currentUserQuery) {
     return (
-      <CartStyles open={cartOpen} ref={wrapperRef}>
+      <CartStyles open={cartOpen} ref={wrapperRef} animate={animate}>
         {isLoading && <div className="loading" aria-busy={isLoading}></div>}
 
         <div className="cartTop">
@@ -103,7 +117,11 @@ export default function Cart() {
         <div className="cartItems">
           {user?.cart?.length === 0 ? (
             <>
-              <img src={emptyCart} />
+           <div className="emptyCart">
+    <img height={200} src={emptyCart} />
+          
+          
+          </div>
               <ButtonContinue
                 onClick={() => {
                   isCartOpen(false);
@@ -134,7 +152,7 @@ export default function Cart() {
               <p> {formatMoney(totalPrice)}</p>
             </div>
             <div className="button">
-              <ButtonCart1>View cart</ButtonCart1>
+              <ButtonCartView>View cart</ButtonCartView>
             </div>
             <div className="button2">
               <CreditCardCheckout
@@ -143,7 +161,7 @@ export default function Cart() {
                 allItemsCount={user.cart.length}
                 user={user}
               >
-                <ButtonCart2>Check out</ButtonCart2>
+                <ButtonCartCheck>Check out</ButtonCartCheck>
               </CreditCardCheckout>
             </div>
             <div className="text">

@@ -223,6 +223,7 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
         className="close"
         title="Delete Item"
         onClick={async () => {
+         
           await deleteCartItem({
             variables: {
               id: cartItem.item.id,

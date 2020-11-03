@@ -5,7 +5,7 @@ export const SingleItemStyle = styled.div`
   box-shadow: ${(props) => props.theme.bs};
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  min-height: 600px;
+  min-height: auto;
   max-width: 1300px;
   padding: 30px;
 
@@ -47,16 +47,32 @@ export const SingleItemStyle = styled.div`
   }
 
   .details {
-    margin-left: 3rem;
+    margin-left: 2rem;
     font-size: 2rem;
     font-weight: 500;
     padding-right: 15%;
   }
+
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+
+  img {
+  padding-bottom: 30px;
+  }
+
+  .details {
+    padding-right: 0%;
+  }
+
+  }
+  
 `;
 
 export const CounterStyles = styled.div`
   position: relative;
-  margin-right: 100px;
+
 `;
 
 export const AdminButtonsContainer = styled.div``;

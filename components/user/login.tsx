@@ -26,7 +26,7 @@ export default function Login(props: LoginProps) {
   });
 
   const [wrapperClass, setWrapperClass] = useState("wrapper");
-  const [buttonLoginClass, setButtonLoginClass] = useState("dark");
+  const [buttonLoginClass, setButtonLoginClass] = useState("dark active");
   const [buttonRegisterClass, setButtonRegisterClass] = useState("dark");
 
   const [loginUser, loginUserData] = useMutation(LOGIN_USER_MUTATION, {

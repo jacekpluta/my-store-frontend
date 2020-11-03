@@ -82,7 +82,7 @@ export default function Gallery() {
                 variants={variants}
                 key={page}
               >
-                {imageIndex === 0 && <p>NEW SALE 50% OFF</p>}
+                {imageIndex === 0 && <p>SALE! 50% OFF</p>}
                 {imageIndex === 1 && <p> STEP INTO NEW AIR</p>}
                 {imageIndex === 2 && <p> START RUNNING</p>}
               </motion.div>

@@ -75,10 +75,8 @@ function Page(props: any) {
     <ThemeProvider theme={theme}>
       <StyledPage>
         <Header></Header>
-
         <Meta></Meta>
         <GlobalStyle />
-
         <Inner>{props.children}</Inner>
         <Footer></Footer>
       </StyledPage>

@@ -4,10 +4,10 @@ const GalleryText = styled.div`
   color: white;
   position: absolute;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 32px;
   z-index: 2;
-  top: 30%;
-  left: 50px;
+  top: 40%;
+  left: 40px;
   margin: 15px;
 `;
 

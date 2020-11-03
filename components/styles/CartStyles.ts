@@ -27,17 +27,19 @@ const slideOutAnimation = keyframes`
 
 interface Props {
   open: Boolean;
+  animate: Boolean;
 }
 
 const showCart = css`
   animation: ${slideInAnimation} 1s forwards;
-  visibility: visible;
+  visibility: ${(props) => props.animate ? "visible" : "hidden"};
   margin-right: 0px;
+  
 `;
 
 const hideCart = css`
   animation: ${slideOutAnimation} 1s forwards;
-  visibility: visible;
+  visibility:  ${(props) => props.animate ? "visible" : "hidden"};
 `;
 
 const CartStyles = styled.div`
@@ -48,7 +50,7 @@ const CartStyles = styled.div`
   height: 100%;
   top: 0;
   right: 0;
-  width: 23%;
+  width: 330px;
   min-width: 200px;
   visibility: hidden;
 
@@ -112,6 +114,7 @@ const CartStyles = styled.div`
 
   ${(props: Props) => (props.open ? showCart : hideCart)};
 
+
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
   z-index: 3;
 
@@ -140,6 +143,11 @@ const CartStyles = styled.div`
 
   .cartItems {
     position: relative;
+
+.emptyCart{
+  text-align:center;
+}
+ 
     ul {
       margin: 0;
       padding: 5px 15px 15px 15px;
@@ -148,6 +156,17 @@ const CartStyles = styled.div`
       list-style: none;
       overflow-y: scroll;
     }
+.emptyCart{
+
+ img{
+  text-align: center;
+  padding: 5px;
+  width: 250px;
+    height: 250px;
+    }
+
+}
+   
   }
 
   footer {
@@ -214,6 +233,8 @@ const CartStyles = styled.div`
       justify-self: center;
     }
   }
+
+   
 `;
 
 export default CartStyles;

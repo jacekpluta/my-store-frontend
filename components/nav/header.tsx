@@ -6,10 +6,13 @@ import Cart from "../cart/cart";
 import { StyledHeader } from "../styles/StyledHeader";
 import React, { useEffect, useState } from "react";
 import { Dimmer } from "../styles/Dimmer";
-import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../../lib/queries";
+import {
+  CURRENT_USER_QUERY,
+  IS_CART_OPEN_QUERY,
+  IS_NAV_OPEN_QUERY,
+} from "../../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Error from "../errorMessage";
-import NavMenu from "../styles/NavMenu";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -30,8 +33,10 @@ export default function Header() {
 
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
+  const navOpenData = useQuery(IS_NAV_OPEN_QUERY);
 
   const cartOpen = cartOpenData.data.cartOpen;
+  const navOpen = navOpenData.data.navOpen;
 
   const changeLogo = () => {
     if (path === "/" && window.scrollY > 0) {
@@ -97,34 +102,6 @@ export default function Header() {
   const user = currentUserQuery.data.user;
   return (
     <>
-      {path !== "/" && (
-        <div style={{ height: "100px", visibility: "hidden" }}></div>
-      )}
-      {/* <NavMenu>
-        <div id="menuToggle">
-          <input type="checkbox" />
-
-          <span></span>
-          <span></span>
-          <span></span>
-
-          <ul id="menu">
-            <a href="#">
-              <li>Home</li>
-            </a>
-            <a href="#">
-              <li>About</li>
-            </a>
-            <a href="#">
-              <li>Info</li>
-            </a>
-            <a href="#">
-              <li>Contact</li>
-            </a>
-          </ul>
-        </div>
-      </NavMenu> */}
-
       <StyledHeader
         style={
           bar && path === "/"
@@ -135,17 +112,20 @@ export default function Header() {
         }
       >
         <Link href="/">
-          <img
-            src={`/images/${image}`}
-            alt="my shop"
-            style={{ width: "15%", cursor: "pointer" }}
-          ></img>
+        <div className="logo">
+
+          <img src={`/images/${image}`} alt="my shop"></img>
+          </div>
         </Link>
 
         <Nav />
-        {cartOpen && <Dimmer></Dimmer>}
+        {cartOpen || navOpen ? <Dimmer></Dimmer> : <></>}
         {user && <Cart></Cart>}
       </StyledHeader>
+
+      {path !== "/" && (
+        <div style={{ height: "100px", visibility: "hidden" }}></div>
+      )}
     </>
   );
 }

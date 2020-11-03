@@ -30,6 +30,12 @@ export const IS_CART_OPEN_QUERY = gql`
   }
 `;
 
+export const IS_NAV_OPEN_QUERY = gql`
+  query IsNavOpen {
+    navOpen @client
+  }
+`;
+
 export const FILTERS_QUERY = gql`
   query Filters {
     filters @client

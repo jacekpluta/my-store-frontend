@@ -41,7 +41,7 @@ it("renders user nav component when signed in", async () => {
   expect(pagination).toMatchSnapshot();
 
   const allPages = wrapper.find(".allPages").text();
-  expect(allPages).toEqual("3");
+  expect(allPages).toEqual("2");
 });
 
 it("disables prev button on first page", async () => {
@@ -89,5 +89,5 @@ it("enables all buttons if not on the first or list page", async () => {
   const prev = wrapper.find("a.prev").prop("aria-disabled");
   const next = wrapper.find("a.next").prop("aria-disabled");
   expect(prev).toEqual(false);
-  expect(next).toEqual(false);
+  expect(next).toEqual(true);
 });

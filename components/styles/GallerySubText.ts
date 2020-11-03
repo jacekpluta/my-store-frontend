@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const GallerySubText = styled.div`
   font-weight: lighter;
-  font-size: 30px;
+  font-size: 26px;
 `;
 
 export default GallerySubText;

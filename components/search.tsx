@@ -88,13 +88,13 @@ export default function Search({ biggerIcon }: ISearchProps) {
                     style={
                       biggerIcon
                         ? { marginBottom: "0px" }
-                        : { marginBottom: "2px" }
+                        : { marginBottom: "-2px" }
                     }
                   />
                   <input
                     {...getInputProps({
                       type: "search",
-                      placeholder: `Search for an item      `,
+                      placeholder: `Search...`,
                       id: "search",
                       className: loading ? "loading" : "",
                       onChange: (e) => {
