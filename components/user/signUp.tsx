@@ -7,20 +7,7 @@ import { useFormFields } from "../utils/useFormFields";
 import Link from "next/link";
 import Router from "next/router";
 import { Bar } from "../styles/Bar";
-
-export const CREATE_USER_MUTATION = gql`
-  mutation CREATE_USER_MUTATION(
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    signUp(name: $name, email: $email, password: $password) {
-      id
-      email
-      name
-    }
-  }
-`;
+import { CREATE_USER_MUTATION } from "../../lib/queries";
 
 export default function SignUp() {
   const [fields, handleFieldChange] = useFormFields({

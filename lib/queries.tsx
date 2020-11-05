@@ -71,7 +71,7 @@ export const ALL_ITEMS_QUERY = gql`
 `;
 
 export const FEATURED_ITEMS_QUERY = gql`
-  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
+  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 6) {
     items(first: $first, skip: $skip, orderBy: description_ASC) {
       id
       title
@@ -83,8 +83,22 @@ export const FEATURED_ITEMS_QUERY = gql`
   }
 `;
 
+export const CREATE_USER_MUTATION = gql`
+  mutation CREATE_USER_MUTATION(
+    $name: String!
+    $email: String!
+    $password: String!
+  ) {
+    signUp(name: $name, email: $email, password: $password) {
+      id
+      email
+      name
+    }
+  }
+`;
+
 export const DISCOUNT_ITEMS_QUERY = gql`
-  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 4) {
+  query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = 6) {
     items(first: $first, skip: $skip, orderBy: id_ASC) {
       id
       title
@@ -120,20 +134,6 @@ export const ADD_TO_CART_MUTATION = gql`
 export const LOGIN_USER_MUTATION = gql`
   mutation LOGIN_USER_MUTATION($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      id
-      email
-      name
-    }
-  }
-`;
-
-export const CREATE_USER_MUTATION = gql`
-  mutation CREATE_USER_MUTATION(
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    signUp(name: $name, email: $email, password: $password) {
       id
       email
       name

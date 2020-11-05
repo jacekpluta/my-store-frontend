@@ -12,20 +12,23 @@ import MenuItem from "./menuItem";
 import { IItem } from "../catalog/items";
 import PickSize from "../singleItem/pickSize";
 import { ADD_TO_CART_ITEM_QUERY } from "../../lib/queries";
+import { Icon } from "semantic-ui-react";
 
 export interface IItems {
   items?: [IItem];
   subTitle?: string;
   title?: string;
+  menuWrapper: number;
 }
 
-const Discounts = ({ items, subTitle, title }: IItems) => {
+const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
   const width = 280;
-  const [galleryWidth, setGalleryWidth] = useState(0);
+  // const [galleryWidth, setGalleryWidth] = useState(0);
   const scrollmenu = useRef(null);
   const [alignCenter, setAlignCenter] = useState(false);
   const [dicountsHovered, setDicountsHovered] = useState(false);
   const [showPickSize, setShowPickSize] = useState(false);
+  const [scroll, setScroll] = useState(0);
 
   const handleShowPickSize = (show: any) => {
     setShowPickSize(show);
@@ -43,12 +46,12 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
     ));
   };
 
-  const scrollmenuWidth = scrollmenu?.current?.allItemsWidth;
-  useEffect(() => {
-    if (scrollmenuWidth && scrollmenu.current) {
-      setGalleryWidth(scrollmenuWidth);
-    }
-  }, [scrollmenu.current, scrollmenuWidth]);
+  // const scrollmenuWidth = scrollmenu?.current?.allItemsWidth;
+  // useEffect(() => {
+  //   if (scrollmenuWidth && scrollmenu.current) {
+  //     setGalleryWidth(scrollmenuWidth);
+  //   }
+  // }, [scrollmenu.current, scrollmenuWidth]);
 
   const menuItems = ItemsMenu();
 
@@ -70,13 +73,91 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const els = document.querySelectorAll(`.menu-wrapper`);
+    if (els[menuWrapper]) {
+      if (scroll > els[menuWrapper].clientWidth) {
+        setScroll(els[menuWrapper].clientWidth);
+      }
+    }
+    if (scroll < 0) {
+      setScroll(0);
+    }
+  }, [scroll]);
+
   const addToCartItemQuery = useQuery(ADD_TO_CART_ITEM_QUERY, {
     fetchPolicy: "network-only",
   });
 
+  const update = () => {
+    const els = document.querySelectorAll(`.menu-wrapper`);
+    const width = els[menuWrapper].scrollLeft;
+
+    if (width) {
+      setScroll(width);
+    }
+  };
+
+  useEffect(() => {
+    const els = document.querySelectorAll(`.menu-wrapper`);
+
+    if (els[menuWrapper]) {
+      els[menuWrapper].scrollTo({ top: 0, left: scroll, behavior: "smooth" });
+    }
+  }, [scroll]);
+
   if (addToCartItemQuery.loading) return <p>Loading...</p>;
 
   const data = addToCartItemQuery.data.addToCartItem;
+
+  const ArrowLeft = () => {
+    if (alignCenter && scroll > 0) {
+      return (
+        <Icon
+          className="arrow-prev"
+          style={{
+            position: "absolute",
+            zIndex: 5,
+            color: "grey",
+            left: "60px",
+            marginTop: "-60px",
+          }}
+          size="huge"
+          onClick={() => setScroll((scroll: number) => scroll - width)}
+          name="angle left"
+        />
+      );
+    } else {
+      return <div></div>;
+    }
+  };
+
+  const ArrowRight = () => {
+    const els = document.querySelectorAll(`.menu-wrapper`);
+    if (els[menuWrapper]) {
+      if (alignCenter && scroll < els[menuWrapper].clientWidth - 10) {
+        return (
+          <Icon
+            className="arrow-next"
+            style={{
+              position: "absolute",
+              zIndex: 5,
+              color: "grey",
+              right: "60px",
+              marginTop: "-60px",
+            }}
+            size="huge"
+            onClick={() => setScroll((scroll: number) => scroll + width)}
+            name="angle right"
+          />
+        );
+      } else {
+        return <div></div>;
+      }
+    } else {
+      return <div></div>;
+    }
+  };
 
   return (
     <DiscountsStyle>
@@ -92,12 +173,16 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
           <FeaturedStyle>{title}</FeaturedStyle>
           <UnderFeaturedStyle>{subTitle}</UnderFeaturedStyle>
         </FeaturedContainer>
-
         <ScrollMenu
+          onUpdate={update}
+          hideArrows={true}
           ref={scrollmenu}
           alignCenter={alignCenter}
           clickWhenDrag={true}
           dragging={true}
+          arrowLeft={ArrowLeft()}
+          arrowRight={ArrowRight()}
+          hideSingleArrow={true}
           data={menuItems}
           innerWrapperStyle={{
             transform: "translate3d(0px, 0px, 0px)",
@@ -111,7 +196,7 @@ const Discounts = ({ items, subTitle, title }: IItems) => {
                   transition: "all 0.3s ease",
                 }
               : {
-                  overflowX: "auto",
+                  overflowX: "scroll",
                 }
           }
           useButtonRole={true}

@@ -19,6 +19,10 @@ const CartItemsNumber = styled.div`
   width: 1.6em;
   height: 1.6em;
   cursor: pointer;
+
+  @media (max-width: 1000px) {
+    right: 75px;
+  }
 `;
 
 export default CartItemsNumber;

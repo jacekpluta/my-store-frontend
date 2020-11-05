@@ -26,7 +26,14 @@ function Home(props: HomeProps) {
 
   const Menu = () =>
     logoImages.map((image, index) => {
-      return <LogosImg key={index} src={logoImages[index]}></LogosImg>;
+      return (
+        <LogosImg
+          style={{ cursor: "grab" }}
+          draggable="false"
+          key={index}
+          src={logoImages[index]}
+        ></LogosImg>
+      );
     });
 
   const menuItems = Menu();
@@ -35,12 +42,14 @@ function Home(props: HomeProps) {
     <>
       <Gallery></Gallery>
       <Discounts
+        menuWrapper={0}
         items={discountItems}
         title={"Shoes on sale"}
         subTitle={"Get your new pair of shoes today!"}
       ></Discounts>
       <ImageMain></ImageMain>
       <Discounts
+        menuWrapper={1}
         items={featuredItems}
         title={"Featured products"}
         subTitle={"Check out our newest addition!"}

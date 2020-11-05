@@ -130,7 +130,7 @@ const MenuItem = ({
               query: { id: item.id },
             }}
           >
-            <DiscountsImg src={item.image}></DiscountsImg>
+            <DiscountsImg draggable="false" src={item.image}></DiscountsImg>
           </Link>
         </motion.div>
       </ContainerImg>

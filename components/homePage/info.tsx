@@ -9,6 +9,8 @@ export const InfoStyles = styled.div`
   grid-template-columns: 25% 25% 25%;
   justify-content: center;
   grid-gap: 20px;
+
+  margin-left: 20px;
   @media (max-width: 870px) {
     grid-template-columns: 55%;
   }

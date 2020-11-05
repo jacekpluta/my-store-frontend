@@ -126,12 +126,10 @@ export const FormStyles = styled.div`
     overflow: hidden;
   }
   .veen .wrapper > form {
-
     padding: 34px 30px 30px;
     width: 100%;
     transition: all 0.5s;
     background: #fff;
-
   }
   .veen .wrapper > form:focus {
     outline: none;
@@ -187,7 +185,7 @@ export const FormStyles = styled.div`
   .veen > .wrapper.move input:focus {
     border-color: #e0b722;
   }
-  @ (max-width: 767px) {
+  @media (max-width: 767px) {
     .veen {
       padding: 5px;
       margin: 0;

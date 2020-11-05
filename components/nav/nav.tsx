@@ -1,8 +1,12 @@
 import Link from "next/link";
 import NavStyles from "../styles/NavStyles";
 import React, { useState, useEffect, useRef } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { CURRENT_USER_QUERY, IS_NAV_OPEN_QUERY } from "../../lib/queries";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import {
+  CREATE_USER_MUTATION,
+  CURRENT_USER_QUERY,
+  IS_NAV_OPEN_QUERY,
+} from "../../lib/queries";
 import SignOut from "../user/signOut";
 import { isCartOpen } from "../../lib/vars";
 import styled from "styled-components";
@@ -15,6 +19,7 @@ import { useRouter } from "next/router";
 import { isNavOpen } from "../../lib/vars";
 import NavMenu from "../styles/NavMenu";
 import { NavIcons } from "../styles/NavIcons";
+import faker from "faker";
 
 const AnimationStyles = styled.span`
   position: absolute;
@@ -99,6 +104,11 @@ export default function Nav() {
     }
   }
 
+  const [createUser, createUserData] = useMutation(CREATE_USER_MUTATION, {
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    awaitRefetchQueries: true,
+  });
+
   return (
     <NavStyles data-test="nav" ref={wrapperRef}>
       <NavMenu navOpen={navOpen} main={main} toggleBar={toggleBar}>
@@ -177,15 +187,37 @@ export default function Nav() {
               </>
             )}
             {!currentUser.user && (
-              <Link href="/login">
-                <li
-                  onClick={() => {
-                    isNavOpen(!navOpen);
-                  }}
-                >
-                  <a>Login / Register</a>
-                </li>
-              </Link>
+              <>
+                <Link href="/login">
+                  <li
+                    onClick={() => {
+                      isNavOpen(!navOpen);
+                    }}
+                  >
+                    <a>Login / Register</a>
+                  </li>
+                </Link>
+
+                <Link href="/login">
+                  <li
+                    onClick={async () => {
+                      const name = faker.name.findName();
+                      const email = faker.internet.email();
+                      const password = faker.internet.password();
+
+                      await createUser({
+                        variables: {
+                          email,
+                          name,
+                          password,
+                        },
+                      });
+                    }}
+                  >
+                    <a>Guest login</a>
+                  </li>
+                </Link>
+              </>
             )}
             <div className="footer">
               <ul>
@@ -212,13 +244,6 @@ export default function Nav() {
 
       <NavIcons>
         <ul className="icons">
-       
-          {/* <li
-            className="icon"
-        
-          >
-            <Icon size="big" name="heart" />
-          </li> */}
           {currentUser.user && (
             <li
               onClick={() => {
@@ -227,7 +252,7 @@ export default function Nav() {
               className="icon"
             >
               <div style={{ display: "inline" }}>
-                <Icon size="big" name="shopping cart"     />
+                <Icon size="big" name="shopping cart" />
 
                 {cartItems?.length === 0 ? (
                   <CartItemsNumber> 0</CartItemsNumber>
@@ -250,14 +275,20 @@ export default function Nav() {
             </li>
           )}
 
-             <li className="icon">
+          <li className="icon">
             <Popup
               content={<Search biggerIcon={true} />}
               on="click"
               pinned
               position="bottom right"
               offset="15px,5px"
-              trigger={<Icon size="big" name="search" style={{marginRight: "25px"}} />}
+              trigger={
+                <Icon
+                  size="big"
+                  name="search"
+                  style={{ marginRight: "25px" }}
+                />
+              }
             />
           </li>
         </ul>
@@ -283,7 +314,6 @@ export default function Nav() {
               </Link>
             </li>
           )}
-
 
           {/* <li className="icon">
             <Icon name="heart" size="big" style={{ paddingLeft: "30px" }} />
@@ -343,22 +373,22 @@ export default function Nav() {
                   )}
                 </div>
               </li>
-              
-          <li className="icon" >
-            <Popup
-              content={<Search biggerIcon={true} />}
-              on="click"
-              pinned
-              position="bottom center"
-              trigger={
-                <Icon
-                  name="search"
-                  size="big"
-                  style={{ paddingLeft: "15px" }}
+
+              <li className="icon">
+                <Popup
+                  content={<Search biggerIcon={true} />}
+                  on="click"
+                  pinned
+                  position="bottom center"
+                  trigger={
+                    <Icon
+                      name="search"
+                      size="big"
+                      style={{ paddingLeft: "15px" }}
+                    />
+                  }
                 />
-              }
-            />
-          </li>
+              </li>
             </>
           )}
         </ul>

@@ -19,10 +19,10 @@ export const DiscountsStyle = styled.div`
     padding-right: 40px;
   }
 
-  user-select: none;
+  /* user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
+  -ms-user-select: none; */
 `;
 
 export const ContainerImg = styled.div`
@@ -66,11 +66,11 @@ export const ButtonContainerDetails = styled.div`
 export const DiscountsImg = styled.img`
   width: 100%;
   height: auto;
-  cursor: pointer;
-  user-select: none;
+  cursor: grab;
+  /* user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
+  -ms-user-select: none; */
 `;
 
 export const FeaturedContainer = styled.div`

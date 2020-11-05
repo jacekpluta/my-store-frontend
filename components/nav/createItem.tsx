@@ -44,33 +44,32 @@ export const CREATE_ITEM_MUTATION = gql`
   }
 `;
 
-
-export const CREATE_ITEM_LOWERCASE_MUTATION = gql`
-  mutation CREATE_ITEM_LOWERCASE_MUTATION(
-    $title: String!
-    $description: String!
-    $price: Int!
-    $image: String!
-    $largeImage: String!
-    $gender: Gender!
-    $category: Category!
-    $brand: Brand!
-  ) {
-    createItemLowercase(
-      title: $title
-      description: $description
-      price: $price
-      image: $image
-      largeImage: $largeImage
-      gender: $gender
-      category: $category
-      brand: $brand
-    ) {
-      id
-      title
-    }
-  }
-`;
+// export const CREATE_ITEM_LOWERCASE_MUTATION = gql`
+//   mutation CREATE_ITEM_LOWERCASE_MUTATION(
+//     $title: String!
+//     $description: String!
+//     $price: Int!
+//     $image: String!
+//     $largeImage: String!
+//     $gender: Gender!
+//     $category: Category!
+//     $brand: Brand!
+//   ) {
+//     createItemLowercase(
+//       title: $title
+//       description: $description
+//       price: $price
+//       image: $image
+//       largeImage: $largeImage
+//       gender: $gender
+//       category: $category
+//       brand: $brand
+//     ) {
+//       id
+//       title
+//     }
+//   }
+// `;
 
 interface HTMLInputEvent {
   target: HTMLInputElement & EventTarget;
@@ -137,15 +136,13 @@ const CreateItem = () => {
                   },
                 });
 
-                const res2 = await createItemLowercase({
-                  variables: {
-                    ...fields,
-                    image: image,
-                    largeImage: largeImage,
-                  },
-                });
-
-                
+                // const res2 = await createItemLowercase({
+                //   variables: {
+                //     ...fields,
+                //     image: image,
+                //     largeImage: largeImage,
+                //   },
+                // });
 
                 Router.push({
                   pathname: "/item",
