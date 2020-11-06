@@ -40,9 +40,6 @@ export default function Cart() {
   const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const [isLoading, setIsLoading] = useState(false);
   const [animate, setAnimate] = useState(false);
-
-
-
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -69,17 +66,20 @@ export default function Cart() {
   const handleLoading = (loading: boolean) => {
     setIsLoading(loading);
   };
-  
+
   useEffect(() => {
-    if(currentUserQuery.data){
-  const timer = setTimeout(() => {
-    setAnimate(true)
-  }, 2000);
+    if (currentUserQuery.data) {
+      if (wrapperRef && wrapperRef.current) {
+        var position = wrapperRef.current.getBoundingClientRect();
+        if (position.left < window.innerWidth) {
+          const timer = setTimeout(() => {
+            setAnimate(true);
+          }, 100);
+          return () => clearTimeout(timer);
+        }
+      }
     }
-
-  // return () => clearTimeout(timer);
-}, []);
-
+  }, [wrapperRef, wrapperRef.current]);
 
   if (cartOpenData.loading) return <p>Loading...</p>;
   if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
@@ -117,11 +117,9 @@ export default function Cart() {
         <div className="cartItems">
           {user?.cart?.length === 0 ? (
             <>
-           <div className="emptyCart">
-    <img height={200} src={emptyCart} />
-          
-          
-          </div>
+              <div className="emptyCart">
+                <img height={200} src={emptyCart} />
+              </div>
               <ButtonContinue
                 onClick={() => {
                   isCartOpen(false);

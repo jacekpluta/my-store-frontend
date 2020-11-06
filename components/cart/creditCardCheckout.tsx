@@ -8,7 +8,6 @@ import gql from "graphql-tag";
 
 import { CURRENT_USER_QUERY } from "../../lib/queries";
 import { ALL_ORDERS_QUERY } from "../nav/orders";
-import { ICartItem } from "./cartItem";
 
 export const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {

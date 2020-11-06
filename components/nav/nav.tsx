@@ -165,7 +165,8 @@ export default function Nav() {
                     <a>Accout</a>
                   </li>
                 </Link>
-                {matchedPermissions.length && (
+
+                {matchedPermissions.length > 0 && (
                   <Link href="/sell">
                     <li
                       onClick={() => {
@@ -198,25 +199,23 @@ export default function Nav() {
                   </li>
                 </Link>
 
-                <Link href="/login">
-                  <li
-                    onClick={async () => {
-                      const name = faker.name.findName();
-                      const email = faker.internet.email();
-                      const password = faker.internet.password();
+                <li
+                  onClick={async () => {
+                    const name = faker.name.findName();
+                    const email = faker.internet.email();
+                    const password = faker.internet.password();
 
-                      await createUser({
-                        variables: {
-                          email,
-                          name,
-                          password,
-                        },
-                      });
-                    }}
-                  >
-                    <a>Guest login</a>
-                  </li>
-                </Link>
+                    await createUser({
+                      variables: {
+                        email,
+                        name,
+                        password,
+                      },
+                    });
+                  }}
+                >
+                  <a>Guest login</a>
+                </li>
               </>
             )}
             <div className="footer">
