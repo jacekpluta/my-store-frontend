@@ -20,13 +20,13 @@ const NavStyles = styled.ul`
 
     .icons {
       li {
-        padding-right: 10px;
+        padding-right: 5px;
       }
       display: flex;
       list-style: none;
       position: absolute;
       top: 30px;
-      right: 5px;
+      right: 0px;
     }
   }
 `;

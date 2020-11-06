@@ -143,13 +143,9 @@ const MenuItem = ({
         >
           <p style={{ cursor: "pointer" }}>{item.title}</p>
         </Link>
-        <Button
-          animated="fade"
-          className="buttonHeart"
-          style={{ backgroundColor: "white" }}
-        >
+        <Button animated="fade" className="buttonHeart">
           <Button.Content visible>
-            <Icon size="big" name="heart outline" />
+            <Icon size="big" style={{ zIndex: -2 }} name="heart outline" />
           </Button.Content>
           <Button.Content hidden>
             <Icon size="big" name="heart" />

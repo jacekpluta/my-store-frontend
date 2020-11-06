@@ -21,7 +21,7 @@ const CartItemsNumber = styled.div`
   cursor: pointer;
 
   @media (max-width: 1000px) {
-    right: 75px;
+    right: 65px;
   }
 `;
 

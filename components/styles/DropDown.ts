@@ -45,7 +45,7 @@ const SearchStyles = styled.div`
   border-style: solid;
   border-width: 1px;
   border-color: ${(props) => props.theme.blackwhite};
-
+  margin-left: 20px;
   input {
     width: 130px;
     padding: 10px;

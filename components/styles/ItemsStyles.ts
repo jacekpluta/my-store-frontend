@@ -117,24 +117,26 @@ export const UnderFeaturedStyle = styled.h4`
 `;
 
 export const Description = styled.div`
-  z-index: 1;
+  z-index: 0;
   color: grey;
   position: relative;
   display: grid;
-  grid-template-columns: 0.9fr 0.1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 0.7fr 0.3fr;
+  grid-template-rows: auto auto;
   padding-left: 10px;
-  padding-bottom: 10px;
+
   padding-top: 12px;
-  z-index: 1;
+  text-align: left;
+  grid-gap: 5px;
+
   p {
     padding: 0;
     margin: 0;
-
     line-height: 1;
     color: ${(props) => props.theme.black};
     justify-self: start;
   }
+
   p:nth-child(1) {
     font-size: 1.2em;
   }
@@ -147,10 +149,33 @@ export const Description = styled.div`
     height: 1px;
     padding-bottom: 20px;
     top: -8px;
+    background-color: transparent;
   }
   span {
     position: aboslute;
     top: 0;
     left: 0;
+  }
+
+  /* @media (max-width: 800px) {
+    grid-template-rows: 40px 30px;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-rows: 55px 30px;
+  } */
+
+  @media (max-width: 530px) {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-gap: 0px;
+
+    .buttonHeart {
+      padding: 0;
+      margin: 0;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      justify-self: left;
+    }
   }
 `;

@@ -126,6 +126,12 @@ export default function Nav() {
           <span></span>
           <ul id="menu">
             <h1>Menu</h1>
+            {currentUser.user && (
+              <p>
+                Hello, <b>{currentUser.user.name}!</b>
+              </p>
+            )}
+
             <div className="barTop"></div>
             <Link href="/">
               <li
@@ -201,7 +207,7 @@ export default function Nav() {
 
                 <li
                   onClick={async () => {
-                    const name = faker.name.findName();
+                    const name = `guest-${faker.random.number()}`;
                     const email = faker.internet.email();
                     const password = faker.internet.password();
 
@@ -332,7 +338,7 @@ export default function Nav() {
                 </Link>
               </li>
 
-              {matchedPermissions.length && (
+              {matchedPermissions.length > 0 && (
                 <li>
                   <Link href="/sell">
                     <a>Sell</a>

@@ -15,8 +15,8 @@ const GalleryDot = styled.div`
   font-size: 18px;
   z-index: 3;
   /* top: 40%; */
-  left: calc(50% - 120px);
-  top: 300px;
+  left: calc(50% - 105px);
+  top: 40vh;
   margin: 15px;
   opacity: 0.5;
 

@@ -31,6 +31,12 @@ const NavMenu = styled.ul`
 
     #menuToggle h1 {
       color: black;
+      padding: 0;
+      margin: 0;
+    }
+    #menuToggle p {
+      position: relative;
+      left: -18px;
     }
 
     #menuToggle a {
