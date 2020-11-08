@@ -10,7 +10,7 @@ interface ItemsProps {
 }
 //props.query
 function catalog(props: ItemsProps) {
-  const filtersData = useQuery(FILTERS_QUERY, { fetchPolicy: "network-only" });
+  const filtersData = useQuery(FILTERS_QUERY);
 
   if (filtersData.loading) return <p>Loading...</p>;
   if (filtersData.error) return <p>ERROR: {filtersData.error.message}</p>;

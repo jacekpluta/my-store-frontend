@@ -24,14 +24,6 @@ const ButtonStyle = styled.button`
   }
 `;
 
-export const DELETE_CART_ITEM_WHEN_ITEM_DELETED_MUTATION = gql`
-  mutation DELETE_CART_ITEM_WHEN_ITEM_DELETED_MUTATION($id: ID!) {
-    deleteCartItemWhenItemDeleted(id: $id) {
-      id
-    }
-  }
-`;
-
 export const DELETE_CART_ITEM_MUTATION = gql`
   mutation DELETE_CART_ITEM_MUTATION($id: ID!) {
     deleteCartItem(id: $id) {
@@ -48,13 +40,16 @@ export const GET_DELETED_ITEM_ID = gql`
 
 export interface IItem {
   item: {
-    id: number;
+    id: string;
     price: number;
     user: null;
     image: string;
     title: string;
     description: string;
     largeImage: string;
+    brand: string;
+    category: string;
+    gender: string;
   };
 }
 
@@ -83,28 +78,11 @@ interface propsCartItem {
 }
 
 const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
-  const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
-  });
-
-  const [
-    deleteCartItemWhenItemDeleted,
-    deleteCartItemWhenItemDeletedMutation,
-  ] = useMutation(DELETE_CART_ITEM_WHEN_ITEM_DELETED_MUTATION, {
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    awaitRefetchQueries: true,
-  });
+  const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION);
 
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
-    DELETE_CART_ITEM_MUTATION,
-    {
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    }
+    DELETE_CART_ITEM_MUTATION
   );
-
-  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-  const getDeletedItemQuery = useQuery(GET_DELETED_ITEM_ID);
-  const deletedItemId = getDeletedItemQuery?.data?.id;
 
   const deleteCartUpdate = (cache: any, payload: any) => {
     let data;
@@ -116,42 +94,19 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
 
     const cartItemId = payload.data.deleteCartItem.id;
 
-    data.user.cart = data.user.cart.filter(
+    const newCart = data.user.cart.filter(
       (cartItem: ICartItem) => cartItem.id !== cartItemId
     );
 
     try {
-      cache.writeQuery({ query: CURRENT_USER_QUERY, data });
+      cache.writeQuery({
+        query: CURRENT_USER_QUERY,
+        data: { user: { cart: newCart } },
+      });
     } catch (e) {
       console.log(e.message);
     }
   };
-
-  useEffect(() => {
-    if (deletedItemId) {
-      //delete item from cart if it was deleted from items page
-      async function deleteItemFromCart() {
-        const userCart = currentUserQuery.data.user.cart;
-
-        //check if deleted item is in the cart
-        const foundItem = userCart.filter((item: IItem) => {
-          if (item.item.id === deletedItemId) return item;
-        });
-
-        //if it is then delete it
-        if (foundItem) {
-          const id = foundItem[0].id;
-
-          await deleteCartItemWhenItemDeleted({
-            variables: {
-              id: id,
-            },
-          }).catch((err) => console.log(err.message));
-        }
-      }
-      deleteItemFromCart();
-    }
-  }, [deletedItemId]);
 
   if (addToCartMutation.error) return <Error error={addToCartMutation.error} />;
   if (!cartItem) return <p>Error: no cart item</p>;
@@ -170,9 +125,9 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
       <div className="price">
         <p>
           {cartItem?.quantity} &times;{" "}
-          <div style={{ fontWeight: 900, display: "inline" }}>
+          <span style={{ fontWeight: 900, display: "inline" }}>
             {formatMoney(cartItem?.item?.price)}
-          </div>
+          </span>
         </p>
       </div>
       <div className="counter">
@@ -182,10 +137,11 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
             await addToCart({
               variables: {
                 id: cartItem.item.id,
-                quantity: 1,
+                quantity: +1,
                 size: cartItem.size,
               },
-            });
+            }).catch((err) => console.log(err.message));
+
             handleLoading(false);
           }}
         >
@@ -201,6 +157,13 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
                   id: cartItem.item.id,
                 },
                 update: deleteCartUpdate,
+
+                // optimisticResponse: {
+                //   __typename: "Mutation",
+                //   deleteCartItem: {
+                //     __typename: "CartItem",
+                //   },
+                // },
               }).catch((err) => console.log(err.message));
             } else {
               await addToCart({
@@ -223,12 +186,19 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
         className="close"
         title="Delete Item"
         onClick={async () => {
-         
           await deleteCartItem({
             variables: {
               id: cartItem.item.id,
             },
             update: deleteCartUpdate,
+
+            optimisticResponse: {
+              __typename: "Mutation",
+              deleteCartItem: {
+                __typename: "cartItem",
+                id: cartItem.item.id,
+              },
+            },
           }).catch((err) => console.log(err.message));
         }}
       >

@@ -29,6 +29,9 @@ export default function Pagination(props: PaginationProps) {
   if (error) return <Error error={error} />;
   const pagesCount = data?.itemsConnection?.aggregate?.count;
   const allPages = Math.ceil(pagesCount / perPage);
+
+  console.log(allPages, "allPages");
+  console.log(page, "page");
   return (
     <PaginationStyles data-test="pagination">
       <Head>
@@ -39,25 +42,79 @@ export default function Pagination(props: PaginationProps) {
       <Link
         href={{
           pathname: "/catalog",
-          query: { page: page - 1 },
+          query: { page: 1 },
         }}
       >
         <a className="prev" aria-disabled={page <= 1}>
-          ⬅ Prev
+          ⬅ First
         </a>
       </Link>
-      <p style={{ marginTop: 5 }}>
-        Page {page} of <span className="allPages">{allPages}</span>
-      </p>
+      {page <= allPages && page > 2 && (
+        <Link
+          href={{
+            pathname: "/catalog",
+            query: { page: allPages - page + 2 },
+          }}
+        >
+          <a className="prev">{allPages - page + 2}</a>
+        </Link>
+      )}
+
+      {page <= allPages && page > 1 && (
+        <Link
+          href={{
+            pathname: "/catalog",
+            query: { page: allPages - page + 1 },
+          }}
+        >
+          <a className="prev">{allPages - page + 1}</a>
+        </Link>
+      )}
 
       <Link
         href={{
           pathname: "/catalog",
-          query: { page: page + 1 },
+          query: { page: page },
+        }}
+      >
+        <a aria-disabled={true} className="prev">
+          {page}
+        </a>
+      </Link>
+
+      {/* <p style={{ marginTop: 5 }}>
+        Page {page} of <span className="allPages">{allPages}</span>
+      </p> */}
+      {allPages > page && page + 1 > allPages === false && (
+        <Link
+          href={{
+            pathname: "/catalog",
+            query: { page: page + 1 },
+          }}
+        >
+          <a className="next">{page + 1}</a>
+        </Link>
+      )}
+
+      {allPages > page && page + 2 > allPages === false && (
+        <Link
+          href={{
+            pathname: "/catalog",
+            query: { page: page + 2 },
+          }}
+        >
+          <a className="next">{page + 2}</a>
+        </Link>
+      )}
+
+      <Link
+        href={{
+          pathname: "/catalog",
+          query: { page: allPages },
         }}
       >
         <a className="next" aria-disabled={page >= allPages}>
-          ➡ Next
+          Last ➡
         </a>
       </Link>
     </PaginationStyles>

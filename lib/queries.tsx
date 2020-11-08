@@ -9,17 +9,36 @@ export const CURRENT_USER_QUERY = gql`
       name
       permissions
       cart {
-        id
         quantity
         size
         item {
           id
-          price
-          image
           title
           description
+          price
+          gender
+          category
+          brand
+          image
+          largeImage
         }
       }
+    }
+  }
+`;
+
+export const SINGLE_ITEM_QUERY = gql`
+  query SINGLE_ITEM_QUERY($id: ID!) {
+    item(where: { id: $id }) {
+      id
+      title
+      description
+      image
+      largeImage
+      price
+      brand
+      category
+      gender
     }
   }
 `;
@@ -51,6 +70,36 @@ export const CLEAR_FILTERS_QUERY = gql`
 export const ADD_TO_CART_ITEM_QUERY = gql`
   query AddToCartItem {
     addToCartItem @client
+  }
+`;
+
+export const UPDATE_ITEM_MUTATION = gql`
+  mutation UPDATE_ITEM_MUTATION(
+    $id: ID!
+    $title: String
+    $description: String
+    $price: Int
+    $gender: Gender
+    $brand: Brand
+    $category: Category
+  ) {
+    updateItem(
+      id: $id
+      title: $title
+      description: $description
+      price: $price
+      gender: $gender
+      brand: $brand
+      category: $category
+    ) {
+      id
+      title
+      description
+      price
+      gender
+      brand
+      category
+    }
   }
 `;
 
@@ -126,7 +175,20 @@ export const FILTERED_ITEMS_QUERY = gql`
 export const ADD_TO_CART_MUTATION = gql`
   mutation ADD_TO_CART_MUTATION($id: ID!, $quantity: Int!, $size: Int!) {
     addToCart(id: $id, quantity: $quantity, size: $size) {
-      id
+      __typename
+      quantity
+      size
+      item {
+        id
+        title
+        description
+        price
+        gender
+        category
+        brand
+        image
+        largeImage
+      }
     }
   }
 `;

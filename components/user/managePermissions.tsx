@@ -84,7 +84,6 @@ export default function ManagePermissions(props: ManagePermissionsProps) {
       skip: page * usersOnPage - usersOnPage,
       first: usersOnPage,
     },
-    fetchPolicy: "network-only",
   });
 
   if (

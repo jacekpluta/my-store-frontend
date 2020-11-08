@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../../lib/queries";
+import { ADD_TO_CART_MUTATION } from "../../lib/queries";
 import Error from "../errorMessage";
 import Counter from "./counter";
 import { IItem } from "../catalog/items";
@@ -41,7 +41,7 @@ function PickSize({ showPickSize, handleShowPickSize, item }: PropsPickSize) {
   const [error, setError] = useState(false);
 
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION, {
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
   useEffect(() => {

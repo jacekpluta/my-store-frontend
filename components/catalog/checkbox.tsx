@@ -11,9 +11,7 @@ const Checkbox: React.FunctionComponent<MyProps> = (props) => {
   const { children, changeFilter } = props;
   const [checked, setChecked] = useState<boolean>(false);
 
-  const clearFiltersData = useQuery(CLEAR_FILTERS_QUERY, {
-    fetchPolicy: "network-only",
-  });
+  const clearFiltersData = useQuery(CLEAR_FILTERS_QUERY);
 
   useEffect(() => {
     if (!clearFiltersData.loading && !clearFiltersData.error) {

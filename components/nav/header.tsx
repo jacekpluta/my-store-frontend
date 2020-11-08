@@ -6,13 +6,8 @@ import Cart from "../cart/cart";
 import { StyledHeader } from "../styles/StyledHeader";
 import React, { useEffect, useState } from "react";
 import { Dimmer } from "../styles/Dimmer";
-import {
-  CURRENT_USER_QUERY,
-  IS_CART_OPEN_QUERY,
-  IS_NAV_OPEN_QUERY,
-} from "../../lib/queries";
+import { IS_CART_OPEN_QUERY, IS_NAV_OPEN_QUERY } from "../../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
-import Error from "../errorMessage";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -31,9 +26,9 @@ export default function Header() {
   const router = useRouter();
   const path = router.pathname;
 
-  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
   const navOpenData = useQuery(IS_NAV_OPEN_QUERY);
+  const [cartActive, setCartActive] = useState(false);
 
   const cartOpen = cartOpenData.data.cartOpen;
   const navOpen = navOpenData.data.navOpen;
@@ -83,7 +78,7 @@ export default function Header() {
 
   useEffect(() => {
     const header = document.querySelector("header");
-    if (currentUserQuery.data && header) {
+    if (header) {
       if (path === "/") {
         header.classList.toggle("sticky", false);
         window.addEventListener("scroll", handleScroll);
@@ -93,13 +88,8 @@ export default function Header() {
     }
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [path, currentUserQuery]);
+  }, [path]);
 
-  if (currentUserQuery.loading) return <></>;
-  if (currentUserQuery.error)
-    return <Error error={currentUserQuery.error}></Error>;
-
-  const user = currentUserQuery.data.user;
   return (
     <>
       <StyledHeader
@@ -112,15 +102,14 @@ export default function Header() {
         }
       >
         <Link href="/">
-        <div className="logo">
-
-          <img src={`/images/${image}`} alt="my shop"></img>
+          <div className="logo">
+            <img src={`/images/${image}`} alt="my shop"></img>
           </div>
         </Link>
 
         <Nav />
         {cartOpen || navOpen ? <Dimmer></Dimmer> : <></>}
-        {user && <Cart></Cart>}
+        {<Cart></Cart>}
       </StyledHeader>
 
       {path !== "/" && (

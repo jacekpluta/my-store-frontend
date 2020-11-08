@@ -32,7 +32,7 @@ const Size = ({
     }
   }
 
-  const PickSizeDrop = ({ sizeNum, key, handleSizePicked }: PickProps) => {
+  const PickSizeDrop = ({ sizeNum, handleSizePicked }: PickProps) => {
     return (
       <li>
         <span>

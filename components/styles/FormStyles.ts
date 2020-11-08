@@ -11,7 +11,7 @@ export const FormStyles = styled.div`
     width: 70%;
     margin: 100px auto;
     background: rgba(255, 255, 255, 0.5);
-    min-height: 400px;
+    min-height: 420px;
     display: table;
     position: relative;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);

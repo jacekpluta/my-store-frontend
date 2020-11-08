@@ -17,12 +17,16 @@ import { ADD_TO_CART_ITEM_QUERY, ALL_ITEMS_QUERY } from "../../lib/queries";
 import PickSize from "../singleItem/pickSize";
 
 export interface IItem {
-  description: string;
   id: string;
-  image: string;
-  largeImage: string;
   price: number;
+  user: null;
+  image: string;
   title: string;
+  description: string;
+  largeImage: string;
+  brand: string;
+  category: string;
+  gender: string;
 }
 
 export interface ItemsProps {
@@ -229,7 +233,6 @@ class Items extends React.Component<ItemsProps, ItemsState> {
 
           <Query
             query={ALL_ITEMS_QUERY}
-            fetchPolicy="network-only"
             variables={
               filters.length === 0
                 ? {
@@ -260,7 +263,7 @@ class Items extends React.Component<ItemsProps, ItemsState> {
           </Query>
         </CatalogGrid>
 
-        <Query query={ADD_TO_CART_ITEM_QUERY} fetchPolicy="network-only">
+        <Query query={ADD_TO_CART_ITEM_QUERY}>
           {({ data, error, loading }: any) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error: {error.message}</p>;

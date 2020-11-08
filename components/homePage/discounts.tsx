@@ -85,9 +85,7 @@ const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
     }
   }, [scroll]);
 
-  const addToCartItemQuery = useQuery(ADD_TO_CART_ITEM_QUERY, {
-    fetchPolicy: "network-only",
-  });
+  const addToCartItemQuery = useQuery(ADD_TO_CART_ITEM_QUERY);
 
   const update = () => {
     const els = document.querySelectorAll(`.menu-wrapper`);
@@ -187,7 +185,7 @@ const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
           innerWrapperStyle={{
             transform: "translate3d(0px, 0px, 0px)",
             // transition: `transform 0.4s ease 0s; width: ${1200}px`,
-            width: `${items.length * width + 150}px`,
+            width: `${items.length * width + 160}px`,
             textAlign: "left",
           }}
           wrapperStyle={

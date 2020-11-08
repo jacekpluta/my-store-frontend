@@ -126,9 +126,9 @@ export default function Nav() {
           <span></span>
           <ul id="menu">
             <h1>Menu</h1>
-            {currentUser.user && (
+            {currentUser?.user && (
               <p>
-                Hello, <b>{currentUser.user.name}!</b>
+                Hello, <b>{currentUser?.user?.name}!</b>
               </p>
             )}
 
@@ -151,7 +151,7 @@ export default function Nav() {
                 <a>Catalog</a>
               </li>
             </Link>
-            {currentUser.user && (
+            {currentUser?.user && (
               <>
                 <Link href="/cart">
                   <li
@@ -193,7 +193,7 @@ export default function Nav() {
                 </li>
               </>
             )}
-            {!currentUser.user && (
+            {!currentUser?.user && (
               <>
                 <Link href="/login">
                   <li
@@ -249,7 +249,7 @@ export default function Nav() {
 
       <NavIcons>
         <ul className="icons">
-          {currentUser.user && (
+          {currentUser?.user && (
             <li
               onClick={() => {
                 isCartOpen(true);
@@ -260,7 +260,19 @@ export default function Nav() {
                 <Icon size="big" name="shopping cart" />
 
                 {cartItems?.length === 0 ? (
-                  <CartItemsNumber> 0</CartItemsNumber>
+                  <AnimationStyles>
+                    <TransitionGroup>
+                      <CSSTransition
+                        unmountOnExit
+                        classNames="count"
+                        className="count"
+                        key={cartItemsCount}
+                        timeout={{ enter: 100, exit: 100 }}
+                      >
+                        <CartItemsNumber>0</CartItemsNumber>
+                      </CSSTransition>
+                    </TransitionGroup>
+                  </AnimationStyles>
                 ) : (
                   <AnimationStyles>
                     <TransitionGroup>
@@ -312,7 +324,7 @@ export default function Nav() {
             </Link>
           </li>
 
-          {!currentUser.user && (
+          {!currentUser?.user && (
             <li>
               <Link href="/login">
                 <a>Login / Register</a>
@@ -324,7 +336,7 @@ export default function Nav() {
             <Icon name="heart" size="big" style={{ paddingLeft: "30px" }} />
           </li> */}
 
-          {currentUser.user && (
+          {currentUser?.user && (
             <>
               <li>
                 <Link href="/cart">
@@ -360,7 +372,19 @@ export default function Nav() {
                   <Icon size="big" name="shopping cart" />
 
                   {cartItems.length === 0 ? (
-                    <CartItemsNumber> 0</CartItemsNumber>
+                    <AnimationStyles>
+                      <TransitionGroup>
+                        <CSSTransition
+                          unmountOnExit
+                          classNames="count"
+                          className="count"
+                          key={cartItemsCount}
+                          timeout={{ enter: 100, exit: 100 }}
+                        >
+                          <CartItemsNumber>0</CartItemsNumber>
+                        </CSSTransition>
+                      </TransitionGroup>
+                    </AnimationStyles>
                   ) : (
                     <AnimationStyles>
                       <TransitionGroup>

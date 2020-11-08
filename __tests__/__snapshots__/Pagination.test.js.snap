@@ -36,22 +36,63 @@ Array [
           ⬅ Prev
         </a>
       </Link>
-      <p
-        style={
+      <Link
+        href={
           Object {
-            "marginTop": 5,
+            "pathname": "/catalog",
+            "query": Object {
+              "page": 2,
+            },
           }
         }
       >
-        Page 
-        1
-         of 
-        <span
-          className="allPages"
+        <a
+          className="next"
+          href="/catalog?page=2"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
         >
           2
-        </span>
-      </p>
+        </a>
+      </Link>
+      <Link
+        href={
+          Object {
+            "pathname": "/catalog",
+            "query": Object {
+              "page": 3,
+            },
+          }
+        }
+      >
+        <a
+          className="next"
+          href="/catalog?page=3"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          3
+        </a>
+      </Link>
+      <Link
+        href={
+          Object {
+            "pathname": "/catalog",
+            "query": Object {
+              "page": 4,
+            },
+          }
+        }
+      >
+        <a
+          className="next"
+          href="/catalog?page=4"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          4
+        </a>
+      </Link>
       <Link
         href={
           Object {
@@ -105,22 +146,63 @@ Array [
         ⬅ Prev
       </a>
     </Link>
-    <p
-      style={
+    <Link
+      href={
         Object {
-          "marginTop": 5,
+          "pathname": "/catalog",
+          "query": Object {
+            "page": 2,
+          },
         }
       }
     >
-      Page 
-      1
-       of 
-      <span
-        className="allPages"
+      <a
+        className="next"
+        href="/catalog?page=2"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
       >
         2
-      </span>
-    </p>
+      </a>
+    </Link>
+    <Link
+      href={
+        Object {
+          "pathname": "/catalog",
+          "query": Object {
+            "page": 3,
+          },
+        }
+      }
+    >
+      <a
+        className="next"
+        href="/catalog?page=3"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        3
+      </a>
+    </Link>
+    <Link
+      href={
+        Object {
+          "pathname": "/catalog",
+          "query": Object {
+            "page": 4,
+          },
+        }
+      }
+    >
+      <a
+        className="next"
+        href="/catalog?page=4"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        4
+      </a>
+    </Link>
     <Link
       href={
         Object {

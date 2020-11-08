@@ -1,5 +1,4 @@
 import React from "react";
-import gql from "graphql-tag";
 import Form from "../styles/Form";
 import Error from "../errorMessage";
 import { useMutation } from "@apollo/react-hooks";

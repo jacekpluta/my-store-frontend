@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { CURRENT_USER_QUERY } from "../../lib/queries";
+
 import { Icon, Button } from "semantic-ui-react";
-import { useQuery } from "@apollo/react-hooks";
-import Error from "../errorMessage";
+
 import { AnimatePresence, motion } from "framer-motion";
 
 import {
@@ -43,11 +42,6 @@ const MenuItem = ({
   handleShowPickSize: Function;
 }) => {
   const [buttonsVisible, setButtonsVisible] = useState(false);
-  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-
-  if (currentUserQuery.loading) return <p>Loading...</p>;
-  if (currentUserQuery.error)
-    return <Error error={currentUserQuery.error}></Error>;
 
   return (
     <Container style={{ width: width }}>

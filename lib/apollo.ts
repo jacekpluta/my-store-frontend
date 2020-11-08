@@ -23,11 +23,11 @@ function createApolloClient(context?: ResolverContext): any {
     name: "my-shop",
     version: "1.0",
     queryDeduplication: false,
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: "cache-and-network",
-      },
-    },
+    // defaultOptions: {
+    //   watchQuery: {
+    //     fetchPolicy: "cache-and-network",
+    //   },
+    // },
   });
 }
 

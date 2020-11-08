@@ -37,7 +37,9 @@ export interface ICartItem {
 
 export default function Cart() {
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
-  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
+  const currentUserQuery = useQuery(CURRENT_USER_QUERY, {
+    fetchPolicy: "cache-and-network",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [animate, setAnimate] = useState(false);
   const wrapperRef = useRef(null);
@@ -55,6 +57,7 @@ export default function Cart() {
         else return;
       }, 0)
     : "";
+
   const cartOpen = cartOpenData.data.cartOpen;
 
   function handleClickOutside(event: MouseEvent) {
@@ -72,10 +75,7 @@ export default function Cart() {
       if (wrapperRef && wrapperRef.current) {
         var position = wrapperRef.current.getBoundingClientRect();
         if (position.left < window.innerWidth) {
-          const timer = setTimeout(() => {
-            setAnimate(true);
-          }, 100);
-          return () => clearTimeout(timer);
+          setAnimate(true);
         }
       }
     }
@@ -84,11 +84,7 @@ export default function Cart() {
   if (cartOpenData.loading) return <p>Loading...</p>;
   if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
 
-  if (currentUserQuery.loading) return <></>;
-  if (currentUserQuery.error)
-    return <Error error={currentUserQuery.error}></Error>;
-
-  if (currentUserQuery) {
+  if (user) {
     return (
       <CartStyles open={cartOpen} ref={wrapperRef} animate={animate}>
         {isLoading && <div className="loading" aria-busy={isLoading}></div>}
@@ -105,10 +101,10 @@ export default function Cart() {
           </button>
           <p>
             Shopping Cart
-            {user.cart.length > 0 && (
+            {user?.cart?.length > 0 && (
               <>
                 {" "}
-                - {user.cart.length} item{user.cart.length === 1 ? "" : "s"}
+                - {user?.cart?.length} item{user?.cart?.length === 1 ? "" : "s"}
               </>
             )}
           </p>

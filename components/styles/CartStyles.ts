@@ -46,7 +46,7 @@ const CartStyles = styled.div`
   position: relative;
   background: white;
   position: fixed;
-  height: 100%;
+  height: 100vh;
   top: 0;
   right: 0;
   width: 330px;
@@ -125,7 +125,7 @@ const CartStyles = styled.div`
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     padding-top: 2rem;
-
+    height: 10%;
     .closeButton {
       background: black;
       color: white;
@@ -140,6 +140,7 @@ const CartStyles = styled.div`
   }
 
   .cartItems {
+    height: 58%;
     position: relative;
 
     .emptyCart {

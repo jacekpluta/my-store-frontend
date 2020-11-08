@@ -136,14 +136,6 @@ const CreateItem = () => {
                   },
                 });
 
-                // const res2 = await createItemLowercase({
-                //   variables: {
-                //     ...fields,
-                //     image: image,
-                //     largeImage: largeImage,
-                //   },
-                // });
-
                 Router.push({
                   pathname: "/item",
                   query: { id: res.data.createItem.id },
@@ -186,6 +178,7 @@ const CreateItem = () => {
                   id="price"
                   name="price"
                   required
+                  value={fields.price}
                   onChange={handleFieldChange}
                 />
 

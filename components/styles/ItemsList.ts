@@ -7,7 +7,7 @@ export const ItemsList = styled.div`
   grid-template-columns: auto auto auto;
   grid-gap: 20px;
   justify-content: center;
-  align-content: center;
+  /* align-content: center;*/
   @media (max-width: 870px) {
     grid-template-columns: 25vw 25vw;
   }

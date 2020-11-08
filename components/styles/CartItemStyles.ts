@@ -57,6 +57,7 @@ export const CartItemStyles = styled.li`
     grid-area: counter;
     align-self: center;
     justify-self: start;
+    padding-bottom: 10px;
   }
 
   .close {
