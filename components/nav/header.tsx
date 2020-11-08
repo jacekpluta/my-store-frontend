@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import { Dimmer } from "../styles/Dimmer";
 import { IS_CART_OPEN_QUERY, IS_NAV_OPEN_QUERY } from "../../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
+import { IItem } from "../cart/cartItem";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -19,19 +20,36 @@ Router.events.on("routeChangeError", () => {
   NProgress.done();
 });
 
-export default function Header() {
+export interface IUser {
+  currentUser: {
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      permissions: Array<string>;
+      cart: [
+        cartItem: {
+          item: IItem;
+          quantity: number;
+          size: number;
+        }
+      ];
+    };
+  };
+}
+
+export default function Header({ currentUser }: IUser) {
   const [image, setImage] = useState("myTransparentWhite.png");
   const [bar, setBar] = useState(false);
 
   const router = useRouter();
   const path = router.pathname;
 
-  const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
-  const navOpenData = useQuery(IS_NAV_OPEN_QUERY);
-  const [cartActive, setCartActive] = useState(false);
+  const cartOpenQuery = useQuery(IS_CART_OPEN_QUERY);
+  const navOpenQuery = useQuery(IS_NAV_OPEN_QUERY);
 
-  const cartOpen = cartOpenData.data.cartOpen;
-  const navOpen = navOpenData.data.navOpen;
+  const cartOpen = cartOpenQuery.data.cartOpen;
+  const navOpen = navOpenQuery.data.navOpen;
 
   const changeLogo = () => {
     if (path === "/" && window.scrollY > 0) {
@@ -107,7 +125,7 @@ export default function Header() {
           </div>
         </Link>
 
-        <Nav />
+        <Nav currentUser={currentUser} />
         {cartOpen || navOpen ? <Dimmer></Dimmer> : <></>}
         {<Cart></Cart>}
       </StyledHeader>

@@ -10,19 +10,19 @@ import Info from "./info";
 import { LogosImg, Logos } from "../styles/FooterStyles";
 import Error from "../errorMessage";
 
+import { loadingItems } from "../utils/fakeItems";
+
 interface HomeProps {}
 
 function Home(props: HomeProps) {
   const featuredItemsQuery = useQuery(FEATURED_ITEMS_QUERY);
   const discountItemsQuery = useQuery(DISCOUNT_ITEMS_QUERY);
 
-  if (featuredItemsQuery.loading || discountItemsQuery.loading)
-    return <p>Loading...</p>;
   if (featuredItemsQuery.error || discountItemsQuery.error)
     return <Error error={featuredItemsQuery.error}></Error>;
 
-  const featuredItems = featuredItemsQuery.data.items;
-  const discountItems = discountItemsQuery.data.items;
+  const featuredItems = featuredItemsQuery?.data?.items;
+  const discountItems = discountItemsQuery?.data?.items;
 
   const Menu = () =>
     logoImages.map((image, index) => {
@@ -43,14 +43,14 @@ function Home(props: HomeProps) {
       <Gallery></Gallery>
       <Discounts
         menuWrapper={0}
-        items={discountItems}
+        items={discountItemsQuery.loading ? loadingItems : discountItems}
         title={"Shoes on sale"}
         subTitle={"Get your new pair of shoes today!"}
       ></Discounts>
       <ImageMain></ImageMain>
       <Discounts
         menuWrapper={1}
-        items={featuredItems}
+        items={featuredItemsQuery.loading ? loadingItems : featuredItems}
         title={"Featured products"}
         subTitle={"Check out our newest addition!"}
       ></Discounts>

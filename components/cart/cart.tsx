@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { emptyCart } from "../../lib/images";
 import { CURRENT_USER_QUERY, IS_CART_OPEN_QUERY } from "../../lib/queries";
 import { isCartOpen } from "../../lib/vars";
-import Error from "../errorMessage";
+
 import {
   ButtonCartView,
   ButtonCartCheck,
@@ -41,7 +41,7 @@ export default function Cart() {
     fetchPolicy: "cache-and-network",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [animate, setAnimate] = useState(false);
+
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -70,102 +70,84 @@ export default function Cart() {
     setIsLoading(loading);
   };
 
-  useEffect(() => {
-    if (currentUserQuery.data) {
-      if (wrapperRef && wrapperRef.current) {
-        var position = wrapperRef.current.getBoundingClientRect();
-        if (position.left < window.innerWidth) {
-          setAnimate(true);
-        }
-      }
-    }
-  }, [wrapperRef, wrapperRef.current]);
+  return (
+    <CartStyles open={cartOpen} ref={wrapperRef} animate={true}>
+      {isLoading && <div className="loading" aria-busy={isLoading}></div>}
 
-  if (cartOpenData.loading) return <p>Loading...</p>;
-  if (cartOpenData.error) return <Error error={cartOpenData.error}></Error>;
-
-  if (user) {
-    return (
-      <CartStyles open={cartOpen} ref={wrapperRef} animate={animate}>
-        {isLoading && <div className="loading" aria-busy={isLoading}></div>}
-
-        <div className="cartTop">
-          <button
-            className="closeButton"
-            onClick={() => {
-              isCartOpen(false);
-            }}
-            title="close"
-          >
-            &times;
-          </button>
-          <p>
-            Shopping Cart
-            {user?.cart?.length > 0 && (
-              <>
-                {" "}
-                - {user?.cart?.length} item{user?.cart?.length === 1 ? "" : "s"}
-              </>
-            )}
-          </p>
-        </div>
-
-        <div className="cartItems">
-          {user?.cart?.length === 0 ? (
+      <div className="cartTop">
+        <button
+          className="closeButton"
+          onClick={() => {
+            isCartOpen(false);
+          }}
+          title="close"
+        >
+          &times;
+        </button>
+        <p>
+          Shopping Cart
+          {user?.cart?.length > 0 && (
             <>
-              <div className="emptyCart">
-                <img height={200} src={emptyCart} />
-              </div>
-              <ButtonContinue
-                onClick={() => {
-                  isCartOpen(false);
-                }}
-              >
-                CONTINUE SHOPPING
-              </ButtonContinue>
+              {" "}
+              - {user?.cart?.length} item{user?.cart?.length === 1 ? "" : "s"}
             </>
-          ) : (
-            <ul>
-              {user?.cart?.map((cartItem: ICartItem) => (
-                <CartItem
-                  handleLoading={handleLoading}
-                  key={cartItem.id}
-                  cartItem={cartItem}
-                ></CartItem>
-              ))}
-            </ul>
           )}
-        </div>
+        </p>
+      </div>
 
-        {user?.cart?.length > 0 && (
-          <footer>
-            <div className="total">
-              <p>Subtotal:</p>
+      <div className="cartItems">
+        {user?.cart?.length === 0 ? (
+          <>
+            <div className="emptyCart">
+              <img height={200} src={emptyCart} />
             </div>
-            <div className="price">
-              <p> {formatMoney(totalPrice)}</p>
-            </div>
-            <div className="button">
-              <ButtonCartView>View cart</ButtonCartView>
-            </div>
-            <div className="button2">
-              <CreditCardCheckout
-                cart={user.cart}
-                totalPrice={totalPrice}
-                allItemsCount={user.cart.length}
-                user={user}
-              >
-                <ButtonCartCheck>Check out</ButtonCartCheck>
-              </CreditCardCheckout>
-            </div>
-            <div className="text">
-              <p>Shipping & taxes calculated at checkout</p>
-            </div>
-          </footer>
+            <ButtonContinue
+              onClick={() => {
+                isCartOpen(false);
+              }}
+            >
+              CONTINUE SHOPPING
+            </ButtonContinue>
+          </>
+        ) : (
+          <ul>
+            {user?.cart?.map((cartItem: ICartItem) => (
+              <CartItem
+                handleLoading={handleLoading}
+                key={cartItem.item.id + cartItem.size}
+                cartItem={cartItem}
+              ></CartItem>
+            ))}
+          </ul>
         )}
-      </CartStyles>
-    );
-  } else {
-    return <></>;
-  }
+      </div>
+
+      {user?.cart?.length > 0 && (
+        <footer>
+          <div className="total">
+            <p>Subtotal:</p>
+          </div>
+          <div className="price">
+            <p> {formatMoney(totalPrice)}</p>
+          </div>
+          <div className="button">
+            <ButtonCartView>View cart</ButtonCartView>
+          </div>
+          <div className="button2">
+            <CreditCardCheckout
+              cart={user.cart}
+              totalPrice={totalPrice}
+              allItemsCount={user.cart.length}
+              user={user}
+            >
+              <ButtonCartCheck>Check out</ButtonCartCheck>
+            </CreditCardCheckout>
+          </div>
+          <div className="text">
+            <p>Shipping & taxes calculated at checkout</p>
+          </div>
+        </footer>
+      )}
+    </CartStyles>
+  );
 }

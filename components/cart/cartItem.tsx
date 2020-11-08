@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import React, { useEffect } from "react";
+import React from "react";
 import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
 import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../../lib/queries";
@@ -95,7 +95,7 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
     const cartItemId = payload.data.deleteCartItem.id;
 
     const newCart = data.user.cart.filter(
-      (cartItem: ICartItem) => cartItem.id !== cartItemId
+      (cartItem: ICartItem) => cartItem.item.id !== cartItemId
     );
 
     try {
@@ -109,7 +109,6 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
   };
 
   if (addToCartMutation.error) return <Error error={addToCartMutation.error} />;
-  if (!cartItem) return <p>Error: no cart item</p>;
 
   return (
     <CartItemStyles data-test="cartItem">
@@ -156,15 +155,7 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
                 variables: {
                   id: cartItem.item.id,
                 },
-                update: deleteCartUpdate,
-
-                // optimisticResponse: {
-                //   __typename: "Mutation",
-                //   deleteCartItem: {
-                //     __typename: "CartItem",
-                //   },
-                // },
-              }).catch((err) => console.log(err.message));
+              });
             } else {
               await addToCart({
                 variables: {
@@ -192,13 +183,13 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
             },
             update: deleteCartUpdate,
 
-            optimisticResponse: {
-              __typename: "Mutation",
-              deleteCartItem: {
-                __typename: "cartItem",
-                id: cartItem.item.id,
-              },
-            },
+            // optimisticResponse: {
+            //   __typename: "Mutation",
+            //   deleteCartItem: {
+            //     __typename: "cartItem",
+            //     id: cartItem.item.id,
+            //   },
+            // },
           }).catch((err) => console.log(err.message));
         }}
       >

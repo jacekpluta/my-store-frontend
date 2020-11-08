@@ -185,6 +185,12 @@ const NavMenu = styled.ul`
     #menuToggle input:checked ~ ul {
       transform: none;
     }
+
+    .icons {
+      &:hover {
+        color: red;
+      }
+    }
   }
 `;
 

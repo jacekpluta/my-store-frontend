@@ -194,15 +194,15 @@ export default function SingleItem(props: SingleItemProps) {
                   size: sizePicked,
                 },
 
-                // optimisticResponse: {
-                //   __typename: "Mutation",
-                //   addToCart: {
-                //     __typename: "CartItem",
-                //     id: item.id,
-                //     quantity: +1,
-                //     size: sizePicked,
-                //   },
-                // },
+                optimisticResponse: {
+                  __typename: "Mutation",
+                  addToCart: {
+                    __typename: "CartItem",
+                    id: item.id,
+                    quantity: +1,
+                    size: sizePicked,
+                  },
+                },
               });
               addToCartItem(null);
               setError(false);

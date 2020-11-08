@@ -22,14 +22,14 @@ header nav ul li {
 }
 
 header nav ul li a {
-  position: relative;
-  margin: 0 15px;
+  color: #fff;
+  text-transform: uppercase;
   text-decoration: none;
-  color: white;
-  letter-spacing: 1px;
-  font-size: 18px;
-  font-weight: 700px;
-  transition: 0.3s;
+  letter-spacing: 0.1em;
+
+  display: inline-block;
+  padding: 15px 10px;
+  position: relative;
 }
 
 header .icon {
@@ -37,7 +37,60 @@ header .icon {
   cursor: pointer;
 }
 
+/* header nav ul li a:after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 3px;
+  bottom: 10px;
+  left: 0;
+  background-color: white;
+  transform: scaleX(1);
+  transform-origin: bottom right;
+  transition: transform 0.3s;
+} */
+
+.add:after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 3px;
+  bottom: 10px;
+  left: 0;
+  background-color: lightgrey;
+  transform: scaleX(1);
+  transform-origin: bottom right;
+  transition: transform 0.3s;
+}
+
+.none:after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 3px;
+  bottom: 10px;
+  left: 0;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s;
+}
+
+header nav ul li a:hover::after {
+  transform: scaleX(1) !important;
+}
+
 header nav ul li a:hover {
+  color: #999;
+}
+
+.icn:hover {
   color: #999;
 }
 
@@ -55,4 +108,28 @@ header.sticky ul li a {
   margin-right: 20vw;
   margin-left: 20vw;
   border-radius: 50px;
+}
+
+@media (min-width: 1000px) {
+  header nav ul li a {
+    padding: 15px 12px;
+  }
+}
+@media (max-width: 1000px) {
+  header nav ul li a {
+    padding: 15px 12px;
+  }
+
+  .add:after {
+    width: 100%;
+    margin-right: 0%;
+    margin-left: 0%;
+    bottom: -5px;
+  }
+}
+
+@media (min-width: 1100px) {
+  header nav ul li a {
+    padding: 15px 15px;
+  }
 }

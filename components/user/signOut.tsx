@@ -11,8 +11,10 @@ export const SIGN_OUT_MUTATION = gql`
     }
   }
 `;
-
-export default function signOut() {
+interface signOutProps {
+  path: string;
+}
+export default function signOut({ path }: signOutProps) {
   const [signOut] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     awaitRefetchQueries: true,
@@ -25,7 +27,7 @@ export default function signOut() {
           pathname: "/",
         }}
       >
-        <a>Logout </a>
+        <a className={path === "/cart" ? "add" : "none"}>Logout </a>
       </Link>
     </div>
   );

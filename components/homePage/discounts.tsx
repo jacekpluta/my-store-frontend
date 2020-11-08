@@ -12,7 +12,6 @@ import MenuItem from "./menuItem";
 import { IItem } from "../catalog/items";
 import PickSize from "../singleItem/pickSize";
 import { ADD_TO_CART_ITEM_QUERY } from "../../lib/queries";
-import { Icon } from "semantic-ui-react";
 
 export interface IItems {
   items?: [IItem];
@@ -23,7 +22,6 @@ export interface IItems {
 
 const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
   const width = 280;
-  // const [galleryWidth, setGalleryWidth] = useState(0);
   const scrollmenu = useRef(null);
   const [alignCenter, setAlignCenter] = useState(false);
   const [dicountsHovered, setDicountsHovered] = useState(false);
@@ -35,23 +33,28 @@ const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
   };
 
   const ItemsMenu = () => {
-    return items.map((item: IItem, id: number) => (
-      <MenuItem
-        width={width}
-        key={id}
-        id={id}
-        item={item}
-        handleShowPickSize={handleShowPickSize}
-      />
-    ));
+    if (items[0]?.title === "loading") {
+      return items.map((item: IItem, id: number) => (
+        <MenuItem
+          width={width}
+          key={id}
+          id={id}
+          item={item}
+          handleShowPickSize={handleShowPickSize}
+        />
+      ));
+    } else {
+      return items.map((item: IItem, id: number) => (
+        <MenuItem
+          width={width}
+          key={id}
+          id={id}
+          item={item}
+          handleShowPickSize={handleShowPickSize}
+        />
+      ));
+    }
   };
-
-  // const scrollmenuWidth = scrollmenu?.current?.allItemsWidth;
-  // useEffect(() => {
-  //   if (scrollmenuWidth && scrollmenu.current) {
-  //     setGalleryWidth(scrollmenuWidth);
-  //   }
-  // }, [scrollmenu.current, scrollmenuWidth]);
 
   const menuItems = ItemsMenu();
 
@@ -108,54 +111,54 @@ const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
 
   const data = addToCartItemQuery.data.addToCartItem;
 
-  const ArrowLeft = () => {
-    if (alignCenter && scroll > 0) {
-      return (
-        <Icon
-          className="arrow-prev"
-          style={{
-            position: "absolute",
-            zIndex: 5,
-            color: "grey",
-            left: "60px",
-            marginTop: "-60px",
-          }}
-          size="huge"
-          onClick={() => setScroll((scroll: number) => scroll - width)}
-          name="angle left"
-        />
-      );
-    } else {
-      return <div></div>;
-    }
-  };
+  // const ArrowLeft = () => {
+  //   if (alignCenter && scroll > 0) {
+  //     return (
+  //       <Icon
+  //         className="arrow-prev"
+  //         style={{
+  //           position: "absolute",
+  //           zIndex: 5,
+  //           color: "grey",
+  //           left: "60px",
+  //           marginTop: "-60px",
+  //         }}
+  //         size="huge"
+  //         onClick={() => setScroll((scroll: number) => scroll - width)}
+  //         name="angle left"
+  //       />
+  //     );
+  //   } else {
+  //     return <div></div>;
+  //   }
+  // };
 
-  const ArrowRight = () => {
-    const els = document.querySelectorAll(`.menu-wrapper`);
-    if (els[menuWrapper]) {
-      if (alignCenter && scroll < els[menuWrapper].clientWidth - 10) {
-        return (
-          <Icon
-            className="arrow-next"
-            style={{
-              position: "absolute",
-              zIndex: 5,
-              color: "grey",
-              right: "60px",
-              marginTop: "-60px",
-            }}
-            size="huge"
-            onClick={() => setScroll((scroll: number) => scroll + width)}
-            name="angle right"
-          />
-        );
-      } else {
-        return <div></div>;
-      }
-    } else {
-      return <div></div>;
-    }
-  };
+  // const ArrowRight = () => {
+  //   const els = document.querySelectorAll(`.menu-wrapper`);
+  //   if (els[menuWrapper]) {
+  //     if (alignCenter && scroll < els[menuWrapper].clientWidth - 10) {
+  //       return (
+  //         <Icon
+  //           className="arrow-next"
+  //           style={{
+  //             position: "absolute",
+  //             zIndex: 5,
+  //             color: "grey",
+  //             right: "60px",
+  //             marginTop: "-60px",
+  //           }}
+  //           size="huge"
+  //           onClick={() => setScroll((scroll: number) => scroll + width)}
+  //           name="angle right"
+  //         />
+  //       );
+  //     } else {
+  //       return <div></div>;
+  //     }
+  //   } else {
+  //     return <div></div>;
+  //   }
+  // };
 
   return (
     <DiscountsStyle>
@@ -178,8 +181,8 @@ const Discounts = ({ items, subTitle, title, menuWrapper }: IItems) => {
           alignCenter={alignCenter}
           clickWhenDrag={true}
           dragging={true}
-          arrowLeft={ArrowLeft()}
-          arrowRight={ArrowRight()}
+          // arrowLeft={ArrowLeft()}
+          // arrowRight={ArrowRight()}
           hideSingleArrow={true}
           data={menuItems}
           innerWrapperStyle={{

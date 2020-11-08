@@ -13,6 +13,7 @@ export const infoImages = [
   "./images/info2.png",
   "./images/info3.jpg",
 ];
+export const mainLogo = "/images/myTransparentBlack.png";
 
 export const logoImages = [
   "./images/logos/logo1.png",

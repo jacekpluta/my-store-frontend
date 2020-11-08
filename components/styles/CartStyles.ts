@@ -125,7 +125,7 @@ const CartStyles = styled.div`
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     padding-top: 2rem;
-    height: 10%;
+    height: 10vh;
     .closeButton {
       background: black;
       color: white;
@@ -140,7 +140,6 @@ const CartStyles = styled.div`
   }
 
   .cartItems {
-    height: 58%;
     position: relative;
 
     .emptyCart {
@@ -151,7 +150,7 @@ const CartStyles = styled.div`
       margin: 0;
       padding: 5px 15px 15px 15px;
 
-      height: 480px;
+      height: 57vh;
       list-style: none;
       overflow-y: scroll;
     }
@@ -168,9 +167,10 @@ const CartStyles = styled.div`
   footer {
     position: relative;
     width: 100%;
-    height: 30%;
+    height: 30vh;
     bottom: 0;
-
+    z-index: 5;
+    background-color: white;
     -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);

@@ -30,8 +30,6 @@ export default function Pagination(props: PaginationProps) {
   const pagesCount = data?.itemsConnection?.aggregate?.count;
   const allPages = Math.ceil(pagesCount / perPage);
 
-  console.log(allPages, "allPages");
-  console.log(page, "page");
   return (
     <PaginationStyles data-test="pagination">
       <Head>

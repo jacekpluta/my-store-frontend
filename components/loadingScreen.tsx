@@ -1,38 +1,41 @@
 import styled from "styled-components";
 import React from "react";
+import { mainLogo } from "../lib/images";
+import { motion } from "framer-motion";
 
 const LoadingScreenStyles = styled.div`
-  .loading {
-    width: 100%;
-    height: 100%;
+  img {
+    text-align: center;
     position: fixed;
-    top: 0;
-    left: 0;
-    background: limegreen;
-    z-index: 99;
-  }
-  .loading:after {
-    content: "";
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: -30px;
+    top: 0px;
     right: 0;
     left: 0;
     bottom: 0;
     margin: auto;
-    border: 6px solid #f2f2f2;
-    border-top: 6px dotted #f2f2f2;
-    border-bottom: 6px dotted #f2f2f2;
-    border-radius: 50%;
-    animation: loading 2s infinite;
+    width: 200px;
   }
-  .loading:before {
+  .loader:after {
+    content: "";
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    border: 6px solid ${(props) => props.theme.black};
+    border-top: 6px dotted ${(props) => props.theme.black};
+    border-bottom: 6px dotted ${(props) => props.theme.black};
+    border-radius: 50%;
+    animation: loadingAnimation 5s infinite;
+  }
+  .loader:before {
     font-family: "Lobster", cursive;
     font-size: 20px;
     letter-spacing: 1px;
     color: white;
-    content: "Loading...";
+    content: "";
     position: absolute;
     top: 57%;
     text-align: center;
@@ -41,7 +44,7 @@ const LoadingScreenStyles = styled.div`
     margin: auto;
   }
 
-  @keyframes loading {
+  @keyframes loadingAnimation {
     0% {
       transform: rotate(0);
     }
@@ -52,7 +55,29 @@ const LoadingScreenStyles = styled.div`
 `;
 
 function LoadingScreen() {
-  return <LoadingScreenStyles></LoadingScreenStyles>;
+  return (
+    <motion.div
+      key="animation"
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 200 }}
+      transition={{ duration: 1, type: "spring", stiffness: 100 }}
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        background: "white",
+        zIndex: 99,
+      }}
+    >
+      <LoadingScreenStyles>
+        <img src={mainLogo} />
+        <div className="loader"></div>
+      </LoadingScreenStyles>
+    </motion.div>
+  );
 }
 
 export default LoadingScreen;

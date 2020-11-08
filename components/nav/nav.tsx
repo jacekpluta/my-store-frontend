@@ -20,6 +20,7 @@ import { isNavOpen } from "../../lib/vars";
 import NavMenu from "../styles/NavMenu";
 import { NavIcons } from "../styles/NavIcons";
 import faker from "faker";
+import { IUser } from "./header";
 
 const AnimationStyles = styled.span`
   position: absolute;
@@ -40,13 +41,9 @@ const AnimationStyles = styled.span`
   }
 `;
 
-export default function Nav() {
-  const currentUserQuery = useQuery(CURRENT_USER_QUERY);
-
+export default function Nav({ currentUser }: IUser) {
   const [main, setMain] = useState(false);
   const [toggleBar, setToggleBar] = useState(true);
-
-  const currentUser = currentUserQuery.data;
 
   const navOpenData = useQuery(IS_NAV_OPEN_QUERY);
   const navOpen = navOpenData.data.navOpen;
@@ -77,13 +74,11 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [path]);
 
-  const cartItems = currentUserQuery?.data?.user?.cart;
-  const cartItemsCount = !cartItems
-    ? ""
-    : cartItems.reduce(
-        (all: any[], cartItem: any) => all + cartItem.quantity,
-        0
-      );
+  const cartItems = currentUser?.user?.cart;
+  const cartItemsCount = cartItems?.reduce(
+    (all, cartItem) => all + cartItem.quantity,
+    0
+  );
 
   const permissionsNeeded = ["ADMIN", "PERRMISSIONUPDATE"];
   const matchedPermissions = currentUser?.user?.permissions?.filter(
@@ -139,7 +134,7 @@ export default function Nav() {
                   isNavOpen(!navOpen);
                 }}
               >
-                <a>Home</a>
+                <a className={path === "/" ? "add" : "none"}>Home</a>
               </li>
             </Link>
             <Link href="/catalog">
@@ -148,7 +143,7 @@ export default function Nav() {
                   isNavOpen(!navOpen);
                 }}
               >
-                <a>Catalog</a>
+                <a className={path === "/catalog" ? "add" : "none"}>Catalog</a>
               </li>
             </Link>
             {currentUser?.user && (
@@ -159,7 +154,7 @@ export default function Nav() {
                       isNavOpen(!navOpen);
                     }}
                   >
-                    <a>Cart</a>
+                    <a className={path === "/cart" ? "add" : "none"}>Cart</a>
                   </li>
                 </Link>
                 <Link href="/account">
@@ -168,7 +163,9 @@ export default function Nav() {
                       isNavOpen(!navOpen);
                     }}
                   >
-                    <a>Accout</a>
+                    <a className={path === "/account" ? "add" : "none"}>
+                      Accout
+                    </a>
                   </li>
                 </Link>
 
@@ -179,7 +176,7 @@ export default function Nav() {
                         isNavOpen(!navOpen);
                       }}
                     >
-                      <a>Sell</a>
+                      <a className={path === "/sell" ? "add" : "none"}>Sell</a>
                     </li>
                   </Link>
                 )}
@@ -189,7 +186,7 @@ export default function Nav() {
                     isNavOpen(!navOpen);
                   }}
                 >
-                  <SignOut></SignOut>
+                  <SignOut path={path}></SignOut>
                 </li>
               </>
             )}
@@ -201,7 +198,9 @@ export default function Nav() {
                       isNavOpen(!navOpen);
                     }}
                   >
-                    <a>Login / Register</a>
+                    <a className={path === "/login" ? "add" : "none"}>
+                      Login / Register
+                    </a>
                   </li>
                 </Link>
 
@@ -228,17 +227,32 @@ export default function Nav() {
               <ul>
                 <li>
                   <a>
-                    <Icon color="grey" size="big" name="facebook" />
+                    <Icon
+                      className="icn"
+                      color="grey"
+                      size="big"
+                      name="facebook"
+                    />
                   </a>
                 </li>
                 <li>
                   <a>
-                    <Icon color="grey" size="big" name="twitter" />
+                    <Icon
+                      className="icn"
+                      color="grey"
+                      size="big"
+                      name="twitter"
+                    />
                   </a>
                 </li>
                 <li>
                   <a>
-                    <Icon color="grey" size="big" name="instagram" />
+                    <Icon
+                      className="icn"
+                      color="grey"
+                      size="big"
+                      name="instagram"
+                    />
                   </a>
                 </li>
               </ul>
@@ -257,9 +271,9 @@ export default function Nav() {
               className="icon"
             >
               <div style={{ display: "inline" }}>
-                <Icon size="big" name="shopping cart" />
+                <Icon className="icn" size="big" name="shopping cart" />
 
-                {cartItems?.length === 0 ? (
+                {cartItems.length ? (
                   <AnimationStyles>
                     <TransitionGroup>
                       <CSSTransition
@@ -301,6 +315,7 @@ export default function Nav() {
               offset="15px,5px"
               trigger={
                 <Icon
+                  className="icn"
                   size="big"
                   name="search"
                   style={{ marginRight: "25px" }}
@@ -315,19 +330,21 @@ export default function Nav() {
         <ul>
           <li>
             <Link href="/">
-              <a>Home</a>
+              <a className={path === "/" ? "add" : "none"}>Home</a>
             </Link>
           </li>
           <li>
             <Link href="/catalog">
-              <a>Catalog</a>
+              <a className={path === "/catalog" ? "add" : "none"}>Catalog</a>
             </Link>
           </li>
 
           {!currentUser?.user && (
             <li>
               <Link href="/login">
-                <a>Login / Register</a>
+                <a className={path === "/login" ? "add" : "none"}>
+                  Login / Register
+                </a>
               </Link>
             </li>
           )}
@@ -340,26 +357,26 @@ export default function Nav() {
             <>
               <li>
                 <Link href="/cart">
-                  <a>Cart</a>
+                  <a className={path === "/cart" ? "add" : "none"}>Cart</a>
                 </Link>
               </li>
 
               <li>
                 <Link href="/account">
-                  <a>Accout</a>
+                  <a className={path === "/account" ? "add" : "none"}>Accout</a>
                 </Link>
               </li>
 
               {matchedPermissions.length > 0 && (
                 <li>
                   <Link href="/sell">
-                    <a>Sell</a>
+                    <a className={path === "/sell" ? "add" : "none"}>Sell</a>
                   </Link>
                 </li>
               )}
 
               <li>
-                <SignOut></SignOut>
+                <SignOut path={path}></SignOut>
               </li>
 
               <li
@@ -369,9 +386,9 @@ export default function Nav() {
                 className="icon"
               >
                 <div style={{ display: "inline" }}>
-                  <Icon size="big" name="shopping cart" />
+                  <Icon className="icn" size="big" name="shopping cart" />
 
-                  {cartItems.length === 0 ? (
+                  {cartItems.length ? (
                     <AnimationStyles>
                       <TransitionGroup>
                         <CSSTransition
@@ -411,6 +428,7 @@ export default function Nav() {
                   position="bottom center"
                   trigger={
                     <Icon
+                      className="icn"
                       name="search"
                       size="big"
                       style={{ paddingLeft: "15px" }}
