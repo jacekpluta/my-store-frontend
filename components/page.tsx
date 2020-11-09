@@ -94,9 +94,7 @@ body{
           <GlobalStyle />
           <Inner>
             <AnimatePresence>
-              {currentUserQuery.loading && !currentUserQuery?.data?.user && (
-                <LoadingScreen></LoadingScreen>
-              )}
+              {currentUserQuery.loading && <LoadingScreen></LoadingScreen>}
             </AnimatePresence>
             <AnimatePresence>
               <motion.div
@@ -106,9 +104,7 @@ body{
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                {!currentUserQuery.loading &&
-                  currentUserQuery?.data?.user &&
-                  props.children}
+                {!currentUserQuery.loading && props.children}
               </motion.div>
             </AnimatePresence>
           </Inner>

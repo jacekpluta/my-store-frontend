@@ -28,7 +28,7 @@ export interface IUser {
       email: string;
       permissions: Array<string>;
       cart: [
-        cartItem?: {
+        {
           item: IItem;
           quantity: number;
           size: number;
@@ -41,7 +41,7 @@ export interface IUser {
 export default function Header({ currentUser }: IUser) {
   const [image, setImage] = useState("myTransparentWhite.png");
   const [bar, setBar] = useState(false);
-
+  console.log(currentUser);
   const router = useRouter();
   const path = router.pathname;
 
