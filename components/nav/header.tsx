@@ -28,7 +28,7 @@ export interface IUser {
       email: string;
       permissions: Array<string>;
       cart: [
-        cartItem: {
+        cartItem?: {
           item: IItem;
           quantity: number;
           size: number;
