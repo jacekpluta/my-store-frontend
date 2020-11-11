@@ -3,7 +3,12 @@ import gql from "graphql-tag";
 import React from "react";
 import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
-import { ADD_TO_CART_MUTATION, CURRENT_USER_QUERY } from "../../lib/queries";
+import {
+  ADD_TO_CART_MUTATION,
+  CART_LOCAL_QUERY,
+  CURRENT_USER_QUERY,
+} from "../../lib/queries";
+import { cartLocal } from "../../lib/vars";
 import {
   ButtonCounterFirstCart,
   ButtonCounterNumberCart,
@@ -55,6 +60,12 @@ export interface IItem {
 
 interface propsCartItem {
   handleLoading: Function;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    permissions: string[];
+  };
   cartItem: {
     id: number;
     quantity: number;
@@ -77,8 +88,11 @@ interface propsCartItem {
   };
 }
 
-const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
+const CartItem = ({ cartItem, handleLoading, user }: propsCartItem) => {
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION);
+
+  const data = useQuery(CART_LOCAL_QUERY);
+  const localCart = [...data?.data?.cartLocal];
 
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
     DELETE_CART_ITEM_MUTATION
@@ -110,6 +124,152 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
 
   if (addToCartMutation.error) return <Error error={addToCartMutation.error} />;
 
+  const handleAddOneToCart = async () => {
+    handleLoading(true);
+    if (!user) {
+      const isInCart = localCart.find((item) => {
+        if (item.item.id + item.size === cartItem.item.id + cartItem.size)
+          return cartItem;
+      });
+
+      if (isInCart) {
+        const filteredCart = localCart.filter(
+          (localCartItem) =>
+            localCartItem.item.id + localCartItem.size !==
+            isInCart.item.id + isInCart.size
+        );
+
+        cartLocal([
+          ...filteredCart,
+          {
+            __typename: "Item",
+            quantity: isInCart.quantity + 1,
+            size: isInCart.size,
+            item: isInCart.item,
+          },
+        ]);
+      }
+    } else {
+      await addToCart({
+        variables: {
+          id: cartItem.item.id,
+          quantity: +1,
+          size: cartItem.size,
+        },
+      }).catch((err) => console.log(err.message));
+    }
+
+    handleLoading(false);
+  };
+
+  const handleSubstractOneFromCart = async () => {
+    handleLoading(true);
+
+    if (cartItem.quantity === 1) {
+      handleDeleteOneFromCart();
+    } else {
+      if (!user) {
+        const isInCart = localCart.find((itm) => {
+          if (itm.item.id + itm.size === cartItem.item.id + cartItem.size)
+            return cartItem;
+        });
+
+        if (isInCart) {
+          const filteredCart = localCart.filter(
+            (localCartItem) =>
+              localCartItem.item.id + localCartItem.size !==
+              isInCart.item.id + isInCart.size
+          );
+
+          cartLocal([
+            ...filteredCart,
+            {
+              __typename: "Item",
+              quantity: isInCart.quantity - 1,
+              size: isInCart.size,
+              item: isInCart.item,
+            },
+          ]);
+        }
+      } else {
+        await addToCart({
+          variables: {
+            id: cartItem.item.id,
+            quantity: -1,
+            size: cartItem.size,
+          },
+        });
+      }
+    }
+
+    handleLoading(false);
+  };
+
+  const handleDeleteOneFromCart = async () => {
+    handleLoading(true);
+
+    if (!user) {
+      const isInCart = localCart.find((itm) => {
+        if (itm.item.id + itm.size === cartItem.item.id + cartItem.size) {
+          return cartItem;
+        }
+      });
+
+      if (isInCart) {
+        const filteredCart = localCart.filter(
+          (localCartItem) =>
+            localCartItem.item.id + localCartItem.size !==
+            isInCart.item.id + isInCart.size
+        );
+
+        handleLoading(false);
+
+        if (filteredCart.length === 0) {
+          console.log("lol");
+          return cartLocal([]);
+        }
+
+        return cartLocal([...filteredCart]);
+      }
+    }
+
+    await deleteCartItem({
+      variables: {
+        id: cartItem.item.id,
+      },
+      update: deleteCartUpdate,
+    }).catch((err) => console.log(err.message));
+
+    // if (!user) {
+    //   const isInCart = localCart.find((cartItem) => {
+    //     if (
+    //       cartItem.item.id + cartItem.size ===
+    //       cartItem.item.id + cartItem.size
+    //     )
+    //       return cartItem;
+    //   });
+
+    //   if (isInCart) {
+    //     const filteredCart = localCart.filter(
+    //       (localCartItem) =>
+    //         localCartItem.item.id + localCartItem.size !==
+    //         isInCart.item.id + isInCart.size
+    //     );
+
+    //     console.log(filteredCart);
+
+    //     cartLocal([filteredCart]);
+    //   }
+    // } else {
+    //   await deleteCartItem({
+    //     variables: {
+    //       id: cartItem.item.id,
+    //     },
+    //     update: deleteCartUpdate,
+    //   }).catch((err) => console.log(err.message));
+    // }
+    handleLoading(false);
+  };
   return (
     <CartItemStyles data-test="cartItem">
       <div className="image">
@@ -130,45 +290,11 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
         </p>
       </div>
       <div className="counter">
-        <ButtonCounterFirstCart
-          onClick={async () => {
-            handleLoading(true);
-            await addToCart({
-              variables: {
-                id: cartItem.item.id,
-                quantity: +1,
-                size: cartItem.size,
-              },
-            }).catch((err) => console.log(err.message));
-
-            handleLoading(false);
-          }}
-        >
+        <ButtonCounterFirstCart onClick={() => handleAddOneToCart()}>
           +
         </ButtonCounterFirstCart>
         <ButtonCounterNumberCart>{cartItem?.quantity}</ButtonCounterNumberCart>
-        <ButtonCounterSecondCart
-          onClick={async () => {
-            handleLoading(true);
-            if (cartItem.quantity === 1) {
-              await deleteCartItem({
-                variables: {
-                  id: cartItem.item.id,
-                },
-              });
-            } else {
-              await addToCart({
-                variables: {
-                  id: cartItem.item.id,
-                  quantity: -1,
-                  size: cartItem.size,
-                },
-              });
-            }
-
-            handleLoading(false);
-          }}
-        >
+        <ButtonCounterSecondCart onClick={() => handleSubstractOneFromCart()}>
           -
         </ButtonCounterSecondCart>
       </div>
@@ -176,22 +302,7 @@ const CartItem = ({ cartItem, handleLoading }: propsCartItem) => {
       <ButtonStyle
         className="close"
         title="Delete Item"
-        onClick={async () => {
-          await deleteCartItem({
-            variables: {
-              id: cartItem.item.id,
-            },
-            update: deleteCartUpdate,
-
-            // optimisticResponse: {
-            //   __typename: "Mutation",
-            //   deleteCartItem: {
-            //     __typename: "cartItem",
-            //     id: cartItem.item.id,
-            //   },
-            // },
-          }).catch((err) => console.log(err.message));
-        }}
+        onClick={() => handleDeleteOneFromCart()}
       >
         <Icon size="small" name="trash" color="black" />
       </ButtonStyle>

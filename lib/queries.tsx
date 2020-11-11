@@ -73,6 +73,12 @@ export const ADD_TO_CART_ITEM_QUERY = gql`
   }
 `;
 
+export const CART_LOCAL_QUERY = gql`
+  query CartLocal {
+    cartLocal @client
+  }
+`;
+
 export const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
     $id: ID!

@@ -6,7 +6,11 @@ import Cart from "../cart/cart";
 import { StyledHeader } from "../styles/StyledHeader";
 import React, { useEffect, useState } from "react";
 import { Dimmer } from "../styles/Dimmer";
-import { IS_CART_OPEN_QUERY, IS_NAV_OPEN_QUERY } from "../../lib/queries";
+import {
+  CART_LOCAL_QUERY,
+  IS_CART_OPEN_QUERY,
+  IS_NAV_OPEN_QUERY,
+} from "../../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
 import { IItem } from "../cart/cartItem";
 
@@ -41,7 +45,7 @@ export interface IUser {
 export default function Header({ currentUser }: IUser) {
   const [image, setImage] = useState("myTransparentWhite.png");
   const [bar, setBar] = useState(false);
-  console.log(currentUser);
+
   const router = useRouter();
   const path = router.pathname;
 

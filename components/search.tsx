@@ -20,7 +20,7 @@ const SEARCH_ITEM_QUERY = gql`
       id
       image
       title
-      item{
+      item {
         id
       }
     }
@@ -42,12 +42,10 @@ export default function Search({ biggerIcon }: ISearchProps) {
       query: SEARCH_ITEM_QUERY,
       variables: { searchTerm: e.target.value },
     });
- 
+
     setItems(res.data.itemLowercases);
     setLoading(false);
   }, 300);
-
-
 
   const routeToItem = (lowercaseItem: any) => {
     Router.push({
@@ -58,6 +56,7 @@ export default function Search({ biggerIcon }: ISearchProps) {
     });
   };
   resetIdCounter();
+
   return (
     <SearchStyles>
       <Downshift
@@ -74,14 +73,7 @@ export default function Search({ biggerIcon }: ISearchProps) {
           <div>
             <ApolloConsumer>
               {(client) => (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingLeft: "10px",
-                  }}
-                >
+                <div className="container">
                   <Icon
                     name="search"
                     size={biggerIcon ? "big" : "small"}
@@ -96,7 +88,7 @@ export default function Search({ biggerIcon }: ISearchProps) {
                       type: "search",
                       placeholder: `Search...`,
                       id: "search",
-                      className: loading ? "loading" : "",
+                      className: loading ? "input loading" : "input",
                       onChange: (e) => {
                         e.persist(); //access to event cos of debounce
                         handleOnSearch(e, client);
@@ -113,9 +105,17 @@ export default function Search({ biggerIcon }: ISearchProps) {
                     key={item.id}
                     {...getItemProps({ item })}
                     highlighted={index === highlightedIndex}
+                    style={{
+                      textAlign: "left",
+                      fontSize: "10px",
+                      paddingLeft: "10px",
+                    }}
                   >
                     <img width="50" src={item.image} alt={item.title}></img>
-                    {item.title.replace(/(^\w{1})|(\s+\w{1})/g, (letter: string) => letter.toUpperCase())}
+                    {item.title.replace(
+                      /(^\w{1})|(\s+\w{1})/g,
+                      (letter: string) => letter.toUpperCase()
+                    )}
                   </DropDownItem>
                 ))}
                 {!items.length && !loading && (

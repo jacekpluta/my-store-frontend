@@ -5,6 +5,7 @@ import {
   clearFilters,
   addToCartItem,
   isNavOpen,
+  cartLocal,
 } from "./vars";
 
 export const cache = new InMemoryCache({
@@ -34,6 +35,11 @@ export const cache = new InMemoryCache({
         addToCartItem: {
           read() {
             return addToCartItem();
+          },
+        },
+        cartLocal: {
+          read() {
+            return cartLocal();
           },
         },
       },

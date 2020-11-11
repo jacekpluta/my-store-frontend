@@ -41,18 +41,27 @@ const glow = keyframes`
 
 const SearchStyles = styled.div`
   position: relative;
-
   border-style: solid;
   border-width: 1px;
   border-color: ${(props) => props.theme.blackwhite};
-  margin-left: 20px;
-  input {
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+    padding-top: 4px;
+    background-color: #f5f5f5;
+  }
+
+  .input {
     width: 130px;
     padding: 10px;
     border: 0;
     font-size: 2rem;
+    background-color: #f5f5f5;
 
-    &.loading {
+    .loading {
       animation: ${glow} 0.5s ease-in-out infinite alternate;
     }
   }
