@@ -49,14 +49,20 @@ export default function Nav({ currentUser }: IUser) {
   const [itemsCount, setItemsCount] = useState(0);
 
   const navOpenData = useQuery(IS_NAV_OPEN_QUERY);
-  const navOpen = navOpenData.data.navOpen;
+  const navOpen: boolean = navOpenData.data.navOpen;
 
   const router = useRouter();
-  const path = router.pathname;
+  const path: string = router.pathname;
 
   const cartLocalData = useQuery(CART_LOCAL_QUERY);
   const cartItems = currentUser?.user?.cart;
   const cartLocalQuery = cartLocalData?.data?.cartLocal;
+
+  const permissionsNeeded = ["ADMIN", "PERRMISSIONUPDATE"];
+  const matchedPermissions = currentUser?.user?.permissions?.filter(
+    (permissionTheyHave: string) =>
+      permissionsNeeded.includes(permissionTheyHave)
+  );
 
   useEffect(() => {
     if (path === "/") {
@@ -84,7 +90,7 @@ export default function Nav({ currentUser }: IUser) {
 
   //save to local storage on exit
   useEffect(() => {
-    if (cartLocalQuery.length !== 0) {
+    if (cartLocalQuery.length) {
       window.onbeforeunload = function () {
         localStorage.setItem("cartLocal", JSON.stringify(cartLocalQuery));
       };
@@ -106,7 +112,8 @@ export default function Nav({ currentUser }: IUser) {
     (all: number, cartItem: ICartItem) => all + cartItem.quantity,
     0
   );
-
+  // console.log(cartItemsLocalCount);
+  // console.log(cartItemsCount, "cartItemsCount");
   useEffect(() => {
     if (cartItemsLocalCount) {
       setItemsCount(cartItemsLocalCount);
@@ -115,12 +122,6 @@ export default function Nav({ currentUser }: IUser) {
       setItemsCount(cartItemsCount);
     }
   }, [cartItemsCount, cartItemsLocalCount]);
-
-  const permissionsNeeded = ["ADMIN", "PERRMISSIONUPDATE"];
-  const matchedPermissions = currentUser?.user?.permissions?.filter(
-    (permissionTheyHave: string) =>
-      permissionsNeeded.includes(permissionTheyHave)
-  );
 
   const wrapperRef = useRef(null);
 

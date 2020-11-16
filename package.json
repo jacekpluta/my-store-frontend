@@ -71,6 +71,7 @@
     "react-transition-group": "^4.4.1",
     "react-use": "^15.3.4",
     "reactjs-localstorage": "^1.0.1",
+    "sass-convert": "^0.5.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.2.1",
     "styled-components": "^5.1.1",

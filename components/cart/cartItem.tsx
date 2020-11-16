@@ -216,17 +216,17 @@ const CartItem = ({ cartItem, handleLoading, user }: propsCartItem) => {
       });
 
       if (isInCart) {
-        const filteredCart = localCart.filter(
+        let filteredCart = localCart.filter(
           (localCartItem) =>
             localCartItem.item.id + localCartItem.size !==
             isInCart.item.id + isInCart.size
         );
 
         handleLoading(false);
+        filteredCart.length === 0;
 
         if (filteredCart.length === 0) {
-          console.log("lol");
-          return cartLocal([]);
+          return cartLocal(filteredCart);
         }
 
         return cartLocal([...filteredCart]);

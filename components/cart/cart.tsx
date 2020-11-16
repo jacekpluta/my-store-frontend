@@ -78,16 +78,16 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
+    if (cartUserLength === 0 || cartLocalLength === 0) {
+      return setCartItems([]);
+    }
+
     if (cartUserLength > 0) {
       return setCartItems(cartUserItems);
     }
 
     if (!cartUserLength && cartLocalLength > 0) {
       return setCartItems(cartLocalItems);
-    }
-
-    if (cartUserLength === 0 && cartLocalLength === 0) {
-      return setCartItems([]);
     }
   }, [cartUserItems, cartLocalItems]);
 
