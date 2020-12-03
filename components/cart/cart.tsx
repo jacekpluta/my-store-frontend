@@ -7,7 +7,6 @@ import {
   IS_CART_OPEN_QUERY,
 } from "../../lib/queries";
 import { isCartOpen } from "../../lib/vars";
-
 import {
   ButtonCartView,
   ButtonCartCheck,

@@ -22,7 +22,7 @@ body{
   margin: 0;
   font-size: 1.5rem;
   line-height: 2;
-  overflow: ${isCartOpen ? "hidden" : "scroll"};
+  overflow: ${isCartOpen() ? "hidden" : "scroll"};
 }
   a{
     color: ${theme.black};

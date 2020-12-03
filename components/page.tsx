@@ -28,7 +28,6 @@ function Page(props: any) {
       <AnimatePresence>
         <StyledPage>
           <Header currentUser={currentUser}></Header>
-
           <Meta></Meta>
           <GlobalStyle />
           <Inner>

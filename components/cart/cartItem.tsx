@@ -90,14 +90,11 @@ interface propsCartItem {
 
 const CartItem = ({ cartItem, handleLoading, user }: propsCartItem) => {
   const [addToCart, addToCartMutation] = useMutation(ADD_TO_CART_MUTATION);
-
   const data = useQuery(CART_LOCAL_QUERY);
   const localCart = [...data?.data?.cartLocal];
-
   const [deleteCartItem, deleteCartItemMutation] = useMutation(
     DELETE_CART_ITEM_MUTATION
   );
-
   const deleteCartUpdate = (cache: any, payload: any) => {
     let data;
     try {

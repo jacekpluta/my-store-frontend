@@ -63,6 +63,7 @@ export default function Nav({ currentUser }: IUser) {
     (permissionTheyHave: string) =>
       permissionsNeeded.includes(permissionTheyHave)
   );
+ 
 
   useEffect(() => {
     if (path === "/") {
