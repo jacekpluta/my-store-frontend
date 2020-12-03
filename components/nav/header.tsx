@@ -6,11 +6,7 @@ import Cart from "../cart/cart";
 import { StyledHeader } from "../styles/StyledHeader";
 import React, { useEffect, useState } from "react";
 import { Dimmer } from "../styles/Dimmer";
-import {
-  CART_LOCAL_QUERY,
-  IS_CART_OPEN_QUERY,
-  IS_NAV_OPEN_QUERY,
-} from "../../lib/queries";
+import { IS_CART_OPEN_QUERY, IS_NAV_OPEN_QUERY } from "../../lib/queries";
 import { useQuery } from "@apollo/react-hooks";
 import { IItem } from "../cart/cartItem";
 
