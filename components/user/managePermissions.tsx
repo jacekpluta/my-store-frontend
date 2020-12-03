@@ -31,7 +31,6 @@ const PERMISSIONS_QUERY = gql`
   }
 `;
 
-//name_DESC
 const ALL_USERS_QUERY = gql`
   query ALL_USERS_QUERY($skip: Int = 0, $first: Int = 20) {
     users(first: $first, skip: $skip, orderBy: createdAt_DESC) {

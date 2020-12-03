@@ -37,21 +37,6 @@ header .icon {
   cursor: pointer;
 }
 
-/* header nav ul li a:after {
-  content: "";
-  position: absolute;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
-  height: 3px;
-  bottom: 10px;
-  left: 0;
-  background-color: white;
-  transform: scaleX(1);
-  transform-origin: bottom right;
-  transition: transform 0.3s;
-} */
-
 .add:after {
   content: "";
   position: absolute;

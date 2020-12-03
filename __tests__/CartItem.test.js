@@ -2,7 +2,6 @@ import CartItem, { DELETE_CART_ITEM_MUTATION } from "../components/CartItem";
 import { mount } from "enzyme";
 import { MockedProvider } from "@apollo/react-testing";
 import { CURRENT_USER_QUERY } from "../components/Queries";
-import { ApolloConsumer } from "@apollo/client";
 
 global.alert = console.log;
 const cartItem = {
