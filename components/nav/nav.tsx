@@ -110,6 +110,7 @@ export default function Nav({ currentUser }: IUser) {
         path={path}
       ></LeftNavBar>
       <TopNavBar
+        navOpen={navOpen}
         itemsCount={itemsCount}
         path={path}
         currentUser={currentUser}

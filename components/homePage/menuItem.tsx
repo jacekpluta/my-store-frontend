@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
-
 import { Icon, Button } from "semantic-ui-react";
-
 import { AnimatePresence, motion } from "framer-motion";
 import ReactPlaceholder from "react-placeholder";
 import {
   TextBlock,
-  MediaBlock,
-  TextRow,
   RectShape,
   RoundShape,
 } from "react-placeholder/lib/placeholders";

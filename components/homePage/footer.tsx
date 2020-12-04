@@ -1,17 +1,6 @@
 import React from "react";
-import ScrollMenu from "react-horizontal-scrolling-menu";
 import { Icon } from "semantic-ui-react";
-
-import { logoImages } from "../../lib/images";
-import Info from "./info";
-import {
-  Bar,
-  Credits,
-  Logos,
-  LogosImg,
-  FooterMain,
-  FooterStyles,
-} from "../styles/FooterStyles";
+import { Bar, Credits, FooterMain, FooterStyles } from "../styles/FooterStyles";
 
 function Footer() {
   return (
