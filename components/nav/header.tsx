@@ -34,20 +34,27 @@ export default function Header({ currentUser }: IUser) {
     if (path === "/" && window.scrollY > 0) {
       setImage("myTransparentBlack.png");
       setSticky(true);
-    } else {
+    } else if (path === "/" && window.scrollY === 0) {
       setImage("myTransparentWhite.png");
       setSticky(false);
+    } else {
+      setImage("myTransparentBlack.png");
+      setSticky(true);
     }
   };
 
   useEffect(() => {
+    window.addEventListener("scroll", changeLogo);
+
     if (path === "/") {
-      window.addEventListener("scroll", changeLogo);
-    } else {
-      setImage("myTransparentBlack.png");
-      window.removeEventListener("scroll", changeLogo);
+      setImage("myTransparentWhite.png");
+      setSticky(false);
     }
 
+    if (path !== "/") {
+      setImage("myTransparentBlack.png");
+      setSticky(true);
+    }
     return () => window.removeEventListener("scroll", changeLogo);
   }, [path]);
 

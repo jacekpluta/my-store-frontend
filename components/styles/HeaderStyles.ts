@@ -1,6 +1,9 @@
 import styled from "styled-components";
 interface Props {
   sticky: boolean;
+  theme: {
+    whiteBlack: string;
+  };
 }
 
 export const HeaderStyles = styled.header`
@@ -13,17 +16,11 @@ export const HeaderStyles = styled.header`
   display: flex;
   justify-content: space-between;
   transition: 0.7s;
-  padding: 30px 100px;
-
-  .text-overflowsticky {
-    padding: 10px 100px;
-    background: white;
-  }
 
   ${(props: Props) =>
     props.sticky
-      ? "padding: 15px 100px; background: white"
-      : "padding: 30px 100px; background: transparent"};
+      ? `padding: 15px 100px; background: #f3f3f4`
+      : `padding: 30px 100px; background: transparent`};
 
   nav ul {
     position: relative;
@@ -52,7 +49,7 @@ export const HeaderStyles = styled.header`
       }
 
       a:hover {
-        color: #999;
+        color: ${(props: Props) => props.theme.darkerGrey};
       }
     }
   }
@@ -88,7 +85,7 @@ export const HeaderStyles = styled.header`
     height: 3px;
     bottom: 10px;
     left: 0;
-    background-color: white;
+    background-color: lightgrey;
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.3s;

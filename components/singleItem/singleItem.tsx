@@ -1,6 +1,6 @@
 import { gql, useMutation, useQuery } from "@apollo/react-hooks";
 import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ADD_TO_CART_MUTATION,
   CART_LOCAL_QUERY,
@@ -73,6 +73,59 @@ export default function SingleItem(props: SingleItemProps) {
       permissionsNeeded.includes(permissionTheyHave)
   );
 
+  const deleteFromCart = async () => {
+    if (currentUser?.data?.user && sizePicked !== 0) {
+      await addToCart({
+        variables: {
+          id: item.id,
+          quantity: +counter,
+          size: sizePicked,
+        },
+      });
+
+      addToCartItem(null);
+
+      setError(false);
+    } else if (!currentUser?.data?.user && sizePicked !== 0) {
+      const localCart = [...cartLocalData.data.cartLocal];
+
+      const isInCart = localCart.find((cartItem) => {
+        if (cartItem.item.id === item.id && cartItem.size === sizePicked)
+          return cartItem;
+      });
+
+      if (isInCart) {
+        const filteredCart = localCart.filter(
+          (localCartItem) =>
+            localCartItem.item.id + localCartItem.size !==
+            isInCart.item.id + isInCart.size
+        );
+
+        return cartLocal([
+          ...filteredCart,
+          {
+            __typename: "Item",
+            quantity: isInCart.quantity + counter,
+            size: sizePicked,
+            item: item,
+          },
+        ]);
+      }
+
+      return cartLocal([
+        ...localCart,
+        {
+          __typename: "Item",
+          quantity: +counter,
+          size: sizePicked,
+          item: item,
+        },
+      ]);
+    } else {
+      setError(true);
+    }
+  };
+
   return (
     <SingleItemStyle>
       <img src={item.largeImage} alt={item.title} />
@@ -101,61 +154,7 @@ export default function SingleItem(props: SingleItemProps) {
 
         <ButtonSingleItemPage
           disabled={addToCartMutation.loading}
-          onClick={async () => {
-            if (currentUser?.data?.user && sizePicked !== 0) {
-              await addToCart({
-                variables: {
-                  id: item.id,
-                  quantity: +counter,
-                  size: sizePicked,
-                },
-              });
-
-              addToCartItem(null);
-
-              setError(false);
-            } else if (!currentUser?.data?.user && sizePicked !== 0) {
-              const localCart = [...cartLocalData.data.cartLocal];
-
-              const isInCart = localCart.find((cartItem) => {
-                if (
-                  cartItem.item.id === item.id &&
-                  cartItem.size === sizePicked
-                )
-                  return cartItem;
-              });
-
-              if (isInCart) {
-                const filteredCart = localCart.filter(
-                  (localCartItem) =>
-                    localCartItem.item.id + localCartItem.size !==
-                    isInCart.item.id + isInCart.size
-                );
-
-                return cartLocal([
-                  ...filteredCart,
-                  {
-                    __typename: "Item",
-                    quantity: isInCart.quantity + counter,
-                    size: sizePicked,
-                    item: item,
-                  },
-                ]);
-              }
-
-              return cartLocal([
-                ...localCart,
-                {
-                  __typename: "Item",
-                  quantity: +counter,
-                  size: sizePicked,
-                  item: item,
-                },
-              ]);
-            } else {
-              setError(true);
-            }
-          }}
+          onClick={deleteFromCart}
         >
           ADD TO CART
         </ButtonSingleItemPage>

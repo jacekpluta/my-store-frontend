@@ -1,5 +1,3 @@
-import { IItem } from "../components/cart/cartItem";
-
 export interface CurrentUser {
   user: {
     id: string;
@@ -53,4 +51,44 @@ export interface IUser {
       ];
     };
   };
+}
+
+export interface IItem {
+  id: string;
+  price: number;
+  user: null;
+  image: string;
+  title: string;
+  description: string;
+  largeImage: string;
+  brand: string;
+  category: string;
+  gender: string;
+}
+
+export interface ItemsProps {
+  page: number;
+  filters: any[]; //array of string and objects(with numbers)
+}
+
+export interface ItemsState {
+  filterOptions: {
+    skip: number;
+    first: number;
+    orderBy: string;
+    gender_in?: string[] | undefined;
+    category_in?: string[] | undefined;
+    brand_in?: string[] | undefined;
+    price_gte?: number | undefined;
+    price_lte?: number | undefined;
+  };
+  showPickSize: Boolean;
+}
+
+export enum Order {
+  createdAtDESC = "createdAt_DESC",
+  titleDESC = "title_DESC",
+  titleASC = "title_ASC",
+  priceASC = "price_ASC",
+  priceDESC = "price_DESC",
 }

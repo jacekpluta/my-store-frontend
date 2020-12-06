@@ -19,7 +19,7 @@ export default function Nav({ currentUser }: IUser) {
   const path: string = router.pathname;
   const cartLocalData = useQuery(CART_LOCAL_QUERY);
   const cartItems = currentUser?.user?.cart;
-  const cartLocalQuery = cartLocalData?.data?.cartLocal;
+  const cartLocalItems = cartLocalData?.data?.cartLocal;
   const permissionsNeeded = ["ADMIN", "PERRMISSIONUPDATE"];
 
   const matchedPermissions = currentUser?.user?.permissions?.filter(
@@ -51,27 +51,25 @@ export default function Nav({ currentUser }: IUser) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [path]);
 
-  //save to local storage on exit
-  useEffect(() => {
-    if (cartLocalQuery.length) {
-      window.onbeforeunload = function () {
-        localStorage.setItem("cartLocal", JSON.stringify(cartLocalQuery));
-      };
-    }
-  }, [cartLocalQuery]);
-
   //save localstorage to apollo on start
   useEffect(() => {
     const localStorageCart = JSON.parse(localStorage.getItem("cartLocal"));
     if (localStorageCart) cartLocal([...localStorageCart]);
   }, []);
 
+  // save to local storage on exit
+  useEffect(() => {
+    window.onbeforeunload = function () {
+      localStorage.setItem("cartLocal", JSON.stringify(cartLocalItems));
+    };
+  }, [cartLocalItems]);
+
   const cartItemsCount = cartItems?.reduce(
     (all, cartItem) => all + cartItem.quantity,
     0
   );
 
-  const cartItemsLocalCount = cartLocalQuery?.reduce(
+  const cartItemsLocalCount = cartLocalItems?.reduce(
     (all: number, cartItem: ICartItem) => all + cartItem.quantity,
     0
   );
