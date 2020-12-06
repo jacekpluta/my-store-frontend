@@ -92,3 +92,13 @@ export enum Order {
   priceASC = "price_ASC",
   priceDESC = "price_DESC",
 }
+
+export interface NavBarProps {
+  itemsCount: number;
+  navOpen: boolean;
+  main: boolean;
+  toggleBar: boolean;
+  path: string;
+  currentUser: CurrentUser;
+  matchedPermissions: string[];
+}

@@ -3,6 +3,7 @@ interface Props {
   sticky: boolean;
   theme: {
     whiteBlack: string;
+    darkerGrey: string;
   };
 }
 

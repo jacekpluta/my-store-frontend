@@ -1,9 +1,5 @@
 import styled, { css } from "styled-components";
 
-interface Props {
-  activeTab: String;
-}
-
 const aaa = css`
   display: block;
   animation: 1s forwards;

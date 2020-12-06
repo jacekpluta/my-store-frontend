@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import PaginationStyles from "../styles/PaginationStyles";
 import styled from "styled-components";
 import Table from "../styles/Table";
-import { css } from "@emotion/core";
+import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const USERS_QUERY = gql`

@@ -9,9 +9,10 @@ import {
   FeaturedStyle,
 } from "../styles/ItemsStyles";
 import MenuItem from "./menuItem";
-import { IItem } from "../catalog/items";
+
 import PickSize from "../singleItem/pickSize";
 import { ADD_TO_CART_ITEM_QUERY } from "../../lib/queries";
+import { IItem } from "../../lib/interfaces";
 
 export interface IItems {
   items?: [IItem];

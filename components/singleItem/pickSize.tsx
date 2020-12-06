@@ -4,13 +4,14 @@ import styled from "styled-components";
 import { ADD_TO_CART_MUTATION } from "../../lib/queries";
 import Error from "../errorMessage";
 import Counter from "./counter";
-import { IItem } from "../catalog/items";
+
 import Size from "./size";
 import { ButtonPickSize } from "../styles/ButtonStyles";
 import { Dimmer } from "../styles/Dimmer";
 import { PickSizeStyles } from "../styles/PickSizeStyles";
 import Link from "next/link";
 import { addToCartItem } from "../../lib/vars";
+import { IItem } from "../../lib/interfaces";
 
 const ButtonStyle = styled.button`
   position: absolute;

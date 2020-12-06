@@ -7,16 +7,7 @@ import { CREATE_USER_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 import { Icon } from "semantic-ui-react";
 import { isNavOpen } from "../lib/vars";
 import SignOut from "./user/signOut";
-import { CurrentUser } from "../lib/interfaces";
-
-interface LeftNavBarProps {
-  navOpen: boolean;
-  main: boolean;
-  toggleBar: boolean;
-  path: string;
-  currentUser: CurrentUser;
-  matchedPermissions: string[];
-}
+import { NavBarProps } from "../lib/interfaces";
 
 const LeftNavBar = ({
   navOpen,
@@ -25,7 +16,8 @@ const LeftNavBar = ({
   currentUser,
   matchedPermissions,
   path,
-}: LeftNavBarProps) => {
+  itemsCount,
+}: NavBarProps) => {
   const [createUser, createUserData] = useMutation(CREATE_USER_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     awaitRefetchQueries: true,
@@ -124,9 +116,7 @@ const LeftNavBar = ({
                     isNavOpen(!navOpen);
                   }}
                 >
-                  <a className={path === "/login" ? "add" : "none"}>
-                    Login / Register
-                  </a>
+                  <a className={path === "/login" ? "add" : "none"}>Login</a>
                 </li>
               </Link>
 
@@ -145,7 +135,7 @@ const LeftNavBar = ({
                   });
                 }}
               >
-                <a>Guest login</a>
+                <a>Test Guest (Insta Register And Login)</a>
               </li>
             </>
           )}

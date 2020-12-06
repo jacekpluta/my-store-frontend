@@ -1,12 +1,12 @@
 import styled, { keyframes } from "styled-components";
 
 const loading = keyframes`
-
   from{transform:rotate(360deg)} 
   to{transform:rotate(0deg) }
 `;
 
 export const FormStyles = styled.div`
+  margin-top: 120px;
   .veen {
     width: 70%;
     margin: 100px auto;

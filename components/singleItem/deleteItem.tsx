@@ -12,6 +12,7 @@ const DELETE_ITEM_MUTATION = gql`
     }
   }
 `;
+
 const GET_DELETED_ITEM_ID = gql`
   {
     id @client
@@ -33,8 +34,6 @@ export default function DeleteItem(props: deleteItemProps) {
     },
   });
   const { itemId } = props;
-
-  const { client, data } = useQuery(GET_DELETED_ITEM_ID);
 
   const handleDeleteItem = () => {
     if (confirm("Do you want to delete that item?"))

@@ -14,7 +14,7 @@ function Account() {
     <>
       <Head>My Account</Head>
       <AccountPageTitle>My Account</AccountPageTitle>
-      <AccountPageStyles activeTab={activeTab}>
+      <AccountPageStyles>
         <div className="menu">
           <ul>
             <li>
