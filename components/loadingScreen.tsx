@@ -60,8 +60,8 @@ function LoadingScreen() {
       key="animation"
       initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 200 }}
-      transition={{ duration: 1, type: "spring", stiffness: 100 }}
+      exit={{ opacity: 0, y: -200 }}
+      transition={{ duration: 1 }}
       style={{
         width: "100%",
         height: "100%",

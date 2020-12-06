@@ -1,4 +1,4 @@
-import { StyledGallery } from "../styles/StyledGallery";
+import { GalleryStyles } from "../styles/GalleryStyles";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { wrap } from "@popmotion/popcorn";
@@ -46,7 +46,7 @@ export default function Gallery() {
   }, [page]);
 
   return (
-    <StyledGallery>
+    <GalleryStyles>
       <OpacityBackground></OpacityBackground>
       <AnimatePresence initial={false}>
         <motion.img
@@ -135,6 +135,6 @@ export default function Gallery() {
           }}
         ></GalleryDot>
       ))}
-    </StyledGallery>
+    </GalleryStyles>
   );
 }

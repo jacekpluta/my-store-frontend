@@ -5,10 +5,9 @@ import { CART_LOCAL_QUERY, IS_NAV_OPEN_QUERY } from "../../lib/queries";
 import { cartLocal } from "../../lib/vars";
 import { useRouter } from "next/router";
 import { isNavOpen } from "../../lib/vars";
-import { IUser } from "./header";
-import { ICartItem } from "../cart/cart";
-import LeftNavBar from "./leftNavBar";
+import LeftNavBar from "../leftNavBar";
 import TopNavBar from "./topNavBar";
+import { IUser, ICartItem } from "../../lib/interfaces";
 
 export default function Nav({ currentUser }: IUser) {
   const [main, setMain] = useState(false);

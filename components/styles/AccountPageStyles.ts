@@ -31,8 +31,6 @@ export const AccountPageStyles = styled.div`
         padding: 10px;
         margin-right: 15%;
 
-        /* ${(props: Props) => props.activeTab && aaa}; */
-
         :hover {
           background-color: ${(props) => props.theme.offWhite};
         }

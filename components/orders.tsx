@@ -2,13 +2,13 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import Head from "next/head";
 import gql from "graphql-tag";
-import Error from "../errorMessage";
-import OrderItemStyles from "../styles/OrderItemStyles";
-import formatMoney from "../../lib/utils/formatMoney";
+import Error from "./errorMessage";
+import OrderItemStyles from "./styles/OrderItemStyles";
+import formatMoney from "../lib/utils/formatMoney";
 import Link from "next/link";
-import { OrdersStyles } from "../styles/OrdersStyles";
-import { emptyOrders } from "../../lib/images";
-import { ButtonContinue } from "../styles/ButtonStyles";
+import { OrdersStyles } from "./styles/OrdersStyles";
+import { emptyOrders } from "../lib/images";
+import { ButtonContinue } from "./styles/ButtonStyles";
 
 export const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY($skip: Int = 0, $first: Int = 10) {

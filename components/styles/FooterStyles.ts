@@ -6,7 +6,6 @@ export const FooterMain = styled.div`
   grid-template-rows: 0.8fr 0.1fr 0.1fr;
   grid-gap: 20px;
 
-
   ul {
     position: relative;
     list-style: none;
@@ -56,19 +55,15 @@ export const FooterMain = styled.div`
     color: #eeeeee;
   }
 
-    @media (max-width: 730px) {
-   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.8fr 0.1fr 0.1fr;
+  @media (max-width: 730px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.8fr 0.1fr 0.1fr;
 
-  
-  ul:nth-child(4) > li {
-    float: left;
+    ul:nth-child(4) > li {
+      float: left;
+    }
   }
-
-  }
-
 `;
-
 
 export const Bar = styled.div`
   position: relative;
@@ -83,7 +78,7 @@ export const Bar = styled.div`
 export const Credits = styled.div`
   display: flex;
   justify-content: space-between;
-  
+
   ul {
     display: flex;
     position: relative;
@@ -95,25 +90,25 @@ export const Credits = styled.div`
 
   a {
     color: ${(props) => props.theme.greyish};
-   font-size: 11px;
-        line-height: 1;
-  margin: 0;
+    font-size: 11px;
+    line-height: 1;
+    margin: 0;
     padding: 0;
-       margin-top: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
-   
-      ul > li{
-   font-size: 11px;
-        line-height: 1;
-  margin: 0;
+  ul > li {
+    font-size: 11px;
+    line-height: 1;
+    margin: 0;
     padding: 0;
-         margin-left: 5px;
-       margin-top: 10px;
-      }
-      
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
   ul > li > a {
-   
     cursor: pointer;
   }
 

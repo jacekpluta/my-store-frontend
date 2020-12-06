@@ -16,27 +16,7 @@ import CartStyles from "../styles/CartStyles";
 import formatMoney from "../../lib/utils/formatMoney";
 import CartItem from "./cartItem";
 import CreditCardCheckout from "./creditCardCheckout";
-
-export interface ICartItem {
-  id: number;
-  quantity: number;
-  size: number;
-  item: {
-    id: number;
-    price: number;
-    user: null;
-    image: string;
-    title: string;
-    description: string;
-    largeImage: string;
-  };
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    permissions: string[];
-  };
-}
+import { ICartItem } from "../../lib/interfaces";
 
 export default function Cart() {
   const cartOpenData = useQuery(IS_CART_OPEN_QUERY);
@@ -46,7 +26,8 @@ export default function Cart() {
   const cartLocal = useQuery(CART_LOCAL_QUERY);
 
   const [isLoading, setIsLoading] = useState(false);
-
+  const [cartItems, setCartItems] = useState([]);
+  const [animateCart, setAnimateCart] = useState(false);
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -55,8 +36,11 @@ export default function Cart() {
   }, []);
 
   const user = currentUserQuery?.data?.user;
-
-  const cartOpen = cartOpenData.data.cartOpen;
+  const cartOpen = cartOpenData?.data?.cartOpen;
+  const cartUserLength = user?.cart?.length;
+  const cartLocalLength = cartLocal?.data?.cartLocal?.length;
+  const cartUserItems = user?.cart;
+  const cartLocalItems = cartLocal?.data?.cartLocal;
 
   function handleClickOutside(event: MouseEvent) {
     if (wrapperRef && !wrapperRef?.current?.contains(event.target)) {
@@ -67,14 +51,6 @@ export default function Cart() {
   const handleLoading = (loading: boolean) => {
     setIsLoading(loading);
   };
-
-  const cartUserLength = user?.cart?.length;
-  const cartLocalLength = cartLocal?.data?.cartLocal?.length;
-
-  const cartUserItems = user?.cart;
-  const cartLocalItems = cartLocal?.data?.cartLocal;
-
-  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     if (cartUserLength === 0 || cartLocalLength === 0) {
@@ -90,6 +66,12 @@ export default function Cart() {
     }
   }, [cartUserItems, cartLocalItems]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimateCart(true);
+    }, 1000);
+  }, []);
+
   const totalPrice = cartItems
     ? cartItems.reduce((all: number, cartItem: ICartItem) => {
         if (cartItem.item) return all + cartItem.quantity * cartItem.item.price;
@@ -98,7 +80,7 @@ export default function Cart() {
     : "";
 
   return (
-    <CartStyles open={cartOpen} ref={wrapperRef} animate={true}>
+    <CartStyles open={cartOpen} ref={wrapperRef} animateCart={animateCart}>
       {isLoading && <div className="loading" aria-busy={isLoading}></div>}
 
       <div className="cartTop">

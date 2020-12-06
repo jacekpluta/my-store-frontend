@@ -1,13 +1,13 @@
 import React from "react";
-import NavMenu from "../styles/NavMenu";
+import NavMenu from "./styles/NavMenu";
 import faker from "faker";
 import Link from "next/link";
 import { useMutation } from "@apollo/react-hooks";
-import { CREATE_USER_MUTATION, CURRENT_USER_QUERY } from "../../lib/queries";
+import { CREATE_USER_MUTATION, CURRENT_USER_QUERY } from "../lib/queries";
 import { Icon } from "semantic-ui-react";
-import { isNavOpen } from "../../lib/vars";
-import SignOut from "../user/signOut";
-import { CurrentUser } from "../../lib/interfaces";
+import { isNavOpen } from "../lib/vars";
+import SignOut from "./user/signOut";
+import { CurrentUser } from "../lib/interfaces";
 
 interface LeftNavBarProps {
   navOpen: boolean;

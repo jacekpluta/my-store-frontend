@@ -25,30 +25,27 @@ function Page(props: any) {
 
   return (
     <ThemeProvider theme={theme}>
-      <AnimatePresence>
-        <StyledPage>
-          <Header currentUser={currentUser}></Header>
-          <Meta></Meta>
-          <GlobalStyle />
-          <Inner>
-            <AnimatePresence>
-              {currentUserQuery.loading && <LoadingScreen></LoadingScreen>}
-            </AnimatePresence>
-            <AnimatePresence>
-              <motion.div
-                key="pageAnimation"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                {!currentUserQuery.loading && props.children}
-              </motion.div>
-            </AnimatePresence>
-          </Inner>
-          <Footer></Footer>
-        </StyledPage>
-      </AnimatePresence>
+      <StyledPage>
+        <Header currentUser={currentUser}></Header>
+        <Meta></Meta>
+        <GlobalStyle />
+        <Inner>
+          <AnimatePresence>
+            {currentUserQuery.loading && <LoadingScreen></LoadingScreen>}
+          </AnimatePresence>
+
+          <motion.div
+            key="pageAnimation"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {!currentUserQuery.loading && props.children}
+          </motion.div>
+        </Inner>
+        <Footer></Footer>
+      </StyledPage>
     </ThemeProvider>
   );
 }

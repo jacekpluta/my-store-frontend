@@ -2,9 +2,9 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import Head from "next/head";
 import gql from "graphql-tag";
-import Error from "../errorMessage";
-import OrderStyles from "../styles/OrderStyles";
-import formatMoney from "../../lib/utils/formatMoney";
+import Error from "./errorMessage";
+import OrderStyles from "./styles/OrderStyles";
+import formatMoney from "../lib/utils/formatMoney";
 
 type OrderProps = { orderId: string };
 

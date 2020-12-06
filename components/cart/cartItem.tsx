@@ -17,7 +17,7 @@ import {
 import { CartItemStyles } from "../styles/CartItemStyles";
 import formatMoney from "../../lib/utils/formatMoney";
 import Error from "./../errorMessage";
-import { ICartItem } from "./cart";
+import { ICartItem } from "../../lib/interfaces";
 
 const ButtonStyle = styled.button`
   font-size: 3rem;

@@ -1,6 +1,6 @@
 import React from "react";
 import RequestToLogin from "../components/user/requestToLogin";
-import Orders from "../components/nav/orders";
+import Orders from "../components/orders";
 
 const orderpage = () => (
   <RequestToLogin>
