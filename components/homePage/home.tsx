@@ -10,7 +10,7 @@ import Info from "./info";
 import { LogosImg, Logos } from "../styles/FooterStyles";
 import Error from "../errorMessage";
 
-import { loadingItems } from "../utils/fakeItems";
+import { loadingItems } from "../../lib/fakeItems";
 
 interface HomeProps {}
 

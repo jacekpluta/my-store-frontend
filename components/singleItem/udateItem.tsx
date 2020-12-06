@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "react-apollo";
 import Form from "../styles/Form";
 import Error from "../errorMessage";
 import { SINGLE_ITEM_QUERY, UPDATE_ITEM_MUTATION } from "../../lib/queries";
-import { useFormFields } from "../utils/useFormFields";
+import { useFormFields } from "../../lib/utils/useFormFields";
 import { CREATE_ITEM_MUTATION } from "../nav/createItem";
 import { FormStyles } from "../styles/FormStyles";
 import Router from "next/router";

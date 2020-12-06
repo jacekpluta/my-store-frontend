@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "../styles/Form";
 import Error from "../errorMessage";
 import { useMutation } from "@apollo/react-hooks";
-import { useFormFields } from "../utils/useFormFields";
+import { useFormFields } from "../../lib/utils/useFormFields";
 import {
   CREATE_USER_MUTATION,
   CURRENT_USER_QUERY,

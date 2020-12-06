@@ -2,7 +2,7 @@ import React from "react";
 import Form from "../styles/Form";
 import Error from "../errorMessage";
 import { useMutation } from "@apollo/react-hooks";
-import { useFormFields } from "../utils/useFormFields";
+import { useFormFields } from "../../lib/utils/useFormFields";
 import Link from "next/link";
 import Router from "next/router";
 import { Bar } from "../styles/Bar";

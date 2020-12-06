@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 import Form from "../styles/Form";
 import Error from "../errorMessage";
 import { useMutation } from "@apollo/react-hooks";
-import { useFormFields } from "../utils/useFormFields";
+import { useFormFields } from "../../lib/utils/useFormFields";
 import { FormStyles } from "../styles/FormStyles";
 
 export interface RequestResetProps {}

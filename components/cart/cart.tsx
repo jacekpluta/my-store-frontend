@@ -13,7 +13,7 @@ import {
   ButtonContinue,
 } from "../styles/ButtonStyles";
 import CartStyles from "../styles/CartStyles";
-import formatMoney from "../utils/formatMoney";
+import formatMoney from "../../lib/utils/formatMoney";
 import CartItem from "./cartItem";
 import CreditCardCheckout from "./creditCardCheckout";
 

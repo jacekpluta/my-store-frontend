@@ -15,7 +15,7 @@ import {
   ButtonCounterSecondCart,
 } from "../styles/ButtonStyles";
 import { CartItemStyles } from "../styles/CartItemStyles";
-import formatMoney from "../utils/formatMoney";
+import formatMoney from "../../lib/utils/formatMoney";
 import Error from "./../errorMessage";
 import { ICartItem } from "./cart";
 

@@ -4,7 +4,7 @@ import Head from "next/head";
 import gql from "graphql-tag";
 import Error from "../errorMessage";
 import OrderItemStyles from "../styles/OrderItemStyles";
-import formatMoney from "../utils/formatMoney";
+import formatMoney from "../../lib/utils/formatMoney";
 import Link from "next/link";
 import { OrdersStyles } from "../styles/OrdersStyles";
 import { emptyOrders } from "../../lib/images";
@@ -45,7 +45,9 @@ export default function Orders() {
       {orders.length === 0 && (
         <div className="noOrders">
           <img src={emptyOrders} />
-          <p style={{fontWeight: 900, fontSize: 20}}>There are no orders yet.</p>
+          <p style={{ fontWeight: 900, fontSize: 20 }}>
+            There are no orders yet.
+          </p>
           <Link
             href={{
               pathname: "/catalog",
